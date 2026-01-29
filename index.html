@@ -1,9 +1,87 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Develac PDF</title>
-  </head>
-  <body>
-    <h1>Develac PDF Frontend Ready</h1>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Develac PDF Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: #020617;
+      padding: 30px;
+      border-radius: 10px;
+      width: 320px;
+      text-align: center;
+    }
+    input, button {
+      width: 100%;
+      margin-top: 15px;
+    }
+    button {
+      padding: 10px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Develac PDF Compressor</h2>
+
+    <input type="file" id="pdfFile" accept="application/pdf" />
+    <button onclick="uploadPDF()">Compress PDF</button>
+
+    <p id="status"></p>
+  </div>
+
+  <script>
+    async function uploadPDF() {
+      const fileInput = document.getElementById("pdfFile");
+      const status = document.getElementById("status");
+
+      if (!fileInput.files.length) {
+        status.innerText = "Please select a PDF file";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+
+      status.innerText = "Uploading...";
+
+      try {
+        const res = await fetch(
+          "https://develac-pdf-backend-production.up.railway.app/compress",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        if (!res.ok) throw new Error("Server error");
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "compressed.pdf";
+        a.click();
+
+        status.innerText = "PDF compressed successfully ✅";
+      } catch (err) {
+        status.innerText = "Error connecting backend ❌";
+      }
+    }
+  </script>
+</body>
 </html>
