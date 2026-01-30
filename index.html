@@ -95,19 +95,22 @@ footer a{color:#9ca3af;text-decoration:none;margin:0 6px}
 
 <div class="card">
 
-<label class="upload-box" for="pdf">
+<div class="upload-box" onclick="document.getElementById('pdf').click()">
   <div class="upload-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M12 16V4M7 9l5-5 5 5"/>
-    </svg>
+    ...
   </div>
   <div class="upload-text" id="uploadText">
     <strong>Upload your PDF</strong>
     <span>Drag & drop or tap to browse</span>
   </div>
-</label>
+</div>
 
-<input type="file" id="pdf" accept="application/pdf" hidden>
+<input
+  type="file"
+  id="pdf"
+  accept="application/pdf"
+  style="position:absolute; left:-9999px;"
+>
 
 <div class="level-box">
   <div class="level-option active" data="medium">
