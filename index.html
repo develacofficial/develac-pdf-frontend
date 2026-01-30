@@ -178,11 +178,45 @@ function goProcess() {
     return;
   }
 
-  // save data for next page
-  sessionStorage.setItem("pdfFile", pdf.files[0]);
-  sessionStorage.setItem("level", level);
+function goProcess() {
+  if (!pdf.files.length) {
+    alert("Please select a PDF file");
+    return;
+  }
 
-  window.location.href = "processing.html";
+  const formData = new FormData();
+  formData.append("pdf", pdf.files[0]);
+  formData.append("level", level);
+
+  btn.disabled = true;
+  status.innerText = "Uploading & compressing PDF...";
+
+  fetch("https://develac-pdf-backend-production.up.railway.app/compress", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Compression failed");
+    return res.blob();
+  })
+  .then(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "compressed.pdf";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    status.innerText = "PDF downloaded successfully ✔";
+    btn.disabled = false;
+  })
+  .catch(err => {
+    console.error(err);
+    status.innerText = "Compression failed. Please try again.";
+    btn.disabled = false;
+  });
+  }
 }
 </script>
 </body>
