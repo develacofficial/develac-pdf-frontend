@@ -39,5 +39,24 @@ Your file was deleted automatically.
 </div>
 </div>
 </div>
+  <script>
+const downloadBtn = document.getElementById("downloadBtn");
+
+const downloadUrl = sessionStorage.getItem("compressedPdf");
+
+if (!downloadUrl) {
+  alert("No compressed file found. Please try again.");
+  window.location.href = "index.html";
+}
+
+downloadBtn.addEventListener("click", () => {
+  const a = document.createElement("a");
+  a.href = downloadUrl;
+  a.download = "compressed.pdf";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+});
+  </script>
 </body>
 </html>
