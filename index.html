@@ -95,7 +95,7 @@ footer a{color:#9ca3af;text-decoration:none;margin:0 6px}
 
 <div class="card">
 
-<div class="upload-box" onclick="pdf.click()">
+<label class="upload-box" for="pdf">
   <div class="upload-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M12 16V4M7 9l5-5 5 5"/>
@@ -105,9 +105,9 @@ footer a{color:#9ca3af;text-decoration:none;margin:0 6px}
     <strong>Upload your PDF</strong>
     <span>Drag & drop or tap to browse</span>
   </div>
-</div>
+</label>
 
-<input type="file" id="pdf" hidden accept="application/pdf"/>
+<input type="file" id="pdf" accept="application/pdf" hidden>
 
 <div class="level-box">
   <div class="level-option active" data="medium">
@@ -136,61 +136,53 @@ footer a{color:#9ca3af;text-decoration:none;margin:0 6px}
 </footer>
 
 </div>
-
 <script>
-const pdf=document.getElementById("pdf");
-const uploadText=document.getElementById("uploadText");
-const btn=document.getElementById("compressBtn");
-let level="medium";
+const pdf = document.getElementById("pdf");
+const uploadText = document.getElementById("uploadText");
+const btn = document.getElementById("compressBtn");
+const status = document.getElementById("status");
 
-document.querySelectorAll(".level-option").forEach(o=>{
-  o.onclick=()=>{
-    document.querySelectorAll(".level-option").forEach(x=>x.classList.remove("active"));
+let level = "medium";
+
+/* compression level select */
+document.querySelectorAll(".level-option").forEach(o => {
+  o.addEventListener("click", () => {
+    document.querySelectorAll(".level-option").forEach(x =>
+      x.classList.remove("active")
+    );
     o.classList.add("active");
-    level=o.getAttribute("data");
-  }
+    level = o.getAttribute("data");
+  });
 });
 
-pdf.onchange=()=>{
-  const f=pdf.files[0];
-  uploadText.innerHTML=`<strong>${f.name}</strong><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
-  btn.disabled=false;
-  btn.classList.add("active");
-};
+/* file select */
+pdf.addEventListener("change", () => {
+  if (!pdf.files.length) return;
 
+  const f = pdf.files[0];
+
+  uploadText.innerHTML = `
+    <strong>${f.name}</strong>
+    <span>${(f.size / 1024 / 1024).toFixed(2)} MB</span>
+  `;
+
+  btn.disabled = false;
+  btn.classList.add("active");
+  status.innerText = "";
+});
+
+/* go to processing page */
 function goProcess() {
   if (!pdf.files.length) {
     alert("Please select a PDF file");
     return;
   }
 
-  const formData = new FormData();
-  formData.append("pdf", pdf.files[0]);
-  formData.append("level", level);
+  // save data for next page
+  sessionStorage.setItem("pdfFile", pdf.files[0]);
+  sessionStorage.setItem("level", level);
 
-  // Status UI
-  document.getElementById("status").innerText = "Uploading PDF...";
-
-  fetch("https://develac-pdf-backend-production.up.railway.app/compress", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => {
-    if (!response.ok) throw new Error("Upload failed");
-    return response.blob();
-  })
-  .then(blob => {
-    // Temporary download (backend test ke liye)
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "compressed.pdf";
-    a.click();
-  })
-  .catch(() => {
-    document.getElementById("status").innerText = "Compression failed";
-  });
-  }
+  window.location.href = "processing.html";
 }
 </script>
 </body>
