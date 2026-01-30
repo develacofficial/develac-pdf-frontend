@@ -139,6 +139,8 @@ footer a{color:#9ca3af;text-decoration:none;margin:0 6px}
 </footer>
 
 </div>
+
+  
 <script>
 const pdf = document.getElementById("pdf");
 const uploadText = document.getElementById("uploadText");
@@ -148,13 +150,13 @@ const status = document.getElementById("status");
 let level = "medium";
 
 /* compression level select */
-document.querySelectorAll(".level-option").forEach(option => {
-  option.addEventListener("click", () => {
+document.querySelectorAll(".level-option").forEach(o => {
+  o.addEventListener("click", () => {
     document.querySelectorAll(".level-option").forEach(x =>
       x.classList.remove("active")
     );
-    option.classList.add("active");
-    level = option.getAttribute("data");
+    o.classList.add("active");
+    level = o.getAttribute("data");
   });
 });
 
@@ -170,49 +172,22 @@ pdf.addEventListener("change", () => {
 
   btn.disabled = false;
   btn.classList.add("active");
-  status.innerText = "";
 });
 
-/* BUTTON CLICK */
+/* button click */
 function goProcess() {
+  alert("Button clicked");
+
   if (!pdf.files.length) {
     alert("Please select a PDF file");
     return;
   }
 
-  const formData = new FormData();
-  formData.append("pdf", pdf.files[0]);
-  formData.append("level", level);
-
-  btn.disabled = true;
-  status.innerText = "Uploading & compressing PDF...";
-
-  fetch("https://develac-pdf-backend-production.up.railway.app/compress", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => {
-    if (!res.ok) throw new Error("Compression failed");
-    return res.blob();
-  })
-  .then(blob => {
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "compressed.pdf";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-
-    status.innerText = "PDF downloaded successfully ✔";
-    btn.disabled = false;
-  })
-  .catch(err => {
-    console.error(err);
-    status.innerText = "Compression failed. Please try again.";
-    btn.disabled = false;
-  });
+  // ✅ redirect works here
+  window.location.href = "processing.html";
 }
 </script>
+
+  
 </body>
 </html>
