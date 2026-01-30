@@ -220,7 +220,7 @@
     </div>
 
     <div class="upload-box" onclick="document.getElementById('pdfFile').click()">
-  <div class="upload-inner">
+  <div class="upload-inner" id="uploadText">
     <strong>Click to upload your PDF</strong>
     <span>Files stay private. Deleted automatically.</span>
   </div>
@@ -306,6 +306,22 @@
         status.innerText = "❌ Error connecting backend";
       }
     }
-  </script>
+</script>
+  <script>
+  const fileInput = document.getElementById("pdfFile");
+  const uploadText = document.getElementById("uploadText");
+
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const sizeMB = (file.size / 1024 / 1024).toFixed(2);
+
+      uploadText.innerHTML = `
+        <strong>${file.name}</strong>
+        <span>${sizeMB} MB • PDF selected</span>
+      `;
+    }
+  });
+</script>
 </body>
 </html>
