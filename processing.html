@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Processing — Develac PDF</title>
+<style>
+body{
+  background:#020617;color:#e5e7eb;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;font-family:system-ui
+}
+.card{
+  background:#0f172a;padding:40px;
+  border-radius:20px;text-align:center;
+  width:320px
+}
+.progress{
+  width:80px;height:80px;border-radius:50%;
+  border:6px solid #1f2937;
+  border-top-color:#3b82f6;
+  animation:spin 1s linear infinite;
+  margin:auto  auto 20px
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
 
+<div class="card">
+<div class="progress"></div>
+<p>Compressing securely on our servers…</p>
+
+<!-- ADS PLACEHOLDER -->
+<div style="margin-top:20px;font-size:13px;color:#9ca3af">
+Ads will appear here
+</div>
+</div>
+
+<script>
+setTimeout(()=>{
+  window.location="success.html";
+},3000);
+</script>
+
+</body>
+</html>
