@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PDF Ready — Develac PDF</title>
+<style>
+body{background:#020617;color:#e5e7eb;font-family:system-ui}
+.container{max-width:420px;margin:auto;padding:60px 16px}
+.card{
+  background:#0f172a;padding:32px;border-radius:20px;text-align:center
+}
+.check{
+  width:70px;height:70px;border-radius:50%;
+  background:#22c55e;display:flex;
+  align-items:center;justify-content:center;
+  margin:auto  auto 16px;color:#022c22;font-size:32px
+}
+button{
+  width:100%;padding:16px;border-radius:14px;
+  border:none;margin-top:14px;font-size:16px;
+  cursor:pointer
+}
+.download{background:#22c55e}
+.again{background:#1f2937;color:#9ca3af}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="card">
+<div class="check">✓</div>
+<h2>Your PDF is ready</h2>
 
+<button class="download">⬇ Download Compressed PDF</button>
+<button class="again" onclick="location='index.html'">Compress another PDF</button>
+
+<div style="margin-top:20px;font-size:13px;color:#9ca3af">
+Your file was deleted automatically.
+</div>
+</div>
+</div>
+</body>
+</html>
