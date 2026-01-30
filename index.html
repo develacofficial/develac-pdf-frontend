@@ -66,33 +66,45 @@
     /* ---------- UPLOAD ---------- */
 
     .upload-box {
-      border: 2px dashed #2563eb;
-      border-radius: 14px;
-      padding: 32px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-    }
+  border: 2px dashed #2563eb;
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
 
-    .upload-box:hover {
-      background: rgba(37, 99, 235, 0.08);
-      border-color: #3b82f6;
-    }
+.upload-box:hover {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: #3b82f6;
+}
 
-    .upload-box strong {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
+.upload-inner strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
 
-    .upload-box span {
-      font-size: 14px;
-      color: #9ca3af;
-    }
+.upload-inner span {
+  font-size: 14px;
+  color: #9ca3af;
+}
 
-    input[type="file"] {
-      display: none;
-    }
+/* Mobile polish */
+@media (max-width: 640px) {
+  .upload-box {
+    padding: 22px 14px;
+  }
+
+  .upload-inner strong {
+    font-size: 15px;
+  }
+
+  .upload-inner span {
+    font-size: 13px;
+  }
+}
+    
 
     /* ---------- CONTROLS ---------- */
 
@@ -207,13 +219,14 @@
       <p>Fast, secure, and private PDF compression.</p>
     </div>
 
-    <div class="card">
-      <label class="upload-box">
-        <strong>Click to upload your PDF</strong>
-        <span>Files stay private. Deleted automatically.</span>
-        <input type="file" id="pdfFile" accept="application/pdf" />
-      </label>
-
+    <div class="upload-box" onclick="document.getElementById('pdfFile').click()">
+  <div class="upload-inner">
+    <strong>Click to upload your PDF</strong>
+    <span>Files stay private. Deleted automatically.</span>
+  </div>
+</div>
+<input type="file" id="pdfFile" accept="application/pdf" hidden />
+    
       <div class="control">
         <select id="level">
           <option value="medium">Medium — Recommended</option>
