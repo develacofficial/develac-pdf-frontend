@@ -106,43 +106,83 @@
 }
     
 
-    /* ---------- CONTROLS ---------- */
+    /* ---------- LEVEL UI (Lovable style) ---------- */
 
-    .control {
-      margin-top: 18px;
-    }
+.level-box {
+  margin-top: 18px;
+}
 
-    select {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      background: #020617;
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #e5e7eb;
-      font-size: 15px;
-    }
+.level-title {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
 
-    button {
-      width: 100%;
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 14px;
-      border: none;
-      background: linear-gradient(135deg, #2563eb, #3b82f6);
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: opacity 0.2s, transform 0.1s;
-    }
+.level-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-    button:hover {
-      opacity: 0.95;
-    }
+.level-option:hover {
+  border-color: #3b82f6;
+}
 
-    button:active {
-      transform: scale(0.98);
-    }
+.level-option.active {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.level-option span {
+  font-size: 14px;
+}
+
+.check {
+  opacity: 0;
+  color: #3b82f6;
+  font-weight: bold;
+}
+
+.level-option.active .check {
+  opacity: 1;
+}
+
+    /* Compress button - disabled by default */
+#compressBtn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  background: #1f2937;        /* gray */
+  color: #9ca3af;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+}
+
+/* Active (PDF selected) */
+#compressBtn.active {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#compressBtn.active:hover {
+  opacity: 0.95;
+}
+
+#compressBtn.active:active {
+  transform: scale(0.98);
+}
 
     .status {
       margin-top: 14px;
@@ -227,15 +267,31 @@
 </div>
 <input type="file" id="pdfFile" accept="application/pdf" hidden />
     
-      <div class="control">
-        <select id="level">
-          <option value="medium">Medium — Recommended</option>
-          <option value="low">Low — Highest quality</option>
-          <option value="high">High — Smallest size</option>
-        </select>
-      </div>
+      <div class="level-box">
+  <p class="level-title">Compression Level</p>
 
-      <button onclick="uploadPDF()">Compress & Download PDF</button>
+  <div class="level-option active" data-value="medium">
+    <span>Medium — Recommended</span>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="level-option" data-value="low">
+    <span>Low — Highest quality</span>
+    <div class="check">✓</div>
+  </div>
+
+  <div class="level-option" data-value="high">
+    <span>High — Smallest size</span>
+    <div class="check">✓</div>
+  </div>
+
+  <!-- backend ke liye hidden input -->
+  <input type="hidden" id="level" value="medium">
+      </div>
+    
+      <button id="compressBtn" disabled>
+  ⚡ Compress & Download PDF
+      </button>
 
       <div class="status" id="status"></div>
     </div>
@@ -264,53 +320,15 @@
     </footer>
 
   </div>
-
-  <script>
-    async function uploadPDF() {
-      const fileInput = document.getElementById("pdfFile");
-      const level = document.getElementById("level").value;
-      const status = document.getElementById("status");
-
-      if (!fileInput.files.length) {
-        status.innerText = "Please select a PDF file";
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("pdf", fileInput.files[0]);
-      formData.append("level", level);
-
-      status.innerText = "Uploading & compressing…";
-
-      try {
-        const res = await fetch(
-          "https://develac-pdf-backend-production.up.railway.app/compress",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
-
-        if (!res.ok) throw new Error("Server error");
-
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
-
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "compressed.pdf";
-        a.click();
-
-        status.innerText = "✅ PDF compressed & downloaded!";
-      } catch (err) {
-        status.innerText = "❌ Error connecting backend";
-      }
-    }
-</script>
-  <script>
+<script>
   const fileInput = document.getElementById("pdfFile");
   const uploadText = document.getElementById("uploadText");
+  const compressBtn = document.getElementById("compressBtn");
+  const status = document.getElementById("status");
+  const levelInput = document.getElementById("level");
+  const levelOptions = document.querySelectorAll(".level-option");
 
+  /* -------- FILE SELECT -------- */
   fileInput.addEventListener("change", () => {
     if (fileInput.files.length > 0) {
       const file = fileInput.files[0];
@@ -318,10 +336,62 @@
 
       uploadText.innerHTML = `
         <strong>${file.name}</strong>
-        <span>${sizeMB} MB • PDF selected</span>
+        <span>${sizeMB} MB · PDF selected</span>
       `;
+
+      compressBtn.disabled = false;
+      compressBtn.style.opacity = "1";
+      compressBtn.style.cursor = "pointer";
     }
   });
+
+  /* -------- LEVEL SELECT -------- */
+  levelOptions.forEach(option => {
+    option.addEventListener("click", () => {
+      levelOptions.forEach(o => o.classList.remove("active"));
+      option.classList.add("active");
+      levelInput.value = option.dataset.value;
+    });
+  });
+
+  /* -------- UPLOAD & COMPRESS -------- */
+  async function uploadPDF() {
+    if (!fileInput.files.length) {
+      status.innerText = "❌ Please select a PDF file";
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("pdf", fileInput.files[0]);
+    formData.append("level", levelInput.value);
+
+    status.innerText = "⏳ Uploading & compressing...";
+
+    try {
+      const res = await fetch(
+        "https://develac-pdf-backend-production.up.railway.app/compress",
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+
+      if (!res.ok) throw new Error("Server error");
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "compressed.pdf";
+      a.click();
+
+      status.innerText = "✅ PDF compressed & downloaded!";
+    } catch (err) {
+      status.innerText = "❌ Error connecting backend";
+    }
+  }
 </script>
+
 </body>
 </html>
