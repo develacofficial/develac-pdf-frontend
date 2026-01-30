@@ -268,7 +268,35 @@
     </div>
 
     <button id="compressBtn">Compress & Download</button>
-    <div class="status" id="status"></div>
+
+<!-- ✅ YAHI PASTE KARO -->
+<div id="progressBox" style="display:none; margin-top:14px;">
+  <div style="
+    width:100%;
+    height:6px;
+    background:rgba(255,255,255,0.1);
+    border-radius:6px;
+    overflow:hidden;
+  ">
+    <div id="progressBar" style="
+      width:0%;
+      height:100%;
+      background:linear-gradient(90deg,#3b82f6,#60a5fa);
+      transition:width 0.3s ease;
+    "></div>
+  </div>
+  <div id="progressText" style="
+    margin-top:8px;
+    font-size:13px;
+    color:#9ca3af;
+    text-align:center;
+  ">
+    Compressing PDF…
+  </div>
+</div>
+<!-- ✅ YAHI TAK -->
+
+<div class="status" id="status"></div>
 
   </div>
 
@@ -325,7 +353,27 @@ const uploadText = document.getElementById("uploadText");
 const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
 
+/* create progress bar dynamically */
+const progressWrap = document.createElement("div");
+progressWrap.style.marginTop = "12px";
+progressWrap.style.display = "none";
+
+progressWrap.innerHTML = `
+  <div style="height:6px;background:#1f2937;border-radius:6px;overflow:hidden">
+    <div id="progressBar" style="height:100%;width:0%;background:#3b82f6;transition:width .4s"></div>
+  </div>
+  <div id="progressText" style="font-size:13px;margin-top:6px;color:#9ca3af;text-align:center">
+    0%
+  </div>
+`;
+
+btn.after(progressWrap);
+
+const progressBar = progressWrap.querySelector("#progressBar");
+const progressText = progressWrap.querySelector("#progressText");
+
 let level = "medium";
+let fakeProgressInterval = null;
 
 /* level select */
 document.querySelectorAll(".level-option").forEach(option=>{
@@ -340,12 +388,42 @@ document.querySelectorAll(".level-option").forEach(option=>{
 /* file select */
 pdf.addEventListener("change",()=>{
   if(!pdf.files.length) return;
+
   const f = pdf.files[0];
-  uploadText.innerHTML = `<strong>${f.name}</strong><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
-  btn.classList.add("active");
+  uploadText.innerHTML = `
+    <strong>${f.name}</strong>
+    <span>${(f.size/1024/1024).toFixed(2)} MB</span>
+  `;
+
   btn.disabled = false;
+  btn.classList.add("active");
   status.innerText = "";
+  progressWrap.style.display = "none";
 });
+
+/* start fake progress */
+function startProgress(){
+  let progress = 0;
+  progressWrap.style.display = "block";
+  progressBar.style.width = "0%";
+  progressText.innerText = "0%";
+
+  fakeProgressInterval = setInterval(()=>{
+    if(progress < 90){
+      progress += Math.floor(Math.random() * 6) + 3;
+      if(progress > 90) progress = 90;
+      progressBar.style.width = progress + "%";
+      progressText.innerText = progress + "%";
+    }
+  }, 500);
+}
+
+/* finish progress */
+function finishProgress(){
+  clearInterval(fakeProgressInterval);
+  progressBar.style.width = "100%";
+  progressText.innerText = "100%";
+}
 
 /* compress */
 btn.addEventListener("click",()=>{
@@ -357,6 +435,7 @@ btn.addEventListener("click",()=>{
 
   btn.disabled = true;
   status.innerText = "Compressing PDF…";
+  startProgress();
 
   fetch("https://develac-pdf-backend-production.up.railway.app/compress",{
     method:"POST",
@@ -367,6 +446,8 @@ btn.addEventListener("click",()=>{
     return r.blob();
   })
   .then(blob=>{
+    finishProgress();
+
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -375,10 +456,12 @@ btn.addEventListener("click",()=>{
     a.click();
     a.remove();
     URL.revokeObjectURL(url);
+
     status.innerText = "Download started ✔";
     btn.disabled = false;
   })
   .catch(()=>{
+    clearInterval(fakeProgressInterval);
     status.innerText = "Compression failed. Try again.";
     btn.disabled = false;
   });
