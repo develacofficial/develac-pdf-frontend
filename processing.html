@@ -38,10 +38,55 @@ Ads will appear here
 </div>
 
 <script>
-setTimeout(()=>{
-  window.location="success.html";
-},3000);
-</script>
+(async function () {
+  try {
+    // 1. get data from previous page
+    const file = sessionStorage.getItem("pdfFile");
+    const level = sessionStorage.getItem("level") || "medium";
+
+    if (!file) {
+      alert("No PDF found. Please upload again.");
+      window.location.href = "index.html";
+      return;
+    }
+
+    // 2. convert back to File object
+    const response = await fetch(file);
+    const blob = await response.blob();
+    const pdfFile = new File([blob], "input.pdf", { type: "application/pdf" });
+
+    // 3. prepare form data
+    const formData = new FormData();
+    formData.append("pdf", pdfFile);
+    formData.append("level", level);
+
+    // 4. send to backend
+    const res = await fetch(
+      "https://develac-pdf-backend-production.up.railway.app/compress",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    if (!res.ok) throw new Error("Backend error");
+
+    // 5. get compressed PDF
+    const compressedBlob = await res.blob();
+
+    // 6. store result for success page
+    const downloadUrl = URL.createObjectURL(compressedBlob);
+    sessionStorage.setItem("compressedPdf", downloadUrl);
+
+    // 7. go to success page
+    window.location.href = "success.html";
+
+  } catch (err) {
+    alert("Compression failed. Please try again.");
+    window.location.href = "index.html";
+  }
+})();
+      </script>
 
 </body>
 </html>
