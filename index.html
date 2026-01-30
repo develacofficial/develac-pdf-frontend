@@ -148,13 +148,13 @@ const status = document.getElementById("status");
 let level = "medium";
 
 /* compression level select */
-document.querySelectorAll(".level-option").forEach(o => {
-  o.addEventListener("click", () => {
+document.querySelectorAll(".level-option").forEach(option => {
+  option.addEventListener("click", () => {
     document.querySelectorAll(".level-option").forEach(x =>
       x.classList.remove("active")
     );
-    o.classList.add("active");
-    level = o.getAttribute("data");
+    option.classList.add("active");
+    level = option.getAttribute("data");
   });
 });
 
@@ -163,7 +163,6 @@ pdf.addEventListener("change", () => {
   if (!pdf.files.length) return;
 
   const f = pdf.files[0];
-
   uploadText.innerHTML = `
     <strong>${f.name}</strong>
     <span>${(f.size / 1024 / 1024).toFixed(2)} MB</span>
@@ -174,7 +173,7 @@ pdf.addEventListener("change", () => {
   status.innerText = "";
 });
 
-/* button click */
+/* BUTTON CLICK */
 function goProcess() {
   if (!pdf.files.length) {
     alert("Please select a PDF file");
@@ -214,6 +213,6 @@ function goProcess() {
     btn.disabled = false;
   });
 }
-    </script>
+</script>
 </body>
 </html>
