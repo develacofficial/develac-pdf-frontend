@@ -124,7 +124,7 @@ footer a{color:#9ca3af;text-decoration:none;margin:0 6px}
   </div>
 </div>
 
-<button id="compressBtn" onclick="goProcess()">
+<button id="compressBtn">
 ⚡ Compress & Download PDF
 </button>
 
@@ -174,13 +174,7 @@ pdf.addEventListener("change", () => {
   status.innerText = "";
 });
 
-/* go to processing page */
-function goProcess() {
-  if (!pdf.files.length) {
-    alert("Please select a PDF file");
-    return;
-  }
-
+/* button click */
 function goProcess() {
   if (!pdf.files.length) {
     alert("Please select a PDF file");
@@ -219,8 +213,7 @@ function goProcess() {
     status.innerText = "Compression failed. Please try again.";
     btn.disabled = false;
   });
-  }
 }
-</script>
+    </script>
 </body>
 </html>
