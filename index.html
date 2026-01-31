@@ -26,28 +26,15 @@ body{
 }
 
 /* HERO */
-.hero{
-  text-align:center;
-  margin-bottom:40px;
-}
-.brand{
-  font-weight:600;
-  opacity:.9;
-  margin-bottom:10px;
-}
-.hero h1{
-  font-size:40px;
-  line-height:1.2;
-}
-.hero p{
-  color:#9ca3af;
-  margin-top:8px;
-}
+.hero{text-align:center;margin-bottom:40px;}
+.brand{opacity:.9;margin-bottom:10px;font-weight:600;}
+.hero h1{font-size:40px;margin-bottom:10px;}
+.hero p{color:#9ca3af;}
 
 /* CARD */
 .card{
   max-width:520px;
-  margin:0 auto 48px;
+  margin:0 auto;
   background:rgba(15,23,42,.7);
   border:1px solid rgba(255,255,255,.06);
   border-radius:18px;
@@ -63,13 +50,15 @@ body{
   padding:36px 20px;
   text-align:center;
   cursor:pointer;
-  transition:.2s;
+  transition:.25s;
 }
-.upload-box:hover{
-  background:rgba(59,130,246,.08);
+.upload-box:hover{background:rgba(59,130,246,.08);}
+.upload-box.has-file{
+  border-color:#60a5fa;
+  background:rgba(59,130,246,.12);
 }
 
-/* FILE INPUT (REAL CLICK TARGET) */
+/* FILE INPUT (FULL OVERLAY – MOBILE SAFE) */
 .file-input{
   position:absolute;
   inset:0;
@@ -96,50 +85,26 @@ body{
   display:none;
   z-index:3;
 }
-.upload-box.has-file .remove-btn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+.upload-box.has-file .remove-btn{display:flex;align-items:center;justify-content:center;}
 
-/* ICON */
 .upload-icon{
-  width:56px;
-  height:56px;
-  border-radius:50%;
+  width:56px;height:56px;border-radius:50%;
   background:rgba(59,130,246,.15);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  display:flex;align-items:center;justify-content:center;
   margin:0 auto 14px;
 }
-.upload-icon svg{
-  width:26px;
-  height:26px;
-  stroke:#3b82f6;
-}
+.upload-icon svg{width:26px;height:26px;stroke:#3b82f6;}
 
-/* TEXT */
-.upload-text strong{
-  display:block;
-  font-size:16px;
-}
-.upload-text span{
-  font-size:14px;
-  color:#9ca3af;
-}
+.upload-text strong{display:block;margin-bottom:4px;}
+.upload-text span{color:#9ca3af;font-size:14px;}
 
 /* LEVEL */
 .level-box{margin-top:20px;}
 .level-option{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 16px;
-  margin-bottom:10px;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 16px;margin-bottom:10px;
   border-radius:14px;
-  background:#0f172a;
-  border:1px solid #1f2937;
+  background:#0f172a;border:1px solid #1f2937;
   cursor:pointer;
 }
 .level-option.active{
@@ -156,9 +121,9 @@ body{
   padding:16px;
   border-radius:14px;
   border:none;
-  font-size:16px;
   background:#1f2937;
   color:#9ca3af;
+  font-size:16px;
   cursor:not-allowed;
 }
 #compressBtn.active{
@@ -167,14 +132,36 @@ body{
   cursor:pointer;
 }
 
+/* PROGRESS */
+.progress-wrap{
+  width:100%;
+  height:6px;
+  background:rgba(255,255,255,.1);
+  border-radius:6px;
+  overflow:hidden;
+  margin-top:14px;
+  display:none;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#3b82f6,#60a5fa);
+  transition:width .4s;
+}
+
+/* STATUS */
 .status{
   margin-top:12px;
   text-align:center;
   font-size:14px;
   color:#9ca3af;
+  animation:fadeIn .4s ease;
+}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:none}
 }
 
-/* MOBILE */
 @media(max-width:640px){
   .hero h1{font-size:28px;}
 }
@@ -184,54 +171,56 @@ body{
 <body>
 <div class="container">
 
-  <div class="hero">
-    <div class="brand">Develac PDF</div>
-    <h1>Compress PDFs instantly</h1>
-    <p>Fast, secure, no sign-up required.</p>
+<div class="hero">
+  <div class="brand">Develac PDF</div>
+  <h1>Compress PDFs instantly</h1>
+  <p>Fast, secure, no sign-up required.</p>
+</div>
+
+<div class="card">
+
+<div class="upload-box" id="uploadBox">
+  <input type="file" id="pdf" class="file-input" accept="application/pdf">
+  <button class="remove-btn" id="removePdf">×</button>
+
+  <div class="upload-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <path d="M12 16V4"/>
+      <path d="M7 9l5-5 5 5"/>
+      <path d="M4 20h16"/>
+    </svg>
   </div>
 
-  <div class="card">
-
-    <div class="upload-box" id="uploadBox">
-
-      <input type="file" id="pdf" class="file-input" accept="application/pdf">
-
-      <button class="remove-btn" id="removePdf" type="button">×</button>
-
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <path d="M12 16V4"/>
-          <path d="M7 9l5-5 5 5"/>
-          <path d="M4 20h16"/>
-        </svg>
-      </div>
-
-      <div class="upload-text" id="uploadText">
-        <strong>Upload your PDF</strong>
-        <span>Drag & drop or tap to browse</span>
-      </div>
-
-    </div>
-
-    <div class="level-box">
-      <div class="level-option active" data="medium">
-        <span>Medium — Recommended</span>
-        <span class="check">✓</span>
-      </div>
-      <div class="level-option" data="low">
-        <span>Low — Highest quality</span>
-        <span class="check">✓</span>
-      </div>
-      <div class="level-option" data="high">
-        <span>High — Smallest size</span>
-        <span class="check">✓</span>
-      </div>
-    </div>
-
-    <button id="compressBtn">Compress & Download</button>
-    <div class="status" id="status"></div>
-
+  <div class="upload-text" id="uploadText">
+    <strong>Upload your PDF</strong>
+    <span>Drag & drop or tap to browse</span>
   </div>
+</div>
+
+<div class="level-box">
+  <div class="level-option active" data="medium">
+    <span>Medium — Recommended</span>
+    <span class="check">✓</span>
+  </div>
+  <div class="level-option" data="low">
+    <span>Low — Highest quality</span>
+    <span class="check">✓</span>
+  </div>
+  <div class="level-option" data="high">
+    <span>High — Smallest size</span>
+    <span class="check">✓</span>
+  </div>
+</div>
+
+<button id="compressBtn">Compress & Download</button>
+
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="status" id="status"></div>
+
+</div>
 </div>
 
 <script>
@@ -241,67 +230,84 @@ const uploadText = document.getElementById("uploadText");
 const removeBtn = document.getElementById("removePdf");
 const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
+const progressWrap = document.getElementById("progressWrap");
+const progressBar = document.getElementById("progressBar");
 
 let level = "medium";
+let timer = null;
 
-/* level select */
-document.querySelectorAll(".level-option").forEach(opt=>{
-  opt.addEventListener("click",()=>{
-    document.querySelectorAll(".level-option").forEach(o=>o.classList.remove("active"));
-    opt.classList.add("active");
-    level = opt.dataset.value || opt.getAttribute("data");
-  });
+/* LEVEL SELECT */
+document.querySelectorAll(".level-option").forEach(o=>{
+  o.onclick=()=>{
+    document.querySelectorAll(".level-option").forEach(x=>x.classList.remove("active"));
+    o.classList.add("active");
+    level=o.dataset.level;
+  }
 });
 
-/* file select */
-pdf.addEventListener("change",()=>{
+/* FILE SELECT */
+pdf.onchange=()=>{
   if(!pdf.files.length) return;
-  const f = pdf.files[0];
-
-  uploadText.innerHTML = `
-    <strong>${f.name}</strong>
-    <span>${(f.size/1024/1024).toFixed(2)} MB</span>
-  `;
+  const f=pdf.files[0];
+  uploadText.innerHTML=`<strong>${f.name}</strong><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
   uploadBox.classList.add("has-file");
+  btn.disabled=false;
   btn.classList.add("active");
-  btn.disabled = false;
-});
+};
 
-/* remove */
-removeBtn.addEventListener("click",(e)=>{
+/* REMOVE */
+removeBtn.onclick=(e)=>{
   e.stopPropagation();
   pdf.value="";
   uploadBox.classList.remove("has-file");
   uploadText.innerHTML=`<strong>Upload your PDF</strong><span>Drag & drop or tap to browse</span>`;
-  btn.classList.remove("active");
   btn.disabled=true;
-});
+  btn.classList.remove("active");
+  progressWrap.style.display="none";
+  status.innerText="";
+};
 
-/* compress */
-btn.addEventListener("click",()=>{
+/* COMPRESS */
+btn.onclick=()=>{
   if(!pdf.files.length) return;
+
+  btn.innerText="Compressing…";
+  btn.disabled=true;
+  progressWrap.style.display="block";
+  progressBar.style.width="0%";
   status.innerText="Compressing PDF…";
+
+  let p=0;
+  timer=setInterval(()=>{
+    if(p<90){p+=Math.random()*8;progressBar.style.width=p+"%";}
+  },400);
 
   const fd=new FormData();
   fd.append("pdf",pdf.files[0]);
   fd.append("level",level);
 
-  fetch("https://develac-pdf-backend-production.up.railway.app/compress",{
-    method:"POST",
-    body:fd
-  })
+  fetch("https://develac-pdf-backend-production.up.railway.app/compress",{method:"POST",body:fd})
   .then(r=>r.blob())
-  .then(blob=>{
-    const url=URL.createObjectURL(blob);
+  .then(b=>{
+    clearInterval(timer);
+    progressBar.style.width="100%";
+
+    const url=URL.createObjectURL(b);
     const a=document.createElement("a");
-    a.href=url;
-    a.download="compressed.pdf";
-    a.click();
+    a.href=url;a.download="compressed.pdf";a.click();
     URL.revokeObjectURL(url);
-    status.innerText="Download started ✔";
+
+    btn.innerText="Compress & Download";
+    btn.disabled=false;
+    status.innerHTML="✅ PDF compressed successfully";
   })
-  .catch(()=>status.innerText="Compression failed");
-});
+  .catch(()=>{
+    clearInterval(timer);
+    btn.innerText="Compress & Download";
+    btn.disabled=false;
+    status.innerText="❌ Compression failed. Try again.";
+  });
+};
 </script>
 
 </body>
