@@ -265,16 +265,15 @@
 
   <!-- TOOL -->
   <div class="card">
-<label class="upload-box" for="pdf">
+
+   <div class="upload-box" id="uploadBox">
 
   <button
-  id="removePdf"
-  class="remove-btn"
-  type="button"
-  title="Remove PDF"
->
-  ×
-  </button>
+    id="removePdf"
+    class="remove-btn"
+    type="button"
+    title="Remove PDF"
+  >×</button>
 
   <div class="upload-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
@@ -289,10 +288,9 @@
     <span>Drag & drop or tap to browse</span>
   </div>
 
-  <input type="file" id="pdf" accept="application/pdf" hidden />
+</div>
 
-</label>
-      
+<input type="file" id="pdf" accept="application/pdf" hidden />   
     </div>
 
 
@@ -400,6 +398,11 @@ const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
   const removeBtn = document.getElementById("removePdf");
 const uploadBox = document.querySelector(".upload-box");
+  uploadBox.addEventListener("click", () => {
+  if (!uploadBox.classList.contains("has-file")) {
+    pdf.click();
+  }
+});
 
 /* create progress bar dynamically */
 const progressWrap = document.createElement("div");
