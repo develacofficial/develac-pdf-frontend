@@ -398,9 +398,11 @@ const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
   const removeBtn = document.getElementById("removePdf");
 const uploadBox = document.querySelector(".upload-box");
-  uploadBox.addEventListener("click", () => {
+  
+uploadBox.addEventListener("click", () => {
+  pdf.click();
 });
-
+  
 /* create progress bar dynamically */
 const progressWrap = document.createElement("div");
 progressWrap.style.marginTop = "12px";
