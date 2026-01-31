@@ -236,6 +236,7 @@
   <div class="card">
 
     <div class="upload-box" onclick="document.getElementById('pdf').click()">
+      <button id="removePdf" class="remove-btn" title="Remove PDF">×</button>
       <div class="upload-icon">
         <!-- upload icon (linear) -->
         <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
@@ -346,12 +347,16 @@
   </footer>
 
 </div>
+  
+  <!--script-->
 
 <script>
 const pdf = document.getElementById("pdf");
 const uploadText = document.getElementById("uploadText");
 const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
+  const removeBtn = document.getElementById("removePdf");
+const uploadBox = document.querySelector(".upload-box");
 
 /* create progress bar dynamically */
 const progressWrap = document.createElement("div");
@@ -394,9 +399,30 @@ pdf.addEventListener("change",()=>{
     <strong>${f.name}</strong>
     <span>${(f.size/1024/1024).toFixed(2)} MB</span>
   `;
+  uploadBox.classList.add("has-file");
+removeBtn.style.display = "flex";
 
   btn.disabled = false;
   btn.classList.add("active");
+  status.innerText = "";
+  progressWrap.style.display = "none";
+});
+  /* remove pdf */
+removeBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // upload box click se bachaata hai
+
+  pdf.value = ""; // file input reset
+  uploadText.innerHTML = `
+    <strong>Upload your PDF</strong>
+    <span>Drag & drop or tap to browse</span>
+  `;
+
+  uploadBox.classList.remove("has-file");
+  removeBtn.style.display = "none";
+
+  btn.disabled = true;
+  btn.classList.remove("active");
+
   status.innerText = "";
   progressWrap.style.display = "none";
 });
