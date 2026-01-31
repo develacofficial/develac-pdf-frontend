@@ -266,7 +266,7 @@
   <!-- TOOL -->
   <div class="card">
 
-    <div class="upload-box" onclick="document.getElementById('pdf').click()">
+    <div class="upload-box">
       <button id="removePdf" class="remove-btn" title="Remove PDF">×</button>
       <div class="upload-icon">
         <!-- upload icon (linear) -->
@@ -388,6 +388,10 @@ const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
   const removeBtn = document.getElementById("removePdf");
 const uploadBox = document.querySelector(".upload-box");
+  // upload box click → open file picker
+uploadBox.addEventListener("click", () => {
+  pdf.click();
+});
 
 /* create progress bar dynamically */
 const progressWrap = document.createElement("div");
