@@ -61,6 +61,7 @@
 
     /* ---------- UPLOAD BOX ---------- */
     .upload-box{
+      position:relative;
       border:2px dashed #3b82f6;
       border-radius:16px;
       padding:36px 20px;
@@ -72,7 +73,35 @@
     .upload-box:hover{
       background:rgba(59,130,246,.08);
     }
+    
+/* ---------- REMOVE PDF BUTTON ---------- */
+.remove-btn{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1px solid rgba(59,130,246,.5);
+  background:transparent;
+  color:#3b82f6;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
 
+.remove-btn:hover{
+  background:rgba(59,130,246,.15);
+}
+
+/* show only when pdf selected */
+.upload-box.has-file .remove-btn{
+  display:flex;
+}
     .upload-icon{
       width:56px;
       height:56px;
@@ -221,7 +250,9 @@
     }
   </style>
 </head>
-
+  
+<!--HTML-->
+  
 <body>
 <div class="container">
 
@@ -400,7 +431,6 @@ pdf.addEventListener("change",()=>{
     <span>${(f.size/1024/1024).toFixed(2)} MB</span>
   `;
   uploadBox.classList.add("has-file");
-removeBtn.style.display = "flex";
 
   btn.disabled = false;
   btn.classList.add("active");
@@ -418,7 +448,7 @@ removeBtn.addEventListener("click", (e) => {
   `;
 
   uploadBox.classList.remove("has-file");
-  removeBtn.style.display = "none";
+  
 
   btn.disabled = true;
   btn.classList.remove("active");
@@ -491,7 +521,6 @@ btn.addEventListener("click",()=>{
     status.innerText = "Compression failed. Try again.";
     btn.disabled = false;
   });
-});
 </script>
 
 </body>
