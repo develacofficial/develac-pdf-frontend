@@ -72,6 +72,7 @@ body{
   background:#0f172a;
   border:1px solid #1f2937;
   display:flex;justify-content:space-between;
+  cursor:pointer;
 }
 .level-option.active{border-color:#3b82f6;background:rgba(59,130,246,.15)}
 .check{opacity:0;color:#3b82f6}
@@ -86,6 +87,7 @@ body{
 #compressBtn.active{
   background:linear-gradient(135deg,#2563eb,#3b82f6);
   color:#fff;
+  cursor:pointer;
 }
 
 /* PROGRESS */
@@ -93,7 +95,7 @@ body{
 .progress-bar-bg{
   height:6px;background:#1f2937;border-radius:6px;overflow:hidden
 }
-.progress-bar{height:100%;width:0%;background:#3b82f6}
+.progress-bar{height:100%;width:0%;background:#3b82f6;transition:width .3s}
 .progress-text{text-align:center;font-size:13px;color:#9ca3af;margin-top:8px}
 
 /* SUCCESS */
@@ -137,9 +139,9 @@ body{
 
 <!-- LEVEL -->
 <div class="level-box" id="levelBox">
-  <div class="level-option active" data="medium">Medium — Recommended <span class="check">✓</span></div>
-  <div class="level-option" data="low">Low — Highest quality <span class="check">✓</span></div>
-  <div class="level-option" data="high">High — Smallest size <span class="check">✓</span></div>
+  <div class="level-option active" data-level="medium">Medium — Recommended <span class="check">✓</span></div>
+  <div class="level-option" data-level="low">Low — Highest quality <span class="check">✓</span></div>
+  <div class="level-option" data-level="high">High — Smallest size <span class="check">✓</span></div>
 </div>
 
 <button id="compressBtn">Compress & Download</button>
@@ -164,57 +166,77 @@ body{
 </div>
 
 <script>
-const pdf=document.getElementById("pdf");
-const uploadBox=document.getElementById("uploadBox");
-const uploadText=document.getElementById("uploadText");
-const removeBtn=document.getElementById("removeBtn");
-const compressBtn=document.getElementById("compressBtn");
-const levelBox=document.getElementById("levelBox");
-const progressWrap=document.getElementById("progressWrap");
-const progressBar=document.getElementById("progressBar");
-const progressText=document.getElementById("progressText");
-const successBox=document.getElementById("successBox");
-const resultInfo=document.getElementById("resultInfo");
-const downloadBtn=document.getElementById("downloadBtn");
+const pdf = document.getElementById("pdf");
+const uploadBox = document.getElementById("uploadBox");
+const uploadText = document.getElementById("uploadText");
+const removeBtn = document.getElementById("removeBtn");
+const compressBtn = document.getElementById("compressBtn");
+const levelBox = document.getElementById("levelBox");
+const progressWrap = document.getElementById("progressWrap");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
+const successBox = document.getElementById("successBox");
+const resultInfo = document.getElementById("resultInfo");
+const downloadBtn = document.getElementById("downloadBtn");
 
-let level="medium",originalSize=0,blobURL=null;
+let level = "medium";
+let originalSize = 0;
+let blobURL = null;
 
-document.querySelectorAll(".level-option").forEach(o=>{
-  o.onclick=()=>{
+/* LEVEL SELECT */
+document.querySelectorAll(".level-option").forEach(opt=>{
+  opt.onclick=()=>{
     document.querySelectorAll(".level-option").forEach(x=>x.classList.remove("active"));
-    o.classList.add("active");
-    level=o.dataset.level;
-  }
+    opt.classList.add("active");
+    level = opt.dataset.level;
+  };
 });
 
+/* FILE SELECT */
 pdf.onchange=()=>{
-  const f=pdf.files[0];
-  if(!f)return;
-  originalSize=f.size;
-  uploadText.innerHTML=`<strong>${f.name}</strong><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
+  const f = pdf.files[0];
+  if(!f) return;
+
+  originalSize = f.size;
+  uploadText.innerHTML = `<strong>${f.name}</strong><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
   uploadBox.classList.add("has-file");
   compressBtn.classList.add("active");
 };
 
+/* REMOVE */
+removeBtn.onclick=()=>{
+  pdf.value="";
+  uploadText.innerHTML=`<strong>Upload your PDF</strong><span>Drag & drop or tap to browse</span>`;
+  uploadBox.classList.remove("has-file");
+  compressBtn.classList.remove("active");
+};
+
+/* COMPRESS */
 compressBtn.onclick=()=>{
+  if(!pdf.files.length) return;
+
   levelBox.style.display="none";
   compressBtn.style.display="none";
   progressWrap.style.display="block";
 
   let p=0;
   const fake=setInterval(()=>{
-    p+=5;
-    if(p>90)p=90;
-    progressBar.style.width=p+"%";
-    progressText.innerText=p+"%";
-  },300);
+    if(p<90){
+      p+=Math.floor(Math.random()*6)+3;
+      progressBar.style.width=p+"%";
+      progressText.innerText=p+"%";
+    }
+  },400);
 
   const fd=new FormData();
   fd.append("pdf",pdf.files[0]);
   fd.append("level",level);
 
   fetch("https://develac-pdf-backend-production.up.railway.app/compress",{method:"POST",body:fd})
-  .then(r=>r.blob())
+  .then(r=>{
+    if(!r.ok) throw new Error("Compression failed");
+    return r.blob();
+  })
   .then(b=>{
     clearInterval(fake);
     progressBar.style.width="100%";
@@ -225,17 +247,21 @@ compressBtn.onclick=()=>{
       progressWrap.style.display="none";
       successBox.style.display="block";
 
-      const compressed=(b.size/1024/1024).toFixed(2);
-      const original=(originalSize/1024/1024).toFixed(2);
-      const saved=((1-b.size/originalSize)*100).toFixed(1);
+      const originalMB=(originalSize/1024/1024).toFixed(2);
+      const compressedMB=(b.size/1024/1024).toFixed(2);
+      const saved=Math.max(0,((originalSize-b.size)/originalSize*100)).toFixed(1);
 
-      resultInfo.innerHTML=`Original: ${original} MB<br>Compressed: ${compressed} MB<br>Reduced: ${saved}%`;
-
+      resultInfo.innerHTML=`Original: ${originalMB} MB<br>Compressed: ${compressedMB} MB<br>Reduced: ${saved}%`;
       blobURL=URL.createObjectURL(b);
     },600);
+  })
+  .catch(()=>{
+    alert("Compression failed. Please try again.");
+    location.reload();
   });
 };
 
+/* DOWNLOAD */
 downloadBtn.onclick=()=>{
   const a=document.createElement("a");
   a.href=blobURL;
