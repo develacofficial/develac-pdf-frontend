@@ -267,7 +267,14 @@
   <div class="card">
 <label class="upload-box" for="pdf">
 
-  <button id="removePdf" class="remove-btn" title="Remove PDF">×</button>
+  <button
+  id="removePdf"
+  class="remove-btn"
+  type="button"
+  title="Remove PDF"
+>
+  ×
+  </button>
 
   <div class="upload-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
@@ -436,7 +443,7 @@ pdf.addEventListener("change",()=>{
     <span>${(f.size/1024/1024).toFixed(2)} MB</span>
   `;
   uploadBox.classList.add("has-file");
-
+removeBtn.style.display = "flex";
   btn.disabled = false;
   btn.classList.add("active");
   status.innerText = "";
