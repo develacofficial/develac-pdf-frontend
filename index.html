@@ -1,69 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Develac PDF — Compress PDFs Instantly</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Develac PDF — Compress PDFs Instantly</title>
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
 
-    body{
-      min-height:100vh;
-      background: radial-gradient(circle at top, #0b1220, #020617);
-      color:#e5e7eb;
-    }
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,#0b1220,#020617);
+  color:#e5e7eb;
+}
 
-    .container{
-      max-width:960px;
-      margin:auto;
-      padding:40px 16px 80px;
-    }
+.container{
+  max-width:960px;
+  margin:auto;
+  padding:40px 16px 80px;
+}
 
-    /* ---------- HERO ---------- */
-    .hero{
-      text-align:center;
-      margin-bottom:40px;
-    }
+/* HERO */
+.hero{
+  text-align:center;
+  margin-bottom:40px;
+}
+.brand{
+  font-weight:600;
+  opacity:.9;
+  margin-bottom:10px;
+}
+.hero h1{
+  font-size:40px;
+  line-height:1.2;
+}
+.hero p{
+  color:#9ca3af;
+  margin-top:8px;
+}
 
-    .brand{
-      font-weight:600;
-      opacity:.9;
-      margin-bottom:10px;
-    }
+/* CARD */
+.card{
+  max-width:520px;
+  margin:0 auto 48px;
+  background:rgba(15,23,42,.7);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
 
-    .hero h1{
-      font-size:40px;
-      line-height:1.2;
-      margin-bottom:10px;
-    }
+/* UPLOAD BOX */
+.upload-box{
+  position:relative;
+  border:2px dashed #3b82f6;
+  border-radius:16px;
+  padding:36px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s;
+}
+.upload-box:hover{
+  background:rgba(59,130,246,.08);
+}
 
-    .hero p{
-      color:#9ca3af;
-      font-size:16px;
-    }
-
-    /* ---------- CARD ---------- */
-    .card{
-      max-width:520px;
-      margin:0 auto 48px;
-      background:rgba(15,23,42,.7);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px;
-      padding:28px;
-      box-shadow:0 30px 80px rgba(0,0,0,.6);
-    }
-
-    /* ---------- UPLOAD BOX ---------- */
-    .remove-btn{
-  z-index:3; /* input से ऊपर */
-    }
-    /* ---------- FILE INPUT OVERLAY (MOBILE FIX) ---------- */
+/* FILE INPUT (REAL CLICK TARGET) */
 .file-input{
   position:absolute;
   inset:0;
@@ -73,21 +79,8 @@
   cursor:pointer;
   z-index:2;
 }
-    .upload-box{
-      position:relative;
-      border:2px dashed #3b82f6;
-      border-radius:16px;
-      padding:36px 20px;
-      text-align:center;
-      cursor:pointer;
-      transition:.2s;
-    }
 
-    .upload-box:hover{
-      background:rgba(59,130,246,.08);
-    }
-    
-/* ---------- REMOVE PDF BUTTON ---------- */
+/* REMOVE BUTTON */
 .remove-btn{
   position:absolute;
   top:12px;
@@ -99,215 +92,126 @@
   background:transparent;
   color:#3b82f6;
   font-size:16px;
-  font-weight:600;
   cursor:pointer;
   display:none;
-  align-items:center;
-  justify-content:center;
-  transition:.2s;
+  z-index:3;
 }
-
-.remove-btn:hover{
-  background:rgba(59,130,246,.15);
-}
-
-/* show only when pdf selected */
 .upload-box.has-file .remove-btn{
   display:flex;
+  align-items:center;
+  justify-content:center;
 }
-    .upload-icon{
-      width:56px;
-      height:56px;
-      border-radius:50%;
-      background:rgba(59,130,246,.15);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 auto 14px;
-    }
 
-    .upload-icon svg{
-      width:26px;
-      height:26px;
-      stroke:#3b82f6;
-    }
+/* ICON */
+.upload-icon{
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:rgba(59,130,246,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 14px;
+}
+.upload-icon svg{
+  width:26px;
+  height:26px;
+  stroke:#3b82f6;
+}
 
-    .upload-text strong{
-      display:block;
-      font-size:16px;
-      margin-bottom:4px;
-    }
+/* TEXT */
+.upload-text strong{
+  display:block;
+  font-size:16px;
+}
+.upload-text span{
+  font-size:14px;
+  color:#9ca3af;
+}
 
-    .upload-text span{
-      font-size:14px;
-      color:#9ca3af;
-    }
+/* LEVEL */
+.level-box{margin-top:20px;}
+.level-option{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px;
+  margin-bottom:10px;
+  border-radius:14px;
+  background:#0f172a;
+  border:1px solid #1f2937;
+  cursor:pointer;
+}
+.level-option.active{
+  border-color:#3b82f6;
+  background:rgba(59,130,246,.15);
+}
+.check{opacity:0;color:#3b82f6;font-weight:600;}
+.level-option.active .check{opacity:1;}
 
-    /* ---------- LEVEL ---------- */
-    .level-box{
-      margin-top:20px;
-    }
+/* BUTTON */
+#compressBtn{
+  width:100%;
+  margin-top:18px;
+  padding:16px;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
+  background:#1f2937;
+  color:#9ca3af;
+  cursor:not-allowed;
+}
+#compressBtn.active{
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  color:#fff;
+  cursor:pointer;
+}
 
-    .level-option{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:14px 16px;
-      margin-bottom:10px;
-      border-radius:14px;
-      background:#0f172a;
-      border:1px solid #1f2937;
-      cursor:pointer;
-      transition:.2s;
-    }
+.status{
+  margin-top:12px;
+  text-align:center;
+  font-size:14px;
+  color:#9ca3af;
+}
 
-    .level-option.active{
-      border-color:#3b82f6;
-      background:rgba(59,130,246,.15);
-    }
-
-    .level-option span{
-      font-size:14px;
-    }
-
-    .check{
-      opacity:0;
-      color:#3b82f6;
-      font-weight:600;
-    }
-
-    .level-option.active .check{
-      opacity:1;
-    }
-
-    /* ---------- BUTTON ---------- */
-    #compressBtn{
-      width:100%;
-      margin-top:18px;
-      padding:16px;
-      border-radius:14px;
-      border:none;
-      font-size:16px;
-      font-weight:600;
-      background:#1f2937;
-      color:#9ca3af;
-      cursor:not-allowed;
-      transition:.2s;
-    }
-
-    #compressBtn.active{
-      background:linear-gradient(135deg,#2563eb,#3b82f6);
-      color:#fff;
-      cursor:pointer;
-    }
-
-    .status{
-      margin-top:12px;
-      text-align:center;
-      font-size:14px;
-      color:#9ca3af;
-    }
-
-    /* ---------- TRUST ---------- */
-    .trust{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:20px;
-      margin-top:40px;
-    }
-
-    .trust-card{
-      background:rgba(15,23,42,.6);
-      border:1px solid rgba(255,255,255,.05);
-      border-radius:14px;
-      padding:20px;
-    }
-
-    .trust-icon{
-      margin-bottom:10px;
-    }
-
-    .trust-icon svg{
-      width:24px;
-      height:24px;
-      stroke:#3b82f6;
-    }
-
-    .trust-card h3{
-      font-size:16px;
-      margin-bottom:6px;
-    }
-
-    .trust-card p{
-      font-size:14px;
-      color:#9ca3af;
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer{
-      margin-top:60px;
-      text-align:center;
-      font-size:13px;
-      color:#6b7280;
-    }
-
-    footer a{
-      color:#9ca3af;
-      text-decoration:none;
-      margin:0 6px;
-    }
-
-    @media(max-width:640px){
-      .hero h1{font-size:28px;}
-      .card{padding:22px;}
-    }
-  </style>
+/* MOBILE */
+@media(max-width:640px){
+  .hero h1{font-size:28px;}
+}
+</style>
 </head>
-  
-<!--HTML-->
-  
+
 <body>
 <div class="container">
 
-  <!-- HERO -->
   <div class="hero">
     <div class="brand">Develac PDF</div>
     <h1>Compress PDFs instantly</h1>
     <p>Fast, secure, no sign-up required.</p>
   </div>
 
-  <!-- TOOL -->
   <div class="card">
 
-   <div class="upload-box">
-<input
-  type="file"
-  id="pdf"
-  class="file-input"
-  accept="application/pdf"
-/>
+    <div class="upload-box" id="uploadBox">
 
-  <button
-    id="removePdf"
-    class="remove-btn"
-    type="button"
-    title="Remove PDF"
-  >×</button>
+      <input type="file" id="pdf" class="file-input" accept="application/pdf">
 
-  <div class="upload-icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M12 16V4"/>
-      <path d="M7 9l5-5 5 5"/>
-      <path d="M4 20h16"/>
-    </svg>
-  </div>
+      <button class="remove-btn" id="removePdf" type="button">×</button>
 
-  <div class="upload-text" id="uploadText">
-    <strong>Upload your PDF</strong>
-    <span>Drag & drop or tap to browse</span>
-  </div>
-   </div>
+      <div class="upload-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M12 16V4"/>
+          <path d="M7 9l5-5 5 5"/>
+          <path d="M4 20h16"/>
+        </svg>
+      </div>
 
+      <div class="upload-text" id="uploadText">
+        <strong>Upload your PDF</strong>
+        <span>Drag & drop or tap to browse</span>
+      </div>
+
+    </div>
 
     <div class="level-box">
       <div class="level-option active" data="medium">
@@ -325,229 +229,80 @@
     </div>
 
     <button id="compressBtn">Compress & Download</button>
+    <div class="status" id="status"></div>
 
-<!-- ✅ YAHI PASTE KARO -->
-<div id="progressBox" style="display:none; margin-top:14px;">
-  <div style="
-    width:100%;
-    height:6px;
-    background:rgba(255,255,255,0.1);
-    border-radius:6px;
-    overflow:hidden;
-  ">
-    <div id="progressBar" style="
-      width:0%;
-      height:100%;
-      background:linear-gradient(90deg,#3b82f6,#60a5fa);
-      transition:width 0.3s ease;
-    "></div>
-  </div>
-  <div id="progressText" style="
-    margin-top:8px;
-    font-size:13px;
-    color:#9ca3af;
-    text-align:center;
-  ">
-    Compressing PDF…
   </div>
 </div>
-<!-- ✅ YAHI TAK -->
-
-<div class="status" id="status"></div>
-
-  </div>
-
-  <!-- TRUST -->
-  <div class="trust">
-    <div class="trust-card">
-      <div class="trust-icon">
-        <!-- lock icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <rect x="3" y="11" width="18" height="10" rx="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-      </div>
-      <h3>Secure Processing</h3>
-      <p>Your files are processed securely.</p>
-    </div>
-
-    <div class="trust-card">
-      <div class="trust-icon">
-        <!-- trash icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <path d="M3 6h18"/>
-          <path d="M8 6V4h8v2"/>
-          <path d="M19 6l-1 14H6L5 6"/>
-        </svg>
-      </div>
-      <h3>Auto-Delete</h3>
-      <p>Files are deleted automatically.</p>
-    </div>
-
-    <div class="trust-card">
-      <div class="trust-icon">
-        <!-- bolt icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <path d="M13 2L3 14h7l-1 8 10-12h-7z"/>
-        </svg>
-      </div>
-      <h3>Real Compression</h3>
-      <p>Powered by a real PDF engine.</p>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    Develac is building simple, powerful tools for the web.<br/>
-    <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a>
-  </footer>
-
-</div>
-  
-  <!--script-->
 
 <script>
 const pdf = document.getElementById("pdf");
+const uploadBox = document.getElementById("uploadBox");
 const uploadText = document.getElementById("uploadText");
+const removeBtn = document.getElementById("removePdf");
 const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
-  const removeBtn = document.getElementById("removePdf");
-const uploadBox = document.querySelector(".upload-box");
-  
-  
-/* create progress bar dynamically */
-const progressWrap = document.createElement("div");
-progressWrap.style.marginTop = "12px";
-progressWrap.style.display = "none";
-
-progressWrap.innerHTML = `
-  <div style="height:6px;background:#1f2937;border-radius:6px;overflow:hidden">
-    <div id="progressBar" style="height:100%;width:0%;background:#3b82f6;transition:width .4s"></div>
-  </div>
-  <div id="progressText" style="font-size:13px;margin-top:6px;color:#9ca3af;text-align:center">
-    0%
-  </div>
-`;
-
-btn.after(progressWrap);
-
-const progressBar = progressWrap.querySelector("#progressBar");
-const progressText = progressWrap.querySelector("#progressText");
 
 let level = "medium";
-let fakeProgressInterval = null;
 
 /* level select */
-document.querySelectorAll(".level-option").forEach(option=>{
-  option.addEventListener("click",()=>{
-    document.querySelectorAll(".level-option")
-      .forEach(o=>o.classList.remove("active"));
-    option.classList.add("active");
-    level = option.getAttribute("data");
+document.querySelectorAll(".level-option").forEach(opt=>{
+  opt.addEventListener("click",()=>{
+    document.querySelectorAll(".level-option").forEach(o=>o.classList.remove("active"));
+    opt.classList.add("active");
+    level = opt.dataset.value || opt.getAttribute("data");
   });
 });
 
 /* file select */
 pdf.addEventListener("change",()=>{
   if(!pdf.files.length) return;
-
   const f = pdf.files[0];
+
   uploadText.innerHTML = `
     <strong>${f.name}</strong>
     <span>${(f.size/1024/1024).toFixed(2)} MB</span>
   `;
   uploadBox.classList.add("has-file");
-removeBtn.style.display = "flex";
-  btn.disabled = false;
   btn.classList.add("active");
-  status.innerText = "";
-  progressWrap.style.display = "none";
+  btn.disabled = false;
 });
-  /* remove pdf */
-removeBtn.addEventListener("click", (e) => {
-  e.stopPropagation(); // upload box click se bachaata hai
 
-  pdf.value = ""; // file input reset
-  uploadText.innerHTML = `
-    <strong>Upload your PDF</strong>
-    <span>Drag & drop or tap to browse</span>
-  `;
-
+/* remove */
+removeBtn.addEventListener("click",(e)=>{
+  e.stopPropagation();
+  pdf.value="";
   uploadBox.classList.remove("has-file");
-  
-
-  btn.disabled = true;
+  uploadText.innerHTML=`<strong>Upload your PDF</strong><span>Drag & drop or tap to browse</span>`;
   btn.classList.remove("active");
-
-  status.innerText = "";
-  progressWrap.style.display = "none";
+  btn.disabled=true;
 });
-
-/* start fake progress */
-function startProgress(){
-  let progress = 0;
-  progressWrap.style.display = "block";
-  progressBar.style.width = "0%";
-  progressText.innerText = "0%";
-
-  fakeProgressInterval = setInterval(()=>{
-    if(progress < 90){
-      progress += Math.floor(Math.random() * 6) + 3;
-      if(progress > 90) progress = 90;
-      progressBar.style.width = progress + "%";
-      progressText.innerText = progress + "%";
-    }
-  }, 500);
-}
-
-/* finish progress */
-function finishProgress(){
-  clearInterval(fakeProgressInterval);
-  progressBar.style.width = "100%";
-  progressText.innerText = "100%";
-}
 
 /* compress */
 btn.addEventListener("click",()=>{
   if(!pdf.files.length) return;
+  status.innerText="Compressing PDF…";
 
-  const formData = new FormData();
-  formData.append("pdf", pdf.files[0]);
-  formData.append("level", level);
-
-  btn.disabled = true;
-  status.innerText = "Compressing PDF…";
-  startProgress();
+  const fd=new FormData();
+  fd.append("pdf",pdf.files[0]);
+  fd.append("level",level);
 
   fetch("https://develac-pdf-backend-production.up.railway.app/compress",{
     method:"POST",
-    body:formData
+    body:fd
   })
-  .then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  })
+  .then(r=>r.blob())
   .then(blob=>{
-    finishProgress();
-
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "compressed.pdf";
-    document.body.appendChild(a);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download="compressed.pdf";
     a.click();
-    a.remove();
     URL.revokeObjectURL(url);
-
-    status.innerText = "Download started ✔";
-    btn.disabled = false;
+    status.innerText="Download started ✔";
   })
-  .catch(()=>{
-    clearInterval(fakeProgressInterval);
-    status.innerText = "Compression failed. Try again.";
-    btn.disabled = false;
-  });
+  .catch(()=>status.innerText="Compression failed");
+});
 </script>
 
 </body>
-        </html>
+</html>
