@@ -1,274 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Develac PDF — Compress PDFs Instantly</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Develac — Smart & Secure PDF Tools</title>
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
-body{
-  min-height:100vh;
-  background:radial-gradient(circle at top,#0b1220,#020617);
-  color:#e5e7eb;
-}
-.container{max-width:960px;margin:auto;padding:40px 16px 80px}
-.hero{text-align:center;margin-bottom:40px}
-.brand{font-weight:600;opacity:.9;margin-bottom:10px}
-.hero h1{font-size:40px;line-height:1.2;margin-bottom:10px}
-.hero p{color:#9ca3af;font-size:16px}
-
-.card{
-  max-width:520px;
-  margin:0 auto;
-  background:rgba(15,23,42,.7);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:18px;
-  padding:28px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
-}
-
-/* UPLOAD BOX */
-.upload-box{
-  position:relative;
-  border:2px dashed #3b82f6;
-  border-radius:16px;
-  padding:36px 20px;
-  text-align:center;
-}
-.file-input{
-  position:absolute;
-  inset:0;
-  opacity:0;
-  cursor:pointer;
-}
-.remove-btn{
-  position:absolute;
-  top:12px;right:12px;
-  width:28px;height:28px;
-  border-radius:50%;
-  border:1px solid rgba(59,130,246,.5);
-  background:transparent;
-  color:#3b82f6;
-  font-size:18px;
-  display:none;
-}
-.upload-box.has-file .remove-btn{display:block}
-
-.upload-icon{
-  width:56px;height:56px;border-radius:50%;
-  background:rgba(59,130,246,.15);
-  display:flex;align-items:center;justify-content:center;
-  margin:0 auto 14px;
-}
-.upload-text strong{display:block;font-size:16px}
-.upload-text span{font-size:14px;color:#9ca3af}
-
-/* LEVEL */
-.level-box{margin-top:20px}
-.level-option{
-  padding:14px 16px;margin-bottom:10px;
-  border-radius:14px;
-  background:#0f172a;
-  border:1px solid #1f2937;
-  display:flex;justify-content:space-between;
-  cursor:pointer;
-}
-.level-option.active{border-color:#3b82f6;background:rgba(59,130,246,.15)}
-.check{opacity:0;color:#3b82f6}
-.level-option.active .check{opacity:1}
-
-/* BUTTON */
-#compressBtn{
-  width:100%;margin-top:18px;padding:16px;
-  border-radius:14px;border:none;
-  background:#1f2937;color:#9ca3af;
-}
-#compressBtn.active{
-  background:linear-gradient(135deg,#2563eb,#3b82f6);
-  color:#fff;
-  cursor:pointer;
-}
-
-/* PROGRESS */
-.progress-wrap{margin-top:18px;display:none}
-.progress-bar-bg{
-  height:6px;background:#1f2937;border-radius:6px;overflow:hidden
-}
-.progress-bar{height:100%;width:0%;background:#3b82f6;transition:width .3s}
-.progress-text{text-align:center;font-size:13px;color:#9ca3af;margin-top:8px}
-
-/* SUCCESS */
-.success-box{display:none;text-align:center;margin-top:20px}
-.success-box h3{margin-bottom:8px}
-.success-box p{color:#9ca3af;font-size:14px;margin-bottom:14px}
-.btn-green{
-  background:#16a34a;color:#fff;
-  padding:14px;border-radius:14px;border:none;width:100%;
-  margin-bottom:10px;
-}
-.btn-outline{
-  background:transparent;color:#3b82f6;
-  border:1px solid #3b82f6;
-  padding:14px;border-radius:14px;width:100%;
-}
-</style>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif}
+    body{
+      min-height:100vh;
+      background:radial-gradient(circle at top,#0b1220,#020617);
+      color:#e5e7eb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+    h1{font-size:40px;margin-bottom:12px}
+    p{color:#9ca3af;font-size:16px;margin-bottom:24px}
+    a{
+      display:inline-block;
+      padding:14px 24px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#2563eb,#3b82f6);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+    }
+  </style>
 </head>
 
 <body>
-<div class="container">
-
-<div class="hero">
-  <div class="brand">Develac PDF</div>
-  <h1>Compress PDFs instantly</h1>
-  <p>Fast, secure, no sign-up required.</p>
-</div>
-
-<div class="card">
-
-<!-- UPLOAD -->
-<div class="upload-box" id="uploadBox">
-  <input type="file" id="pdf" class="file-input" accept="application/pdf">
-  <button class="remove-btn" id="removeBtn">×</button>
-  <div class="upload-icon">⬆</div>
-  <div class="upload-text" id="uploadText">
-    <strong>Upload your PDF</strong>
-    <span>Drag & drop or tap to browse</span>
+  <div>
+    <h1>Develac</h1>
+    <p>Smart & secure software tools for modern workflows.</p>
+    <a href="/pdf/">Open PDF Tools</a>
   </div>
-</div>
-
-<!-- LEVEL -->
-<div class="level-box" id="levelBox">
-  <div class="level-option active" data-level="medium">Medium — Recommended <span class="check">✓</span></div>
-  <div class="level-option" data-level="low">Low — Highest quality <span class="check">✓</span></div>
-  <div class="level-option" data-level="high">High — Smallest size <span class="check">✓</span></div>
-</div>
-
-<button id="compressBtn">Compress & Download</button>
-
-<!-- PROGRESS -->
-<div class="progress-wrap" id="progressWrap">
-  <div class="progress-bar-bg">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-  <div class="progress-text" id="progressText">0%</div>
-</div>
-
-<!-- SUCCESS -->
-<div class="success-box" id="successBox">
-  <h3>✅ Your PDF is ready</h3>
-  <p id="resultInfo"></p>
-  <button class="btn-green" id="downloadBtn">Download PDF</button>
-  <button class="btn-outline" onclick="location.reload()">Compress another PDF</button>
-</div>
-
-</div>
-</div>
-
-<script>
-const pdf = document.getElementById("pdf");
-const uploadBox = document.getElementById("uploadBox");
-const uploadText = document.getElementById("uploadText");
-const removeBtn = document.getElementById("removeBtn");
-const compressBtn = document.getElementById("compressBtn");
-const levelBox = document.getElementById("levelBox");
-const progressWrap = document.getElementById("progressWrap");
-const progressBar = document.getElementById("progressBar");
-const progressText = document.getElementById("progressText");
-const successBox = document.getElementById("successBox");
-const resultInfo = document.getElementById("resultInfo");
-const downloadBtn = document.getElementById("downloadBtn");
-
-let level = "medium";
-let originalSize = 0;
-let blobURL = null;
-
-/* LEVEL SELECT */
-document.querySelectorAll(".level-option").forEach(opt=>{
-  opt.onclick=()=>{
-    document.querySelectorAll(".level-option").forEach(x=>x.classList.remove("active"));
-    opt.classList.add("active");
-    level = opt.dataset.level;
-  };
-});
-
-/* FILE SELECT */
-pdf.onchange=()=>{
-  const f = pdf.files[0];
-  if(!f) return;
-
-  originalSize = f.size;
-  uploadText.innerHTML = `<strong>${f.name}</strong><span>${(f.size/1024/1024).toFixed(2)} MB</span>`;
-  uploadBox.classList.add("has-file");
-  compressBtn.classList.add("active");
-};
-
-/* REMOVE */
-removeBtn.onclick=()=>{
-  pdf.value="";
-  uploadText.innerHTML=`<strong>Upload your PDF</strong><span>Drag & drop or tap to browse</span>`;
-  uploadBox.classList.remove("has-file");
-  compressBtn.classList.remove("active");
-};
-
-/* COMPRESS */
-compressBtn.onclick=()=>{
-  if(!pdf.files.length) return;
-
-  levelBox.style.display="none";
-  compressBtn.style.display="none";
-  progressWrap.style.display="block";
-
-  let p=0;
-  const fake=setInterval(()=>{
-    if(p<90){
-      p+=Math.floor(Math.random()*6)+3;
-      progressBar.style.width=p+"%";
-      progressText.innerText=p+"%";
-    }
-  },400);
-
-  const fd=new FormData();
-  fd.append("pdf",pdf.files[0]);
-  fd.append("level",level);
-
-  fetch("https://develac-pdf-backend-production.up.railway.app/compress",{method:"POST",body:fd})
-  .then(r=>{
-    if(!r.ok) throw new Error("Compression failed");
-    return r.blob();
-  })
-  .then(b=>{
-    clearInterval(fake);
-    progressBar.style.width="100%";
-    progressText.innerText="100%";
-
-    setTimeout(()=>{
-      uploadBox.style.display="none";
-      progressWrap.style.display="none";
-      successBox.style.display="block";
-
-      const originalMB=(originalSize/1024/1024).toFixed(2);
-      const compressedMB=(b.size/1024/1024).toFixed(2);
-      const saved=Math.max(0,((originalSize-b.size)/originalSize*100)).toFixed(1);
-
-      resultInfo.innerHTML=`Original: ${originalMB} MB<br>Compressed: ${compressedMB} MB<br>Reduced: ${saved}%`;
-      blobURL=URL.createObjectURL(b);
-    },600);
-  })
-  .catch(()=>{
-    alert("Compression failed. Please try again.");
-    location.reload();
-  });
-};
-
-/* DOWNLOAD */
-downloadBtn.onclick=()=>{
-  const a=document.createElement("a");
-  a.href=blobURL;
-  a.download="compressed.pdf";
-  a.click();
-};
-</script>
-
 </body>
 </html>
