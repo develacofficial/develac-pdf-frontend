@@ -265,24 +265,29 @@
 
   <!-- TOOL -->
   <div class="card">
+<label class="upload-box" for="pdf">
 
-    <div class="upload-box">
-      <button id="removePdf" class="remove-btn" title="Remove PDF">×</button>
-      <div class="upload-icon">
-        <!-- upload icon (linear) -->
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <path d="M12 16V4"/>
-          <path d="M7 9l5-5 5 5"/>
-          <path d="M4 20h16"/>
-        </svg>
-      </div>
-      <div class="upload-text" id="uploadText">
-        <strong>Upload your PDF</strong>
-        <span>Drag & drop or tap to browse</span>
-      </div>
+  <button id="removePdf" class="remove-btn" title="Remove PDF">×</button>
+
+  <div class="upload-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <path d="M12 16V4"/>
+      <path d="M7 9l5-5 5 5"/>
+      <path d="M4 20h16"/>
+    </svg>
+  </div>
+
+  <div class="upload-text" id="uploadText">
+    <strong>Upload your PDF</strong>
+    <span>Drag & drop or tap to browse</span>
+  </div>
+
+  <input type="file" id="pdf" accept="application/pdf" hidden />
+
+</label>
+      
     </div>
 
-    <input type="file" id="pdf" accept="application/pdf" style="position:absolute; left:-9999px;"/>
 
     <div class="level-box">
       <div class="level-option active" data="medium">
@@ -388,11 +393,7 @@ const btn = document.getElementById("compressBtn");
 const status = document.getElementById("status");
   const removeBtn = document.getElementById("removePdf");
 const uploadBox = document.querySelector(".upload-box");
-uploadBox.addEventListener("click", () => {
-  if (!uploadBox.classList.contains("has-file")) {
-    pdf.click();
-  }
-});
+
 /* create progress bar dynamically */
 const progressWrap = document.createElement("div");
 progressWrap.style.marginTop = "12px";
