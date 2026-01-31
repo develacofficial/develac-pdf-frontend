@@ -60,6 +60,19 @@
     }
 
     /* ---------- UPLOAD BOX ---------- */
+    .remove-btn{
+  z-index:3; /* input से ऊपर */
+    }
+    /* ---------- FILE INPUT OVERLAY (MOBILE FIX) ---------- */
+.file-input{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  cursor:pointer;
+  z-index:2;
+}
     .upload-box{
       position:relative;
       border:2px dashed #3b82f6;
@@ -266,7 +279,13 @@
   <!-- TOOL -->
   <div class="card">
 
-   <div class="upload-box" id="uploadBox">
+   <div class="upload-box">
+<input
+  type="file"
+  id="pdf"
+  class="file-input"
+  accept="application/pdf"
+/>
 
   <button
     id="removePdf"
@@ -287,11 +306,7 @@
     <strong>Upload your PDF</strong>
     <span>Drag & drop or tap to browse</span>
   </div>
-
-</div>
-
-<input type="file" id="pdf" accept="application/pdf" hidden />   
-    </div>
+   </div>
 
 
     <div class="level-box">
@@ -399,9 +414,6 @@ const status = document.getElementById("status");
   const removeBtn = document.getElementById("removePdf");
 const uploadBox = document.querySelector(".upload-box");
   
-uploadBox.addEventListener("click", () => {
-  pdf.click();
-});
   
 /* create progress bar dynamically */
 const progressWrap = document.createElement("div");
