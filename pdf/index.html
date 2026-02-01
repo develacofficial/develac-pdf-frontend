@@ -135,6 +135,22 @@
       Tool UI ready • Compression coming next
     </div>
   </div>
+  <script>
+  const fileInput = document.querySelector('input[type="file"]');
+  const compressBtn = document.querySelector('.compress-btn');
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      compressBtn.style.opacity = '1';
+      compressBtn.style.cursor = 'pointer';
+      compressBtn.disabled = false;
+    } else {
+      compressBtn.style.opacity = '.5';
+      compressBtn.style.cursor = 'not-allowed';
+      compressBtn.disabled = true;
+    }
+  });
+                             </script>
 
 </body>
 </html>
