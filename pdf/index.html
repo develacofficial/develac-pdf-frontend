@@ -2,191 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Compress PDFs — Fast, Secure & Private</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compress PDFs – Develac</title>
 
   <style>
-    :root {
-      --bg1: #060b18;
-      --bg2: #0a1430;
-      --card: rgba(255,255,255,0.05);
-      --border: rgba(255,255,255,0.12);
-      --blue: #3b82f6;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --radius: 22px;
-    }
-
     * {
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background: radial-gradient(1200px 600px at top, var(--bg2), var(--bg1));
-      color: var(--text);
+      background: radial-gradient(1200px 600px at top, #0b1a3a, #050914);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
     }
 
     .container {
-      max-width: 420px;
-      margin: auto;
-      padding: 22px 16px 60px;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      color: var(--muted);
-      font-size: 14px;
-      cursor: pointer;
+      width: 100%;
+      max-width: 520px;
     }
 
     h1 {
-      font-size: 28px;
-      line-height: 1.25;
-      margin: 6px 0;
+      font-size: 34px;
+      line-height: 1.2;
+      margin-bottom: 12px;
     }
 
     .subtitle {
-      color: var(--muted);
+      color: #a8b0c2;
       font-size: 15px;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.04);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.5);
+      backdrop-filter: blur(12px);
     }
 
-    .hidden {
-      display: none;
-    }
+    /* ---------------- Upload Card ---------------- */
 
-    /* Upload box */
     .upload-box {
-      border: 2px dashed rgba(59,130,246,0.7);
-      border-radius: 16px;
-      padding: 28px 16px;
+      border: 2px dashed #3b6df6;
+      border-radius: 18px;
+      padding: 36px 20px;
       text-align: center;
       cursor: pointer;
-      transition: 0.2s;
+      transition: .25s;
     }
 
     .upload-box:hover {
-      background: rgba(59,130,246,0.05);
+      background: rgba(59,109,246,.08);
     }
 
     .upload-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 12px;
-      border-radius: 14px;
-      background: rgba(59,130,246,0.15);
+      width: 52px;
+      height: 52px;
+      margin: 0 auto 14px;
+      background: rgba(59,109,246,.15);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .upload-icon svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--blue);
+      font-size: 22px;
+      color: #5d8bff;
     }
 
     .upload-title {
       font-size: 18px;
-      margin-bottom: 4px;
+      font-weight: 600;
+      margin-bottom: 6px;
     }
 
     .upload-desc {
-      color: var(--muted);
       font-size: 14px;
+      color: #9aa3b7;
     }
 
-    input[type=file] {
+    input[type="file"] {
       display: none;
     }
 
-    /* File preview */
-    .file-row {
+    /* ---------------- File Preview ---------------- */
+
+    .file-box {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border: 2px dashed rgba(59,130,246,0.7);
+      border: 2px dashed #3b6df6;
       border-radius: 16px;
-      padding: 16px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
     }
 
-    .file-info {
+    .file-name {
+      font-weight: 600;
       font-size: 15px;
     }
 
     .file-size {
       font-size: 13px;
-      color: var(--muted);
-      margin-top: 4px;
+      color: #9aa3b7;
     }
 
     .remove-btn {
-      color: #ef4444;
-      font-size: 14px;
+      color: #ff6b6b;
       cursor: pointer;
+      font-size: 14px;
     }
 
-    /* Select */
+    /* ---------------- Select ---------------- */
+
     .label {
-      margin-top: 18px;
-      margin-bottom: 6px;
       font-size: 14px;
-      color: var(--muted);
+      color: #9aa3b7;
+      margin-bottom: 6px;
     }
 
     select {
       width: 100%;
-      padding: 14px;
+      padding: 14px 16px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      color: var(--text);
+      background: #0e1834;
+      color: #fff;
+      border: 1px solid #2d3e70;
       font-size: 15px;
-      appearance: none;
+      outline: none;
     }
 
-    button {
+    /* ---------------- Button ---------------- */
+
+    .btn {
+      margin-top: 20px;
       width: 100%;
-      margin-top: 18px;
-      padding: 15px;
+      padding: 16px;
+      border-radius: 16px;
+      border: none;
+      background: linear-gradient(135deg, #3b6df6, #5d8bff);
+      color: #fff;
       font-size: 16px;
       font-weight: 600;
-      border-radius: 999px;
-      border: none;
       cursor: pointer;
-      background: linear-gradient(135deg, #3b82f6, #2563eb);
-      color: white;
-      box-shadow: 0 10px 30px rgba(59,130,246,0.4);
     }
 
-    button:disabled {
-      opacity: 0.5;
+    .btn:disabled {
+      opacity: .5;
       cursor: not-allowed;
     }
 
-    /* Processing */
-    .progress-ring {
+    /* ---------------- Processing Card ---------------- */
+
+    .processing {
+      display: none;
+      text-align: center;
+    }
+
+    .circle {
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      border: 6px solid rgba(59,130,246,0.2);
-      border-top-color: var(--blue);
-      animation: spin 1.2s linear infinite;
-      margin: 10px auto 14px;
+      border: 6px solid rgba(255,255,255,.1);
+      border-top-color: #3b6df6;
+      margin: 0 auto 18px;
+      animation: spin 1s linear infinite;
+      position: relative;
+    }
+
+    .percent {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
     }
 
     @keyframes spin {
@@ -195,48 +189,37 @@
 
     .progress-bar {
       height: 6px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,.1);
+      border-radius: 6px;
       overflow: hidden;
-      margin: 12px 0;
+      margin-top: 14px;
     }
 
-    .progress-fill {
-      width: 35%;
+    .progress {
       height: 100%;
-      background: var(--blue);
-      border-radius: 999px;
-      animation: move 1.6s ease-in-out infinite;
+      width: 0%;
+      background: linear-gradient(90deg, #3b6df6, #5d8bff);
+      transition: width .3s;
     }
 
-    @keyframes move {
-      0% { width: 20%; }
-      50% { width: 70%; }
-      100% { width: 20%; }
-    }
-
-    .muted {
-      color: var(--muted);
-      font-size: 14px;
-      text-align: center;
-    }
-
-    footer {
+    .note {
       margin-top: 22px;
       font-size: 13px;
-      color: var(--muted);
+      color: #9aa3b7;
+      line-height: 1.6;
     }
 
-    footer li {
-      margin-bottom: 6px;
+    .back {
+      margin-top: 26px;
+      text-align: center;
+      color: #7da2ff;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-
-  <header onclick="history.back()">← Back</header>
 
   <h1>Compress PDFs instantly — fast, secure, and private.</h1>
   <div class="subtitle">
@@ -246,16 +229,14 @@
   <!-- UPLOAD CARD -->
   <div class="card" id="uploadCard">
 
-    <label class="upload-box" id="uploadBox">
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v4h4V9h3.67L12 2z"/>
-        </svg>
-      </div>
+    <label class="upload-box" for="fileInput">
+      <div class="upload-icon">⬆️</div>
       <div class="upload-title">Upload your PDF</div>
       <div class="upload-desc">Drag & drop your PDF here, or tap to browse.</div>
-      <input type="file" id="fileInput" accept="application/pdf">
     </label>
+    <input id="fileInput" type="file" accept="application/pdf" />
+
+    <div id="filePreview"></div>
 
     <div class="label">Compression Level</div>
     <select>
@@ -264,78 +245,76 @@
       <option>High — Smallest file size</option>
     </select>
 
-    <button id="compressBtn" disabled>Compress & Download PDF</button>
-
+    <button class="btn" id="compressBtn" disabled>
+      Compress & Download PDF
+    </button>
   </div>
 
   <!-- PROCESSING CARD -->
-  <div class="card hidden" id="processingCard">
-    <div class="progress-ring"></div>
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
+  <div class="card processing" id="processingCard">
+    <div class="circle">
+      <div class="percent" id="percentText">0%</div>
     </div>
-    <div class="muted">
-      Compressing securely on our servers…<br>
-      This usually takes a few seconds.
+
+    <div>Compressing securely on our servers…</div>
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="note">
+      • Encrypted processing with automatic file deletion<br>
+      • Zero data retention — your files are never stored<br>
+      • Industry-standard compression technology
     </div>
   </div>
 
-  <footer>
-    <ul>
-      <li>• Encrypted processing with automatic file deletion</li>
-      <li>• Zero data retention — your files are never stored</li>
-      <li>• Industry-standard compression technology</li>
-    </ul>
-  </footer>
+  <div class="back" onclick="location.href='/'">← Back to Home</div>
 
 </div>
 
 <script>
   const fileInput = document.getElementById("fileInput");
+  const filePreview = document.getElementById("filePreview");
   const compressBtn = document.getElementById("compressBtn");
   const uploadCard = document.getElementById("uploadCard");
   const processingCard = document.getElementById("processingCard");
-  const uploadBox = document.getElementById("uploadBox");
+  const percentText = document.getElementById("percentText");
+  const progress = document.getElementById("progress");
 
-  let selectedFile = null;
+  fileInput.onchange = () => {
+    const file = fileInput.files[0];
+    if (!file) return;
 
-  fileInput.addEventListener("change", () => {
-    selectedFile = fileInput.files[0];
-    if (!selectedFile) return;
-
-    uploadBox.innerHTML = `
-      <div class="file-row">
-        <div class="file-info">
-          ${selectedFile.name}
-          <div class="file-size">${(selectedFile.size / 1024 / 1024).toFixed(2)} MB</div>
+    filePreview.innerHTML = `
+      <div class="file-box">
+        <div>
+          <div class="file-name">${file.name}</div>
+          <div class="file-size">${(file.size / 1024 / 1024).toFixed(2)} MB</div>
         </div>
         <div class="remove-btn" onclick="removeFile()">Remove</div>
       </div>
     `;
-
     compressBtn.disabled = false;
-  });
+  };
 
   function removeFile() {
-    selectedFile = null;
     fileInput.value = "";
+    filePreview.innerHTML = "";
     compressBtn.disabled = true;
-    uploadBox.innerHTML = `
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M5 20h14v-2H5v2zm7-18L5.33 9h3.67v4h4V9h3.67L12 2z"/>
-        </svg>
-      </div>
-      <div class="upload-title">Upload your PDF</div>
-      <div class="upload-desc">Drag & drop your PDF here, or tap to browse.</div>
-      <input type="file" id="fileInput" accept="application/pdf">
-    `;
   }
 
-  compressBtn.addEventListener("click", () => {
-    uploadCard.classList.add("hidden");
-    processingCard.classList.remove("hidden");
-  });
+  compressBtn.onclick = () => {
+    uploadCard.style.display = "none";
+    processingCard.style.display = "block";
+
+    let p = 0;
+    const timer = setInterval(() => {
+      p += 3;
+      percentText.textContent = p + "%";
+      progress.style.width = p + "%";
+      if (p >= 100) clearInterval(timer);
+    }, 120);
+  };
 </script>
 
 </body>
