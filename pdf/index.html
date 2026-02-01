@@ -18,36 +18,30 @@ body{
   color:#fff;
   display:flex;
   justify-content:center;
-  padding:24px;
+  padding:20px;
 }
 
-/* MAIN WRAPPER */
+/* CONTAINER */
 .container{
   max-width:440px;
   width:100%;
-  margin-top:40px;
 }
 
 /* HEADER */
-.brand{
+.header{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin-bottom:28px;
-  opacity:.9;
+  gap:12px;
+  margin:10px 0 30px;
 }
 
-.brand-icon{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  background:#0f1f3d;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:18px;
+.back{
+  color:#9ca3af;
+  text-decoration:none;
+  font-size:14px;
 }
 
+/* TITLE */
 h1{
   font-size:28px;
   line-height:1.3;
@@ -68,11 +62,11 @@ h1{
   box-shadow:0 20px 50px rgba(0,0,0,.35);
 }
 
-/* UPLOAD BOX */
+/* UPLOAD */
 .upload-box{
   border:2px dashed #3b82f6;
   border-radius:20px;
-  padding:30px 18px;
+  padding:28px 18px;
   text-align:center;
   cursor:pointer;
   transition:.25s;
@@ -87,15 +81,22 @@ h1{
 }
 
 .upload-icon{
-  width:56px;
-  height:56px;
-  border-radius:16px;
+  width:52px;
+  height:52px;
+  border-radius:14px;
   background:#0f1f3d;
   margin:0 auto 14px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
+}
+
+.upload-icon svg{
+  width:22px;
+  height:22px;
+  stroke:#3b82f6;
+  stroke-width:2;
+  fill:none;
 }
 
 .upload-title{
@@ -109,7 +110,7 @@ h1{
   color:#9ca3af;
 }
 
-/* COMPRESSION LEVEL */
+/* SECTION */
 .section{
   margin-top:22px;
 }
@@ -120,15 +121,16 @@ h1{
   color:#cbd5f5;
 }
 
-.select{
+/* SELECT */
+select{
+  width:100%;
   background:#0f1f3d;
+  border:none;
   border-radius:14px;
   padding:14px 16px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
   font-size:15px;
   color:#fff;
+  appearance:none;
 }
 
 /* BUTTON */
@@ -143,14 +145,16 @@ h1{
   font-size:16px;
   font-weight:600;
   opacity:.5;
+  cursor:default;
 }
 
 .btn.active{
   background:#3b82f6;
   opacity:1;
+  cursor:pointer;
 }
 
-/* FOOTER INFO */
+/* INFO */
 .info{
   margin-top:22px;
   font-size:13px;
@@ -162,15 +166,6 @@ h1{
   display:block;
   margin-bottom:6px;
 }
-
-.back{
-  display:block;
-  margin-top:26px;
-  text-align:center;
-  color:#9ca3af;
-  text-decoration:none;
-  font-size:14px;
-}
 </style>
 </head>
 
@@ -178,22 +173,32 @@ h1{
 
 <div class="container">
 
-  <div class="brand">
-    <div class="brand-icon">📄</div>
-    <div>Develac PDF</div>
+  <!-- HEADER -->
+  <div class="header">
+    <a href="/" class="back">← Back</a>
   </div>
 
+  <!-- TEXT -->
   <h1>Compress PDFs instantly — fast, secure, and private.</h1>
   <div class="subtext">
     No signup required. Your files are processed securely and deleted automatically.
   </div>
 
+  <!-- CARD -->
   <div class="card">
 
     <!-- UPLOAD -->
     <label class="upload-box">
       <input type="file" id="fileInput" accept="application/pdf">
-      <div class="upload-icon">⬆️</div>
+
+      <div class="upload-icon">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 16V4"/>
+          <path d="M7 9l5-5 5 5"/>
+          <path d="M5 20h14"/>
+        </svg>
+      </div>
+
       <div class="upload-title">Upload your PDF</div>
       <div class="upload-desc">
         Get a smaller file in seconds<br>
@@ -204,24 +209,24 @@ h1{
     <!-- COMPRESSION LEVEL -->
     <div class="section">
       <div class="label">Compression Level</div>
-      <div class="select">
-        <span>Medium — Recommended</span>
-        <span>▾</span>
-      </div>
+      <select>
+        <option>Low — High quality</option>
+        <option selected>Medium — Recommended</option>
+        <option>High — Smaller size</option>
+      </select>
     </div>
 
     <!-- BUTTON -->
-    <button class="btn" id="btn">⚡ Compress & Download PDF</button>
+    <button class="btn" id="btn">Compress & Download PDF</button>
 
   </div>
 
+  <!-- INFO -->
   <div class="info">
     <span>• Encrypted processing with automatic file deletion</span>
     <span>• Zero data retention — your files are never stored</span>
     <span>• Industry-standard compression technology</span>
   </div>
-
-  <a href="/" class="back">← Back to Home</a>
 
 </div>
 
