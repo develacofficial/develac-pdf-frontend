@@ -7,150 +7,166 @@
 
   <style>
     *{
-      margin:0;
-      padding:0;
       box-sizing:border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
     }
 
     body{
+      margin:0;
       min-height:100vh;
-      background: radial-gradient(circle at top, #0f1b33, #050b18 70%);
-      color:#e5e7eb;
+      background:radial-gradient(circle at top, #0b1630, #050a18);
+      color:#fff;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:24px;
     }
 
-    /* CONTAINER */
-    .compressor-container{
-      width:100%;
+    .container{
       max-width:420px;
+      width:100%;
       text-align:center;
     }
 
-    .compressor-container h1{
-      font-size:28px;
-      margin-bottom:10px;
+    h1{
+      font-size:30px;
+      margin-bottom:8px;
     }
 
-    .compressor-container p{
-      font-size:15px;
+    .subtitle{
       color:#9ca3af;
+      font-size:15px;
       margin-bottom:32px;
     }
 
-    /* UPLOAD BOX */
-    .upload-box{
-      border:2px dashed rgba(255,255,255,0.15);
-      border-radius:24px;
-      padding:40px 20px;
+    /* DROP ZONE */
+    .drop-zone{
+      border:2px dashed rgba(255,255,255,.25);
+      border-radius:20px;
+      padding:36px 20px;
+      margin-bottom:20px;
+      position:relative;
       cursor:pointer;
-      transition:.25s ease;
-      background:rgba(255,255,255,0.03);
+      transition:.25s;
     }
 
-    .upload-box:hover{
+    .drop-zone:hover{
       border-color:#3b82f6;
-      background:rgba(59,130,246,0.08);
     }
 
-    .upload-box .icon{
-      font-size:34px;
-      margin-bottom:10px;
+    .drop-zone input{
+      display:none;
     }
 
-    .upload-box p{
+    .file-icon{
+      font-size:40px;
+      margin-bottom:12px;
+    }
+
+    .drop-title{
       font-size:16px;
-      margin-bottom:6px;
-      color:#e5e7eb;
+      margin-bottom:4px;
     }
 
-    .upload-box span{
+    .drop-sub{
       font-size:13px;
       color:#9ca3af;
-    }
-
-    .upload-box input{
-      display:none;
     }
 
     /* BUTTON */
     .compress-btn{
       width:100%;
-      margin-top:22px;
-      padding:15px;
-      border-radius:18px;
+      padding:16px;
       border:none;
+      border-radius:999px;
+      background:#3b82f6;
+      color:#fff;
       font-size:16px;
       font-weight:600;
-      background:#3b82f6;
-      color:white;
+      cursor:pointer;
+      transition:.25s;
       opacity:.5;
+    }
+
+    .compress-btn.enabled{
+      opacity:1;
+    }
+
+    .compress-btn:disabled{
       cursor:not-allowed;
     }
 
-    /* BACK */
-    .back-link{
+    /* FOOTER */
+    .back{
       display:block;
-      margin-top:32px;
+      margin-top:22px;
+      color:#9ca3af;
       text-decoration:none;
       font-size:14px;
-      color:#9ca3af;
     }
 
-    .back-link:hover{
-      color:#e5e7eb;
-    }
-
-    /* FOOTER NOTE */
     .note{
-      margin-top:20px;
+      margin-top:14px;
       font-size:12px;
       color:#6b7280;
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
 
-  <div class="compressor-container">
     <h1>PDF Compressor</h1>
-    <p>Compress your PDF files securely without losing quality</p>
+    <div class="subtitle">
+      Compress your PDF files securely without losing quality
+    </div>
 
-    <label class="upload-box">
-      <div class="icon">📄</div>
-      <p>Drag & drop your PDF here</p>
-      <span>or tap to select file</span>
-      <input type="file" accept="application/pdf" />
+    <!-- DROP ZONE -->
+    <label class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept="application/pdf"/>
+      <div class="file-icon">📄</div>
+      <div class="drop-title">Drag & drop your PDF here</div>
+      <div class="drop-sub">or tap to select file</div>
     </label>
 
-    <button class="compress-btn">
+    <!-- BUTTON -->
+    <button class="compress-btn" id="compressBtn" disabled>
       Compress PDF
     </button>
 
-    <a href="/" class="back-link">← Back to Home</a>
+    <!-- FOOTER -->
+    <a href="/" class="back">← Back to Home</a>
+    <div class="note">Tool UI ready • Compression coming next</div>
 
-    <div class="note">
-      Tool UI ready • Compression coming next
-    </div>
   </div>
+
   <script>
-  const fileInput = document.querySelector('input[type="file"]');
-  const compressBtn = document.querySelector('.compress-btn');
+    const fileInput = document.getElementById('fileInput');
+    const compressBtn = document.getElementById('compressBtn');
+    const dropZone = document.getElementById('dropZone');
 
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files.length > 0) {
-      compressBtn.style.opacity = '1';
-      compressBtn.style.cursor = 'pointer';
-      compressBtn.disabled = false;
-    } else {
-      compressBtn.style.opacity = '.5';
-      compressBtn.style.cursor = 'not-allowed';
+    // Enable button on file select
+    fileInput.addEventListener('change', () => {
+      if(fileInput.files.length > 0){
+        compressBtn.disabled = false;
+        compressBtn.classList.add('enabled');
+      }
+    });
+
+    // Fake compression flow
+    compressBtn.addEventListener('click', () => {
+      compressBtn.innerText = 'Compressing...';
       compressBtn.disabled = true;
-    }
-  });
-                             </script>
 
+      setTimeout(() => {
+        compressBtn.innerText = 'Download PDF';
+
+        const link = document.createElement('a');
+        link.href = '/compressed.pdf';   // dummy file
+        link.download = 'compressed.pdf';
+        link.click();
+      }, 2000);
+    });
+  </script>
 </body>
 </html>
