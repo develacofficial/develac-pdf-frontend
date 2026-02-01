@@ -25,24 +25,20 @@ body{
   padding:48px 16px 100px;
 }
 
-/* ---------- HERO ---------- */
+/* HERO */
 .hero{
   text-align:center;
   margin-bottom:80px;
 }
-
 .brand{
   font-weight:600;
   opacity:.9;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
-
 .hero h1{
   font-size:44px;
-  line-height:1.15;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
-
 .hero p{
   color:#9ca3af;
   font-size:17px;
@@ -50,37 +46,33 @@ body{
   margin:0 auto;
 }
 
-/* ---------- TOOLS ---------- */
+/* TOOLS */
 .tools{
-  margin-top:40px;
   text-align:center;
 }
-
-.tools-title{
+.tools h2{
   font-size:30px;
   margin-bottom:10px;
 }
-
-.tools-subtitle{
+.tools p{
   color:#9ca3af;
-  font-size:15px;
   margin-bottom:42px;
 }
 
 /* GRID */
 .tools-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
 }
 
 /* CARD */
 .tool-card{
-  background:rgba(15,23,42,.65);
+  background:rgba(15,23,42,.7);
   border:1px solid rgba(255,255,255,.06);
-  border-radius:20px;
-  padding:30px 24px;
-  text-align:left;
+  border-radius:26px;
+  padding:38px 20px;
+  text-align:center;
   box-shadow:0 25px 70px rgba(0,0,0,.55);
   transition:.25s ease;
 }
@@ -92,57 +84,39 @@ body{
 
 /* ICON */
 .tool-icon{
-  width:52px;
-  height:52px;
-  border-radius:14px;
+  width:62px;
+  height:62px;
+  border-radius:18px;
   background:rgba(59,130,246,.15);
   display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:16px;
+  margin:0 auto 16px;
 }
 
 .tool-icon svg{
-  width:26px;
-  height:26px;
+  width:30px;
+  height:30px;
   stroke:#3b82f6;
 }
 
-/* TEXT */
-.tool-card h3{
-  font-size:18px;
-  margin-bottom:8px;
-}
-
-.tool-card p{
-  font-size:14px;
-  color:#9ca3af;
-  margin-bottom:18px;
-}
-
-/* BUTTON */
-.tool-btn{
-  display:inline-block;
-  padding:12px 18px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#2563eb,#3b82f6);
-  color:#fff;
-  font-size:14px;
+/* NAME */
+.tool-name{
+  font-size:16px;
   font-weight:600;
-  text-decoration:none;
 }
 
-/* COMING SOON */
-.tool-card.disabled{
+/* STATES */
+.disabled{
   opacity:.55;
 }
-
-.coming-soon{
+.coming{
+  margin-top:6px;
   font-size:13px;
   color:#60a5fa;
 }
 
-/* ---------- FOOTER ---------- */
+/* FOOTER */
 footer{
   margin-top:120px;
   text-align:center;
@@ -167,63 +141,59 @@ footer{
 
   <!-- TOOLS -->
   <section class="tools">
-    <h2 class="tools-title">Our Tools</h2>
-    <p class="tools-subtitle">
-      Powerful utilities designed for speed, privacy, and reliability
-    </p>
+    <h2>Our Tools</h2>
+    <p>Powerful utilities designed for speed, privacy, and reliability</p>
 
     <div class="tools-grid">
 
       <!-- PDF COMPRESSOR -->
-      <div class="tool-card">
+      <a href="/pdf" class="tool-card" style="text-decoration:none;color:inherit;">
         <div class="tool-icon">
-          <!-- upload icon -->
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
             <path d="M12 16V4"/>
             <path d="M7 9l5-5 5 5"/>
             <path d="M4 20h16"/>
           </svg>
         </div>
-        <h3>PDF Compressor</h3>
-        <p>
-          Reduce PDF file size instantly without losing quality.
-          Secure, fast, and private.
-        </p>
-        <a href="/pdf" class="tool-btn">Open Tool</a>
-      </div>
+        <div class="tool-name">PDF Compressor</div>
+      </a>
 
       <!-- PDF MERGER -->
       <div class="tool-card disabled">
         <div class="tool-icon">
-          <!-- merge icon -->
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
             <path d="M8 7h8"/>
             <path d="M8 12h8"/>
             <path d="M8 17h8"/>
           </svg>
         </div>
-        <h3>PDF Merger</h3>
-        <p>
-          Combine multiple PDF files into a single document.
-        </p>
-        <span class="coming-soon">Coming soon</span>
+        <div class="tool-name">PDF Merger</div>
+        <div class="coming">Coming soon</div>
       </div>
 
       <!-- PDF TO IMAGE -->
       <div class="tool-card disabled">
         <div class="tool-icon">
-          <!-- image icon -->
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
             <rect x="3" y="3" width="18" height="18" rx="2"/>
             <circle cx="8.5" cy="8.5" r="1.5"/>
             <path d="M21 15l-5-5L5 21"/>
           </svg>
         </div>
-        <h3>PDF to Image</h3>
-        <p>
-          Convert PDF pages into high-quality images.
-        </p>
-        <span class="coming-soon">Coming soon</span>
+        <div class="tool-name">PDF to Image</div>
+        <div class="coming">Coming soon</div>
+      </div>
+
+      <!-- MORE -->
+      <div class="tool-card disabled">
+        <div class="tool-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M12 6v12"/>
+            <path d="M6 12h12"/>
+          </svg>
+        </div>
+        <div class="tool-name">More tools</div>
+        <div class="coming">Coming soon</div>
       </div>
 
     </div>
