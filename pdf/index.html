@@ -1,11 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>PDF Compressor</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDF Compressor – Develac</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background: radial-gradient(circle at top, #0f1b33, #050b18 70%);
+      color:#e5e7eb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+
+    /* CONTAINER */
+    .compressor-container{
+      width:100%;
+      max-width:420px;
+      text-align:center;
+    }
+
+    .compressor-container h1{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+
+    .compressor-container p{
+      font-size:15px;
+      color:#9ca3af;
+      margin-bottom:32px;
+    }
+
+    /* UPLOAD BOX */
+    .upload-box{
+      border:2px dashed rgba(255,255,255,0.15);
+      border-radius:24px;
+      padding:40px 20px;
+      cursor:pointer;
+      transition:.25s ease;
+      background:rgba(255,255,255,0.03);
+    }
+
+    .upload-box:hover{
+      border-color:#3b82f6;
+      background:rgba(59,130,246,0.08);
+    }
+
+    .upload-box .icon{
+      font-size:34px;
+      margin-bottom:10px;
+    }
+
+    .upload-box p{
+      font-size:16px;
+      margin-bottom:6px;
+      color:#e5e7eb;
+    }
+
+    .upload-box span{
+      font-size:13px;
+      color:#9ca3af;
+    }
+
+    .upload-box input{
+      display:none;
+    }
+
+    /* BUTTON */
+    .compress-btn{
+      width:100%;
+      margin-top:22px;
+      padding:15px;
+      border-radius:18px;
+      border:none;
+      font-size:16px;
+      font-weight:600;
+      background:#3b82f6;
+      color:white;
+      opacity:.5;
+      cursor:not-allowed;
+    }
+
+    /* BACK */
+    .back-link{
+      display:block;
+      margin-top:32px;
+      text-decoration:none;
+      font-size:14px;
+      color:#9ca3af;
+    }
+
+    .back-link:hover{
+      color:#e5e7eb;
+    }
+
+    /* FOOTER NOTE */
+    .note{
+      margin-top:20px;
+      font-size:12px;
+      color:#6b7280;
+    }
+  </style>
 </head>
-<body style="background:#0b1220;color:white;text-align:center;padding-top:40px;">
-  <h1>PDF Compressor</h1>
-  <p>Tool UI coming next</p>
-  <a href="/" style="color:#3b82f6;">← Back to Home</a>
+<body>
+
+  <div class="compressor-container">
+    <h1>PDF Compressor</h1>
+    <p>Compress your PDF files securely without losing quality</p>
+
+    <label class="upload-box">
+      <div class="icon">📄</div>
+      <p>Drag & drop your PDF here</p>
+      <span>or tap to select file</span>
+      <input type="file" accept="application/pdf" />
+    </label>
+
+    <button class="compress-btn">
+      Compress PDF
+    </button>
+
+    <a href="/" class="back-link">← Back to Home</a>
+
+    <div class="note">
+      Tool UI ready • Compression coming next
+    </div>
+  </div>
+
 </body>
 </html>
