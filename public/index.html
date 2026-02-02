@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Develac — Smart PDF Tools</title>
+
+<style>
+/* ---------- BASE ---------- */
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+body{
+  background:radial-gradient(circle at top,#0b1220,#020617);
+  color:#e5e7eb;
+}
+a{text-decoration:none;color:inherit}
+
+/* ---------- CONTAINER ---------- */
+.container{max-width:1200px;margin:auto;padding:32px 20px}
+
+/* ---------- HEADER ---------- */
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:40px;
+}
+.logo{font-weight:700;font-size:20px}
+nav{display:flex;gap:24px}
+nav a{font-size:14px;color:#9ca3af}
+.menu-btn{display:none;font-size:22px}
+
+/* ---------- HERO ---------- */
+.hero{
+  text-align:center;
+  margin:60px 0;
+}
+.hero h1{
+  font-size:44px;
+  margin-bottom:12px;
+}
+.hero p{
+  font-size:17px;
+  color:#9ca3af;
+  max-width:620px;
+  margin:auto;
+}
+
+/* ---------- SECTION TITLE ---------- */
+.section-title{
+  font-size:22px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+/* ---------- TOOLS GRID ---------- */
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:32px;
+  margin-top:30px;
+}
+.tool-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+.tool-icon{
+  width:120px;
+  height:120px;
+  border-radius:28px;
+  background:rgba(59,130,246,.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.2s;
+}
+.tool-icon svg{
+  width:38px;
+  stroke:#3b82f6;
+}
+.tool-card:hover .tool-icon{
+  transform:translateY(-4px);
+  background:rgba(59,130,246,.2);
+}
+.tool-name{
+  margin-top:12px;
+  font-size:15px;
+  color:#e5e7eb;
+}
+
+/* ---------- WHY ---------- */
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:24px;
+}
+.why-card{
+  background:rgba(15,23,42,.6);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:18px;
+  padding:22px;
+}
+.why-card svg{
+  width:26px;
+  stroke:#3b82f6;
+  margin-bottom:10px;
+}
+.why-card h4{margin-bottom:6px}
+.why-card p{font-size:14px;color:#9ca3af}
+
+/* ---------- BLOG ---------- */
+.blog-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  margin-top:24px;
+}
+.blog-card{
+  background:rgba(15,23,42,.6);
+  border-radius:18px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,.05);
+}
+.blog-card h4{margin-bottom:6px}
+.blog-card p{font-size:14px;color:#9ca3af}
+
+/* ---------- FOOTER ---------- */
+footer{
+  margin-top:80px;
+  padding:30px 0;
+  border-top:1px solid rgba(255,255,255,.05);
+  text-align:center;
+  font-size:13px;
+  color:#9ca3af;
+}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:900px){
+  .tools-grid,.why-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  nav{display:none}
+  .menu-btn{display:block}
+  .tools-grid,.why-grid,.blog-grid{grid-template-columns:1fr}
+  .hero h1{font-size:32px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <div class="logo">Develac</div>
+  <nav>
+    <a href="#">Tools</a>
+    <a href="#">Blog</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="menu-btn">☰</div>
+</header>
+
+<section class="hero">
+  <h1>Simple. Powerful. PDF Tools.</h1>
+  <p>Develac builds fast, secure, and privacy-focused PDF tools for everyone.</p>
+</section>
+
+<section>
+  <div class="section-title">PDF Tools</div>
+  <div class="tools-grid">
+
+    <!-- TOOL -->
+    <div class="tool-card">
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 20h16"/>
+        </svg>
+      </div>
+      <div class="tool-name">Compress PDF</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <rect x="3" y="4" width="7" height="16"/>
+          <rect x="14" y="4" width="7" height="16"/>
+        </svg>
+      </div>
+      <div class="tool-name">Merge PDF</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M4 4h16"/><path d="M4 12h16"/><path d="M4 20h16"/>
+        </svg>
+      </div>
+      <div class="tool-name">Split PDF</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18"/>
+        </svg>
+      </div>
+      <div class="tool-name">PDF to Image</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <circle cx="12" cy="12" r="9"/>
+        </svg>
+      </div>
+      <div class="tool-name">Image to PDF</div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M4 4h16v16H4z"/>
+        </svg>
+      </div>
+      <div class="tool-name">Rotate PDF</div>
+    </div>
+
+  </div>
+</section>
+
+<section style="margin-top:80px">
+  <div class="section-title">Why Develac</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <rect x="3" y="11" width="18" height="10"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+      <h4>Secure</h4>
+      <p>Your files are processed safely and deleted automatically.</p>
+    </div>
+
+    <div class="why-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <path d="M13 2L3 14h7l-1 8 10-12h-7z"/>
+      </svg>
+      <h4>Fast</h4>
+      <p>Optimized tools for instant results.</p>
+    </div>
+
+    <div class="why-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <path d="M3 6h18"/><path d="M8 6V4h8v2"/>
+      </svg>
+      <h4>No Tracking</h4>
+      <p>We don’t store or analyze your documents.</p>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:80px">
+  <div class="section-title">From Our Blog</div>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <h4>How PDF Compression Works</h4>
+      <p>Learn how files are reduced without losing quality.</p>
+    </div>
+    <div class="blog-card">
+      <h4>Best PDF Practices</h4>
+      <p>Tips to manage and share PDFs efficiently.</p>
+    </div>
+    <div class="blog-card">
+      <h4>Privacy in Document Tools</h4>
+      <p>Why security matters when using online tools.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Develac · <a href="#">Privacy</a> · <a href="#">Terms</a>
+</footer>
+
+</div>
+</body>
+</html>
