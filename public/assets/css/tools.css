@@ -1,1 +1,72 @@
+/* ===== TOOLS SECTION ===== */
 
+.tools-section {
+  margin-top: 60px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+}
+
+/* GRID */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* TOOL CARD */
+.tool-card {
+  background: linear-gradient(145deg, #0f1b33, #0b1426);
+  border-radius: 20px;
+  padding: 32px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: #e6ebf5;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ICON */
+.tool-icon {
+  font-size: 36px;
+  color: #4da3ff;
+  margin-bottom: 14px;
+}
+
+/* NAME */
+.tool-name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* WHY SECTION */
+.why {
+  margin-top: 80px;
+}
+
+.why-card {
+  background: linear-gradient(145deg, #0f1b33, #0b1426);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+}
