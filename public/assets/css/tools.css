@@ -1,72 +1,165 @@
-/* ===== TOOLS SECTION ===== */
+/* ===============================
+   GLOBAL RESET
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.tools-section {
-  margin-top: 60px;
+/* ===============================
+   ROOT COLORS
+================================ */
+:root {
+  --bg-dark: #050b1a;
+  --card-dark: #0b1630;
+  --card-dark-2: #0e1d3f;
+  --text-main: #e9ecf1;
+  --text-muted: #9aa4bf;
+  --accent: #4ea1ff;
+}
+
+/* ===============================
+   BODY
+================================ */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #0b1430, #050b1a 60%);
+  color: var(--text-main);
+}
+
+/* ===============================
+   SECTION WRAPPER
+================================ */
+.section {
+  max-width: 1200px;
+  margin: auto;
+  padding: 48px 20px;
 }
 
 .section-title {
   text-align: center;
-  font-size: 26px;
-  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: var(--text-main);
 }
 
-/* GRID */
+/* ===============================
+   TOOLS GRID (MAIN FIX)
+================================ */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr); /* ✅ 3 per row */
+  gap: 28px;
 }
 
-/* TOOL CARD */
-.tool-card {
-  background: linear-gradient(145deg, #0f1b33, #0b1426);
-  border-radius: 20px;
-  padding: 32px 20px;
-  text-align: center;
-  text-decoration: none;
-  color: #e6ebf5;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tool-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* ICON */
-.tool-icon {
-  font-size: 36px;
-  color: #4da3ff;
-  margin-bottom: 14px;
-}
-
-/* NAME */
-.tool-name {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-/* WHY SECTION */
-.why {
-  margin-top: 80px;
-}
-
-.why-card {
-  background: linear-gradient(145deg, #0f1b33, #0b1426);
-  border-radius: 18px;
-  padding: 22px;
-  margin-bottom: 20px;
-}
-
-/* RESPONSIVE */
+/* Tablet */
 @media (max-width: 900px) {
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 520px) {
+/* Mobile */
+@media (max-width: 600px) {
   .tools-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ===============================
+   TOOL CARD
+================================ */
+.tool-card {
+  background: linear-gradient(145deg, var(--card-dark), var(--card-dark-2));
+  border-radius: 26px;
+  padding: 42px 20px;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.tool-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ===============================
+   TOOL ICON
+================================ */
+.tool-icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(78, 161, 255, 0.12);
+}
+
+.tool-icon img,
+.tool-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* ===============================
+   TOOL NAME
+================================ */
+.tool-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ===============================
+   WHY DEVELAC SECTION (TEXT FIX)
+================================ */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.why-card {
+  background: linear-gradient(145deg, var(--card-dark), var(--card-dark-2));
+  border-radius: 26px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.why-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: var(--text-main); /* ✅ FIXED */
+}
+
+.why-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted); /* ✅ FIXED */
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+  text-align: center;
+  padding: 32px 20px;
+  font-size: 14px;
+  color: var(--text-muted);
 }
