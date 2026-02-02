@@ -1,119 +1,115 @@
 /* ===============================
-   RESET
+   RESET + BASE
 ================================ */
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-/* ===============================
-   COLORS
-================================ */
-:root {
-  --bg: #050b1a;
-  --card: #0b1630;
-  --card-soft: #0e1d3f;
-  --text: #e9ecf1;
-  --muted: #9aa4bf;
-  --accent: #4ea1ff;
-}
-
-/* ===============================
-   BODY
-================================ */
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #0b1430, #050b1a 65%);
-  color: var(--text);
+  background: radial-gradient(circle at top, #0b1430, #050b1a 70%);
+  color: #e8ecf4;
 }
 
 /* ===============================
-   SECTION
+   SECTIONS
 ================================ */
 .section {
   max-width: 1200px;
   margin: auto;
-  padding: 40px 18px;
+  padding: 42px 16px;
 }
 
 .section-title {
   text-align: center;
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
 /* ===============================
-   TOOLS GRID
+   TOOLS GRID (MOBILE FIRST)
 ================================ */
 .tools-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 /* Tablet */
-@media (max-width: 900px) {
+@media (min-width: 640px) {
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+/* Desktop */
+@media (min-width: 1024px) {
   .tools-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 /* ===============================
-   TOOL CARD (COMPACT)
+   TOOL CARD (REAL FIX)
 ================================ */
 .tool-card {
-  background: linear-gradient(145deg, var(--card), var(--card-soft));
-  border-radius: 22px;
-  padding: 26px 18px;              /* 🔧 reduced */
-  text-align: center;
-  box-shadow: 0 16px 36px rgba(0,0,0,.45);
+  background: linear-gradient(160deg, #0b1630, #0e1d3f);
+  border-radius: 20px;
+  padding: 22px 18px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .tool-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(0,0,0,.6);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.65);
 }
 
 /* ===============================
-   ICON (FIXED VISIBILITY)
+   TOOL CONTENT STACK
+================================ */
+.tool-card a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===============================
+   ICON (VISIBLE + BALANCED)
 ================================ */
 .tool-icon {
-  width: 52px;
-  height: 52px;
-  margin: 0 auto 10px;
+  width: 54px;
+  height: 54px;
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(78,161,255,.18);
+  background: rgba(78, 161, 255, 0.22);
 }
 
 .tool-icon img,
 .tool-icon svg {
-  width: 28px;
-  height: 28px;
-  filter: brightness(1.2);
+  width: 26px;
+  height: 26px;
+  filter: brightness(1.25);
 }
 
 /* ===============================
-   TOOL NAME (NO UNDERLINE)
+   TOOL NAME
 ================================ */
-.tool-name,
-.tool-name a {
-  font-size: 17px;
+.tool-name {
+  font-size: 16px;
   font-weight: 600;
-  color: var(--text);
-  text-decoration: none;   /* 🔧 IMPORTANT */
+  text-align: center;
+  color: #e8ecf4;
 }
 
 /* ===============================
@@ -121,39 +117,38 @@ body {
 ================================ */
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 640px) {
   .why-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 1024px) {
   .why-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .why-card {
-  background: linear-gradient(145deg, var(--card), var(--card-soft));
-  border-radius: 22px;
-  padding: 22px;
-  box-shadow: 0 16px 36px rgba(0,0,0,.45);
+  background: linear-gradient(160deg, #0b1630, #0e1d3f);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
 }
 
 .why-card h3 {
   font-size: 17px;
   margin-bottom: 6px;
-  color: var(--text);
 }
 
 .why-card p {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--muted);
+  color: #a9b3d1;
 }
 
 /* ===============================
@@ -161,7 +156,7 @@ body {
 ================================ */
 .footer {
   text-align: center;
-  padding: 28px 16px;
+  padding: 26px 14px;
   font-size: 14px;
-  color: var(--muted);
+  color: #9aa4bf;
 }
