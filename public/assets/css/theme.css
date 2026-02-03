@@ -1,91 +1,106 @@
 /* ==================================
-   THEME – DEVELAC (DARK)
+   THEME – DEVELAC
    File: theme.css
    Responsibility:
-   - Global colors
+   - Colors
    - Gradients
-   - Shadows
-   - Typography tokens
+   - Typography
 ================================== */
 
+/* -------------------------------
+   ROOT COLOR SYSTEM
+-------------------------------- */
 :root {
-  /* -----------------------------
-     BACKGROUND
-  ----------------------------- */
-  --bg-main: #050b1a;
-  --bg-gradient: radial-gradient(
-    circle at top,
-    #0b1b3a 0%,
-    #050b1a 60%
-  );
+  /* Backgrounds */
+  --bg-main: radial-gradient(circle at top, #0b1220, #020617);
+  --bg-card: rgba(15, 23, 42, 0.7);
+  --bg-soft: rgba(15, 23, 42, 0.6);
 
-  /* -----------------------------
-     TEXT COLORS
-  ----------------------------- */
-  --text-primary: #e9eefb;
-  --text-secondary: #a9b4d0;
-  --text-muted: #7c88a8;
+  /* Borders */
+  --border-soft: rgba(255,255,255,0.06);
+  --border-accent: rgba(59,130,246,.6);
 
-  /* -----------------------------
-     BRAND
-  ----------------------------- */
+  /* Text */
+  --text-main: #e5e7eb;
+  --text-muted: #9ca3af;
+  --text-faint: #6b7280;
+
+  /* Brand / Accent */
   --brand-primary: #3b82f6;
   --brand-secondary: #2563eb;
+  --brand-soft: rgba(59,130,246,.15);
 
-  /* -----------------------------
-     CARDS
-  ----------------------------- */
-  --card-bg: linear-gradient(
-    180deg,
-    rgba(16, 30, 70, 0.9),
-    rgba(10, 18, 45, 0.9)
-  );
-
-  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  --card-shadow-hover: 0 18px 45px rgba(0, 0, 0, 0.6);
-
-  /* -----------------------------
-     ICONS
-  ----------------------------- */
-  --icon-bg: rgba(255, 255, 255, 0.06);
-  --icon-btn-bg: rgba(255, 255, 255, 0.08);
-  --icon-btn-bg-hover: rgba(255, 255, 255, 0.14);
-
-  /* -----------------------------
-     BUTTONS
-  ----------------------------- */
-  --btn-primary-bg: linear-gradient(
-    135deg,
-    #3b82f6,
-    #2563eb
-  );
-  --btn-primary-bg-hover: linear-gradient(
-    135deg,
-    #2563eb,
-    #1d4ed8
-  );
-  --btn-primary-text: #ffffff;
-
-  --btn-secondary-bg: rgba(255, 255, 255, 0.08);
-  --btn-secondary-bg-hover: rgba(255, 255, 255, 0.14);
-  --btn-secondary-text: #e9eefb;
-
-  /* -----------------------------
-     BADGES
-  ----------------------------- */
-  --badge-bg: rgba(59, 130, 246, 0.15);
-  --badge-text: #93c5fd;
-
-  /* -----------------------------
-     BORDERS
-  ----------------------------- */
-  --border-soft: rgba(255, 255, 255, 0.08);
+  /* Success */
+  --success: #16a34a;
 }
 
 /* -------------------------------
-   GLOBAL BODY THEME
+   GLOBAL BODY
 -------------------------------- */
 body {
-  background: var(--bg-gradient);
-  color: var(--text-primary);
+  background: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* -------------------------------
+   TYPOGRAPHY SCALE
+-------------------------------- */
+h1 {
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* -------------------------------
+   LINKS
+-------------------------------- */
+a {
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------
+   SELECTION
+-------------------------------- */
+::selection {
+  background: rgba(59,130,246,.35);
+}
+
+/* -------------------------------
+   SCROLLBAR (DESKTOP)
+-------------------------------- */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(59,130,246,.35);
+    border-radius: 6px;
+  }
 }
