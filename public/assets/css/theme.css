@@ -1,1 +1,116 @@
+/* =========================================================
+   theme.css
+   Responsibility: Global Theme & Brand Colors
+   Do NOT put layout or components here
+   ========================================================= */
 
+
+/* ===== Root Brand Variables ===== */
+:root {
+  /* Primary Brand */
+  --brand-primary: #3b82f6;
+  --brand-primary-soft: rgba(59, 130, 246, 0.15);
+
+  /* Backgrounds */
+  --bg-main: radial-gradient(circle at top, #0b1220, #020617);
+  --bg-card: #0f172a;
+  --bg-card-soft: rgba(15, 23, 42, 0.7);
+
+  /* Borders */
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --border-strong: rgba(59, 130, 246, 0.4);
+
+  /* Text Colors */
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+
+  /* Success */
+  --success: #16a34a;
+  --success-soft: rgba(22, 163, 74, 0.15);
+
+  /* Error */
+  --error: #dc2626;
+  --error-soft: rgba(220, 38, 38, 0.15);
+}
+
+
+/* ===== Global Body Theme ===== */
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+}
+
+
+/* ===== Typography ===== */
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+
+/* ===== Links ===== */
+a {
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* ===== Buttons (Generic Theme) ===== */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    var(--brand-primary)
+  );
+  color: #ffffff;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--brand-primary);
+  border: 1px solid var(--brand-primary);
+}
+
+
+/* ===== Utility Text Colors ===== */
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-error {
+  color: var(--error);
+}
+
+
+/* ===== Card Base Theme ===== */
+.card {
+  background: var(--bg-card-soft);
+  border: 1px solid var(--border-soft);
+}
+
+
+/* ===== Divider ===== */
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 24px 0;
+}
