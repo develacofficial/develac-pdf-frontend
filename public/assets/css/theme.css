@@ -1,117 +1,91 @@
-/* ===============================
-   THEME SYSTEM – DEVELAC
+/* ==================================
+   THEME – DEVELAC (DARK)
    File: theme.css
    Responsibility:
-   - Colors
-   - Fonts
-   - Radius
-   - Shadows
+   - Global colors
    - Gradients
-================================ */
+   - Shadows
+   - Typography tokens
+================================== */
 
-/* -------------------------------
-   CSS RESET (Theme-safe)
--------------------------------- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-/* -------------------------------
-   FONT SYSTEM
--------------------------------- */
 :root {
-  --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-}
+  /* -----------------------------
+     BACKGROUND
+  ----------------------------- */
+  --bg-main: #050b1a;
+  --bg-gradient: radial-gradient(
+    circle at top,
+    #0b1b3a 0%,
+    #050b1a 60%
+  );
 
-/* -------------------------------
-   COLOR PALETTE (Dark-first)
--------------------------------- */
-:root {
-  --color-bg-main: #070b18;
-  --color-bg-soft: #0c132a;
-  --color-bg-card: #0f1a36;
+  /* -----------------------------
+     TEXT COLORS
+  ----------------------------- */
+  --text-primary: #e9eefb;
+  --text-secondary: #a9b4d0;
+  --text-muted: #7c88a8;
 
-  --color-text-primary: #e9ecf5;
-  --color-text-secondary: #aab1d4;
-  --color-text-muted: #6f76a3;
+  /* -----------------------------
+     BRAND
+  ----------------------------- */
+  --brand-primary: #3b82f6;
+  --brand-secondary: #2563eb;
 
-  --color-accent-primary: #4f7cff;
-  --color-accent-secondary: #7aa2ff;
-
-  --color-success: #22c55e;
-  --color-warning: #facc15;
-  --color-danger: #ef4444;
-
-  --color-border-soft: rgba(255, 255, 255, 0.08);
-}
-
-/* -------------------------------
-   BORDER RADIUS SYSTEM
--------------------------------- */
-:root {
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
-  --radius-xl: 28px;
-}
-
-/* -------------------------------
-   SHADOW SYSTEM (Dark UI)
--------------------------------- */
-:root {
-  --shadow-xs: 0 2px 6px rgba(0, 0, 0, 0.25);
-  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.35);
-  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.6);
-}
-
-/* -------------------------------
-   GRADIENTS
--------------------------------- */
-:root {
-  --gradient-main: linear-gradient(
+  /* -----------------------------
+     CARDS
+  ----------------------------- */
+  --card-bg: linear-gradient(
     180deg,
-    #0c132a 0%,
-    #070b18 100%
+    rgba(16, 30, 70, 0.9),
+    rgba(10, 18, 45, 0.9)
   );
 
-  --gradient-card: linear-gradient(
-    160deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.01)
-  );
+  --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --card-shadow-hover: 0 18px 45px rgba(0, 0, 0, 0.6);
 
-  --gradient-accent: linear-gradient(
+  /* -----------------------------
+     ICONS
+  ----------------------------- */
+  --icon-bg: rgba(255, 255, 255, 0.06);
+  --icon-btn-bg: rgba(255, 255, 255, 0.08);
+  --icon-btn-bg-hover: rgba(255, 255, 255, 0.14);
+
+  /* -----------------------------
+     BUTTONS
+  ----------------------------- */
+  --btn-primary-bg: linear-gradient(
     135deg,
-    #4f7cff,
-    #7aa2ff
+    #3b82f6,
+    #2563eb
   );
+  --btn-primary-bg-hover: linear-gradient(
+    135deg,
+    #2563eb,
+    #1d4ed8
+  );
+  --btn-primary-text: #ffffff;
+
+  --btn-secondary-bg: rgba(255, 255, 255, 0.08);
+  --btn-secondary-bg-hover: rgba(255, 255, 255, 0.14);
+  --btn-secondary-text: #e9eefb;
+
+  /* -----------------------------
+     BADGES
+  ----------------------------- */
+  --badge-bg: rgba(59, 130, 246, 0.15);
+  --badge-text: #93c5fd;
+
+  /* -----------------------------
+     BORDERS
+  ----------------------------- */
+  --border-soft: rgba(255, 255, 255, 0.08);
 }
 
 /* -------------------------------
-   BASE THEME APPLICATION
+   GLOBAL BODY THEME
 -------------------------------- */
-html {
-  background-color: var(--color-bg-main);
-  color: var(--color-text-primary);
-  font-family: var(--font-primary);
-  -webkit-font-smoothing: antialiased;
-}
-
 body {
-  margin: 0;
-  background: var(--gradient-main);
-  color: var(--color-text-primary);
-}
-
-/* -------------------------------
-   TEXT SELECTION
--------------------------------- */
-::selection {
-  background: var(--color-accent-primary);
-  color: #ffffff;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
 }
