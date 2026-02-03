@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Develac – Smart PDF Tools</title>
 
+  <!-- Main Styles -->
   <link rel="stylesheet" href="/assets/css/tools.css">
 </head>
 <body>
@@ -13,7 +14,11 @@
   <header class="header">
     <div class="header-inner">
       <div class="logo">Develac</div>
-      <div class="menu-icon">☰</div>
+      <button class="menu-icon" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -31,76 +36,102 @@
 
     <div class="tools-grid">
 
-      <div class="tool-card">
-        <a href="#">
-          <div class="tool-icon">⬆️</div>
-          <div class="tool-name">Compress PDF</div>
-        </a>
-      </div>
+      <!-- Compress -->
+      <a href="/pdf/compress.html" class="tool-item">
+        <div class="tool-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M4 4h6v6H4zM14 14h6v6h-6z"/>
+            <path d="M14 4h6M20 4v6M4 14v6M4 20h6"/>
+          </svg>
+        </div>
+        <div class="tool-name">Compress PDF</div>
+      </a>
 
-      <div class="tool-card">
-        <a href="#">
-          <div class="tool-icon">⏸️</div>
-          <div class="tool-name">Merge PDF</div>
-        </a>
-      </div>
+      <!-- Merge -->
+      <a href="/pdf/merge.html" class="tool-item">
+        <div class="tool-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M7 3h10v6H7z"/>
+            <path d="M5 13h14v8H5z"/>
+          </svg>
+        </div>
+        <div class="tool-name">Merge PDF</div>
+      </a>
 
-      <div class="tool-card">
-        <a href="#">
-          <div class="tool-icon">≡</div>
-          <div class="tool-name">Split PDF</div>
-        </a>
-      </div>
+      <!-- Split -->
+      <a href="/pdf/split.html" class="tool-item">
+        <div class="tool-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M4 4h7v16H4z"/>
+            <path d="M13 4h7v16h-7z"/>
+          </svg>
+        </div>
+        <div class="tool-name">Split PDF</div>
+      </a>
 
-      <div class="tool-card">
-        <a href="#">
-          <div class="tool-icon">🖼️</div>
-          <div class="tool-name">PDF to Image</div>
-        </a>
-      </div>
+      <!-- PDF to Image -->
+      <a href="/pdf/pdf-to-image.html" class="tool-item">
+        <div class="tool-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M8 13l2-2 3 3 2-2 3 3"/>
+          </svg>
+        </div>
+        <div class="tool-name">PDF to Image</div>
+      </a>
 
-      <div class="tool-card">
-        <a href="#">
-          <div class="tool-icon">👤</div>
-          <div class="tool-name">Image to PDF</div>
-        </a>
-      </div>
+      <!-- Image to PDF -->
+      <a href="/pdf/image-to-pdf.html" class="tool-item">
+        <div class="tool-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <path d="M8 14l2-2 3 3"/>
+          </svg>
+        </div>
+        <div class="tool-name">Image to PDF</div>
+      </a>
 
-      <div class="tool-card">
-        <a href="#">
-          <div class="tool-icon">📄</div>
-          <div class="tool-name">PDF to Word</div>
-        </a>
-      </div>
+      <!-- PDF to Word -->
+      <a href="/pdf/pdf-to-word.html" class="tool-item">
+        <div class="tool-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+            <path d="M6 4h9l3 3v13H6z"/>
+            <path d="M9 12l2 4 2-6 2 6 2-4"/>
+          </svg>
+        </div>
+        <div class="tool-name">PDF to Word</div>
+      </a>
 
     </div>
   </section>
 
   <!-- ================= WHY ================= -->
-  <section class="section">
-    <h2 class="section-title">Why Develac</h2>
+  <section class="section section-muted">
+    <h2 class="section-title">Why Develac PDF</h2>
 
     <div class="why-grid">
       <div class="why-card">
-        <h3>🔒 Secure</h3>
-        <p>Your files are processed safely and deleted automatically.</p>
+        <h3>Secure Processing</h3>
+        <p>Your files are encrypted and auto-deleted after processing.</p>
       </div>
 
       <div class="why-card">
-        <h3>⚡ Fast</h3>
-        <p>Optimized tools for instant results.</p>
+        <h3>Fast & Reliable</h3>
+        <p>Optimized infrastructure for instant results.</p>
       </div>
 
       <div class="why-card">
-        <h3>👁️ No Tracking</h3>
-        <p>We don’t store or analyze your documents.</p>
+        <h3>Privacy First</h3>
+        <p>No tracking, no ads, no data selling. Ever.</p>
       </div>
     </div>
   </section>
 
   <!-- ================= FOOTER ================= -->
   <footer class="footer">
-    © 2026 Develac · <a href="#">Privacy</a> · <a href="#">Terms</a>
+    © 2026 Develac ·
+    <a href="/privacy.html">Privacy</a> ·
+    <a href="/terms.html">Terms</a>
   </footer>
 
 </body>
