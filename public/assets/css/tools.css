@@ -1,133 +1,134 @@
-/* ===============================
-   RESET + BASE
-================================ */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* ============ RESET ============ */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+/* ============ BODY ============ */
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #0b1430, #050b1a 70%);
+  background: linear-gradient(180deg, #050b1a, #0b1430);
   color: #e8ecf4;
 }
 
-/* ===============================
-   SECTIONS
-================================ */
+/* ============ HEADER ============ */
+.header {
+  background: #050b1a;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.menu-icon {
+  font-size: 22px;
+}
+
+/* ============ HERO ============ */
+.hero {
+  max-width: 900px;
+  margin: auto;
+  padding: 60px 16px 40px;
+  text-align: left;
+}
+
+.hero h1 {
+  font-size: 36px;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.hero p {
+  font-size: 16px;
+  color: #b6c1e2;
+  line-height: 1.6;
+}
+
+/* ============ SECTION ============ */
 .section {
   max-width: 1200px;
   margin: auto;
-  padding: 42px 16px;
+  padding: 50px 16px;
 }
 
 .section-title {
   text-align: center;
   font-size: 26px;
-  font-weight: 700;
   margin-bottom: 30px;
 }
 
-/* ===============================
-   TOOLS GRID (MOBILE FIRST)
-================================ */
+/* ============ TOOLS GRID ============ */
 .tools-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 22px;
 }
 
-/* Tablet */
-@media (min-width: 640px) {
+@media (min-width: 700px) {
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop */
 @media (min-width: 1024px) {
   .tools-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* ===============================
-   TOOL CARD (REAL FIX)
-================================ */
+/* ============ TOOL CARD ============ */
 .tool-card {
   background: linear-gradient(160deg, #0b1630, #0e1d3f);
-  border-radius: 20px;
-  padding: 22px 18px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
-  transition: transform .25s ease, box-shadow .25s ease;
+  border-radius: 22px;
+  padding: 28px 20px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
 }
 
-.tool-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.65);
-}
-
-/* ===============================
-   TOOL CONTENT STACK
-================================ */
 .tool-card a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   text-decoration: none;
   color: inherit;
 }
 
-/* ===============================
-   ICON (VISIBLE + BALANCED)
-================================ */
 .tool-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(78, 161, 255, 0.22);
+  font-size: 26px;
 }
 
-.tool-icon img,
-.tool-icon svg {
-  width: 26px;
-  height: 26px;
-  filter: brightness(1.25);
-}
-
-/* ===============================
-   TOOL NAME
-================================ */
 .tool-name {
   font-size: 16px;
   font-weight: 600;
-  text-align: center;
-  color: #e8ecf4;
 }
 
-/* ===============================
-   WHY DEVELAC
-================================ */
+/* ============ WHY SECTION ============ */
 .why-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 22px;
 }
 
-@media (min-width: 640px) {
-  .why-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .why-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -135,28 +136,30 @@ body {
 
 .why-card {
   background: linear-gradient(160deg, #0b1630, #0e1d3f);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
 }
 
 .why-card h3 {
-  font-size: 17px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .why-card p {
   font-size: 14px;
   line-height: 1.6;
-  color: #a9b3d1;
+  color: #b6c1e2;
 }
 
-/* ===============================
-   FOOTER
-================================ */
+/* ============ FOOTER ============ */
 .footer {
   text-align: center;
-  padding: 26px 14px;
+  padding: 30px 16px;
   font-size: 14px;
   color: #9aa4bf;
+}
+
+.footer a {
+  color: #9aa4bf;
+  text-decoration: none;
 }
