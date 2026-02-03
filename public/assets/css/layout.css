@@ -1,142 +1,88 @@
-/* ===============================
-   LAYOUT SYSTEM – DEVELAC
+/* ==================================
+   LAYOUT – DEVELAC
    File: layout.css
    Responsibility:
    - Page structure
    - Containers
-   - Section spacing
-   - Responsive layout rhythm
-================================ */
+   - Sections
+   - Grids
+   - Spacing
+================================== */
 
 /* -------------------------------
-   ROOT LAYOUT VARIABLES
--------------------------------- */
-:root {
-  --container-max-width: 1200px;
-  --container-padding-mobile: 16px;
-  --container-padding-tablet: 24px;
-  --container-padding-desktop: 32px;
-
-  --section-space-xs: 32px;
-  --section-space-sm: 48px;
-  --section-space-md: 72px;
-  --section-space-lg: 96px;
-  --section-space-xl: 128px;
-}
-
-/* -------------------------------
-   CONTAINER
+   GLOBAL CONTAINER
 -------------------------------- */
 .container {
-  width: 100%;
-  max-width: var(--container-max-width);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-padding-mobile);
-  padding-right: var(--container-padding-mobile);
-}
-
-/* Tablet */
-@media (min-width: 768px) {
-  .container {
-    padding-left: var(--container-padding-tablet);
-    padding-right: var(--container-padding-tablet);
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  .container {
-    padding-left: var(--container-padding-desktop);
-    padding-right: var(--container-padding-desktop);
-  }
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 20px;
 }
 
 /* -------------------------------
-   PAGE WRAPPER
--------------------------------- */
-.page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* -------------------------------
-   SECTION SYSTEM
+   PAGE SECTIONS
 -------------------------------- */
 .section {
-  width: 100%;
+  padding-block: 80px;
 }
 
-.section--xs {
-  padding-top: var(--section-space-xs);
-  padding-bottom: var(--section-space-xs);
-}
-
-.section--sm {
-  padding-top: var(--section-space-sm);
-  padding-bottom: var(--section-space-sm);
-}
-
-.section--md {
-  padding-top: var(--section-space-md);
-  padding-bottom: var(--section-space-md);
-}
-
-.section--lg {
-  padding-top: var(--section-space-lg);
-  padding-bottom: var(--section-space-lg);
-}
-
-.section--xl {
-  padding-top: var(--section-space-xl);
-  padding-bottom: var(--section-space-xl);
+.section--tight {
+  padding-block: 50px;
 }
 
 /* -------------------------------
-   STACK LAYOUT (Vertical Rhythm)
+   HERO LAYOUT
 -------------------------------- */
-.stack {
-  display: flex;
-  flex-direction: column;
+.hero {
+  text-align: center;
+  max-width: 760px;
+  margin-inline: auto;
 }
 
-.stack-xs > * + * {
-  margin-top: 8px;
-}
-
-.stack-sm > * + * {
-  margin-top: 16px;
-}
-
-.stack-md > * + * {
-  margin-top: 24px;
-}
-
-.stack-lg > * + * {
-  margin-top: 40px;
-}
-
-.stack-xl > * + * {
-  margin-top: 64px;
+.hero > * + * {
+  margin-top: 14px;
 }
 
 /* -------------------------------
-   GRID HELPERS (Layout-only)
+   GRID SYSTEM
 -------------------------------- */
 .grid {
   display: grid;
-  gap: 16px;
+  gap: 28px;
 }
 
-@media (min-width: 768px) {
-  .grid {
-    gap: 24px;
+/* 3 tools per row — ALL DEVICES */
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* -------------------------------
+   RESPONSIVE SAFETY
+-------------------------------- */
+@media (max-width: 900px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding-block: 60px;
   }
 }
 
 /* -------------------------------
-   CENTERING UTILITIES
+   CARD WRAPPERS
+-------------------------------- */
+.cards-wrapper {
+  margin-top: 48px;
+}
+
+/* -------------------------------
+   CENTER UTILITIES
 -------------------------------- */
 .center {
   display: flex;
@@ -144,26 +90,23 @@
   justify-content: center;
 }
 
-.center-x {
+.center-column {
   display: flex;
-  justify-content: center;
-}
-
-.center-y {
-  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
 /* -------------------------------
-   FULL WIDTH SECTIONS
+   STACK UTILITIES
 -------------------------------- */
-.full-width {
-  width: 100%;
+.stack-sm > * + * {
+  margin-top: 10px;
 }
 
-/* -------------------------------
-   PAGE FOOTER PUSH
--------------------------------- */
-.page-footer {
-  margin-top: auto;
+.stack-md > * + * {
+  margin-top: 18px;
+}
+
+.stack-lg > * + * {
+  margin-top: 28px;
 }
