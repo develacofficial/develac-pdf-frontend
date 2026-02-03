@@ -2,126 +2,127 @@
    COMPONENTS – DEVELAC
    File: components.css
    Responsibility:
-   - Reusable UI components
    - Cards
    - Buttons
-   - Feature blocks
+   - Tool tiles
+   - Reusable UI blocks
 ================================== */
 
 /* -------------------------------
-   CARD BASE
+   BASE CARD
 -------------------------------- */
 .card {
-  position: relative;
-  border-radius: 16px;
-  padding: 24px;
-  background: var(--card-bg);
-  box-shadow: var(--card-shadow);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 22px;
+  padding: 28px;
+  backdrop-filter: blur(8px);
 }
 
 /* -------------------------------
-   TOOL CARD
+   TOOL CARD (Canva-style)
 -------------------------------- */
 .tool-card {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  aspect-ratio: 1 / 1;
+  border-radius: 26px;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255,255,255,0.06);
+
   cursor: pointer;
+  transition: transform .25s ease, border-color .25s ease, background .25s ease;
 }
 
-.tool-card__icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: var(--icon-bg);
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(59,130,246,.6);
+  background: rgba(59,130,246,.08);
+}
+
+/* -------------------------------
+   TOOL ICON HOLDER
+-------------------------------- */
+.tool-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
+
+  background: rgba(59,130,246,.15);
 }
 
-.tool-card__icon img {
+.tool-icon svg {
   width: 28px;
   height: 28px;
-}
-
-.tool-card__title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  stroke: #3b82f6;
 }
 
 /* -------------------------------
-   FEATURE CARD
+   TOOL NAME (Outside card)
 -------------------------------- */
-.feature-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-
-.feature-card__icon {
-  font-size: 1.3rem;
-  line-height: 1;
-}
-
-.feature-card__content h4 {
-  margin: 0 0 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.feature-card__content p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+.tool-name {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb;
 }
 
 /* -------------------------------
-   BUTTON BASE
+   PRIMARY BUTTON
 -------------------------------- */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
-  transition: background 0.2s ease, transform 0.15s ease;
-}
-
-.btn:active {
-  transform: scale(0.97);
-}
-
-/* Primary */
 .btn-primary {
-  background: var(--btn-primary-bg);
-  color: var(--btn-primary-text);
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  background: linear-gradient(135deg,#2563eb,#3b82f6);
+  color: #fff;
+
+  cursor: pointer;
+  transition: opacity .2s ease, transform .15s ease;
 }
 
 .btn-primary:hover {
-  background: var(--btn-primary-bg-hover);
+  opacity: .95;
 }
 
-/* Secondary */
-.btn-secondary {
-  background: var(--btn-secondary-bg);
-  color: var(--btn-secondary-text);
+.btn-primary:active {
+  transform: scale(.97);
 }
 
-.btn-secondary:hover {
-  background: var(--btn-secondary-bg-hover);
+/* -------------------------------
+   OUTLINE BUTTON
+-------------------------------- */
+.btn-outline {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+
+  background: transparent;
+  border: 1px solid #3b82f6;
+
+  font-size: 15px;
+  font-weight: 500;
+  color: #3b82f6;
+
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+.btn-outline:hover {
+  background: rgba(59,130,246,.1);
 }
 
 /* -------------------------------
@@ -129,28 +130,32 @@
 -------------------------------- */
 .badge {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  background: var(--badge-bg);
-  color: var(--badge-text);
+
+  font-size: 12px;
+  font-weight: 500;
+
+  background: rgba(59,130,246,.15);
+  color: #93c5fd;
 }
 
 /* -------------------------------
-   ICON BUTTON
+   INFO CARD
 -------------------------------- */
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: var(--icon-btn-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+.info-card {
+  background: rgba(15,23,42,.6);
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 18px;
+  padding: 22px;
 }
 
-.icon-btn:hover {
-  background: var(--icon-btn-bg-hover);
+.info-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.info-card p {
+  font-size: 14px;
+  color: #9ca3af;
 }
