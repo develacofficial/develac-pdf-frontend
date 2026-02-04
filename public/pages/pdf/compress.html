@@ -5,38 +5,223 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Compress PDF – Develac</title>
 
-  <!-- GLOBAL CSS -->
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/tools.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --card: #f8fafc;
+      --border: #e5e7eb;
+      --success: #16a34a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      font-weight: 600;
+    }
+
+    .menu {
+      font-size: 22px;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      padding: 40px 18px 24px;
+      text-align: center;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .page-hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .page-hero p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* ===== UPLOAD CARD ===== */
+    .upload-section {
+      max-width: 760px;
+      margin: 30px auto;
+      padding: 0 18px;
+    }
+
+    .upload-card {
+      background: var(--card);
+      border: 2px dashed var(--border);
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .upload-icon {
+      width: 64px;
+      height: 64px;
+      background: #eef2ff;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+    }
+
+    .upload-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--primary);
+    }
+
+    .upload-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .upload-card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .upload-btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .file-info {
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ===== INFO STRIP ===== */
+    .info-strip {
+      max-width: 900px;
+      margin: 50px auto 10px;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .info-card h4 {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 22px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 60px;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo">Develac</div>
-      <div class="menu-icon">☰</div>
-    </div>
+  <!-- HEADER -->
+  <header>
+    <a href="/">Develac</a>
+    <div class="menu">☰</div>
   </header>
 
-  <!-- ================= MAIN ================= -->
-  <main class="section">
+  <!-- HERO -->
+  <section class="page-hero">
+    <h1>Compress PDF</h1>
+    <p>
+      Reduce PDF file size without losing quality. Fast, secure and privacy-first.
+    </p>
+  </section>
 
-    <h1 class="section-title">Compress PDF</h1>
+  <!-- UPLOAD -->
+  <section class="upload-section">
+    <div class="upload-card">
 
-    <div class="tool-card single-tool">
-      <p>Reduce PDF file size while keeping quality.</p>
+      <div class="upload-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+          <path d="M12 3v12"/>
+          <path d="M7 8l5-5 5 5"/>
+          <rect x="4" y="15" width="16" height="6"/>
+        </svg>
+      </div>
 
-      <button class="primary-btn">
-        Upload PDF
-      </button>
+      <h3>Select PDF file to compress</h3>
+      <p>Upload your PDF and we will compress it instantly.</p>
+
+      <a href="#" class="upload-btn">Choose PDF File</a>
+
+      <div class="file-info">
+        Maximum file size: 100MB · Files deleted automatically
+      </div>
+
     </div>
+  </section>
 
-  </main>
+  <!-- INFO -->
+  <section class="info-strip">
+    <div class="info-card">
+      <h4>Secure Processing</h4>
+      <p>Your files are encrypted during compression.</p>
+    </div>
+    <div class="info-card">
+      <h4>No Quality Loss</h4>
+      <p>Smart compression keeps text and images sharp.</p>
+    </div>
+    <div class="info-card">
+      <h4>Auto File Deletion</h4>
+      <p>Files are removed automatically after processing.</p>
+    </div>
+  </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
+  <!-- FOOTER -->
+  <footer>
     © 2026 Develac ·
     <a href="/pages/privacy.html">Privacy</a> ·
     <a href="/pages/terms.html">Terms</a>
