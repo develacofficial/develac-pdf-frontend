@@ -17,23 +17,16 @@
     }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
     }
 
     body {
+      margin: 0;
       background: var(--bg);
       color: var(--text);
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ===== HEADER ===== */
     header {
       height: 64px;
       border-bottom: 1px solid var(--border);
@@ -44,37 +37,28 @@
       font-weight: 600;
     }
 
-    .menu {
-      font-size: 22px;
-    }
+    .menu { font-size: 22px; }
 
-    /* ===== PAGE HERO ===== */
-    .page-hero {
-      padding: 40px 18px 24px;
-      text-align: center;
-      max-width: 700px;
+    .page {
+      max-width: 760px;
       margin: auto;
+      padding: 30px 18px;
     }
 
-    .page-hero h1 {
+    h1 {
+      text-align: center;
       font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .page-hero p {
+    .subtitle {
+      text-align: center;
       color: var(--muted);
       font-size: 15px;
+      margin-bottom: 30px;
     }
 
-    /* ===== UPLOAD CARD ===== */
-    .upload-section {
-      max-width: 760px;
-      margin: 30px auto;
-      padding: 0 18px;
-    }
-
-    .upload-card {
+    .card {
       background: var(--card);
       border: 2px dashed var(--border);
       border-radius: 20px;
@@ -82,7 +66,7 @@
       text-align: center;
     }
 
-    .upload-icon {
+    .icon {
       width: 64px;
       height: 64px;
       background: #eef2ff;
@@ -93,139 +77,184 @@
       margin: 0 auto 18px;
     }
 
-    .upload-icon svg {
+    .icon svg {
       width: 32px;
       height: 32px;
       stroke: var(--primary);
     }
 
-    .upload-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 6px;
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
     }
 
-    .upload-card p {
-      font-size: 14px;
+    .muted {
       color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* Processing */
+    .progress-box {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .progress-text {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--primary);
+      transition: width 0.4s ease;
+    }
+
+    /* Success */
+    .success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 20px;
+      margin-top: 30px;
+    }
+
+    .success h2 {
+      color: var(--success);
+      margin-bottom: 8px;
+    }
+
+    .success p {
+      color: #166534;
+      font-size: 14px;
       margin-bottom: 18px;
     }
 
-    .upload-btn {
-      display: inline-block;
-      background: var(--primary);
-      color: #fff;
-      padding: 14px 26px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    .file-info {
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* ===== INFO STRIP ===== */
-    .info-strip {
-      max-width: 900px;
-      margin: 50px auto 10px;
-      padding: 0 18px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-    }
-
-    .info-card h4 {
-      font-size: 15px;
-      margin-bottom: 6px;
-    }
-
-    .info-card p {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* ===== FOOTER ===== */
     footer {
+      margin-top: 60px;
       border-top: 1px solid var(--border);
       text-align: center;
-      padding: 22px;
+      padding: 20px;
       font-size: 14px;
       color: var(--muted);
-      margin-top: 60px;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <a href="/">Develac</a>
-    <div class="menu">☰</div>
-  </header>
+<header>
+  <a href="/">Develac</a>
+  <div class="menu">☰</div>
+</header>
 
-  <!-- HERO -->
-  <section class="page-hero">
-    <h1>Compress PDF</h1>
-    <p>
-      Reduce PDF file size without losing quality. Fast, secure and privacy-first.
-    </p>
-  </section>
+<div class="page">
 
-  <!-- UPLOAD -->
-  <section class="upload-section">
-    <div class="upload-card">
+  <h1>Compress PDF</h1>
+  <div class="subtitle">
+    Reduce PDF file size without losing quality. Fast, secure and privacy-first.
+  </div>
 
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-          <path d="M12 3v12"/>
-          <path d="M7 8l5-5 5 5"/>
-          <rect x="4" y="15" width="16" height="6"/>
-        </svg>
+  <!-- Upload Card -->
+  <div class="card" id="uploadCard">
+
+    <div class="icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+        <path d="M12 3v12"/>
+        <path d="M7 8l5-5 5 5"/>
+        <rect x="4" y="15" width="16" height="6"/>
+      </svg>
+    </div>
+
+    <h3>Select PDF file to compress</h3>
+    <p class="muted">Upload your PDF and we will compress it instantly.</p>
+
+    <button class="btn" onclick="startFakeCompress()">Choose PDF File</button>
+
+    <div class="muted">
+      Maximum file size: 100MB · Files deleted automatically
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-box" id="progressBox">
+      <div class="progress-text" id="progressText">Uploading file…</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
       </div>
-
-      <h3>Select PDF file to compress</h3>
-      <p>Upload your PDF and we will compress it instantly.</p>
-
-      <a href="#" class="upload-btn">Choose PDF File</a>
-
-      <div class="file-info">
-        Maximum file size: 100MB · Files deleted automatically
-      </div>
-
     </div>
-  </section>
 
-  <!-- INFO -->
-  <section class="info-strip">
-    <div class="info-card">
-      <h4>Secure Processing</h4>
-      <p>Your files are encrypted during compression.</p>
-    </div>
-    <div class="info-card">
-      <h4>No Quality Loss</h4>
-      <p>Smart compression keeps text and images sharp.</p>
-    </div>
-    <div class="info-card">
-      <h4>Auto File Deletion</h4>
-      <p>Files are removed automatically after processing.</p>
-    </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2026 Develac ·
-    <a href="/pages/privacy.html">Privacy</a> ·
-    <a href="/pages/terms.html">Terms</a>
-  </footer>
+  <!-- Success -->
+  <div class="success" id="successBox">
+    <h2>PDF Compressed Successfully</h2>
+    <p>Your file is ready. Size reduced with no quality loss.</p>
+    <button class="btn">Download Compressed PDF</button>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Develac · Privacy · Terms
+</footer>
+
+<script>
+  function startFakeCompress() {
+    const progressBox = document.getElementById("progressBox");
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+    const successBox = document.getElementById("successBox");
+
+    progressBox.style.display = "block";
+
+    let progress = 0;
+
+    const steps = [
+      "Uploading file…",
+      "Analyzing PDF…",
+      "Compressing pages…",
+      "Optimizing file…",
+      "Finalizing…"
+    ];
+
+    let stepIndex = 0;
+
+    const interval = setInterval(() => {
+      progress += 10;
+      progressFill.style.width = progress + "%";
+
+      if (progress % 20 === 0 && stepIndex < steps.length) {
+        progressText.innerText = steps[stepIndex];
+        stepIndex++;
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        progressText.innerText = "Completed";
+        setTimeout(() => {
+          successBox.style.display = "block";
+        }, 600);
+      }
+    }, 400);
+  }
+</script>
 
 </body>
 </html>
