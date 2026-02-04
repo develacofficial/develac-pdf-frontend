@@ -2,149 +2,327 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Develac – Smart PDF Tools</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/tools.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Develac provides secure, fast and professional PDF tools. Compress, merge, split and convert PDFs online." />
 
   <style>
-    /* ===== MOBILE MENU ===== */
-    .mobile-menu{
-      display:none;
-      background:#ffffff;
-      border-bottom:1px solid #e5e7eb;
-    }
-    .mobile-menu a{
-      display:block;
-      padding:14px 18px;
-      text-decoration:none;
-      color:#111827;
-      font-weight:500;
-      border-top:1px solid #f1f5f9;
-    }
-    .mobile-menu a:hover{
-      background:#f8fafc;
+    :root {
+      --primary: #2563eb;
+      --text: #0f172a;
+      --muted: #475569;
+      --border: #e5e7eb;
+      --bg-soft: #f8fafc;
+      --radius: 14px;
     }
 
-    @media (min-width: 769px){
-      .menu-icon{display:none;}
-      .mobile-menu{display:none !important;}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: #ffffff;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .menu {
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 60px 20px;
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      font-weight: 600;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      padding: 14px 22px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      background: #fff;
+    }
+
+    /* TRUST STRIP */
+    .trust {
+      background: var(--bg-soft);
+      padding: 40px 20px;
+    }
+
+    .trust-grid {
+      max-width: 1000px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .trust-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .trust-card h4 {
+      margin-bottom: 6px;
+      font-size: 16px;
+    }
+
+    .trust-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* TOOLS */
+    .tools {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .tools h3 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .tool-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      text-align: center;
+      transition: 0.2s ease;
+      background: #fff;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+
+    .tool-icon {
+      width: 52px;
+      height: 52px;
+      background: #eef2ff;
+      color: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin: 0 auto 14px;
+    }
+
+    .tool-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* WHY */
+    .why {
+      background: var(--bg-soft);
+      padding: 60px 20px;
+    }
+
+    .why h3 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .why-grid {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .why-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .why-card h4 {
+      margin-bottom: 8px;
+    }
+
+    .why-card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--primary);
+      margin: 0 8px;
     }
   </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-<header class="header">
-  <div class="header-inner">
-    <a href="/" class="logo">Develac</a>
-    <div class="menu-icon" id="menuToggle">☰</div>
-  </div>
+<header>
+  <h1>Develac</h1>
+  <div class="menu">☰</div>
 </header>
 
-<!-- ===== MOBILE MENU ===== -->
-<nav class="mobile-menu" id="mobileMenu">
-  <a href="/">Home</a>
-  <a href="/pages/pdf/compress.html">Compress PDF</a>
-<a href="/pages/pdf/merge.html">Merge PDF</a>
-<a href="/pages/pdf/split.html">Split PDF</a>
-<a href="/pages/pdf/pdf-to-image.html">PDF to Image</a>
-<a href="/pages/pdf/image-to-pdf.html">Image to PDF</a>
-<a href="/pages/pdf/pdf-to-word.html">PDF to Word</a>
-  <a href="/pages/privacy.html">Privacy Policy</a>
-  <a href="/pages/terms.html">Terms of Service</a>
-</nav>
-
-<!-- ================= HERO ================= -->
 <section class="hero">
-  <h1>Simple. Powerful. PDF Tools.</h1>
-  <p>
-    Develac builds fast, secure, and privacy-focused PDF tools for everyone.
-  </p>
-</section>
-
-<!-- ================= TOOLS ================= -->
-<section class="section">
-  <h2 class="section-title">PDF Tools</h2>
-
-  <div class="tools-grid">
-
-    <a href="/pages/pdf/compress.html" class="tool-card">
-      <div class="tool-icon">⬆</div>
-      <div class="tool-name">Compress PDF</div>
-    </a>
-
-    <a href="/pages/pdf/merge.html" class="tool-card">
-      <div class="tool-icon">⧉</div>
-      <div class="tool-name">Merge PDF</div>
-    </a>
-
-    <a href="/pages/pdf/split.html" class="tool-card">
-      <div class="tool-icon">≡</div>
-      <div class="tool-name">Split PDF</div>
-    </a>
-
-    <a href="/pages/pdf/pdf-to-image.html" class="tool-card">
-      <div class="tool-icon">▦</div>
-      <div class="tool-name">PDF to Image</div>
-    </a>
-
-    <a href="/pages/pdf/image-to-pdf.html" class="tool-card">
-      <div class="tool-icon">▢</div>
-      <div class="tool-name">Image to PDF</div>
-    </a>
-
-    <a href="/pages/pdf/pdf-to-word.html" class="tool-card">
-      <div class="tool-icon">W</div>
-      <div class="tool-name">PDF to Word</div>
-    </a>
-
+  <h2>Smart, Secure & Professional PDF Tools</h2>
+  <p>Compress, merge, split and convert PDF files online — fast, secure and privacy-first.</p>
+  <div class="hero-buttons">
+    <a href="/pages/pdf/compress.html" class="btn-primary">Compress PDF</a>
+    <a href="#tools" class="btn-secondary">All PDF Tools</a>
   </div>
 </section>
 
-<!-- ================= WHY ================= -->
-<section class="section">
-  <h2 class="section-title">Why Develac</h2>
-
-  <div class="why-grid">
-    <div class="why-card">
-      <h3>Secure</h3>
-      <p>Your files are processed safely and deleted automatically.</p>
+<section class="trust">
+  <div class="trust-grid">
+    <div class="trust-card">
+      <h4>Secure Processing</h4>
+      <p>Your files are processed safely with modern security standards.</p>
     </div>
-
-    <div class="why-card">
-      <h3>Fast</h3>
-      <p>Optimized tools for instant results.</p>
+    <div class="trust-card">
+      <h4>Fast Performance</h4>
+      <p>Optimized infrastructure for quick PDF operations.</p>
     </div>
-
-    <div class="why-card">
-      <h3>Privacy-First</h3>
+    <div class="trust-card">
+      <h4>Auto File Deletion</h4>
+      <p>Files are deleted automatically after processing.</p>
+    </div>
+    <div class="trust-card">
+      <h4>Privacy-First</h4>
       <p>No tracking. No data collection.</p>
     </div>
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-  © 2026 Develac ·
-  <a href="/pages/privacy.html">Privacy</a> ·
-  <a href="/pages/terms.html">Terms</a>
+<section class="tools" id="tools">
+  <h3>PDF Tools</h3>
+  <div class="tools-grid">
+    <a class="tool-card" href="/pages/pdf/compress.html">
+      <div class="tool-icon">C</div>
+      <h4>Compress PDF</h4>
+    </a>
+    <div class="tool-card">
+      <div class="tool-icon">M</div>
+      <h4>Merge PDF</h4>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">S</div>
+      <h4>Split PDF</h4>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">I</div>
+      <h4>PDF to Image</h4>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">P</div>
+      <h4>Image to PDF</h4>
+    </div>
+    <div class="tool-card">
+      <div class="tool-icon">W</div>
+      <h4>PDF to Word</h4>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <h3>Why Develac</h3>
+  <div class="why-grid">
+    <div class="why-card">
+      <h4>Built for Professionals</h4>
+      <p>Designed for students, businesses and professionals who need reliable PDF tools.</p>
+    </div>
+    <div class="why-card">
+      <h4>Simple & Transparent</h4>
+      <p>No hidden steps, no confusing UI — just clean and effective tools.</p>
+    </div>
+    <div class="why-card">
+      <h4>Trusted Experience</h4>
+      <p>Professional interface that builds confidence for long-term usage.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Develac
+  · <a href="/pages/privacy.html">Privacy</a>
+  · <a href="/pages/terms.html">Terms</a>
 </footer>
-
-<!-- ================= JS ================= -->
-<script>
-  const menuToggle = document.getElementById("menuToggle");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  menuToggle.addEventListener("click", () => {
-    mobileMenu.style.display =
-      mobileMenu.style.display === "block" ? "none" : "block";
-  });
-</script>
 
 </body>
 </html>
