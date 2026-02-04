@@ -8,7 +8,7 @@
 <style>
 :root{
   --primary:#2563eb;
-  --success:#16a34a;
+  --success:#22c55e;
   --bg:#ffffff;
   --card:#f8fafc;
   --border:#e5e7eb;
@@ -17,10 +17,8 @@
 }
 
 *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system;}
-
 body{margin:0;background:var(--bg);color:var(--text);}
 
-/* HEADER */
 header{
   height:64px;
   border-bottom:1px solid var(--border);
@@ -28,17 +26,11 @@ header{
   align-items:center;
   justify-content:space-between;
   padding:0 18px;
-  font-weight:600;
-}
-
-header a{
-  text-decoration:none;
-  color:var(--text);
   font-weight:700;
-  font-size:18px;
 }
 
-/* PAGE */
+header a{color:var(--text);text-decoration:none;font-size:18px;}
+
 .page{
   max-width:760px;
   margin:auto;
@@ -54,13 +46,9 @@ h1{text-align:center;font-size:28px;margin-bottom:6px;}
   border-radius:20px;
   padding:40px 20px;
   text-align:center;
-  transition:.3s;
 }
 
-.card.locked{
-  opacity:.45;
-  pointer-events:none;
-}
+.card.locked{opacity:.4;pointer-events:none;}
 
 .icon{
   width:64px;height:64px;
@@ -83,7 +71,12 @@ h1{text-align:center;font-size:28px;margin-bottom:6px;}
   font-size:15px;
 }
 
-.btn:disabled{opacity:.6;cursor:not-allowed;}
+.btn.secondary{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.btn:disabled{opacity:.6;}
 
 .muted{font-size:13px;color:var(--muted);margin-top:12px;}
 
@@ -95,6 +88,7 @@ h1{text-align:center;font-size:28px;margin-bottom:6px;}
   background:#e5e7eb;
   border-radius:20px;overflow:hidden;
 }
+
 .progress-fill{
   height:100%;
   width:0%;
@@ -106,15 +100,25 @@ h1{text-align:center;font-size:28px;margin-bottom:6px;}
 .success{
   display:none;
   margin-top:40px;
-  background:#f0fdf4;
-  border:1px solid #bbf7d0;
-  border-radius:22px;
+  background:#0b1220;
+  color:#e5e7eb;
+  border-radius:24px;
   padding:40px 24px;
   text-align:center;
 }
 
-.success h2{color:var(--success);margin-bottom:6px;}
-.success p{color:#166534;font-size:14px;margin-bottom:18px;}
+.success h2{color:#22c55e;margin-bottom:8px;}
+.success .saved{color:#22c55e;font-weight:600;margin-bottom:18px;}
+
+.stats{
+  display:flex;
+  justify-content:space-between;
+  margin:22px 0;
+  font-size:14px;
+}
+
+.stats div{text-align:center;flex:1;}
+.stats strong{display:block;font-size:18px;color:#22c55e;}
 
 footer{
   margin-top:60px;
@@ -154,9 +158,7 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
   <h3>Select PDF file to compress</h3>
   <p class="muted">Upload your PDF and we will compress it instantly.</p>
 
-  <button class="btn" id="startBtn" onclick="startFakeCompress()">
-    Choose PDF File
-  </button>
+  <button class="btn" onclick="startFakeCompress()">Choose PDF File</button>
 
   <div class="muted">
     Maximum file size: 100MB · Files deleted automatically
@@ -172,9 +174,31 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 
 <!-- SUCCESS -->
 <div class="success" id="successBox">
-  <h2>PDF Compressed Successfully</h2>
-  <p>Your file is ready. Size reduced with no quality loss.</p>
-  <button class="btn">Download Compressed PDF</button>
+  <h2>Your PDF is ready</h2>
+  <div class="saved" id="savedText"></div>
+
+  <div class="stats">
+    <div>
+      Original
+      <strong id="origSize"></strong>
+    </div>
+    <div>
+      Compressed
+      <strong id="compSize"></strong>
+    </div>
+  </div>
+
+  <button class="btn" style="margin-bottom:14px;">
+    Download Compressed PDF
+  </button><br>
+
+  <button class="btn secondary" onclick="resetTool()">
+    Compress another PDF
+  </button>
+
+  <p class="muted" style="margin-top:18px;">
+    Encrypted processing · Automatic file deletion
+  </p>
 </div>
 
 </div>
@@ -186,43 +210,42 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 <script>
 function startFakeCompress(){
   const card=document.getElementById("uploadCard");
-  const btn=document.getElementById("startBtn");
   const box=document.getElementById("progressBox");
   const fill=document.getElementById("progressFill");
   const text=document.getElementById("progressText");
   const success=document.getElementById("successBox");
 
-  btn.disabled=true;
   card.classList.add("locked");
   box.style.display="block";
 
-  const steps=[
-    "Uploading file…",
-    "Analyzing PDF…",
-    "Compressing pages…",
-    "Optimizing file…",
-    "Finalizing…"
-  ];
-
+  const steps=["Uploading file…","Analyzing PDF…","Compressing…","Optimizing…"];
   let p=0,i=0;
 
   const timer=setInterval(()=>{
     p+=10;
     fill.style.width=p+"%";
-    if(p%20===0 && i<steps.length){
-      text.innerText=steps[i++];
-    }
+    if(p%25===0 && i<steps.length) text.innerText=steps[i++];
     if(p>=100){
       clearInterval(timer);
-      text.innerText="Completed";
-
       setTimeout(()=>{
         card.style.display="none";
+        showSuccess();
         success.style.display="block";
         success.scrollIntoView({behavior:"smooth"});
       },500);
     }
   },400);
+}
+
+function showSuccess(){
+  document.getElementById("origSize").innerText="1.62 MB";
+  document.getElementById("compSize").innerText="0.84 MB";
+  document.getElementById("savedText").innerText=
+    "Saved 48% · 0.78 MB reduced";
+}
+
+function resetTool(){
+  location.reload();
 }
 </script>
 
