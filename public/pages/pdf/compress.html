@@ -20,6 +20,7 @@
 
 body{margin:0;background:var(--bg);color:var(--text);}
 
+/* HEADER */
 header{
   height:64px;
   border-bottom:1px solid var(--border);
@@ -30,6 +31,14 @@ header{
   font-weight:600;
 }
 
+header a{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:700;
+  font-size:18px;
+}
+
+/* PAGE */
 .page{
   max-width:760px;
   margin:auto;
@@ -49,7 +58,7 @@ h1{text-align:center;font-size:28px;margin-bottom:6px;}
 }
 
 .card.locked{
-  opacity:.5;
+  opacity:.45;
   pointer-events:none;
 }
 
@@ -206,6 +215,7 @@ function startFakeCompress(){
     if(p>=100){
       clearInterval(timer);
       text.innerText="Completed";
+
       setTimeout(()=>{
         card.style.display="none";
         success.style.display="block";
