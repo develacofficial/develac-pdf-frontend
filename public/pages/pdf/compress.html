@@ -1,253 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Compress PDF – Develac</title>
+  <meta charset="UTF-8" />
+  <title>Compress PDF – Develac</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-:root{
-  --primary:#2563eb;
-  --success:#22c55e;
-  --bg:#ffffff;
-  --card:#f8fafc;
-  --border:#e5e7eb;
-  --text:#0f172a;
-  --muted:#64748b;
-}
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/theme.css" />
+  <link rel="stylesheet" href="/assets/css/tools.css" />
 
-*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system;}
-body{margin:0;background:var(--bg);color:var(--text);}
-
-header{
-  height:64px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  font-weight:700;
-}
-
-header a{color:var(--text);text-decoration:none;font-size:18px;}
-
-.page{
-  max-width:760px;
-  margin:auto;
-  padding:32px 18px;
-}
-
-h1{text-align:center;font-size:28px;margin-bottom:6px;}
-.sub{text-align:center;color:var(--muted);margin-bottom:30px;font-size:15px;}
-
-.card{
-  background:var(--card);
-  border:2px dashed var(--border);
-  border-radius:20px;
-  padding:40px 20px;
-  text-align:center;
-}
-
-.card.locked{opacity:.4;pointer-events:none;}
-
-.icon{
-  width:64px;height:64px;
-  margin:0 auto 18px;
-  background:#eef2ff;
-  border-radius:18px;
-  display:flex;align-items:center;justify-content:center;
-}
-
-.icon svg{width:32px;height:32px;stroke:var(--primary);}
-
-.btn{
-  background:var(--primary);
-  color:#fff;
-  padding:14px 30px;
-  border-radius:12px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  font-size:15px;
-}
-
-.btn.secondary{
-  background:#e5e7eb;
-  color:#111827;
-}
-
-.btn:disabled{opacity:.6;}
-
-.muted{font-size:13px;color:var(--muted);margin-top:12px;}
-
-.progress-box{display:none;margin-top:22px;}
-.progress-text{font-size:14px;margin-bottom:10px;}
-
-.progress-bar{
-  width:100%;height:10px;
-  background:#e5e7eb;
-  border-radius:20px;overflow:hidden;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:var(--primary);
-  transition:width .4s ease;
-}
-
-/* SUCCESS */
-.success{
-  display:none;
-  margin-top:40px;
-  background:#0b1220;
-  color:#e5e7eb;
-  border-radius:24px;
-  padding:40px 24px;
-  text-align:center;
-}
-
-.success h2{color:#22c55e;margin-bottom:8px;}
-.success .saved{color:#22c55e;font-weight:600;margin-bottom:18px;}
-
-.stats{
-  display:flex;
-  justify-content:space-between;
-  margin:22px 0;
-  font-size:14px;
-}
-
-.stats div{text-align:center;flex:1;}
-.stats strong{display:block;font-size:18px;color:#22c55e;}
-
-footer{
-  margin-top:60px;
-  border-top:1px solid var(--border);
-  padding:20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:14px;
-}
-</style>
 </head>
-
 <body>
 
-<header>
-  <a href="/">Develac</a>
-  ☰
-</header>
-
-<div class="page">
-
-<h1>Compress PDF</h1>
-<div class="sub">
-Reduce PDF file size without losing quality. Fast, secure and privacy-first.
-</div>
-
-<!-- UPLOAD -->
-<div class="card" id="uploadCard">
-  <div class="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M12 3v12"/>
-      <path d="M7 8l5-5 5 5"/>
-      <rect x="4" y="15" width="16" height="6"/>
-    </svg>
-  </div>
-
-  <h3>Select PDF file to compress</h3>
-  <p class="muted">Upload your PDF and we will compress it instantly.</p>
-
-  <button class="btn" onclick="startFakeCompress()">Choose PDF File</button>
-
-  <div class="muted">
-    Maximum file size: 100MB · Files deleted automatically
-  </div>
-
-  <div class="progress-box" id="progressBox">
-    <div class="progress-text" id="progressText">Uploading file…</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">Develac</a>
+      <button class="menu-btn">☰</button>
     </div>
-  </div>
-</div>
+  </header>
 
-<!-- SUCCESS -->
-<div class="success" id="successBox">
-  <h2>Your PDF is ready</h2>
-  <div class="saved" id="savedText"></div>
+  <!-- ================= MAIN ================= -->
+  <main class="tool-page">
 
-  <div class="stats">
-    <div>
-      Original
-      <strong id="origSize"></strong>
-    </div>
-    <div>
-      Compressed
-      <strong id="compSize"></strong>
-    </div>
-  </div>
+    <!-- Title -->
+    <section class="tool-hero">
+      <h1>Compress PDF</h1>
+      <p>
+        Reduce PDF file size without losing quality.
+        Fast, secure and privacy-first.
+      </p>
+    </section>
 
-  <button class="btn" style="margin-bottom:14px;">
-    Download Compressed PDF
-  </button><br>
+    <!-- ================= UPLOAD BOX ================= -->
+    <section id="uploadBox" class="upload-box">
+      <div class="upload-inner">
+        <div class="upload-icon">⬆️</div>
+        <h3>Select PDF file to compress</h3>
+        <p>Upload your PDF and we will compress it instantly.</p>
 
-  <button class="btn secondary" onclick="resetTool()">
-    Compress another PDF
-  </button>
+        <label class="primary-btn">
+          Choose PDF File
+          <input
+            type="file"
+            id="pdfInput"
+            accept="application/pdf"
+            hidden
+          />
+        </label>
 
-  <p class="muted" style="margin-top:18px;">
-    Encrypted processing · Automatic file deletion
-  </p>
-</div>
+        <small>
+          Maximum file size: 100MB · Files deleted automatically
+        </small>
+      </div>
+    </section>
 
-</div>
+    <!-- ================= PROGRESS BOX ================= -->
+    <section id="progressBox" class="progress-box" style="display:none;">
+      <p id="progressText">Uploading file...</p>
 
-<footer>
-© 2026 Develac · Privacy · Terms
-</footer>
+      <div class="progress-track">
+        <div id="progressBar" class="progress-fill"></div>
+      </div>
+    </section>
 
-<script>
-function startFakeCompress(){
-  const card=document.getElementById("uploadCard");
-  const box=document.getElementById("progressBox");
-  const fill=document.getElementById("progressFill");
-  const text=document.getElementById("progressText");
-  const success=document.getElementById("successBox");
+    <!-- ================= SUCCESS BOX (LOCKED) ================= -->
+    <section id="successBox" class="success-box" style="display:none;">
+      <h2>Your PDF is ready</h2>
 
-  card.classList.add("locked");
-  box.style.display="block";
+      <p id="savedText" class="saved-text">
+        Saved 0% · 0 KB reduced
+      </p>
 
-  const steps=["Uploading file…","Analyzing PDF…","Compressing…","Optimizing…"];
-  let p=0,i=0;
+      <div class="size-grid">
+        <div>
+          <span>Original</span>
+          <strong id="originalSize">0 MB</strong>
+        </div>
+        <div>
+          <span>Compressed</span>
+          <strong id="compressedSize">0 MB</strong>
+        </div>
+      </div>
 
-  const timer=setInterval(()=>{
-    p+=10;
-    fill.style.width=p+"%";
-    if(p%25===0 && i<steps.length) text.innerText=steps[i++];
-    if(p>=100){
-      clearInterval(timer);
-      setTimeout(()=>{
-        card.style.display="none";
-        showSuccess();
-        success.style.display="block";
-        success.scrollIntoView({behavior:"smooth"});
-      },500);
-    }
-  },400);
-}
+      <button id="downloadBtn" class="primary-btn">
+        Download Compressed PDF
+      </button>
 
-function showSuccess(){
-  document.getElementById("origSize").innerText="1.62 MB";
-  document.getElementById("compSize").innerText="0.84 MB";
-  document.getElementById("savedText").innerText=
-    "Saved 48% · 0.78 MB reduced";
-}
+      <button id="resetBtn" class="secondary-btn">
+        Compress another PDF
+      </button>
 
-function resetTool(){
-  location.reload();
-}
-</script>
+      <p class="privacy-note">
+        Encrypted processing · Automatic file deletion
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+    <p>© 2026 Develac · Privacy · Terms</p>
+  </footer>
+
+  <!-- ================= JS ================= -->
+  <script src="/js/compress.js"></script>
 
 </body>
 </html>
