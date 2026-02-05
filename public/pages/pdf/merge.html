@@ -1,77 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Merge PDF – Develac</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Merge PDF – Develac</title>
 
-  <!-- Shared styles -->
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/tools.css">
+<style>
+:root{
+  --primary:#2563eb;
+  --success:#22c55e;
+  --bg:#ffffff;
+  --card:#f8fafc;
+  --border:#e5e7eb;
+  --text:#0f172a;
+  --muted:#64748b;
+}
+
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system;}
+body{margin:0;background:var(--bg);color:var(--text);}
+
+header{
+  height:64px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  font-weight:700;
+}
+
+header a{color:var(--text);text-decoration:none;font-size:18px;}
+
+.page{
+  max-width:760px;
+  margin:auto;
+  padding:32px 18px;
+}
+
+h1{text-align:center;font-size:28px;margin-bottom:6px;}
+.sub{text-align:center;color:var(--muted);margin-bottom:30px;font-size:15px;}
+
+.card{
+  background:var(--card);
+  border:2px dashed var(--border);
+  border-radius:20px;
+  padding:40px 20px;
+  text-align:center;
+}
+
+.card.locked{opacity:.4;pointer-events:none;}
+
+.icon{
+  width:64px;height:64px;
+  margin:0 auto 18px;
+  background:#eef2ff;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.icon svg{width:32px;height:32px;stroke:var(--primary);}
+
+.btn{
+  background:var(--primary);
+  color:#fff;
+  padding:14px 30px;
+  border-radius:12px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.btn.secondary{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.muted{font-size:13px;color:var(--muted);margin-top:12px;}
+
+.file-list{
+  margin-top:18px;
+  text-align:left;
+}
+
+.file-item{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 14px;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+.progress-box{display:none;margin-top:22px;}
+.progress-text{font-size:14px;margin-bottom:10px;}
+
+.progress-bar{
+  width:100%;height:10px;
+  background:#e5e7eb;
+  border-radius:20px;overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:var(--primary);
+  transition:width .4s ease;
+}
+
+/* SUCCESS */
+.success{
+  display:none;
+  margin-top:40px;
+  background:#0b1220;
+  color:#e5e7eb;
+  border-radius:24px;
+  padding:40px 24px;
+  text-align:center;
+}
+
+.success h2{color:var(--success);margin-bottom:8px;}
+.success .saved{color:var(--success);font-weight:600;margin-bottom:18px;}
+
+footer{
+  margin-top:60px;
+  border-top:1px solid var(--border);
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <div class="header-inner">
-      <a href="/" class="logo">Develac</a>
-      <div class="menu-icon">☰</div>
+<header>
+  <a href="/">Develac</a>
+  ☰
+</header>
+
+<div class="page">
+
+<h1>Merge PDF</h1>
+<div class="sub">
+Combine multiple PDF files into one document. Fast, secure and privacy-first.
+</div>
+
+<!-- UPLOAD -->
+<div class="card" id="uploadCard">
+  <div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <path d="M12 3v12"/>
+      <path d="M7 8l5-5 5 5"/>
+      <rect x="4" y="15" width="16" height="6"/>
+    </svg>
+  </div>
+
+  <h3>Select PDF files to merge</h3>
+  <p class="muted">Upload multiple PDFs and merge them into one.</p>
+
+  <button class="btn" onclick="addFakeFiles()">Choose PDF Files</button>
+
+  <div class="file-list" id="fileList"></div>
+
+  <div class="muted">
+    Maximum file size: 100MB · Files deleted automatically
+  </div>
+
+  <div class="progress-box" id="progressBox">
+    <div class="progress-text" id="progressText">Merging PDFs…</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
-  </header>
+  </div>
+</div>
 
-  <!-- ================= TOOL HERO ================= -->
-  <section class="tool-hero">
-    <h1>Merge PDF</h1>
-    <p>
-      Combine multiple PDF files into a single document in seconds.
-    </p>
-  </section>
+<!-- SUCCESS -->
+<div class="success" id="successBox">
+  <h2>Your PDFs are merged</h2>
+  <div class="saved">All selected files combined successfully.</div>
 
-  <!-- ================= TOOL CARD ================= -->
-  <section class="tool-section">
+  <button class="btn" style="margin-bottom:14px;">
+    Download Merged PDF
+  </button><br>
 
-    <div class="tool-card-main">
+  <button class="btn secondary" onclick="resetTool()">
+    Merge another PDF
+  </button>
 
-      <!-- Upload Box -->
-      <div class="upload-box">
-        <div class="upload-icon">⬆️</div>
-        <div class="upload-text">
-          <strong>Select PDF files</strong>
-          <span>Minimum 2 files required</span>
-        </div>
-      </div>
+  <p class="muted" style="margin-top:18px;">
+    Encrypted processing · Automatic file deletion
+  </p>
+</div>
 
-      <!-- Selected Files Preview (UI only) -->
-      <div class="file-list">
-        <div class="file-item">
-          <span>document-1.pdf</span>
-        </div>
-        <div class="file-item">
-          <span>document-2.pdf</span>
-        </div>
+</div>
 
-        <!-- Add more -->
-        <div class="file-item add-more">
-          <span>＋ Add more files</span>
-        </div>
-      </div>
+<footer>
+© 2026 Develac · Privacy · Terms
+</footer>
 
-      <!-- Action Button -->
-      <button class="primary-btn">
-        Merge PDF
-      </button>
+<script>
+function addFakeFiles(){
+  const list=document.getElementById("fileList");
+  list.innerHTML=`
+    <div class="file-item">file-1.pdf</div>
+    <div class="file-item">file-2.pdf</div>
+    <div class="file-item">file-3.pdf</div>
+  `;
+  startFakeMerge();
+}
 
-    </div>
+function startFakeMerge(){
+  const card=document.getElementById("uploadCard");
+  const box=document.getElementById("progressBox");
+  const fill=document.getElementById("progressFill");
+  const success=document.getElementById("successBox");
 
-  </section>
+  card.classList.add("locked");
+  box.style.display="block";
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    © 2026 Develac ·
-    <a href="/pages/privacy.html">Privacy</a> ·
-    <a href="/pages/terms.html">Terms</a>
-  </footer>
+  let p=0;
+  const timer=setInterval(()=>{
+    p+=12;
+    fill.style.width=p+"%";
+    if(p>=100){
+      clearInterval(timer);
+      setTimeout(()=>{
+        card.style.display="none";
+        success.style.display="block";
+        success.scrollIntoView({behavior:"smooth"});
+      },500);
+    }
+  },350);
+}
+
+function resetTool(){
+  location.reload();
+}
+</script>
 
 </body>
 </html>
