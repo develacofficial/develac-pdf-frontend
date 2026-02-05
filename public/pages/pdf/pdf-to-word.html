@@ -1,51 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PDF to Word – Develac</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PDF to Word – Develac</title>
 
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/tools.css">
+<style>
+:root{
+  --primary:#2563eb;
+  --success:#22c55e;
+  --bg:#ffffff;
+  --card:#f8fafc;
+  --border:#e5e7eb;
+  --text:#0f172a;
+  --muted:#64748b;
+}
+
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system;}
+body{margin:0;background:var(--bg);color:var(--text);}
+
+/* HEADER */
+header{
+  height:64px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  font-weight:700;
+}
+header a{color:var(--text);text-decoration:none;font-size:18px;}
+
+/* PAGE */
+.page{
+  max-width:760px;
+  margin:auto;
+  padding:32px 18px;
+}
+h1{text-align:center;font-size:28px;margin-bottom:6px;}
+.sub{text-align:center;color:var(--muted);margin-bottom:30px;font-size:15px;}
+
+/* CARD */
+.card{
+  background:var(--card);
+  border:2px dashed var(--border);
+  border-radius:20px;
+  padding:40px 20px;
+  text-align:center;
+}
+.card.locked{opacity:.4;pointer-events:none;}
+
+.icon{
+  width:64px;height:64px;
+  margin:0 auto 18px;
+  background:#eef2ff;
+  border-radius:18px;
+  display:flex;align-items:center;justify-content:center;
+}
+.icon svg{width:32px;height:32px;stroke:var(--primary);}
+
+/* BUTTONS */
+.btn{
+  background:var(--primary);
+  color:#fff;
+  padding:14px 30px;
+  border-radius:12px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  font-size:15px;
+}
+.btn.secondary{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.muted{font-size:13px;color:var(--muted);margin-top:12px;}
+
+/* PROGRESS */
+.progress-box{display:none;margin-top:22px;}
+.progress-text{font-size:14px;margin-bottom:10px;}
+.progress-bar{
+  width:100%;height:10px;
+  background:#e5e7eb;
+  border-radius:20px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:var(--primary);
+  transition:width .4s ease;
+}
+
+/* SUCCESS */
+.success{
+  display:none;
+  margin-top:40px;
+  background:#0b1220;
+  color:#e5e7eb;
+  border-radius:24px;
+  padding:40px 24px;
+  text-align:center;
+}
+.success h2{color:var(--success);margin-bottom:8px;}
+.success p{color:#cbd5e1;margin-bottom:22px;}
+
+/* FOOTER */
+footer{
+  margin-top:60px;
+  border-top:1px solid var(--border);
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+</style>
 </head>
+
 <body>
 
-<header class="header">
-  <div class="header-inner">
-    <a href="/" class="logo">Develac</a>
-    <div class="menu-icon">☰</div>
-  </div>
+<header>
+  <a href="/">Develac</a>
+  ☰
 </header>
 
-<section class="tool-hero">
-  <h1>PDF to Word</h1>
-  <p>Convert PDF documents into editable Word files.</p>
-</section>
+<div class="page">
 
-<section class="tool-section">
-  <div class="tool-card-main">
+<h1>PDF to Word</h1>
+<div class="sub">
+Convert PDF files into editable Word documents. Fast, accurate and secure.
+</div>
 
-    <div class="upload-box">
-      <div class="upload-icon">⬆️</div>
-      <div class="upload-text">
-        <strong>Select PDF file</strong>
-        <span>DOCX output</span>
-      </div>
-    </div>
+<!-- UPLOAD -->
+<div class="card" id="uploadCard">
 
-    <button class="primary-btn">
-      Convert to Word
-    </button>
-
+  <div class="icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+      <path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+      <path d="M14 4v6h6"/>
+      <path d="M8 15h8"/>
+      <path d="M8 11h8"/>
+    </svg>
   </div>
-</section>
 
-<footer class="footer">
-  © 2026 Develac ·
-  <a href="/pages/privacy.html">Privacy</a> ·
-  <a href="/pages/terms.html">Terms</a>
+  <h3>Select PDF file</h3>
+  <p class="muted">Text and layout will be converted into Word format.</p>
+
+  <button class="btn" onclick="startFakeConvert()">Choose PDF File</button>
+
+  <div class="muted">
+    Maximum file size: 100MB · Files deleted automatically
+  </div>
+
+  <div class="progress-box" id="progressBox">
+    <div class="progress-text" id="progressText">Uploading PDF…</div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success" id="successBox">
+  <h2>Word file is ready</h2>
+  <p>Your PDF was converted successfully.</p>
+
+  <button class="btn" style="margin-bottom:14px;">
+    Download Word File
+  </button><br>
+
+  <button class="btn secondary" onclick="resetTool()">
+    Convert another PDF
+  </button>
+
+  <p class="muted" style="margin-top:18px;">
+    Encrypted processing · Automatic file deletion
+  </p>
+</div>
+
+</div>
+
+<footer>
+© 2026 Develac · Privacy · Terms
 </footer>
+
+<script>
+function startFakeConvert(){
+  const card=document.getElementById("uploadCard");
+  const box=document.getElementById("progressBox");
+  const fill=document.getElementById("progressFill");
+  const text=document.getElementById("progressText");
+  const success=document.getElementById("successBox");
+
+  card.classList.add("locked");
+  box.style.display="block";
+
+  const steps=[
+    "Uploading PDF…",
+    "Analyzing text…",
+    "Converting to Word…",
+    "Finalizing document…"
+  ];
+
+  let p=0,i=0;
+  const timer=setInterval(()=>{
+    p+=10;
+    fill.style.width=p+"%";
+    if(p%25===0 && i<steps.length) text.innerText=steps[i++];
+    if(p>=100){
+      clearInterval(timer);
+      setTimeout(()=>{
+        card.style.display="none";
+        success.style.display="block";
+        success.scrollIntoView({behavior:"smooth"});
+      },500);
+    }
+  },400);
+}
+
+function resetTool(){
+  location.reload();
+}
+</script>
 
 </body>
 </html>
