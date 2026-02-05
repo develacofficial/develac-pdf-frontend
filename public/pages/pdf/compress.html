@@ -5,106 +5,96 @@
   <title>Compress PDF – Develac</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/theme.css" />
-  <link rel="stylesheet" href="/assets/css/tools.css" />
-
+  <!-- USE EXISTING GLOBAL CSS (IMPORTANT) -->
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" class="logo">Develac</a>
-      <button class="menu-btn">☰</button>
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="/" class="logo">Develac</a>
+    <button class="menu-btn">☰</button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="page">
+
+  <!-- TITLE -->
+  <section class="page-head">
+    <h1>Compress PDF</h1>
+    <p>
+      Reduce PDF file size without losing quality.
+      Fast, secure and privacy-first.
+    </p>
+  </section>
+
+  <!-- UPLOAD -->
+  <section id="uploadBox" class="card">
+    <h3>Select PDF file to compress</h3>
+    <p>Upload your PDF and we will compress it instantly.</p>
+
+    <label class="btn primary">
+      Choose PDF File
+      <input type="file" id="pdfInput" accept="application/pdf" hidden />
+    </label>
+
+    <small>
+      Maximum file size: 100MB · Files deleted automatically
+    </small>
+  </section>
+
+  <!-- PROGRESS -->
+  <section id="progressBox" class="card" style="display:none;">
+    <p id="progressText">Uploading file...</p>
+
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
     </div>
-  </header>
+  </section>
 
-  <!-- ================= MAIN ================= -->
-  <main class="tool-page">
+  <!-- SUCCESS (LOCKED) -->
+  <section id="successBox" class="card success" style="display:none;">
+    <h2>Your PDF is ready</h2>
 
-    <!-- Title -->
-    <section class="tool-hero">
-      <h1>Compress PDF</h1>
-      <p>
-        Reduce PDF file size without losing quality.
-        Fast, secure and privacy-first.
-      </p>
-    </section>
+    <p id="savedText">
+      Saved 0% · 0 KB reduced
+    </p>
 
-    <!-- ================= UPLOAD BOX ================= -->
-    <section id="uploadBox" class="upload-box">
-      <div class="upload-inner">
-        <div class="upload-icon">⬆️</div>
-        <h3>Select PDF file to compress</h3>
-        <p>Upload your PDF and we will compress it instantly.</p>
-
-        <label class="primary-btn">
-          Choose PDF File
-          <input
-            type="file"
-            id="pdfInput"
-            accept="application/pdf"
-            hidden
-          />
-        </label>
-
-        <small>
-          Maximum file size: 100MB · Files deleted automatically
-        </small>
+    <div class="result-grid">
+      <div>
+        <span>Original</span>
+        <strong id="originalSize">0 MB</strong>
       </div>
-    </section>
-
-    <!-- ================= PROGRESS BOX ================= -->
-    <section id="progressBox" class="progress-box" style="display:none;">
-      <p id="progressText">Uploading file...</p>
-
-      <div class="progress-track">
-        <div id="progressBar" class="progress-fill"></div>
+      <div>
+        <span>Compressed</span>
+        <strong id="compressedSize">0 MB</strong>
       </div>
-    </section>
+    </div>
 
-    <!-- ================= SUCCESS BOX (LOCKED) ================= -->
-    <section id="successBox" class="success-box" style="display:none;">
-      <h2>Your PDF is ready</h2>
+    <button id="downloadBtn" class="btn primary">
+      Download Compressed PDF
+    </button>
 
-      <p id="savedText" class="saved-text">
-        Saved 0% · 0 KB reduced
-      </p>
+    <button id="resetBtn" class="btn secondary">
+      Compress another PDF
+    </button>
 
-      <div class="size-grid">
-        <div>
-          <span>Original</span>
-          <strong id="originalSize">0 MB</strong>
-        </div>
-        <div>
-          <span>Compressed</span>
-          <strong id="compressedSize">0 MB</strong>
-        </div>
-      </div>
+    <p class="note">
+      Encrypted processing · Automatic file deletion
+    </p>
+  </section>
 
-      <button id="downloadBtn" class="primary-btn">
-        Download Compressed PDF
-      </button>
+</main>
 
-      <button id="resetBtn" class="secondary-btn">
-        Compress another PDF
-      </button>
+<!-- FOOTER -->
+<footer class="footer">
+  © 2026 Develac · Privacy · Terms
+</footer>
 
-      <p class="privacy-note">
-        Encrypted processing · Automatic file deletion
-      </p>
-    </section>
-
-  </main>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer">
-    <p>© 2026 Develac · Privacy · Terms</p>
-  </footer>
-
-  <!-- ================= JS ================= -->
-  <script src="/js/compress.js"></script>
+<!-- JS -->
+<script src="/js/compress.js"></script>
 
 </body>
 </html>
