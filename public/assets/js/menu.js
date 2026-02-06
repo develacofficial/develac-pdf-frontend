@@ -1,12 +1,10 @@
-const menuBtn = document.getElementById("menuBtn");
-const mobileNav = document.getElementById("mobileNav");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileNav = document.getElementById("mobileNav");
 
-menuBtn.addEventListener("click", () => {
-  mobileNav.classList.toggle("open");
-});
+  if (!menuBtn || !mobileNav) return;
 
-mobileNav.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    mobileNav.classList.remove("open");
+  menuBtn.addEventListener("click", () => {
+    mobileNav.classList.toggle("open");
   });
 });
