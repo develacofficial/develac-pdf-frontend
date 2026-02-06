@@ -1,298 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Develac – Smart PDF Tools</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Develac – Smart PDF Tools</title>
 
-  <style>
-    :root {
-      --primary: #2563eb;
-      --bg: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --card: #f8fafc;
-      --border: #e5e7eb;
-    }
+<style>
+:root{
+  --primary:#2563eb;
+  --bg:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --card:#f8fafc;
+  --border:#e5e7eb;
+}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-    }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system;}
+body{background:var(--bg);color:var(--text);}
+a{text-decoration:none;color:inherit}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-    }
+/* ===== HEADER ===== */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#ffffff;
+  border-bottom:1px solid var(--border);
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+}
+.logo{font-size:20px;font-weight:800}
+.menu-btn{
+  font-size:22px;
+  background:none;
+  border:none;
+  cursor:pointer;
+}
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
+/* ===== MOBILE NAV ===== */
+.mobile-nav{
+  display:none;
+  flex-direction:column;
+  background:#ffffff;
+  border-top:1px solid var(--border);
+}
+.mobile-nav a{
+  padding:14px 18px;
+  border-bottom:1px solid var(--border);
+  font-weight:500;
+}
+.mobile-nav.open{display:flex}
 
-    /* ===== HEADER ===== */
-    header {
-      height: 64px;
-      background: #ffffff;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 18px;
-      font-weight: 700;
-    }
+/* ===== HERO ===== */
+.hero{
+  padding:48px 18px 36px;
+  text-align:center;
+}
+.hero h1{
+  font-size:32px;
+  font-weight:800;
+  margin-bottom:14px;
+}
+.hero p{
+  color:var(--muted);
+  max-width:520px;
+  margin:0 auto 26px;
+}
+.hero-actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:600;
+}
+.btn-secondary{
+  border:1px solid var(--border);
+  padding:12px 22px;
+  border-radius:10px;
+  font-weight:600;
+}
 
-    .menu {
-      font-size: 22px;
-      cursor: pointer;
-    }
+/* ===== SECTION ===== */
+.section{
+  padding:40px 18px;
+  max-width:1100px;
+  margin:auto;
+}
+.section-title{
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+  margin-bottom:28px;
+}
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.tool-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  text-align:center;
+  transition:.2s;
+}
+.tool-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--primary);
+}
+.tool-icon{
+  width:56px;height:56px;
+  background:#eef2ff;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 14px;
+}
+.tool-icon svg{width:26px;height:26px;stroke:var(--primary)}
+.tool-name{font-weight:700}
 
-    /* ===== HERO ===== */
-    .hero {
-      padding: 48px 18px 36px;
-      text-align: center;
-    }
+/* ===== WHY ===== */
+.why-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+.why-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+}
+.why-card h3{margin-bottom:8px}
+.why-card p{color:var(--muted);font-size:14px}
 
-    .hero h1 {
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 520px;
-      margin: 0 auto 26px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      padding: 12px 22px;
-      border-radius: 10px;
-      font-weight: 600;
-    }
-
-    .btn-secondary {
-      border: 1px solid var(--border);
-      padding: 12px 22px;
-      border-radius: 10px;
-      font-weight: 600;
-    }
-
-    /* ===== SECTION ===== */
-    .section {
-      padding: 40px 18px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 800;
-      margin-bottom: 28px;
-    }
-
-    /* ===== TOOLS GRID ===== */
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-    }
-
-    .tool-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 26px 20px;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--primary);
-    }
-
-    .tool-icon {
-      width: 56px;
-      height: 56px;
-      background: #eef2ff;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 14px;
-    }
-
-    .tool-icon svg {
-      width: 26px;
-      height: 26px;
-      stroke: var(--primary);
-    }
-
-    .tool-name {
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    /* ===== WHY ===== */
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 18px;
-    }
-
-    .why-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-    }
-
-    .why-card h3 {
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-
-    .why-card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: var(--muted);
-    }
-  </style>
+/* ===== FOOTER ===== */
+footer{
+  border-top:1px solid var(--border);
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+  color:var(--muted);
+}
+</style>
 </head>
+
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div>Develac</div>
-    <div class="menu">☰</div>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Smart, Secure & Professional PDF Tools</h1>
-    <p>
-      Compress, merge, split and convert PDF files online — fast, secure and privacy-first.
-    </p>
-    <div class="hero-actions">
-      <a href="/pages/pdf/compress.html" class="btn-primary">Compress PDF</a>
-      <a href="/pages/pdf/index.html" class="btn-secondary">All PDF Tools</a>
-    </div>
-  </section>
-
-  <!-- TOOLS -->
-  <section class="section" id="tools">
-    <h2 class="section-title">PDF Tools</h2>
-
-    <div class="tools-grid">
-
-      <a href="/pages/pdf/compress.html" class="tool-card">
-        <div class="tool-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <path d="M4 4h16M4 20h16M9 9v6M15 9v6"/>
-          </svg>
-        </div>
-        <div class="tool-name">Compress PDF</div>
-      </a>
-
-      <a href="/pages/pdf/merge.html" class="tool-card">
-        <div class="tool-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <rect x="3" y="3" width="8" height="8"/>
-            <rect x="13" y="13" width="8" height="8"/>
-          </svg>
-        </div>
-        <div class="tool-name">Merge PDF</div>
-      </a>
-
-      <a href="/pages/pdf/split.html" class="tool-card">
-        <div class="tool-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <path d="M4 12h16"/>
-            <path d="M12 4v16"/>
-          </svg>
-        </div>
-        <div class="tool-name">Split PDF</div>
-      </a>
-
-      <a href="/pages/pdf/pdf-to-image.html" class="tool-card">
-        <div class="tool-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <rect x="3" y="3" width="18" height="14"/>
-            <circle cx="8" cy="8" r="2"/>
-          </svg>
-        </div>
-        <div class="tool-name">PDF to Image</div>
-      </a>
-
-      <a href="/pages/pdf/image-to-pdf.html" class="tool-card">
-        <div class="tool-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <rect x="4" y="4" width="16" height="16"/>
-          </svg>
-        </div>
-        <div class="tool-name">Image to PDF</div>
-      </a>
-
-      <a href="/pages/pdf/pdf-to-word.html" class="tool-card">
-        <div class="tool-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-            <path d="M6 4h12v16H6z"/>
-          </svg>
-        </div>
-        <div class="tool-name">PDF to Word</div>
-      </a>
-
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section class="section">
-    <h2 class="section-title">Why Develac</h2>
-
-    <div class="why-grid">
-      <div class="why-card">
-        <h3>Built for Professionals</h3>
-        <p>Designed for students, businesses and professionals who need reliable PDF tools.</p>
-      </div>
-      <div class="why-card">
-        <h3>Privacy-First</h3>
-        <p>No tracking. No data collection. Files are deleted automatically.</p>
-      </div>
-      <div class="why-card">
-        <h3>Fast & Reliable</h3>
-        <p>Optimized infrastructure for quick and smooth PDF processing.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    © 2026 Develac ·
-    <a href="/pages/privacy.html">Privacy</a> ·
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">Develac</a>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="/">Home</a>
+    <a href="/pages/pdf/">All PDF Tools</a>
+    <a href="/pages/privacy.html">Privacy</a>
     <a href="/pages/terms.html">Terms</a>
-  </footer>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Smart, Secure & Professional PDF Tools</h1>
+  <p>Compress, merge, split and convert PDF files online — fast, secure and privacy-first.</p>
+  <div class="hero-actions">
+    <a href="/pages/pdf/compress.html" class="btn-primary">Compress PDF</a>
+    <a href="/pages/pdf/" class="btn-secondary">All PDF Tools</a>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">PDF Tools</h2>
+  <div class="tools-grid">
+    <a href="/pages/pdf/compress.html" class="tool-card"><div class="tool-name">Compress PDF</div></a>
+    <a href="/pages/pdf/merge.html" class="tool-card"><div class="tool-name">Merge PDF</div></a>
+    <a href="/pages/pdf/split.html" class="tool-card"><div class="tool-name">Split PDF</div></a>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Why Develac</h2>
+  <div class="why-grid">
+    <div class="why-card"><h3>Professional</h3><p>Built for serious users.</p></div>
+    <div class="why-card"><h3>Privacy-First</h3><p>No tracking. Auto delete.</p></div>
+    <div class="why-card"><h3>Fast</h3><p>Optimized PDF processing.</p></div>
+  </div>
+</section>
+
+<footer>
+© 2026 Develac · <a href="/pages/privacy.html">Privacy</a> · <a href="/pages/terms.html">Terms</a>
+</footer>
+
+<script>
+const menuBtn=document.getElementById("menuBtn");
+const mobileNav=document.getElementById("mobileNav");
+menuBtn.addEventListener("click",()=>mobileNav.classList.toggle("open"));
+</script>
 
 </body>
 </html>
