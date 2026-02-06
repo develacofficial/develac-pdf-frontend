@@ -1,9 +1,10 @@
+/* ===== SITE HEADER ===== */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, #0b1630, #060b18);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .header-inner {
@@ -16,35 +17,39 @@
 .logo {
   font-size: 20px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .menu-btn {
   font-size: 22px;
   background: none;
   border: none;
-  color: #ffffff;
+  color: #0f172a;
   cursor: pointer;
 }
 
-/* Mobile Navigation */
+/* ===== MOBILE NAV ===== */
 .mobile-nav {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
   display: none;
   flex-direction: column;
-  background: #0b1630;
-  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .mobile-nav a {
   padding: 14px 18px;
   text-decoration: none;
-  color: #e5e7eb;
+  color: #0f172a;
   font-size: 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .mobile-nav a:hover {
-  background: rgba(255,255,255,0.05);
+  background: #f8fafc;
 }
 
 .mobile-nav.open {
