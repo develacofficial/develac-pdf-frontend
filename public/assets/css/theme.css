@@ -1,34 +1,52 @@
 /* ================================
-   THEME : LIGHT (GLOBAL)
-   ================================ */
+   THEME – DEVELAC (LIGHT, FINAL)
+   File: theme.css
+   Responsibility:
+   - Colors
+   - Typography
+   - Radius
+   - Shadows
+   - Global UI tokens
+================================ */
+
+/* ================================
+   COLOR TOKENS
+================================ */
 
 :root {
-  /* Colors */
+  /* Backgrounds */
   --bg-main: #ffffff;
-  --bg-muted: #f6f7f9;
+  --bg-muted: #f8fafc;
   --bg-card: #ffffff;
 
+  /* Text */
   --text-main: #0f172a;
   --text-muted: #475569;
 
+  /* Borders */
   --border-light: #e5e7eb;
 
+  /* Accent */
   --accent: #2563eb;
   --accent-soft: #e0e7ff;
+
+  /* Success (tool-specific usage allowed) */
+  --success: #22c55e;
 
   /* Radius */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
 
-  /* Shadow */
+  /* Shadows */
   --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
+
 
 /* ================================
    GLOBAL RESET
-   ================================ */
+================================ */
 
 * {
   margin: 0;
@@ -39,14 +57,42 @@
 html, body {
   width: 100%;
   min-height: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
   background: var(--bg-main);
   color: var(--text-main);
 }
 
+
+/* ================================
+   TYPOGRAPHY
+================================ */
+
+h1 {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+
 /* ================================
    LINKS
-   ================================ */
+================================ */
 
 a {
   color: var(--accent);
@@ -57,66 +103,35 @@ a:hover {
   text-decoration: underline;
 }
 
-/* ================================
-   SECTIONS
-   ================================ */
-
-.section {
-  padding: 56px 20px;
-}
-
-.section-light {
-  background: var(--bg-main);
-}
-
-.section-muted {
-  background: var(--bg-muted);
-}
-
-.section-title {
-  text-align: center;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 36px;
-  color: var(--text-main);
-}
 
 /* ================================
-   HERO
-   ================================ */
+   GLOBAL UI HELPERS
+================================ */
 
-.hero-light {
-  background: var(--bg-main);
-  padding: 80px 20px 60px;
+.text-center {
   text-align: center;
 }
 
-.hero-light h1 {
-  font-size: 36px;
-  font-weight: 800;
-  margin-bottom: 16px;
-}
-
-.hero-light p {
-  font-size: 18px;
+.muted {
   color: var(--text-muted);
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 14px;
 }
 
-/* ================================
-   FOOTER
-   ================================ */
 
-.footer-light {
+/* ================================
+   FOOTER (GENERIC)
+================================ */
+
+.footer {
   background: var(--bg-muted);
+  border-top: 1px solid var(--border-light);
   text-align: center;
   padding: 24px 16px;
   font-size: 14px;
   color: var(--text-muted);
 }
 
-.footer-light a {
-  margin: 0 6px;
+.footer a {
   color: var(--accent);
+  margin: 0 6px;
 }
