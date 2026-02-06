@@ -1,38 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const headerContainer = document.getElementById("global-header");
+// =====================================
+// Develac – Global Header Loader
+// File: /assets/js/header.js
+// Responsibility:
+// - Load header.html on every page
+// - Bind mobile menu toggle
+// =====================================
 
-  if (!headerContainer) return;
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("header-container");
 
-  fetch("/components/header.html")
-    .then(res => res.text())
-    .then(html => {
-      headerContainer.innerHTML = html;
+  // Safety check
+  if (!container) return;
 
-      // MENU
-      const menuBtn = document.getElementById("menuBtn");
-      const mobileNav = document.getElementById("mobileNav");
+  try {
+    const response = await fetch("/components/header.html");
+    const html = await response.text();
 
-      if (menuBtn && mobileNav) {
-        menuBtn.addEventListener("click", () => {
-          mobileNav.classList.toggle("open");
-        });
-      }
+    // Inject header
+    container.innerHTML = html;
 
-      // BACK BUTTON
-      const backBtn = document.getElementById("backBtn");
-      const path = window.location.pathname;
+    // Menu logic
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileNav = document.getElementById("mobileNav");
 
-      if (backBtn) {
-        if (path === "/" || path.endsWith("/index.html")) {
-          backBtn.style.display = "none";
-        }
-
-        backBtn.addEventListener("click", () => {
-          window.history.back();
-        });
-      }
-    })
-    .catch(err => {
-      console.error("Header load failed", err);
-    });
+    if (menuBtn && mobileNav) {
+      menuBtn.addEventListener("click", () => {
+        mobileNav.classList.toggle("open");
+      });
+    }
+  } catch (error) {
+    console.error("Failed to load header:", error);
+  }
 });
