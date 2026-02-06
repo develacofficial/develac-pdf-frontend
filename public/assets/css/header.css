@@ -1,4 +1,7 @@
-/* ===== SITE HEADER ===== */
+/* ================================
+   SITE HEADER
+================================ */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -7,14 +10,17 @@
   border-bottom: 1px solid #e5e7eb;
 }
 
+/* Inner layout */
 .header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
 }
 
-/* ===== LOGO ===== */
+/* Logo */
 .logo {
   font-size: 20px;
   font-weight: 700;
@@ -22,21 +28,7 @@
   text-decoration: none;
 }
 
-/* ===== BACK BUTTON ===== */
-.back-btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  color: #0f172a;
-  margin-right: 10px;
-}
-
-.back-btn.hidden {
-  display: none;
-}
-
-/* ===== MENU BUTTON ===== */
+/* Menu button */
 .menu-btn {
   font-size: 22px;
   background: none;
@@ -45,7 +37,10 @@
   cursor: pointer;
 }
 
-/* ===== MOBILE NAV ===== */
+/* ================================
+   MOBILE NAV
+================================ */
+
 .mobile-nav {
   display: none;
   flex-direction: column;
@@ -53,11 +48,17 @@
   border-top: 1px solid #e5e7eb;
 }
 
+/* Open state */
+.mobile-nav.open {
+  display: flex;
+}
+
+/* Links */
 .mobile-nav a {
   padding: 14px 18px;
-  text-decoration: none;
-  color: #0f172a;
   font-size: 16px;
+  color: #0f172a;
+  text-decoration: none;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -65,6 +66,26 @@
   background: #f8fafc;
 }
 
-.mobile-nav.open {
-  display: flex;
+/* ================================
+   DESKTOP BEHAVIOR
+================================ */
+
+@media (min-width: 768px) {
+  .menu-btn {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: row;
+    border-top: none;
+  }
+
+  .mobile-nav a {
+    border-bottom: none;
+    padding: 0 14px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+  }
 }
