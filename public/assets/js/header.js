@@ -1,15 +1,11 @@
 // =====================================
 // Develac – Global Header Loader
 // File: /assets/js/header.js
-// Responsibility:
-// - Load header.html on every page
-// - Bind mobile menu toggle
 // =====================================
 
 document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("header-container");
 
-  // Safety check
   if (!container) return;
 
   try {
@@ -19,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Inject header
     container.innerHTML = html;
 
-    // Menu logic
+    // MENU LOGIC
     const menuBtn = document.getElementById("menuBtn");
     const mobileNav = document.getElementById("mobileNav");
 
@@ -28,6 +24,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         mobileNav.classList.toggle("open");
       });
     }
+
+    // BACK BUTTON LOGIC
+    const backBtn = document.getElementById("backBtn");
+    const path = window.location.pathname;
+
+    if (backBtn) {
+      // Hide on home page
+      if (path === "/" || path.endsWith("/index.html")) {
+        backBtn.style.display = "none";
+      } else {
+        backBtn.addEventListener("click", () => {
+          window.history.back();
+        });
+      }
+    }
+
   } catch (error) {
     console.error("Failed to load header:", error);
   }
