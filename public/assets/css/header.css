@@ -89,3 +89,23 @@
     align-items: center;
   }
 }
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: #0f172a;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+/* Hide back button on desktop home spacing */
+@media (min-width: 768px) {
+  .back-btn {
+    margin-right: 12px;
+  }
+     }
