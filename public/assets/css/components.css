@@ -4,9 +4,9 @@
    Responsibility:
    - Buttons
    - Cards
-   - Tool cards (generic)
+   - Tool cards
+   - Blog components (homepage)
    - Section titles
-   - Blog components
    - Footer helpers
 ================================ */
 
@@ -55,11 +55,16 @@
 ================================ */
 
 .section-title {
-  text-align: center;
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 36px;
+  margin-bottom: 12px;
   color: var(--text-main);
+}
+
+.section-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
 }
 
 
@@ -120,7 +125,7 @@
 
 
 /* ===============================
-   WHY CARD
+   WHY DEVELAC CARD
 ================================ */
 
 .why-card {
@@ -144,63 +149,69 @@
 
 
 /* ===============================
-   BLOG – HOMEPAGE SECTION
+   HOMEPAGE – BLOG SECTION
 ================================ */
 
 .blog-preview {
-  margin-top: 60px;
+  margin-top: 72px;
 }
 
-.blog-grid {
+.blog-preview-list {
   display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
 }
 
-.blog-card {
+.blog-preview-item {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 18px 20px;
   box-shadow: var(--shadow-sm);
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
-.blog-card:hover {
-  transform: translateY(-4px);
+.blog-preview-item:hover {
+  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
-.blog-card h3 {
-  font-size: 18px;
+.blog-preview-item h3 {
+  font-size: 17px;
   font-weight: 700;
-  margin-bottom: 10px;
-  color: var(--text-main);
+  margin-bottom: 6px;
 }
 
-.blog-card p {
-  font-size: 15px;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.blog-card a {
-  font-weight: 600;
+.blog-preview-item h3 a {
   color: var(--accent);
+  text-decoration: none;
 }
 
-.blog-card a:hover {
+.blog-preview-item h3 a:hover {
   text-decoration: underline;
 }
 
+.blog-preview-item p {
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
 
-/* ===============================
-   BLOG – ARTICLE CTA
-================================ */
+.blog-preview-cta {
+  margin-top: 26px;
+}
 
-.article-cta {
-  margin-top: 40px;
-  text-align: center;
+.blog-preview-cta .btn {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .blog-preview-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .blog-preview-cta .btn {
+    width: auto;
+  }
 }
 
 
