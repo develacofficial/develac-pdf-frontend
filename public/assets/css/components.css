@@ -6,6 +6,7 @@
    - Cards
    - Tool cards (generic)
    - Section titles
+   - Blog components
    - Footer helpers
 ================================ */
 
@@ -139,6 +140,67 @@
 .why-card p {
   font-size: 15px;
   color: var(--text-muted);
+}
+
+
+/* ===============================
+   BLOG – HOMEPAGE SECTION
+================================ */
+
+.blog-preview {
+  margin-top: 60px;
+}
+
+.blog-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.blog-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.blog-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.blog-card p {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.blog-card a {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.blog-card a:hover {
+  text-decoration: underline;
+}
+
+
+/* ===============================
+   BLOG – ARTICLE CTA
+================================ */
+
+.article-cta {
+  margin-top: 40px;
+  text-align: center;
 }
 
 
