@@ -1,18 +1,23 @@
-/* =================================================
-   COMPONENTS – DEVELAC (FINAL)
+/* ===============================
+   COMPONENTS – DEVELAC (FINAL UI)
    Responsibility:
    - Buttons
-   - Tool cards (Home + Tools)
-   - Blog cards (Home + Blog)
-   - Generic cards
-================================================= */
+   - Tool cards (icons + grid)
+   - Blog cards (horizontal, premium)
+   - Cards & helpers
+================================ */
 
+:root {
+  --card-radius: 22px;
+}
 
 /* ===============================
    BUTTONS
 ================================ */
 
-.btn {
+.btn,
+.btn-primary,
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -24,19 +29,21 @@
   cursor: pointer;
   border: none;
   transition: all 0.25s ease;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: var(--accent);
-  color: #ffffff;
+  color: #fff;
 }
 
 .btn-primary:hover {
-  opacity: 0.92;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
-  background: transparent;
+  background: #fff;
   border: 1px solid var(--border-light);
   color: var(--text-main);
 }
@@ -44,7 +51,6 @@
 .btn-secondary:hover {
   background: var(--bg-muted);
 }
-
 
 /* ===============================
    SECTION TITLES
@@ -54,38 +60,31 @@
   text-align: center;
   font-size: 30px;
   font-weight: 800;
-  margin-bottom: 42px;
+  margin-bottom: 36px;
   color: var(--text-main);
 }
 
-
 /* ===============================
-   TOOL GRID (HOME)
+   TOOL CARDS (HOME)
 ================================ */
 
 .tools-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 18px;
 }
 
-/* Desktop */
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .tools-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-
-/* ===============================
-   TOOL CARD
-================================ */
-
 .tool-card {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 26px;
-  padding: 28px 18px 22px;
+  border-radius: var(--card-radius);
+  padding: 26px 16px 22px;
   text-align: center;
   box-shadow: var(--shadow-sm);
   transition: all 0.25s ease;
@@ -94,181 +93,175 @@
 .tool-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
-  border-color: var(--accent-soft);
 }
 
-/* Icon */
 .tool-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
   background: var(--accent-soft);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 26px;
+  margin: 0 auto 14px;
 }
 
-/* Name */
+.tool-icon img,
+.tool-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
 .tool-name {
   font-size: 15px;
   font-weight: 700;
   color: var(--text-main);
 }
 
-
 /* ===============================
-   BLOG SECTION (HOME)
+   BLOG – HOME SECTION
 ================================ */
 
 .home-blog {
-  padding: 80px 20px;
+  padding: 70px 0;
 }
 
 .home-blog-header {
   text-align: center;
   max-width: 620px;
-  margin: 0 auto 48px;
+  margin: 0 auto 40px;
 }
 
 .home-blog-header h2 {
-  font-size: 30px;
+  font-size: 32px;
   font-weight: 800;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .home-blog-header p {
+  font-size: 17px;
   color: var(--text-muted);
-  font-size: 16px;
 }
 
-
-/* ===============================
-   BLOG LIST
-================================ */
-
+/* Horizontal scroll */
 .home-blog-list {
-  max-width: 980px;
-  margin: 0 auto;
-  display: grid;
-  gap: 26px;
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 0 16px 20px;
+  scroll-snap-type: x mandatory;
 }
 
-
-/* ===============================
-   BLOG CARD
-================================ */
+.home-blog-list::-webkit-scrollbar {
+  display: none;
+}
 
 .home-blog-card {
-  display: grid;
-  grid-template-columns: 1fr;
+  flex: 0 0 85%;
+  max-width: 85%;
   background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: 22px;
-  overflow: hidden;
+  border-radius: var(--card-radius);
   box-shadow: var(--shadow-sm);
-  animation: blogSlideIn 0.6s ease both;
+  overflow: hidden;
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
 }
 
-/* Desktop layout */
 @media (min-width: 768px) {
   .home-blog-card {
-    grid-template-columns: 1fr 1.2fr;
+    flex: 0 0 420px;
+    max-width: 420px;
   }
 }
 
+.home-blog-card:hover {
+  transform: translateY(-6px);
+}
+
 /* Thumbnail */
-.blog-thumb {
+.home-blog-thumb {
+  height: 160px;
   background: #eef2ff;
-  min-height: 160px;
-  background-size: cover;
-  background-position: center;
 }
 
 /* Content */
-.blog-content {
-  padding: 24px 26px;
+.home-blog-content {
+  padding: 18px 18px 20px;
 }
 
-.blog-date {
+.home-blog-date {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 6px;
 }
 
-.blog-content h3 {
-  font-size: 20px;
+.home-blog-content h3 {
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.blog-content h3 a {
-  color: #2563eb; /* keep blue */
+.home-blog-content h3 a {
+  color: var(--accent);
+  text-decoration: none;
 }
 
-.blog-content h3 a:hover {
+.home-blog-content p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.home-blog-read {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.home-blog-read:hover {
   text-decoration: underline;
 }
 
-.blog-content p {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.blog-read-more {
-  display: inline-block;
-  margin-top: 12px;
-  font-weight: 600;
-  color: #2563eb;
-}
-
-
-/* ===============================
-   BLOG ANIMATION
-================================ */
-
-@keyframes blogSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-
-/* ===============================
-   BLOG CTA
-================================ */
-
+/* CTA */
 .home-blog-cta {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 26px;
 }
 
-
 /* ===============================
-   WHY CARD
+   WHY CARDS
 ================================ */
 
 .why-card {
   background: var(--bg-card);
   border: 1px solid var(--border-light);
-  border-radius: 22px;
-  padding: 26px;
+  border-radius: var(--card-radius);
+  padding: 24px;
   box-shadow: var(--shadow-sm);
 }
 
 .why-card h3 {
   font-size: 18px;
   margin-bottom: 8px;
+  color: var(--text-main);
 }
 
 .why-card p {
   font-size: 15px;
   color: var(--text-muted);
+}
+
+/* ===============================
+   FOOTER HELPERS
+================================ */
+
+.footer a {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
