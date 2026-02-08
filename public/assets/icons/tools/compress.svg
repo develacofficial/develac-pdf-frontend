@@ -1,4 +1,15 @@
-<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-  <rect width="48" height="48" rx="12" fill="#EEF2FF"/>
-  <path d="M16 14h16v6H16zM20 22h8v12h-8z" fill="#2563EB"/>
+<svg
+  width="56"
+  height="56"
+  viewBox="0 0 56 56"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <image
+    href="/assets/icons/tools/compress-pdf-icon.png"
+    x="0"
+    y="0"
+    width="56"
+    height="56"
+    preserveAspectRatio="xMidYMid meet"
+  />
 </svg>
