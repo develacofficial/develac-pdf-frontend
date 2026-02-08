@@ -75,20 +75,20 @@
 
 /* ICON CONTAINER */
 .tool-icon{
-  width:64px;
-  height:64px;
-  border-radius:20px;
-  background:#F4F6FB;
+  width:88px;
+  height:88px;
+  border-radius:26px;
+  background:#EEF2FF;
   display:flex;
   align-items:center;
   justify-content:center;
   margin:0 auto 18px;
 }
 
-/* SVG ICON */
 .tool-icon img{
-  width:32px;
-  height:32px;
+  width:56px;
+  height:56px;
+  object-fit:contain;
 }
 
 /* TOOL NAME (BLACK like iLovePDF) */
