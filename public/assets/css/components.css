@@ -1,267 +1,215 @@
 /* ===============================
    COMPONENTS – DEVELAC (FINAL UI)
-   Responsibility:
-   - Buttons
-   - Tool cards (icons + grid)
-   - Blog cards (horizontal, premium)
-   - Cards & helpers
 ================================ */
 
-:root {
-  --card-radius: 22px;
+/* ---------- BUTTONS ---------- */
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px 26px;
+  border-radius:14px;
+  font-size:15px;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:.2s ease;
 }
 
-/* ===============================
-   BUTTONS
-================================ */
-
-.btn,
-.btn-primary,
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 14px 26px;
-  border-radius: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all 0.25s ease;
-  text-decoration: none;
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
 }
 
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
+.btn-primary:hover{
+  opacity:.92;
 }
 
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+.btn-secondary{
+  background:#fff;
+  border:1px solid var(--border-light);
+  color:var(--text-main);
 }
 
-.btn-secondary {
-  background: #fff;
-  border: 1px solid var(--border-light);
-  color: var(--text-main);
+.btn-secondary:hover{
+  background:var(--bg-muted);
 }
 
-.btn-secondary:hover {
-  background: var(--bg-muted);
+/* ---------- SECTION ---------- */
+
+.section{
+  padding:64px 20px;
 }
 
-/* ===============================
-   SECTION TITLES
-================================ */
-
-.section-title {
-  text-align: center;
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 36px;
-  color: var(--text-main);
-}
-
-/* ===============================
-   TOOL CARDS (HOME)
-================================ */
-
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-@media (min-width: 900px) {
-  .tools-grid {
-    grid-template-columns: repeat(4, 1fr);
+@media(max-width:768px){
+  .section{
+    padding:48px 16px;
   }
 }
 
-.tool-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--card-radius);
-  padding: 26px 16px 22px;
-  text-align: center;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.25s ease;
+.section-title{
+  text-align:center;
+  font-size:30px;
+  font-weight:800;
+  margin-bottom:40px;
 }
 
-.tool-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
+/* ---------- TOOLS GRID ---------- */
+
+.tools-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
 }
 
-.tool-icon {
-  width: 62px;
-  height: 62px;
-  border-radius: 18px;
-  background: var(--accent-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 14px;
-}
-
-.tool-icon img,
-.tool-icon svg {
-  width: 30px;
-  height: 30px;
-}
-
-.tool-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-/* ===============================
-   BLOG – HOME SECTION
-================================ */
-
-.home-blog {
-  padding: 70px 0;
-}
-
-.home-blog-header {
-  text-align: center;
-  max-width: 620px;
-  margin: 0 auto 40px;
-}
-
-.home-blog-header h2 {
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-.home-blog-header p {
-  font-size: 17px;
-  color: var(--text-muted);
-}
-
-/* Horizontal scroll */
-.home-blog-list {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 0 16px 20px;
-  scroll-snap-type: x mandatory;
-}
-
-.home-blog-list::-webkit-scrollbar {
-  display: none;
-}
-
-.home-blog-card {
-  flex: 0 0 85%;
-  max-width: 85%;
-  background: var(--bg-card);
-  border-radius: var(--card-radius);
-  box-shadow: var(--shadow-sm);
-  overflow: hidden;
-  scroll-snap-align: start;
-  transition: transform 0.3s ease;
-}
-
-@media (min-width: 768px) {
-  .home-blog-card {
-    flex: 0 0 420px;
-    max-width: 420px;
+@media(min-width:1024px){
+  .tools-grid{
+    grid-template-columns:repeat(4,1fr);
   }
 }
 
-.home-blog-card:hover {
-  transform: translateY(-6px);
+.tool-card{
+  background:var(--bg-card);
+  border:1px solid var(--border-light);
+  border-radius:22px;
+  padding:28px 18px;
+  text-align:center;
+  box-shadow:var(--shadow-sm);
+  transition:.25s ease;
 }
 
-/* Thumbnail */
-.home-blog-thumb {
-  height: 160px;
-  background: #eef2ff;
+.tool-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
 }
 
-/* Content */
-.home-blog-content {
-  padding: 18px 18px 20px;
+.tool-icon{
+  width:56px;
+  height:56px;
+  border-radius:18px;
+  background:#EEF2FF;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 14px;
 }
 
-.home-blog-date {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-bottom: 6px;
+.tool-icon img{
+  width:24px;
+  height:24px;
 }
 
-.home-blog-content h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 8px;
+.tool-name{
+  font-size:15px;
+  font-weight:600;
+  line-height:1.3;
 }
 
-.home-blog-content h3 a {
-  color: var(--accent);
-  text-decoration: none;
+/* ---------- BLOG (HOME) ---------- */
+
+.home-blog{
+  padding:64px 20px;
 }
 
-.home-blog-content p {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 12px;
+.home-blog-header{
+  text-align:center;
+  margin-bottom:40px;
 }
 
-.home-blog-read {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--accent);
-  text-decoration: none;
+.home-blog-header h2{
+  font-size:30px;
+  font-weight:800;
+  margin-bottom:10px;
 }
 
-.home-blog-read:hover {
-  text-decoration: underline;
+.home-blog-header p{
+  font-size:17px;
+  color:var(--text-muted);
+  line-height:1.6;
 }
 
-/* CTA */
-.home-blog-cta {
-  text-align: center;
-  margin-top: 26px;
+.home-blog-list{
+  display:grid;
+  gap:22px;
 }
 
-/* ===============================
-   WHY CARDS
-================================ */
-
-.why-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--card-radius);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
+.home-blog-card{
+  background:#fff;
+  border:1px solid var(--border-light);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
 }
 
-.why-card h3 {
-  font-size: 18px;
-  margin-bottom: 8px;
-  color: var(--text-main);
+.home-blog-thumb{
+  height:160px;
+  background:#EEF2FF;
 }
 
-.why-card p {
-  font-size: 15px;
-  color: var(--text-muted);
+.home-blog-content{
+  padding:20px;
 }
 
-/* ===============================
-   FOOTER HELPERS
-================================ */
-
-.footer a {
-  color: var(--accent);
-  font-weight: 500;
+.home-blog-meta{
+  font-size:13px;
+  color:var(--text-muted);
+  margin-bottom:6px;
 }
 
-.footer a:hover {
-  text-decoration: underline;
+.home-blog-card h3{
+  font-size:18px;
+  line-height:1.4;
+  margin-bottom:8px;
+}
+
+.home-blog-card a{
+  color:#2563EB;
+  font-weight:700;
+}
+
+.home-blog-card p{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--text-muted);
+}
+
+.read-more{
+  display:inline-block;
+  margin-top:10px;
+  font-weight:600;
+  color:#2563EB;
+}
+
+.home-blog-cta{
+  margin-top:40px;
+  text-align:center;
+}
+
+/* ---------- WHY ---------- */
+
+.why-grid{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  gap:20px;
+}
+
+.why-card{
+  background:#fff;
+  border:1px solid var(--border-light);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:var(--shadow-sm);
+}
+
+.why-card h3{
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.why-card p{
+  font-size:15px;
+  color:var(--text-muted);
 }
