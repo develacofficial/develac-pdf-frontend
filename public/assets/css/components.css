@@ -93,12 +93,11 @@
 }
 
 /* ===============================
-   BLOG – AUTO + MANUAL SWIPE
+   BLOG – MANUAL SWIPE + JS AUTO
 ================================ */
 
 .home-blog{
   padding:80px 20px;
-  overflow:hidden;
 }
 
 .home-blog-header{
@@ -129,21 +128,12 @@
   display:none;
 }
 
-/* SLIDER */
+/* LIST */
 .home-blog-list{
   display:flex;
   gap:20px;
   width:max-content;
   padding-bottom:10px;
-  animation: blog-slide 24s linear infinite;
-  animation-play-state:running;
-}
-
-/* pause animation on interaction */
-.home-blog-scroll:active .home-blog-list,
-.home-blog-scroll:focus-within .home-blog-list,
-.home-blog-scroll:hover .home-blog-list{
-  animation-play-state:paused;
 }
 
 /* CARD */
@@ -155,6 +145,7 @@
   border-radius:24px;
   overflow:hidden;
   box-shadow:var(--shadow-sm);
+  scroll-snap-align:start;
 }
 
 /* THUMBNAIL */
@@ -204,12 +195,6 @@
 .home-blog-cta{
   margin-top:40px;
   text-align:center;
-}
-
-/* AUTO SLIDE */
-@keyframes blog-slide{
-  0%{ transform:translateX(0); }
-  100%{ transform:translateX(-50%); }
 }
 
 /* ---------- WHY ---------- */
