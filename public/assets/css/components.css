@@ -1,5 +1,5 @@
 /* ===============================
-   COMPONENTS – DEVELAC (FINAL UI)
+   COMPONENTS – DEVELAC (FINAL)
 ================================ */
 
 /* ---------- BUTTONS ---------- */
@@ -93,7 +93,7 @@
 }
 
 /* ===============================
-   BLOG – AUTO SLIDE RIGHT → LEFT
+   BLOG – AUTO + MANUAL SWIPE
 ================================ */
 
 .home-blog{
@@ -117,19 +117,33 @@
   color:var(--text-muted);
 }
 
-/* slider wrapper */
+/* SCROLL AREA */
+.home-blog-scroll{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+
+.home-blog-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+/* SLIDER */
 .home-blog-list{
   display:flex;
   gap:20px;
   width:max-content;
-  animation: blog-slide 22s linear infinite;
+  padding-bottom:10px;
+  animation: blog-slide 24s linear infinite;
 }
 
-.home-blog-list:hover{
+/* pause animation on interaction */
+.home-blog-scroll:hover .home-blog-list,
+.home-blog-scroll:active .home-blog-list{
   animation-play-state:paused;
 }
 
-/* card */
+/* CARD */
 .home-blog-card{
   min-width:300px;
   max-width:300px;
@@ -138,15 +152,16 @@
   border-radius:22px;
   overflow:hidden;
   box-shadow:var(--shadow-sm);
+  scroll-snap-align:start;
 }
 
-/* thumbnail */
+/* THUMBNAIL */
 .home-blog-thumb{
   height:160px;
   background:#EEF2FF;
 }
 
-/* content */
+/* CONTENT */
 .home-blog-content{
   padding:20px;
 }
@@ -187,14 +202,10 @@
   text-align:center;
 }
 
-/* slide animation */
+/* AUTO SLIDE */
 @keyframes blog-slide{
-  0%{
-    transform:translateX(0);
-  }
-  100%{
-    transform:translateX(-50%);
-  }
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-50%); }
 }
 
 /* ---------- WHY ---------- */
