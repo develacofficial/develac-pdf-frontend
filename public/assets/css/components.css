@@ -1,5 +1,5 @@
 /* ===============================
-   COMPONENTS – DEVELAC (FINAL)
+   COMPONENTS – DEVELAC (FINAL v2)
 ================================ */
 
 /* ---------- BUTTONS ---------- */
@@ -42,7 +42,9 @@
   margin-bottom:44px;
 }
 
-/* ---------- TOOLS GRID ---------- */
+/* ===============================
+   TOOLS GRID (iLovePDF STYLE)
+================================ */
 
 .tools-grid{
   display:grid;
@@ -57,10 +59,10 @@
 }
 
 .tool-card{
-  background:var(--bg-card);
+  background:#fff;
   border:1px solid var(--border-light);
-  border-radius:24px;
-  padding:30px 18px;
+  border-radius:26px;
+  padding:34px 18px;
   text-align:center;
   box-shadow:var(--shadow-sm);
   transition:.25s ease;
@@ -71,29 +73,34 @@
   box-shadow:var(--shadow-md);
 }
 
+/* ICON CONTAINER */
 .tool-icon{
-  width:58px;
-  height:58px;
-  border-radius:18px;
-  background:#EEF2FF;
+  width:64px;
+  height:64px;
+  border-radius:20px;
+  background:#F4F6FB;
   display:flex;
   align-items:center;
   justify-content:center;
-  margin:0 auto 16px;
+  margin:0 auto 18px;
 }
 
+/* SVG ICON */
 .tool-icon img{
-  width:26px;
-  height:26px;
+  width:32px;
+  height:32px;
 }
 
+/* TOOL NAME (BLACK like iLovePDF) */
 .tool-name{
-  font-size:15px;
+  font-size:15.5px;
   font-weight:700;
+  color:#111827; /* BLACK */
+  line-height:1.4;
 }
 
 /* ===============================
-   BLOG – MANUAL SWIPE + JS AUTO
+   BLOG
 ================================ */
 
 .home-blog{
@@ -116,7 +123,6 @@
   color:var(--text-muted);
 }
 
-/* SCROLL AREA */
 .home-blog-scroll{
   overflow-x:auto;
   -webkit-overflow-scrolling:touch;
@@ -128,7 +134,6 @@
   display:none;
 }
 
-/* LIST */
 .home-blog-list{
   display:flex;
   gap:20px;
@@ -136,7 +141,6 @@
   padding-bottom:10px;
 }
 
-/* CARD */
 .home-blog-card{
   min-width:320px;
   max-width:320px;
@@ -148,14 +152,12 @@
   scroll-snap-align:start;
 }
 
-/* THUMBNAIL */
 .home-blog-thumb{
   height:170px;
   background-size:cover;
   background-position:center;
 }
 
-/* CONTENT */
 .home-blog-content{
   padding:22px;
 }
@@ -191,35 +193,7 @@
   color:#2563EB;
 }
 
-/* CTA */
 .home-blog-cta{
   margin-top:40px;
   text-align:center;
-}
-
-/* ---------- WHY ---------- */
-
-.why-grid{
-  max-width:920px;
-  margin:0 auto;
-  display:grid;
-  gap:22px;
-}
-
-.why-card{
-  background:#fff;
-  border:1px solid var(--border-light);
-  border-radius:24px;
-  padding:26px;
-  box-shadow:var(--shadow-sm);
-}
-
-.why-card h3{
-  font-size:18px;
-  margin-bottom:6px;
-}
-
-.why-card p{
-  font-size:15px;
-  color:var(--text-muted);
 }
