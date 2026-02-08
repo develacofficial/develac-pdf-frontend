@@ -3,13 +3,13 @@
   height="56"
   viewBox="0 0 56 56"
   xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
 >
   <image
-    href="compress-pdf-icon.png"
     x="0"
     y="0"
     width="56"
     height="56"
-    preserveAspectRatio="xMidYMid meet"
+    xlink:href="compress-pdf-icon.png"
   />
 </svg>
