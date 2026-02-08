@@ -23,30 +23,16 @@
   color:#fff;
 }
 
-.btn-primary:hover{
-  opacity:.92;
-}
-
 .btn-secondary{
   background:#fff;
   border:1px solid var(--border-light);
   color:var(--text-main);
 }
 
-.btn-secondary:hover{
-  background:var(--bg-muted);
-}
-
 /* ---------- SECTION ---------- */
 
 .section{
   padding:64px 20px;
-}
-
-@media(max-width:768px){
-  .section{
-    padding:48px 16px;
-  }
 }
 
 .section-title{
@@ -104,18 +90,20 @@
 .tool-name{
   font-size:15px;
   font-weight:600;
-  line-height:1.3;
 }
 
-/* ---------- BLOG (HOME) ---------- */
+/* ===============================
+   BLOG – AUTO SLIDE RIGHT → LEFT
+================================ */
 
 .home-blog{
   padding:64px 20px;
+  overflow:hidden;
 }
 
 .home-blog-header{
   text-align:center;
-  margin-bottom:40px;
+  margin-bottom:36px;
 }
 
 .home-blog-header h2{
@@ -127,15 +115,24 @@
 .home-blog-header p{
   font-size:17px;
   color:var(--text-muted);
-  line-height:1.6;
 }
 
+/* slider wrapper */
 .home-blog-list{
-  display:grid;
-  gap:22px;
+  display:flex;
+  gap:20px;
+  width:max-content;
+  animation: blog-slide 22s linear infinite;
 }
 
+.home-blog-list:hover{
+  animation-play-state:paused;
+}
+
+/* card */
 .home-blog-card{
+  min-width:300px;
+  max-width:300px;
   background:#fff;
   border:1px solid var(--border-light);
   border-radius:22px;
@@ -143,11 +140,13 @@
   box-shadow:var(--shadow-sm);
 }
 
+/* thumbnail */
 .home-blog-thumb{
   height:160px;
   background:#EEF2FF;
 }
 
+/* content */
 .home-blog-content{
   padding:20px;
 }
@@ -159,9 +158,9 @@
 }
 
 .home-blog-card h3{
-  font-size:18px;
-  line-height:1.4;
+  font-size:17px;
   margin-bottom:8px;
+  line-height:1.4;
 }
 
 .home-blog-card a{
@@ -170,7 +169,7 @@
 }
 
 .home-blog-card p{
-  font-size:15px;
+  font-size:14.5px;
   line-height:1.6;
   color:var(--text-muted);
 }
@@ -182,9 +181,20 @@
   color:#2563EB;
 }
 
+/* CTA */
 .home-blog-cta{
-  margin-top:40px;
+  margin-top:36px;
   text-align:center;
+}
+
+/* slide animation */
+@keyframes blog-slide{
+  0%{
+    transform:translateX(0);
+  }
+  100%{
+    transform:translateX(-50%);
+  }
 }
 
 /* ---------- WHY ---------- */
