@@ -197,3 +197,41 @@
   margin-top:40px;
   text-align:center;
 }
+
+/* ===============================
+   WHY DEVELAC SECTION
+================================ */
+
+.why-grid{
+  max-width:960px;
+  margin:0 auto;
+  display:grid;
+  gap:22px;
+}
+
+@media(min-width:768px){
+  .why-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+.why-card{
+  background:#fff;
+  border:1px solid var(--border-light);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:var(--shadow-sm);
+}
+
+.why-card h3{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:#111827;
+}
+
+.why-card p{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--text-muted);
+   }
