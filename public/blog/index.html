@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="/assets/css/theme.css" />
   <link rel="stylesheet" href="/assets/css/layout.css" />
   <link rel="stylesheet" href="/assets/css/components.css" />
-  <link rel="stylesheet" href="/assets/css/blog.css" />
   <link rel="stylesheet" href="/assets/css/header.css" />
 
   <!-- Header loader -->
@@ -27,73 +26,88 @@
   <!-- GLOBAL HEADER -->
   <div id="header-container"></div>
 
-  <main class="page-container">
+  <!-- ================= BLOG PAGE ================= -->
+  <section class="section blog-page">
 
-    <!-- GLOBAL BACK (no custom text) -->
-    <div class="page-back"></div>
-
-    <!-- Page heading -->
-    <header class="page-header">
-      <h1>Develac Blog</h1>
-      <p class="page-subtitle">
-        Guides, tutorials and tips to work smarter with PDF documents.
-      </p>
-    </header>
-
-    <!-- BLOG LIST -->
-    <section class="blog-list">
-
-      <article class="blog-card">
-        <h2 class="blog-title">
-          <a href="/blog/posts/how-to-compress-pdf.html">
-            How to Compress PDF Files Without Losing Quality
-          </a>
-        </h2>
-        <p class="blog-excerpt">
-          Learn the best way to compress PDF files online while keeping text and images clear and readable.
-        </p>
-        <a class="blog-read-more" href="/blog/posts/how-to-compress-pdf.html">
-          Read more →
-        </a>
-      </article>
-
-      <article class="blog-card">
-        <h2 class="blog-title">
-          <a href="/blog/posts/merge-pdf-online.html">
-            How to Merge PDF Files Online for Free
-          </a>
-        </h2>
-        <p class="blog-excerpt">
-          Step-by-step guide to combine multiple PDF files into a single document using Develac PDF.
-        </p>
-        <a class="blog-read-more" href="/blog/posts/merge-pdf-online.html">
-          Read more →
-        </a>
-      </article>
-
-      <article class="blog-card">
-        <h2 class="blog-title">
-          <a href="/blog/posts/split-pdf-guide.html">
-            How to Split PDF Pages Easily
-          </a>
-        </h2>
-        <p class="blog-excerpt">
-          Need to extract pages from a PDF? Learn how to split PDF files quickly and securely.
-        </p>
-        <a class="blog-read-more" href="/blog/posts/split-pdf-guide.html">
-          Read more →
-        </a>
-      </article>
-
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p>
-      © 2026 Develac ·
-      <a href="/pages/privacy.html">Privacy</a> ·
-      <a href="/pages/terms.html">Terms</a>
+    <h1 class="blog-title">Develac Blog</h1>
+    <p class="blog-subtitle">
+      Guides, tutorials and tips to work smarter with PDF documents.
     </p>
+
+    <!-- BLOG LIST (VERTICAL) -->
+    <div class="blog-vertical-list">
+
+      <!-- BLOG 1 -->
+      <article class="home-blog-card">
+        <div class="home-blog-thumb"
+          style="background-image:url('/assets/images/blog/compress-pdf-blog.png')">
+        </div>
+        <div class="home-blog-content">
+          <div class="home-blog-meta">Updated · 2026</div>
+          <h3>
+            <a href="/blog/posts/how-to-compress-pdf.html">
+              How to Compress PDF Files Without Losing Quality
+            </a>
+          </h3>
+          <p>
+            Learn the safest and most effective way to reduce PDF file size online.
+          </p>
+          <a class="read-more" href="/blog/posts/how-to-compress-pdf.html">
+            Read more →
+          </a>
+        </div>
+      </article>
+
+      <!-- BLOG 2 -->
+      <article class="home-blog-card">
+        <div class="home-blog-thumb"
+          style="background-image:url('/assets/images/blog/merge-pdf-blog.png')">
+        </div>
+        <div class="home-blog-content">
+          <div class="home-blog-meta">Updated · 2026</div>
+          <h3>
+            <a href="/blog/posts/merge-pdf-online.html">
+              How to Merge PDF Files Online for Free
+            </a>
+          </h3>
+          <p>
+            Step-by-step guide to combine multiple PDF files into one document.
+          </p>
+          <a class="read-more" href="/blog/posts/merge-pdf-online.html">
+            Read more →
+          </a>
+        </div>
+      </article>
+
+      <!-- BLOG 3 -->
+      <article class="home-blog-card">
+        <div class="home-blog-thumb"
+          style="background-image:url('/assets/images/blog/split-pdf-blog.png')">
+        </div>
+        <div class="home-blog-content">
+          <div class="home-blog-meta">Updated · 2026</div>
+          <h3>
+            <a href="/blog/posts/split-pdf-guide.html">
+              How to Split PDF Pages Easily
+            </a>
+          </h3>
+          <p>
+            Extract pages from PDFs quickly and securely using Develac.
+          </p>
+          <a class="read-more" href="/blog/posts/split-pdf-guide.html">
+            Read more →
+          </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer footer-light">
+    © 2026 Develac ·
+    <a href="/pages/privacy.html">Privacy</a> ·
+    <a href="/pages/terms.html">Terms</a>
   </footer>
 
 </body>
