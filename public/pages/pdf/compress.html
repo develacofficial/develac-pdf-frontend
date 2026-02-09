@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="/assets/css/header.css">
 
 <style>
-/* TOOL-SPECIFIC STYLES */
-
 .page{
   max-width:760px;
   margin:auto;
@@ -36,14 +34,14 @@ h1{
 /* Upload box */
 .upload-box{
   border:2px dashed var(--border-light);
-  border-radius:22px;
-  padding:36px 20px;
+  border-radius:24px;
+  padding:34px 20px;
   text-align:center;
   cursor:pointer;
 }
 
-.upload-box:hover{
-  border-color:var(--accent);
+.upload-box input{
+  display:none;
 }
 
 .upload-icon{
@@ -58,27 +56,35 @@ h1{
 }
 
 .upload-icon svg{
-  width:32px;
-  height:32px;
+  width:30px;
+  height:30px;
   stroke:var(--accent);
 }
 
-.upload-note{
+.upload-title{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.upload-sub{
   font-size:14px;
   color:var(--text-muted);
 }
 
-/* File item */
-.file-item{
+/* File preview */
+.file-preview{
   margin-top:18px;
-  background:#f9fafb;
-  border:1px solid var(--border-light);
-  border-radius:14px;
-  padding:14px 16px;
+}
+
+.file-item{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
+  background:#f9fafb;
+  border:1px solid var(--border-light);
+  border-radius:14px;
+  padding:12px 14px;
 }
 
 .file-meta{
@@ -99,37 +105,33 @@ h1{
   cursor:pointer;
 }
 
-/* Levels */
-.level-box{
-  margin-top:26px;
+/* Level card */
+.level-card{
   background:#fff;
   border:1px solid var(--border-light);
-  border-radius:22px;
+  border-radius:24px;
   padding:22px;
-}
-
-.level-title{
-  font-weight:700;
-  margin-bottom:16px;
+  margin-top:24px;
 }
 
 .level-option{
-  border:1.5px solid var(--border-light);
-  border-radius:16px;
+  border:2px solid var(--border-light);
+  border-radius:18px;
   padding:16px;
-  margin-bottom:12px;
   display:flex;
   gap:12px;
+  align-items:center;
+  margin-top:14px;
   cursor:pointer;
 }
 
 .level-option.active{
-  border-color:var(--accent);
-  background:var(--accent-soft);
+  border-color:#2563eb;
+  background:#eef2ff;
 }
 
 .level-option input{
-  accent-color:var(--accent);
+  accent-color:#2563eb;
 }
 
 /* Button */
@@ -138,18 +140,23 @@ h1{
   width:100%;
   padding:16px;
   font-size:16px;
-  font-weight:700;
-  background:var(--accent);
-  color:#fff;
-  border:none;
   border-radius:16px;
+  border:none;
+  background:#2563eb;
+  color:#fff;
+  font-weight:700;
   cursor:pointer;
 }
 
+.main-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
 /* Progress */
-.progress{
-  margin-top:18px;
+.progress-box{
   display:none;
+  margin-top:22px;
 }
 
 .progress-bar{
@@ -160,27 +167,26 @@ h1{
 }
 
 .progress-fill{
-  width:0%;
   height:100%;
-  background:var(--accent);
+  width:0%;
+  background:#2563eb;
   transition:.4s;
 }
 
 /* Success */
 .success{
   display:none;
-  max-width:760px;
-  margin:40px auto;
+  margin-top:40px;
   background:#0b1220;
   color:#e5e7eb;
-  border-radius:26px;
-  padding:40px 24px;
+  border-radius:28px;
+  padding:36px 22px;
   text-align:center;
 }
 
 .success h2{
   color:#22c55e;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .stats{
@@ -191,14 +197,8 @@ h1{
 
 .stats strong{
   display:block;
+  font-size:18px;
   color:#22c55e;
-  font-size:20px;
-}
-
-.secondary-btn{
-  margin-top:12px;
-  background:#e5e7eb;
-  color:#111827;
 }
 </style>
 </head>
@@ -207,14 +207,19 @@ h1{
 
 <div id="header-container"></div>
 
-<!-- TOOL PAGE -->
-<div class="page" id="toolPage">
+<div class="page">
 
 <h1>Compress PDF</h1>
-<p class="sub">Reduce PDF file size without losing quality. Fast, secure and privacy-first.</p>
+<div class="sub">
+Reduce PDF file size without losing quality. Fast, secure and privacy-first.
+</div>
+
+<!-- MAIN TOOL -->
+<div id="toolSection">
 
 <!-- Upload -->
-<div class="upload-box" onclick="fileInput.click()">
+<label class="upload-box" id="uploadBox">
+  <input type="file" id="fileInput" accept="application/pdf" onchange="handleFile(this)">
   <div class="upload-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
       <path d="M12 3v12"/>
@@ -222,45 +227,46 @@ h1{
       <rect x="4" y="15" width="16" height="6"/>
     </svg>
   </div>
-  <h3>Click or tap to select PDF file</h3>
-  <div class="upload-note">Maximum file size: 100MB</div>
+  <div class="upload-title">Click or tap to select PDF file</div>
+  <div class="upload-sub">Maximum file size: 100MB</div>
 
-  <input type="file" id="fileInput" accept="application/pdf" hidden onchange="handleFile(this)">
-  <div id="filePreview"></div>
-</div>
+  <div class="file-preview" id="filePreview"></div>
+</label>
 
-<!-- Levels -->
-<div class="level-box">
-  <div class="level-title">Compression Level</div>
+<!-- Level -->
+<div class="level-card">
+  <strong>Compression Level</strong>
 
-  <label class="level-option active">
+  <div class="level-option active" onclick="selectLevel(this)">
     <input type="radio" name="level" checked>
     <div>
       <strong>Medium</strong><br>
-      <span>Recommended</span>
+      <small>Recommended</small>
     </div>
-  </label>
+  </div>
 
-  <label class="level-option">
+  <div class="level-option" onclick="selectLevel(this)">
     <input type="radio" name="level">
     <div>
       <strong>Low</strong><br>
-      <span>Best quality</span>
+      <small>Best quality</small>
     </div>
-  </label>
+  </div>
 
-  <label class="level-option">
+  <div class="level-option" onclick="selectLevel(this)">
     <input type="radio" name="level">
     <div>
       <strong>High</strong><br>
-      <span>Smaller size</span>
+      <small>Smaller size</small>
     </div>
-  </label>
+  </div>
 </div>
 
-<button class="main-btn" onclick="startCompress()">Compress PDF</button>
+<button class="main-btn" id="compressBtn" onclick="startCompress()" disabled>
+  Compress PDF
+</button>
 
-<div class="progress" id="progress">
+<div class="progress-box" id="progressBox">
   <p id="progressText">Uploading…</p>
   <div class="progress-bar">
     <div class="progress-fill" id="progressFill"></div>
@@ -277,12 +283,16 @@ h1{
     <div>Compressed<strong>1.1 MB</strong></div>
   </div>
 
-  <button class="main-btn">Download Compressed PDF</button>
-  <button class="main-btn secondary-btn" onclick="location.reload()">Compress another PDF</button>
+  <button class="main-btn">Download Compressed PDF</button><br><br>
+  <button class="main-btn" style="background:#fff;color:#111" onclick="location.reload()">
+    Compress another PDF
+  </button>
 
-  <p class="upload-note" style="margin-top:16px;">
+  <p style="margin-top:18px;font-size:13px;color:#9ca3af">
     Encrypted processing · Automatic file deletion
   </p>
+</div>
+
 </div>
 
 <footer class="footer">
@@ -294,17 +304,6 @@ h1{
 <script src="/assets/js/header.js"></script>
 
 <script>
-/* Level active state */
-document.querySelectorAll('.level-option').forEach(opt=>{
-  opt.addEventListener('click',()=>{
-    document.querySelectorAll('.level-option')
-      .forEach(o=>o.classList.remove('active'));
-    opt.classList.add('active');
-    opt.querySelector('input').checked=true;
-  });
-});
-
-/* File handling */
 function handleFile(input){
   const file=input.files[0];
   if(!file) return;
@@ -318,32 +317,42 @@ function handleFile(input){
       <button class="remove-btn" onclick="removeFile(event)">Remove</button>
     </div>
   `;
+  document.getElementById("compressBtn").disabled=false;
 }
 
 function removeFile(e){
   e.stopPropagation();
   document.getElementById("fileInput").value="";
   document.getElementById("filePreview").innerHTML="";
+  document.getElementById("compressBtn").disabled=true;
 }
 
-/* Fake compress */
+function selectLevel(el){
+  document.querySelectorAll(".level-option").forEach(o=>{
+    o.classList.remove("active");
+    o.querySelector("input").checked=false;
+  });
+  el.classList.add("active");
+  el.querySelector("input").checked=true;
+}
+
 function startCompress(){
-  document.getElementById("progress").style.display="block";
+  document.getElementById("progressBox").style.display="block";
   let p=0;
+  const fill=document.getElementById("progressFill");
+  const text=document.getElementById("progressText");
   const steps=["Uploading…","Analyzing…","Compressing…","Optimizing…"];
   let i=0;
 
-  const timer=setInterval(()=>{
+  const t=setInterval(()=>{
     p+=10;
-    document.getElementById("progressFill").style.width=p+"%";
-    if(p%25===0 && steps[i]) document.getElementById("progressText").innerText=steps[i++];
+    fill.style.width=p+"%";
+    if(p%25===0 && steps[i]) text.innerText=steps[i++];
     if(p>=100){
-      clearInterval(timer);
-      setTimeout(()=>{
-        document.getElementById("toolPage").style.display="none";
-        document.getElementById("successBox").style.display="block";
-        window.scrollTo({top:0,behavior:"smooth"});
-      },400);
+      clearInterval(t);
+      document.getElementById("toolSection").style.display="none";
+      document.getElementById("successBox").style.display="block";
+      document.getElementById("successBox").scrollIntoView({behavior:"smooth"});
     }
   },400);
 }
