@@ -249,3 +249,43 @@
   color:var(--text-muted);
   text-align:center;
 }
+
+/* ===============================
+   BLOG PAGE – VERTICAL LAYOUT
+   (same cards as home, no UI break)
+================================ */
+
+.blog-page{
+  padding-top:60px;
+}
+
+.blog-title{
+  font-size:34px;
+  font-weight:800;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.blog-subtitle{
+  max-width:720px;
+  margin:0 auto 46px;
+  text-align:center;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--text-muted);
+}
+
+/* Vertical list */
+.blog-vertical-list{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+/* Cards full width on blog page */
+.blog-vertical-list .home-blog-card{
+  min-width:100%;
+  max-width:100%;
+            }
