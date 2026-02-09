@@ -47,11 +47,21 @@ h1{
 
 /* ---------- UPLOAD ---------- */
 .upload-card{
-  border:2px dashed #e5e7eb;
+  position:relative;
   text-align:center;
   padding:30px 20px;
   cursor:pointer;
+  border-radius:26px;
 }
+
+  .upload-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border:2px dashed #e5e7eb;
+  border-radius:26px;
+  pointer-events:none;
+  }
 
 .upload-icon{
   width:66px;
