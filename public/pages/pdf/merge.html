@@ -1,221 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Merge PDF – Develac</title>
+  <meta charset="UTF-8" />
+  <title>Merge PDF – Develac</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- GLOBAL STYLES -->
-<link rel="stylesheet" href="/assets/css/theme.css">
-<link rel="stylesheet" href="/assets/css/layout.css">
-<link rel="stylesheet" href="/assets/css/components.css">
-<link rel="stylesheet" href="/assets/css/header.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-<style>
-/* TOOL-SPECIFIC STYLES */
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: #0f172a;
+    }
 
-.page{
-  max-width:760px;
-  margin:auto;
-  padding:32px 18px;
-}
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
 
-h1{text-align:center;font-size:28px;margin-bottom:6px;}
-.sub{text-align:center;color:var(--text-muted);margin-bottom:30px;font-size:15px;}
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
 
-.card{
-  background:var(--bg-card);
-  border:2px dashed var(--border-light);
-  border-radius:20px;
-  padding:40px 20px;
-  text-align:center;
-}
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
 
-.card.locked{opacity:.4;pointer-events:none;}
+    /* ---------- CARD ---------- */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 26px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
 
-.icon{
-  width:64px;height:64px;
-  margin:0 auto 18px;
-  background:var(--accent-soft);
-  border-radius:18px;
-  display:flex;align-items:center;justify-content:center;
-}
+    /* ---------- UPLOAD CARD ---------- */
+    .upload-card {
+      border: 2px dashed #e5e7eb;
+      border-radius: 26px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      overflow: hidden;
+    }
 
-.icon svg{width:32px;height:32px;stroke:var(--accent);}
+    .upload-card.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-.btn{
-  background:var(--accent);
-  color:#fff;
-  padding:14px 30px;
-  border-radius:12px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  font-size:15px;
-}
+    .upload-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 16px;
+      background: #eef2ff;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.btn.secondary{
-  background:#e5e7eb;
-  color:#111827;
-}
+    .upload-icon svg {
+      width: 30px;
+      height: 30px;
+      stroke: #2563eb;
+    }
 
-.muted{font-size:13px;color:var(--text-muted);margin-top:12px;}
+    .upload-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
 
-.file-list{
-  margin-top:18px;
-  text-align:left;
-}
+    .upload-desc {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
 
-.file-item{
-  background:#ffffff;
-  border:1px solid var(--border-light);
-  border-radius:10px;
-  padding:10px 14px;
-  font-size:14px;
-  margin-bottom:8px;
-}
+    .btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-/* Progress */
-.progress-box{display:none;margin-top:22px;}
-.progress-text{font-size:14px;margin-bottom:10px;}
-.progress-bar{
-  width:100%;height:10px;
-  background:#e5e7eb;
-  border-radius:20px;overflow:hidden;
-}
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:var(--accent);
-  transition:width .4s ease;
-}
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+    }
 
-/* Success */
-.success{
-  display:none;
-  margin-top:40px;
-  background:#0b1220;
-  color:#e5e7eb;
-  border-radius:24px;
-  padding:40px 24px;
-  text-align:center;
-}
+    .btn-primary:disabled {
+      background: #a5bdf6;
+      cursor: not-allowed;
+    }
 
-.success h2{color:#22c55e;margin-bottom:8px;}
-.success .saved{color:#22c55e;font-weight:600;margin-bottom:18px;}
-</style>
+    /* ---------- FILE LIST ---------- */
+    .file-list {
+      margin-top: 16px;
+    }
+
+    .file-item {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ---------- PROGRESS ---------- */
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin: 16px 0 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 40%;
+      background: #2563eb;
+      border-radius: 999px;
+    }
+
+    /* ---------- SUCCESS CARD ---------- */
+    .success-card {
+      background: linear-gradient(180deg, #020617, #020617);
+      border-radius: 26px;
+      padding: 28px 22px;
+      color: #ffffff;
+      text-align: center;
+      display: none;
+    }
+
+    .success-title {
+      color: #22c55e;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .success-sub {
+      color: #86efac;
+      font-size: 16px;
+      margin-bottom: 22px;
+    }
+
+    .btn-light {
+      background: #ffffff;
+      color: #0f172a;
+      margin-top: 12px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 28px;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- GLOBAL HEADER -->
-<div id="header-container"></div>
+  <div class="container">
 
-<div class="page">
-
-<h1>Merge PDF</h1>
-<div class="sub">
-Combine multiple PDF files into one document. Fast, secure and privacy-first.
-</div>
-
-<!-- UPLOAD -->
-<div class="card" id="uploadCard">
-  <div class="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M12 3v12"/>
-      <path d="M7 8l5-5 5 5"/>
-      <rect x="4" y="15" width="16" height="6"/>
-    </svg>
-  </div>
-
-  <h3>Select PDF files to merge</h3>
-  <p class="muted">Upload multiple PDFs and merge them into one.</p>
-
-  <button class="btn" onclick="addFakeFiles()">Choose PDF Files</button>
-
-  <div class="file-list" id="fileList"></div>
-
-  <div class="muted">
-    Maximum file size: 100MB · Files deleted automatically
-  </div>
-
-  <div class="progress-box" id="progressBox">
-    <div class="progress-text" id="progressText">Merging PDFs…</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+    <h1>Merge PDF</h1>
+    <div class="subtitle">
+      Combine multiple PDF files into one document. Fast, secure and privacy-first.
     </div>
+
+    <!-- UPLOAD SECTION -->
+    <div id="uploadSection" class="upload-card">
+      <div class="upload-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
+        </svg>
+      </div>
+
+      <div class="upload-title">Select PDF files to merge</div>
+      <div class="upload-desc">Upload multiple PDFs and merge them into one.</div>
+
+      <button id="chooseBtn" class="btn btn-primary">
+        Choose PDF Files
+      </button>
+
+      <input id="fileInput" type="file" accept="application/pdf" multiple />
+
+      <div id="fileList" class="file-list"></div>
+    </div>
+
+    <!-- MERGE BUTTON -->
+    <button id="mergeBtn" class="btn btn-primary" disabled>
+      Merge PDF
+    </button>
+
+    <!-- PROGRESS -->
+    <div id="progressArea" style="display:none;">
+      <div class="progress-text">Merging PDFs...</div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="successCard" class="success-card">
+      <div class="success-title">Your PDFs are merged</div>
+      <div class="success-sub">All selected files combined successfully.</div>
+
+      <button class="btn btn-primary">
+        Download Merged PDF
+      </button>
+
+      <button id="resetBtn" class="btn btn-light">
+        Merge another PDF
+      </button>
+
+      <div style="margin-top:16px; font-size:14px; color:#94a3b8;">
+        Encrypted processing · Automatic file deletion
+      </div>
+    </div>
+
+    <footer>
+      © 2026 Develac ·
+      <a href="#">Privacy</a> ·
+      <a href="#">Terms</a>
+    </footer>
+
   </div>
-</div>
 
-<!-- SUCCESS -->
-<div class="success" id="successBox">
-  <h2>Your PDFs are merged</h2>
-  <div class="saved">All selected files combined successfully.</div>
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const chooseBtn = document.getElementById("chooseBtn");
+    const fileList = document.getElementById("fileList");
+    const mergeBtn = document.getElementById("mergeBtn");
+    const progressArea = document.getElementById("progressArea");
+    const uploadSection = document.getElementById("uploadSection");
+    const successCard = document.getElementById("successCard");
+    const resetBtn = document.getElementById("resetBtn");
 
-  <button class="btn" style="margin-bottom:14px;">
-    Download Merged PDF
-  </button><br>
+    let files = [];
 
-  <button class="btn secondary" onclick="resetTool()">
-    Merge another PDF
-  </button>
+    chooseBtn.onclick = () => fileInput.click();
 
-  <p class="muted" style="margin-top:18px;">
-    Encrypted processing · Automatic file deletion
-  </p>
-</div>
+    fileInput.onchange = () => {
+      files = Array.from(fileInput.files);
+      renderFiles();
+    };
 
-</div>
+    function renderFiles() {
+      fileList.innerHTML = "";
+      files.forEach((file, index) => {
+        const div = document.createElement("div");
+        div.className = "file-item";
+        div.innerHTML = `
+          <span>${file.name}</span>
+          <button class="remove-btn">Remove</button>
+        `;
+        div.querySelector("button").onclick = () => {
+          files.splice(index, 1);
+          renderFiles();
+        };
+        fileList.appendChild(div);
+      });
 
-<footer class="footer">
-© 2026 Develac ·
-<a href="/pages/privacy.html">Privacy</a> ·
-<a href="/pages/terms.html">Terms</a>
-</footer>
-
-<!-- HEADER LOADER -->
-<script src="/assets/js/header.js"></script>
-
-<!-- TOOL LOGIC -->
-<script>
-function addFakeFiles(){
-  const list=document.getElementById("fileList");
-  list.innerHTML=`
-    <div class="file-item">file-1.pdf</div>
-    <div class="file-item">file-2.pdf</div>
-    <div class="file-item">file-3.pdf</div>
-  `;
-  startFakeMerge();
-}
-
-function startFakeMerge(){
-  const card=document.getElementById("uploadCard");
-  const box=document.getElementById("progressBox");
-  const fill=document.getElementById("progressFill");
-  const success=document.getElementById("successBox");
-
-  card.classList.add("locked");
-  box.style.display="block";
-
-  let p=0;
-  const timer=setInterval(()=>{
-    p+=12;
-    fill.style.width=p+"%";
-    if(p>=100){
-      clearInterval(timer);
-      setTimeout(()=>{
-        card.style.display="none";
-        success.style.display="block";
-        success.scrollIntoView({behavior:"smooth"});
-      },400);
+      mergeBtn.disabled = files.length < 2;
     }
-  },350);
-}
 
-function resetTool(){
-  location.reload();
-}
-</script>
+    mergeBtn.onclick = () => {
+      mergeBtn.disabled = true;
+      uploadSection.classList.add("disabled");
+      progressArea.style.display = "block";
+
+      setTimeout(() => {
+        progressArea.style.display = "none";
+        uploadSection.style.display = "none";
+        mergeBtn.style.display = "none";
+        successCard.style.display = "block";
+      }, 2000);
+    };
+
+    resetBtn.onclick = () => {
+      location.reload();
+    };
+  </script>
 
 </body>
 </html>
