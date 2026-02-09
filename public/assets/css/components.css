@@ -289,3 +289,50 @@
   min-width:100%;
   max-width:100%;
             }
+
+/* ===============================
+   COMPRESS LEVEL SELECTOR
+================================ */
+
+.compress-levels{
+  margin:24px 0;
+  text-align:left;
+}
+
+.level-title{
+  font-size:14px;
+  font-weight:600;
+  margin-bottom:10px;
+  color:#111827;
+}
+
+.level-options{
+  display:flex;
+  gap:12px;
+}
+
+.level-option{
+  flex:1;
+  border:1px solid var(--border-light);
+  border-radius:14px;
+  padding:12px;
+  cursor:pointer;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  background:#fff;
+}
+
+.level-option input{
+  accent-color:var(--accent);
+}
+
+.level-option strong{
+  font-size:14px;
+}
+
+.level-option small{
+  display:block;
+  font-size:12px;
+  color:var(--text-muted);
+}
