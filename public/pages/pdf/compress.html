@@ -47,21 +47,23 @@ h1{
 
 /* ---------- UPLOAD ---------- */
 .upload-card{
-  position:relative;
-  text-align:center;
-  padding:30px 20px;
-  cursor:pointer;
-  border-radius:26px;
+  position: relative;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 26px;
 }
 
-  .upload-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  border:2px dashed #e5e7eb;
-  border-radius:26px;
-  pointer-events:none;
-  }
+/* dashed border fix */
+.upload-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px dashed #e5e7eb;
+  border-radius: 26px;
+  pointer-events: none;
+}
 
 .upload-icon{
   width:66px;
