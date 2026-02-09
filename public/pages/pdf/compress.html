@@ -161,6 +161,7 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 
 <!-- UPLOAD -->
 <div class="card" id="uploadCard">
+
   <div class="icon">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
       <path d="M12 3v12"/>
@@ -172,6 +173,38 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
   <h3>Select PDF file to compress</h3>
   <p class="muted">Upload your PDF and we will compress it instantly.</p>
 
+  <!-- ✅ COMPRESSION LEVEL (NEW, SAFE ADDITION) -->
+  <div class="compress-levels">
+    <p class="level-title">Compression Level</p>
+
+    <div class="level-options">
+      <label class="level-option">
+        <input type="radio" name="level" checked>
+        <span>
+          <strong>Medium</strong>
+          <small>Recommended</small>
+        </span>
+      </label>
+
+      <label class="level-option">
+        <input type="radio" name="level">
+        <span>
+          <strong>Low</strong>
+          <small>Best quality</small>
+        </span>
+      </label>
+
+      <label class="level-option">
+        <input type="radio" name="level">
+        <span>
+          <strong>High</strong>
+          <small>Smaller size</small>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <!-- BUTTON -->
   <button class="btn" onclick="startFakeCompress()">Choose PDF File</button>
 
   <div class="muted">
@@ -184,19 +217,21 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
       <div class="progress-fill" id="progressFill"></div>
     </div>
   </div>
+
 </div>
 
 <!-- SUCCESS -->
 <div class="success" id="successBox">
   <h2>Your PDF is ready</h2>
+
   <div class="stats">
     <div>
       Original
-      <strong id="origSize"></strong>
+      <strong id="origSize">—</strong>
     </div>
     <div>
       Compressed
-      <strong id="compSize"></strong>
+      <strong id="compSize">—</strong>
     </div>
   </div>
 
