@@ -12,144 +12,212 @@
 <link rel="stylesheet" href="/assets/css/header.css">
 
 <style>
-/* TOOL-SPECIFIC STYLES ONLY */
-
-.page {
-  max-width: 760px;
-  margin: auto;
-  padding: 32px 18px;
+/* PAGE */
+.page{
+  max-width:760px;
+  margin:auto;
+  padding:32px 18px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 28px;
-  margin-bottom: 6px;
+h1{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:6px;
 }
 
-.sub {
-  text-align: center;
-  color: var(--text-muted);
-  margin-bottom: 30px;
-  font-size: 15px;
+.sub{
+  text-align:center;
+  color:var(--text-muted);
+  margin-bottom:28px;
+  font-size:15px;
 }
 
-.card {
-  background: var(--bg-card);
-  border: 2px dashed var(--border-light);
-  border-radius: 20px;
-  padding: 40px 20px;
-  text-align: center;
+/* UPLOAD CARD */
+.upload-card{
+  background:var(--bg-card);
+  border:2px dashed var(--border-light);
+  border-radius:22px;
+  padding:34px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:.2s ease;
 }
 
-.card.locked {
-  opacity: 0.4;
-  pointer-events: none;
+.upload-card:hover{
+  border-color:var(--accent);
 }
 
-.icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 18px;
-  background: var(--accent-soft);
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.upload-card.locked{
+  pointer-events:none;
+  opacity:.6;
 }
 
-.icon svg {
-  width: 32px;
-  height: 32px;
-  stroke: var(--accent);
+.upload-icon{
+  width:64px;
+  height:64px;
+  margin:0 auto 16px;
+  background:var(--accent-soft);
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.btn {
-  background: var(--accent);
-  color: #fff;
-  padding: 14px 30px;
-  border-radius: 12px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 15px;
+.upload-icon svg{
+  width:32px;
+  height:32px;
+  stroke:var(--accent);
 }
 
-.btn.secondary {
-  background: #e5e7eb;
-  color: #111827;
+.file-info{
+  display:none;
+  text-align:left;
+  margin-top:10px;
 }
 
-.muted {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 12px;
+.file-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:#f9fafb;
+  border:1px solid var(--border-light);
+  border-radius:14px;
+  padding:12px 14px;
 }
 
-/* Progress */
-.progress-box {
-  display: none;
-  margin-top: 22px;
+.file-name{
+  font-size:14px;
+  font-weight:600;
+  color:#111827;
 }
 
-.progress-text {
-  font-size: 14px;
-  margin-bottom: 10px;
+.file-size{
+  font-size:13px;
+  color:var(--text-muted);
 }
 
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #e5e7eb;
-  border-radius: 20px;
-  overflow: hidden;
+.remove-btn{
+  background:none;
+  border:none;
+  color:#ef4444;
+  font-weight:600;
+  cursor:pointer;
 }
 
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--accent);
-  transition: width 0.4s ease;
+/* LEVEL CARD */
+.level-card{
+  margin-top:26px;
+  background:#fff;
+  border:1px solid var(--border-light);
+  border-radius:22px;
+  padding:22px;
 }
 
-/* Success */
-.success {
-  display: none;
-  margin-top: 40px;
-  background: #0b1220;
-  color: #e5e7eb;
-  border-radius: 24px;
-  padding: 40px 24px;
-  text-align: center;
+.level-title{
+  font-weight:700;
+  margin-bottom:14px;
 }
 
-.success h2 {
-  color: #22c55e;
-  margin-bottom: 8px;
+.level-option{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  border:1px solid var(--border-light);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+  cursor:pointer;
 }
 
-.stats {
-  display: flex;
-  justify-content: space-between;
-  margin: 22px 0;
-  font-size: 14px;
+.level-option input{
+  accent-color:var(--accent);
 }
 
-.stats div {
-  flex: 1;
-  text-align: center;
+.level-option.active{
+  border-color:var(--accent);
+  background:var(--accent-soft);
 }
 
-.stats strong {
-  display: block;
-  font-size: 18px;
-  color: #22c55e;
+.level-option strong{
+  display:block;
+  font-size:15px;
+}
+
+.level-option span{
+  font-size:13px;
+  color:var(--text-muted);
+}
+
+/* ACTION BUTTON */
+.action-btn{
+  margin-top:22px;
+  width:100%;
+}
+
+/* PROGRESS */
+.progress-box{
+  display:none;
+  margin-top:22px;
+}
+
+.progress-text{
+  font-size:14px;
+  margin-bottom:10px;
+}
+
+.progress-bar{
+  width:100%;
+  height:10px;
+  background:#e5e7eb;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:var(--accent);
+  transition:width .4s ease;
+}
+
+/* SUCCESS */
+.success{
+  display:none;
+  margin-top:40px;
+  background:#0b1220;
+  color:#e5e7eb;
+  border-radius:26px;
+  padding:40px 24px;
+  text-align:center;
+}
+
+.success h2{
+  color:#22c55e;
+  margin-bottom:8px;
+}
+
+.stats{
+  display:flex;
+  justify-content:space-between;
+  margin:22px 0;
+  font-size:14px;
+}
+
+.stats div{
+  flex:1;
+  text-align:center;
+}
+
+.stats strong{
+  display:block;
+  font-size:18px;
+  color:#22c55e;
 }
 </style>
 </head>
 
 <body>
 
-<!-- GLOBAL HEADER -->
 <div id="header-container"></div>
 
 <div class="page">
@@ -160,9 +228,8 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 </div>
 
 <!-- UPLOAD -->
-<div class="card" id="uploadCard">
-
-  <div class="icon">
+<div class="upload-card" id="uploadCard" onclick="openPicker()">
+  <div class="upload-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
       <path d="M12 3v12"/>
       <path d="M7 8l5-5 5 5"/>
@@ -170,80 +237,80 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
     </svg>
   </div>
 
-  <h3>Select PDF file to compress</h3>
-  <p class="muted">Upload your PDF and we will compress it instantly.</p>
+  <h3 id="uploadTitle">Click or tap to select PDF file</h3>
+  <p class="sub" id="uploadSub">Maximum file size: 100MB</p>
 
-  <!-- ✅ COMPRESSION LEVEL (NEW, SAFE ADDITION) -->
-  <div class="compress-levels">
-    <p class="level-title">Compression Level</p>
-
-    <div class="level-options">
-      <label class="level-option">
-        <input type="radio" name="level" checked>
-        <span>
-          <strong>Medium</strong>
-          <small>Recommended</small>
-        </span>
-      </label>
-
-      <label class="level-option">
-        <input type="radio" name="level">
-        <span>
-          <strong>Low</strong>
-          <small>Best quality</small>
-        </span>
-      </label>
-
-      <label class="level-option">
-        <input type="radio" name="level">
-        <span>
-          <strong>High</strong>
-          <small>Smaller size</small>
-        </span>
-      </label>
+  <div class="file-info" id="fileInfo">
+    <div class="file-row">
+      <div>
+        <div class="file-name" id="fileName"></div>
+        <div class="file-size" id="fileSize"></div>
+      </div>
+      <button class="remove-btn" onclick="removeFile(event)">Remove</button>
     </div>
   </div>
 
-  <!-- BUTTON -->
-  <button class="btn" onclick="startFakeCompress()">Choose PDF File</button>
+  <input type="file" id="fileInput" accept="application/pdf" hidden>
+</div>
 
-  <div class="muted">
-    Maximum file size: 100MB · Files deleted automatically
-  </div>
+<!-- LEVEL -->
+<div class="level-card">
+  <div class="level-title">Compression Level</div>
 
-  <div class="progress-box" id="progressBox">
-    <div class="progress-text" id="progressText">Uploading file…</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+  <label class="level-option active">
+    <input type="radio" name="level" checked>
+    <div>
+      <strong>Medium</strong>
+      <span>Recommended</span>
     </div>
-  </div>
+  </label>
 
+  <label class="level-option">
+    <input type="radio" name="level">
+    <div>
+      <strong>Low</strong>
+      <span>Best quality</span>
+    </div>
+  </label>
+
+  <label class="level-option">
+    <input type="radio" name="level">
+    <div>
+      <strong>High</strong>
+      <span>Smaller size</span>
+    </div>
+  </label>
+</div>
+
+<button class="btn btn-primary action-btn" id="compressBtn" disabled onclick="startCompress()">
+  Compress PDF
+</button>
+
+<!-- PROGRESS -->
+<div class="progress-box" id="progressBox">
+  <div class="progress-text" id="progressText">Uploading…</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
 </div>
 
 <!-- SUCCESS -->
 <div class="success" id="successBox">
   <h2>Your PDF is ready</h2>
-
   <div class="stats">
-    <div>
-      Original
-      <strong id="origSize">—</strong>
-    </div>
-    <div>
-      Compressed
-      <strong id="compSize">—</strong>
-    </div>
+    <div>Original<strong>2.4 MB</strong></div>
+    <div>Compressed<strong>1.1 MB</strong></div>
   </div>
 
-  <button class="btn" style="margin-bottom:14px;">
+  <button class="btn btn-primary" style="margin-bottom:14px;">
     Download Compressed PDF
   </button><br>
 
-  <button class="btn secondary" onclick="resetTool()">
+  <button class="btn btn-secondary" onclick="location.reload()">
     Compress another PDF
   </button>
 
-  <p class="muted" style="margin-top:18px;">
+  <p class="sub" style="margin-top:18px;">
     Encrypted processing · Automatic file deletion
   </p>
 </div>
@@ -256,42 +323,55 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 <a href="/pages/terms.html">Terms</a>
 </footer>
 
-<!-- HEADER LOADER -->
 <script src="/assets/js/header.js"></script>
 
-<!-- TOOL LOGIC -->
 <script>
-function startFakeCompress(){
-  const card=document.getElementById("uploadCard");
-  const box=document.getElementById("progressBox");
+const input=document.getElementById("fileInput");
+const info=document.getElementById("fileInfo");
+const nameEl=document.getElementById("fileName");
+const sizeEl=document.getElementById("fileSize");
+const btn=document.getElementById("compressBtn");
+
+function openPicker(){
+  input.click();
+}
+
+input.addEventListener("change",()=>{
+  const file=input.files[0];
+  if(!file) return;
+  nameEl.textContent=file.name;
+  sizeEl.textContent=(file.size/1024/1024).toFixed(2)+" MB";
+  info.style.display="block";
+  btn.disabled=false;
+});
+
+function removeFile(e){
+  e.stopPropagation();
+  input.value="";
+  info.style.display="none";
+  btn.disabled=true;
+}
+
+function startCompress(){
+  document.getElementById("progressBox").style.display="block";
+  let p=0;
   const fill=document.getElementById("progressFill");
   const text=document.getElementById("progressText");
-  const success=document.getElementById("successBox");
-
-  card.classList.add("locked");
-  box.style.display="block";
-
-  let p=0;
   const steps=["Uploading…","Analyzing…","Compressing…","Optimizing…"];
   let i=0;
 
-  const timer=setInterval(()=>{
+  const t=setInterval(()=>{
     p+=10;
     fill.style.width=p+"%";
     if(p%25===0 && steps[i]) text.innerText=steps[i++];
     if(p>=100){
-      clearInterval(timer);
+      clearInterval(t);
       setTimeout(()=>{
-        card.style.display="none";
-        success.style.display="block";
-        success.scrollIntoView({behavior:"smooth"});
+        document.getElementById("successBox").style.display="block";
+        document.getElementById("progressBox").style.display="none";
       },400);
     }
   },400);
-}
-
-function resetTool(){
-  location.reload();
 }
 </script>
 
