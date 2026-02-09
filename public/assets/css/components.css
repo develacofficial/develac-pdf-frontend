@@ -1,5 +1,5 @@
 /* ===============================
-   COMPONENTS – DEVELAC (FINAL v2)
+   COMPONENTS – DEVELAC (FINAL v3)
 ================================ */
 
 /* ---------- BUTTONS ---------- */
@@ -39,180 +39,105 @@
   text-align:center;
   font-size:32px;
   font-weight:800;
-  margin-bottom:44px;
+  margin-bottom:16px;
+}
+
+/* Section description (used in Blog & Why) */
+.section > p{
+  max-width:720px;
+  margin:0 auto 44px;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--text-muted);
+  text-align:center;
 }
 
 /* ===============================
-   TOOLS GRID (iLovePDF STYLE)
+   BLOG PAGE (PERFECT UI)
 ================================ */
 
-.tools-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
+.blog-page{
+  padding:64px 20px 80px;
 }
 
-@media(min-width:1024px){
-  .tools-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
+.blog-header{
+  text-align:left;
+  max-width:920px;
+  margin:0 auto 40px;
 }
 
-.tool-card{
-  background:#fff;
-  border:1px solid var(--border-light);
-  border-radius:26px;
-  padding:34px 18px;
-  text-align:center;
-  box-shadow:var(--shadow-sm);
-  transition:.25s ease;
-}
-
-.tool-card:hover{
-  transform:translateY(-6px);
-  box-shadow:var(--shadow-md);
-}
-
-/* ICON CONTAINER */
-.tool-icon{
-  width:64px;
-  height:64px;
-  border-radius:20px;
-  background:#F4F6FB;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 18px;
-}
-
-/* SVG ICON */
-.tool-icon img{
-  width:72px;
-  height:72px;
-}
-
-/* TOOL NAME (BLACK like iLovePDF) */
-.tool-name{
-  font-size:15.5px;
-  font-weight:700;
-  color:#111827; /* BLACK */
-  line-height:1.4;
-}
-
-/* ===============================
-   BLOG
-================================ */
-
-.home-blog{
-  padding:80px 20px;
-}
-
-.home-blog-header{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-.home-blog-header h2{
-  font-size:32px;
+.blog-header h1{
+  font-size:34px;
   font-weight:800;
   margin-bottom:10px;
 }
 
-.home-blog-header p{
+.blog-header p{
   font-size:17px;
   color:var(--text-muted);
 }
 
-.home-blog-scroll{
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  scroll-snap-type:x mandatory;
+/* BLOG LIST */
+.blog-list{
+  max-width:920px;
+  margin:0 auto;
+  display:grid;
+  gap:24px;
 }
 
-.home-blog-scroll::-webkit-scrollbar{
-  display:none;
-}
-
-.home-blog-list{
-  display:flex;
-  gap:20px;
-  width:max-content;
-  padding-bottom:10px;
-}
-
-.home-blog-card{
-  min-width:320px;
-  max-width:320px;
+/* BLOG CARD */
+.blog-card{
   background:#fff;
   border:1px solid var(--border-light);
   border-radius:24px;
-  overflow:hidden;
+  padding:26px 26px 24px;
   box-shadow:var(--shadow-sm);
-  scroll-snap-align:start;
+  transition:.25s ease;
 }
 
-.home-blog-thumb{
-  height:170px;
-  background-size:cover;
-  background-position:center;
+.blog-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
 }
 
-.home-blog-content{
-  padding:22px;
+/* TITLE */
+.blog-card h2{
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:10px;
+  line-height:1.35;
 }
 
-.home-blog-meta{
-  font-size:13px;
-  color:var(--text-muted);
-  margin-bottom:6px;
-}
-
-.home-blog-card h3{
-  font-size:17px;
-  margin-bottom:8px;
-  line-height:1.4;
-}
-
-.home-blog-card h3 a{
+.blog-card h2 a{
   color:#2563EB;
-  font-weight:700;
   text-decoration:none;
 }
 
-.home-blog-card p{
-  font-size:14.5px;
-  line-height:1.6;
+/* DESCRIPTION */
+.blog-card p{
+  font-size:15.5px;
+  line-height:1.65;
   color:var(--text-muted);
+  margin-bottom:14px;
 }
 
-.read-more{
-  display:inline-block;
-  margin-top:10px;
+/* READ MORE */
+.blog-card .read-more{
   font-weight:600;
   color:#2563EB;
-}
-
-.home-blog-cta{
-  margin-top:40px;
-  text-align:center;
+  font-size:15px;
+  text-decoration:none;
 }
 
 /* ===============================
-   WHY DEVELAC SECTION
+   WHY DEVELAC
 ================================ */
 
 .why-grid{
-  max-width:960px;
+  max-width:920px;
   margin:0 auto;
   display:grid;
-  gap:22px;
-}
-
-@media(min-width:768px){
-  .why-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+  gap:24px;
 }
 
 .why-card{
@@ -225,26 +150,12 @@
 
 .why-card h3{
   font-size:18px;
-  font-weight:700;
-  margin-bottom:8px;
-  color:#111827;
+  font-weight:800;
+  margin-bottom:6px;
 }
 
 .why-card p{
-  font-size:15px;
+  font-size:15.5px;
   line-height:1.6;
   color:var(--text-muted);
-   }
-/* ===============================
-   WHY CHOOSE DEVELAC – SPACING FIX
-================================ */
-
-/* Heading ke niche description spacing */
-.section > p{
-  max-width:720px;
-  margin:0 auto 40px;
-  font-size:17px;
-  line-height:1.7;
-  color:var(--text-muted);
-  text-align:center;
 }
