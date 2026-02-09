@@ -1,5 +1,5 @@
 /* ===============================
-   COMPONENTS – DEVELAC (FINAL v3)
+   COMPONENTS – DEVELAC (FINAL)
 ================================ */
 
 /* ---------- BUTTONS ---------- */
@@ -39,94 +39,163 @@
   text-align:center;
   font-size:32px;
   font-weight:800;
-  margin-bottom:16px;
-}
-
-/* Section description (used in Blog & Why) */
-.section > p{
-  max-width:720px;
-  margin:0 auto 44px;
-  font-size:17px;
-  line-height:1.7;
-  color:var(--text-muted);
-  text-align:center;
+  margin-bottom:18px;
 }
 
 /* ===============================
-   BLOG PAGE (PERFECT UI)
+   TOOLS GRID (iLovePDF STYLE)
 ================================ */
 
-.blog-page{
-  padding:64px 20px 80px;
-}
-
-.blog-header{
-  text-align:left;
-  max-width:920px;
-  margin:0 auto 40px;
-}
-
-.blog-header h1{
-  font-size:34px;
-  font-weight:800;
-  margin-bottom:10px;
-}
-
-.blog-header p{
-  font-size:17px;
-  color:var(--text-muted);
-}
-
-/* BLOG LIST */
-.blog-list{
-  max-width:920px;
-  margin:0 auto;
+.tools-grid{
   display:grid;
-  gap:24px;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
 }
 
-/* BLOG CARD */
-.blog-card{
+@media(min-width:1024px){
+  .tools-grid{
+    grid-template-columns:repeat(4,1fr);
+  }
+}
+
+.tool-card{
   background:#fff;
   border:1px solid var(--border-light);
-  border-radius:24px;
-  padding:26px 26px 24px;
+  border-radius:26px;
+  padding:34px 18px;
+  text-align:center;
   box-shadow:var(--shadow-sm);
   transition:.25s ease;
 }
 
-.blog-card:hover{
-  transform:translateY(-4px);
+.tool-card:hover{
+  transform:translateY(-6px);
   box-shadow:var(--shadow-md);
 }
 
-/* TITLE */
-.blog-card h2{
-  font-size:20px;
+/* ICON CONTAINER */
+.tool-icon{
+  width:64px;
+  height:64px;
+  border-radius:20px;
+  background:#F4F6FB;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 18px;
+}
+
+/* ICON IMAGE */
+.tool-icon img{
+  width:72px;
+  height:72px;
+}
+
+/* TOOL NAME */
+.tool-name{
+  font-size:15.5px;
+  font-weight:700;
+  color:#111827;
+  line-height:1.4;
+}
+
+/* ===============================
+   BLOG (HOME)
+================================ */
+
+.home-blog{
+  padding:80px 20px;
+}
+
+.home-blog-header{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.home-blog-header h2{
+  font-size:32px;
   font-weight:800;
   margin-bottom:10px;
-  line-height:1.35;
 }
 
-.blog-card h2 a{
+.home-blog-header p{
+  font-size:17px;
+  color:var(--text-muted);
+}
+
+.home-blog-scroll{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  scroll-snap-type:x mandatory;
+}
+
+.home-blog-scroll::-webkit-scrollbar{
+  display:none;
+}
+
+.home-blog-list{
+  display:flex;
+  gap:20px;
+  width:max-content;
+  padding-bottom:10px;
+}
+
+.home-blog-card{
+  min-width:320px;
+  max-width:320px;
+  background:#fff;
+  border:1px solid var(--border-light);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  scroll-snap-align:start;
+}
+
+.home-blog-thumb{
+  height:170px;
+  background-size:cover;
+  background-position:center;
+}
+
+.home-blog-content{
+  padding:22px;
+}
+
+.home-blog-meta{
+  font-size:13px;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+
+.home-blog-card h3{
+  font-size:17px;
+  margin-bottom:8px;
+  line-height:1.4;
+}
+
+.home-blog-card h3 a{
   color:#2563EB;
+  font-weight:700;
   text-decoration:none;
 }
 
-/* DESCRIPTION */
-.blog-card p{
-  font-size:15.5px;
-  line-height:1.65;
+.home-blog-card p{
+  font-size:14.5px;
+  line-height:1.6;
   color:var(--text-muted);
-  margin-bottom:14px;
 }
 
-/* READ MORE */
-.blog-card .read-more{
+.read-more{
+  display:inline-block;
+  margin-top:10px;
   font-weight:600;
   color:#2563EB;
-  font-size:15px;
-  text-decoration:none;
+}
+
+.home-blog-cta{
+  margin-top:40px;
+  text-align:center;
 }
 
 /* ===============================
@@ -134,10 +203,16 @@
 ================================ */
 
 .why-grid{
-  max-width:920px;
-  margin:0 auto;
+  max-width:960px;
+  margin:36px auto 0;
   display:grid;
-  gap:24px;
+  gap:22px;
+}
+
+@media(min-width:768px){
+  .why-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
 .why-card{
@@ -150,12 +225,27 @@
 
 .why-card h3{
   font-size:18px;
-  font-weight:800;
-  margin-bottom:6px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:#111827;
 }
 
 .why-card p{
-  font-size:15.5px;
+  font-size:15px;
   line-height:1.6;
   color:var(--text-muted);
+}
+
+/* ===============================
+   WHY CHOOSE DEVELAC – SAFE SPACING
+================================ */
+
+/* Sirf heading ke niche jo description hai uske liye */
+.section > .section-title + p{
+  max-width:720px;
+  margin:0 auto 32px;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--text-muted);
+  text-align:center;
 }
