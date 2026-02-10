@@ -1,113 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Split PDF – Develac</title>
+  <meta charset="UTF-8" />
+  <title>Split PDF – Develac</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- GLOBAL STYLES -->
-<link rel="stylesheet" href="/assets/css/theme.css">
-<link rel="stylesheet" href="/assets/css/layout.css">
-<link rel="stylesheet" href="/assets/css/components.css">
-<link rel="stylesheet" href="/assets/css/header.css">
+  <!-- GLOBAL STYLES -->
+  <link rel="stylesheet" href="/assets/css/theme.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/header.css">
 
-<style>
-/* TOOL-SPECIFIC STYLES */
+  <style>
+    .page {
+      max-width: 420px;
+      margin: auto;
+      padding: 24px 16px 40px;
+    }
 
-.page{
-  max-width:760px;
-  margin:auto;
-  padding:32px 18px;
-}
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
 
-h1{text-align:center;font-size:28px;margin-bottom:6px;}
-.sub{text-align:center;color:var(--text-muted);margin-bottom:30px;font-size:15px;}
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
 
-.card{
-  background:var(--bg-card);
-  border:2px dashed var(--border-light);
-  border-radius:20px;
-  padding:40px 20px;
-  text-align:center;
-}
+    /* CARD */
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 26px;
+      padding: 22px;
+      margin-bottom: 22px;
+    }
 
-.card.locked{opacity:.4;pointer-events:none;}
+    /* UPLOAD CARD */
+    .upload-card {
+      border: 2px dashed #e5e7eb;
+      border-radius: 26px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+    }
 
-.icon{
-  width:64px;height:64px;
-  margin:0 auto 18px;
-  background:var(--accent-soft);
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    .upload-card.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-.icon svg{width:32px;height:32px;stroke:var(--accent);}
+    .upload-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 16px;
+      background: #eef2ff;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.btn{
-  background:var(--accent);
-  color:#fff;
-  padding:14px 30px;
-  border-radius:12px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  font-size:15px;
-}
+    .upload-icon svg {
+      width: 30px;
+      height: 30px;
+      stroke: #2563eb;
+    }
 
-.btn.secondary{
-  background:#e5e7eb;
-  color:#111827;
-}
+    .upload-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
 
-.muted{font-size:13px;color:var(--text-muted);margin-top:12px;}
+    .upload-desc {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
 
-/* OPTIONS */
-.options{
-  margin:24px auto;
-  text-align:left;
-  max-width:360px;
-}
+    /* FILE ITEM */
+    .file-item {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 14px;
+      font-size: 14px;
+    }
 
-.option{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 0;
-  font-size:14px;
-}
+    .file-name {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
 
-/* PROGRESS */
-.progress-box{display:none;margin-top:22px;}
-.progress-text{font-size:14px;margin-bottom:10px;}
-.progress-bar{
-  width:100%;height:10px;
-  background:#e5e7eb;
-  border-radius:20px;
-  overflow:hidden;
-}
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:var(--accent);
-  transition:width .4s ease;
-}
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-weight: 600;
+      cursor: pointer;
+    }
 
-/* SUCCESS */
-.success{
-  display:none;
-  margin-top:40px;
-  background:#0b1220;
-  color:#e5e7eb;
-  border-radius:24px;
-  padding:40px 24px;
-  text-align:center;
-}
+    /* OPTIONS */
+    .option {
+      display: flex;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 2px solid #e5e7eb;
+      margin-bottom: 14px;
+      cursor: pointer;
+    }
 
-.success h2{color:#22c55e;margin-bottom:8px;}
-.success p{color:#cbd5e1;margin-bottom:22px;}
-</style>
+    .option.active {
+      border-color: #2563eb;
+      background: #eef2ff;
+    }
+
+    .range-input {
+      display: none;
+      margin-top: 12px;
+    }
+
+    .range-input input {
+      width: 100%;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 0 14px;
+      font-size: 14px;
+    }
+
+    /* BUTTON */
+    .btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .btn-primary:disabled {
+      background: #a5bdf6;
+      cursor: not-allowed;
+    }
+
+    /* PROGRESS */
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin: 16px 0 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 60%;
+      background: #2563eb;
+    }
+
+    /* SUCCESS */
+    .success {
+      background: #020617;
+      border-radius: 26px;
+      padding: 28px 22px;
+      color: #fff;
+      text-align: center;
+      display: none;
+    }
+
+    .success h2 {
+      color: #22c55e;
+      margin-bottom: 6px;
+    }
+
+    .btn-light {
+      background: #fff;
+      color: #0f172a;
+      margin-top: 12px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -117,112 +219,147 @@ h1{text-align:center;font-size:28px;margin-bottom:6px;}
 
 <div class="page">
 
-<h1>Split PDF</h1>
-<div class="sub">
-Split a PDF into multiple files. Fast, secure and privacy-first.
-</div>
-
-<!-- UPLOAD -->
-<div class="card" id="uploadCard">
-
-  <div class="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M12 3v12"/>
-      <path d="M7 8l5-5 5 5"/>
-      <rect x="4" y="15" width="16" height="6"/>
-    </svg>
+  <h1>Split PDF</h1>
+  <div class="subtitle">
+    Split a PDF into multiple files. Fast, secure and privacy-first.
   </div>
 
-  <h3>Select PDF file to split</h3>
-  <p class="muted">Upload your PDF and choose how to split it.</p>
+  <!-- UPLOAD -->
+  <div id="uploadCard" class="upload-card">
+    <div class="upload-icon">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
+      </svg>
+    </div>
 
-  <div class="options">
-    <label class="option">
-      <input type="radio" name="split" checked>
-      Split each page into separate PDF
-    </label>
-    <label class="option">
-      <input type="radio" name="split">
-      Split by page range
-    </label>
-  </div>
+    <div class="upload-title">Select PDF file to split</div>
+    <div class="upload-desc">Upload your PDF and choose how to split it.</div>
 
-  <button class="btn" onclick="startFakeSplit()">Choose PDF File</button>
+    <input id="fileInput" type="file" accept="application/pdf" />
 
-  <div class="muted">
-    Maximum file size: 100MB · Files deleted automatically
-  </div>
+    <div id="fileItem"></div>
 
-  <div class="progress-box" id="progressBox">
-    <div class="progress-text" id="progressText">Uploading file…</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+    <div class="upload-desc" style="margin-top:14px;">
+      Maximum file size: 100MB · Files deleted automatically
     </div>
   </div>
-</div>
 
-<!-- SUCCESS -->
-<div class="success" id="successBox">
-  <h2>Your PDF is split</h2>
-  <p>All pages were split successfully.</p>
+  <!-- OPTIONS -->
+  <div class="card">
+    <div id="optEach" class="option active">
+      <input type="radio" checked />
+      <div>Split each page into separate PDF</div>
+    </div>
 
-  <button class="btn" style="margin-bottom:14px;">
-    Download Split PDFs
-  </button><br>
+    <div id="optRange" class="option">
+      <input type="radio" />
+      <div>Split by page range</div>
+    </div>
 
-  <button class="btn secondary" onclick="resetTool()">
-    Split another PDF
+    <div id="rangeBox" class="range-input">
+      <input type="text" placeholder="Pages (example: 1-3, 5, 8-10)">
+    </div>
+  </div>
+
+  <button id="splitBtn" class="btn btn-primary" disabled>
+    Split PDF
   </button>
 
-  <p class="muted" style="margin-top:18px;">
-    Encrypted processing · Automatic file deletion
-  </p>
-</div>
+  <!-- PROGRESS -->
+  <div id="progress" style="display:none;">
+    <div class="progress-text">Splitting PDF...</div>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div id="success" class="success">
+    <h2>Your PDF is split</h2>
+    <p>All pages were split successfully.</p>
+
+    <button class="btn btn-primary">Download Split PDFs</button>
+    <button id="resetBtn" class="btn btn-light">Split another PDF</button>
+
+    <p style="margin-top:16px; font-size:14px; color:#94a3b8;">
+      Encrypted processing · Automatic file deletion
+    </p>
+  </div>
 
 </div>
 
-<footer class="footer">
-© 2026 Develac ·
-<a href="/pages/privacy.html">Privacy</a> ·
-<a href="/pages/terms.html">Terms</a>
+<footer class="site-footer">
+  © 2026 Develac ·
+  <a href="/pages/privacy.html">Privacy</a> ·
+  <a href="/pages/terms.html">Terms</a>
 </footer>
 
-<!-- HEADER LOADER -->
 <script src="/assets/js/header.js"></script>
 
-<!-- TOOL LOGIC -->
 <script>
-function startFakeSplit(){
-  const card=document.getElementById("uploadCard");
-  const box=document.getElementById("progressBox");
-  const fill=document.getElementById("progressFill");
-  const text=document.getElementById("progressText");
-  const success=document.getElementById("successBox");
+  const uploadCard = document.getElementById("uploadCard");
+  const fileInput = document.getElementById("fileInput");
+  const fileItem = document.getElementById("fileItem");
+  const splitBtn = document.getElementById("splitBtn");
+  const progress = document.getElementById("progress");
+  const success = document.getElementById("success");
+  const resetBtn = document.getElementById("resetBtn");
 
-  card.classList.add("locked");
-  box.style.display="block";
+  const optEach = document.getElementById("optEach");
+  const optRange = document.getElementById("optRange");
+  const rangeBox = document.getElementById("rangeBox");
 
-  const steps=["Uploading file…","Analyzing PDF…","Splitting pages…","Finalizing…"];
-  let p=0,i=0;
+  let file = null;
 
-  const timer=setInterval(()=>{
-    p+=10;
-    fill.style.width=p+"%";
-    if(p%25===0 && i<steps.length) text.innerText=steps[i++];
-    if(p>=100){
-      clearInterval(timer);
-      setTimeout(()=>{
-        card.style.display="none";
-        success.style.display="block";
-        success.scrollIntoView({behavior:"smooth"});
-      },400);
-    }
-  },400);
-}
+  uploadCard.onclick = () => fileInput.click();
 
-function resetTool(){
-  location.reload();
-}
+  fileInput.onchange = () => {
+    file = fileInput.files[0];
+    if (!file) return;
+
+    fileItem.innerHTML = `
+      <div class="file-item">
+        <span class="file-name">${file.name}</span>
+        <button class="remove-btn">Remove</button>
+      </div>
+    `;
+
+    fileItem.querySelector("button").onclick = () => {
+      file = null;
+      fileItem.innerHTML = "";
+      splitBtn.disabled = true;
+    };
+
+    splitBtn.disabled = false;
+  };
+
+  optEach.onclick = () => {
+    optEach.classList.add("active");
+    optRange.classList.remove("active");
+    rangeBox.style.display = "none";
+  };
+
+  optRange.onclick = () => {
+    optRange.classList.add("active");
+    optEach.classList.remove("active");
+    rangeBox.style.display = "block";
+  };
+
+  splitBtn.onclick = () => {
+    uploadCard.classList.add("disabled");
+    splitBtn.disabled = true;
+    progress.style.display = "block";
+
+    setTimeout(() => {
+      progress.style.display = "none";
+      uploadCard.style.display = "none";
+      splitBtn.style.display = "none";
+      success.style.display = "block";
+    }, 2000);
+  };
+
+  resetBtn.onclick = () => location.reload();
 </script>
 
 </body>
