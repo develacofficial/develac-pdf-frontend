@@ -5,228 +5,88 @@
   <title>Split PDF – Develac</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- GLOBAL STYLES -->
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/layout.css">
-  <link rel="stylesheet" href="/assets/css/components.css">
-  <link rel="stylesheet" href="/assets/css/header.css">
-
   <style>
-    .page {
-      max-width: 420px;
-      margin: auto;
-      padding: 24px 16px 40px;
-    }
+    * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
 
-    h1 {
-      font-size: 32px;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 8px;
-    }
+    body { margin: 0; background: #fff; color: #0f172a; }
 
-    .subtitle {
-      text-align: center;
-      font-size: 16px;
-      color: #64748b;
-      margin-bottom: 28px;
-    }
+    .container { max-width: 420px; margin: auto; padding: 24px 16px 40px; }
+
+    h1 { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+
+    .subtitle { text-align: center; font-size: 16px; color: #64748b; margin-bottom: 26px; }
 
     /* CARD */
-    .card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 26px;
-      padding: 22px;
-      margin-bottom: 22px;
-    }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 26px; padding: 22px; margin-bottom: 20px; }
 
-    /* UPLOAD CARD */
-    .upload-card {
-      border: 2px dashed #e5e7eb;
-      border-radius: 26px;
-      padding: 28px 20px;
-      text-align: center;
-      cursor: pointer;
-    }
+    /* UPLOAD */
+    .upload { border: 2px dashed #e5e7eb; border-radius: 26px; padding: 28px 20px; text-align: center; cursor: pointer; }
 
-    .upload-card.disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
+    .upload.disabled { pointer-events: none; }
 
-    .upload-icon {
-      width: 66px;
-      height: 66px;
-      margin: 0 auto 16px;
-      background: #eef2ff;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .icon { width: 64px; height: 64px; background: #eef2ff; border-radius: 18px; margin: auto; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
 
-    .upload-icon svg {
-      width: 30px;
-      height: 30px;
-      stroke: #2563eb;
-    }
+    .icon svg { width: 30px; height: 30px; stroke: #2563eb; }
 
-    .upload-title {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
+    .upload-title { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
 
-    .upload-desc {
-      font-size: 14px;
-      color: #64748b;
-      margin-bottom: 14px;
-    }
+    .upload-desc { font-size: 14px; color: #64748b; }
 
-    /* FILE ITEM */
-    .file-item {
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 12px 14px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 14px;
-      font-size: 14px;
-    }
+    /* FILE */
+    .file-item { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; margin-top: 14px; }
 
-    .file-name {
-      flex: 1;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+    .file-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; }
 
-    .remove-btn {
-      background: none;
-      border: none;
-      color: #ef4444;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .remove { background: none; border: none; color: #ef4444; font-weight: 600; cursor: pointer; }
 
     /* OPTIONS */
-    .option {
-      display: flex;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 2px solid #e5e7eb;
-      margin-bottom: 14px;
-      cursor: pointer;
-    }
+    .option { border: 2px solid #e5e7eb; border-radius: 18px; padding: 14px; display: flex; gap: 12px; align-items: center; margin-bottom: 12px; cursor: pointer; }
 
-    .option.active {
-      border-color: #2563eb;
-      background: #eef2ff;
-    }
+    .option.active { border-color: #2563eb; background: #eef2ff; }
 
-    .range-input {
-      display: none;
-      margin-top: 12px;
-    }
+    .range { display: none; margin-top: 12px; }
 
-    .range-input input {
-      width: 100%;
-      height: 44px;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-      padding: 0 14px;
-      font-size: 14px;
-    }
+    .range input { width: 100%; height: 44px; border-radius: 12px; border: 1px solid #e5e7eb; padding: 0 14px; font-size: 14px; }
 
     /* BUTTON */
-    .btn {
-      width: 100%;
-      height: 48px;
-      border-radius: 14px;
-      border: none;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .btn { width: 100%; height: 48px; border-radius: 14px; border: none; font-size: 16px; font-weight: 600; cursor: pointer; }
 
-    .btn-primary {
-      background: #2563eb;
-      color: #fff;
-    }
+    .btn-primary { background: #2563eb; color: #fff; }
 
-    .btn-primary:disabled {
-      background: #a5bdf6;
-      cursor: not-allowed;
-    }
+    .btn-primary:disabled { background: #a5bdf6; cursor: not-allowed; }
 
     /* PROGRESS */
-    .progress-text {
-      text-align: center;
-      font-size: 14px;
-      color: #64748b;
-      margin: 16px 0 8px;
-    }
+    .progress { display: none; margin-top: 16px; }
 
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      overflow: hidden;
-    }
+    .bar { width: 100%; height: 8px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
 
-    .progress-fill {
-      height: 100%;
-      width: 60%;
-      background: #2563eb;
-    }
+    .fill { width: 60%; height: 100%; background: #2563eb; }
 
     /* SUCCESS */
-    .success {
-      background: #020617;
-      border-radius: 26px;
-      padding: 28px 22px;
-      color: #fff;
-      text-align: center;
-      display: none;
-    }
+    .success { display: none; background: #020617; border-radius: 26px; padding: 28px 22px; color: #fff; text-align: center; margin-top: 24px; }
 
-    .success h2 {
-      color: #22c55e;
-      margin-bottom: 6px;
-    }
+    .success h2 { color: #22c55e; margin-bottom: 6px; }
 
-    .btn-light {
-      background: #fff;
-      color: #0f172a;
-      margin-top: 12px;
-    }
+    .btn-light { background: #fff; color: #0f172a; margin-top: 12px; }
 
-    input[type="file"] {
-      display: none;
-    }
+    footer { text-align: center; font-size: 14px; color: #64748b; margin-top: 28px; }
+
+    footer a { color: #2563eb; text-decoration: none; margin: 0 6px; }
+
+    input[type="file"] { display: none; }
   </style>
 </head>
 
 <body>
 
-<!-- GLOBAL HEADER -->
-<div id="header-container"></div>
-
-<div class="page">
+<div class="container">
 
   <h1>Split PDF</h1>
-  <div class="subtitle">
-    Split a PDF into multiple files. Fast, secure and privacy-first.
-  </div>
+  <div class="subtitle">Split a PDF into multiple files. Fast, secure and privacy-first.</div>
 
   <!-- UPLOAD -->
-  <div id="uploadCard" class="upload-card">
-    <div class="upload-icon">
+  <div id="upload" class="upload">
+    <div class="icon">
       <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round"
           d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
@@ -234,132 +94,102 @@
     </div>
 
     <div class="upload-title">Select PDF file to split</div>
-    <div class="upload-desc">Upload your PDF and choose how to split it.</div>
+    <div class="upload-desc">Maximum file size: 100MB</div>
 
-    <input id="fileInput" type="file" accept="application/pdf" />
-
-    <div id="fileItem"></div>
-
-    <div class="upload-desc" style="margin-top:14px;">
-      Maximum file size: 100MB · Files deleted automatically
-    </div>
+    <input id="fileInput" type="file" accept="application/pdf">
+    <div id="fileBox"></div>
   </div>
 
   <!-- OPTIONS -->
   <div class="card">
-    <div id="optEach" class="option active">
-      <input type="radio" checked />
-      <div>Split each page into separate PDF</div>
-    </div>
-
-    <div id="optRange" class="option">
-      <input type="radio" />
-      <div>Split by page range</div>
-    </div>
-
-    <div id="rangeBox" class="range-input">
-      <input type="text" placeholder="Pages (example: 1-3, 5, 8-10)">
+    <div id="each" class="option active">Split each page into separate PDF</div>
+    <div id="rangeOpt" class="option">Split by page range</div>
+    <div id="rangeBox" class="range">
+      <input id="rangeInput" placeholder="Pages (example: 1-3, 5, 8-10)">
     </div>
   </div>
 
-  <button id="splitBtn" class="btn btn-primary" disabled>
-    Split PDF
-  </button>
+  <button id="splitBtn" class="btn btn-primary" disabled>Split PDF</button>
 
-  <!-- PROGRESS -->
-  <div id="progress" style="display:none;">
-    <div class="progress-text">Splitting PDF...</div>
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
-    </div>
+  <div id="progress" class="progress">
+    <div style="text-align:center; font-size:14px; color:#64748b; margin-bottom:8px;">Splitting PDF…</div>
+    <div class="bar"><div class="fill"></div></div>
   </div>
 
-  <!-- SUCCESS -->
   <div id="success" class="success">
     <h2>Your PDF is split</h2>
     <p>All pages were split successfully.</p>
-
     <button class="btn btn-primary">Download Split PDFs</button>
-    <button id="resetBtn" class="btn btn-light">Split another PDF</button>
-
-    <p style="margin-top:16px; font-size:14px; color:#94a3b8;">
-      Encrypted processing · Automatic file deletion
-    </p>
+    <button id="reset" class="btn btn-light">Split another PDF</button>
   </div>
 
+  <footer>© 2026 Develac · <a href="#">Privacy</a> · <a href="#">Terms</a></footer>
 </div>
 
-<footer class="site-footer">
-  © 2026 Develac ·
-  <a href="/pages/privacy.html">Privacy</a> ·
-  <a href="/pages/terms.html">Terms</a>
-</footer>
-
-<script src="/assets/js/header.js"></script>
-
 <script>
-  const uploadCard = document.getElementById("uploadCard");
+  const upload = document.getElementById("upload");
   const fileInput = document.getElementById("fileInput");
-  const fileItem = document.getElementById("fileItem");
+  const fileBox = document.getElementById("fileBox");
   const splitBtn = document.getElementById("splitBtn");
   const progress = document.getElementById("progress");
   const success = document.getElementById("success");
-  const resetBtn = document.getElementById("resetBtn");
 
-  const optEach = document.getElementById("optEach");
-  const optRange = document.getElementById("optRange");
+  const each = document.getElementById("each");
+  const rangeOpt = document.getElementById("rangeOpt");
   const rangeBox = document.getElementById("rangeBox");
+  const rangeInput = document.getElementById("rangeInput");
 
   let file = null;
+  let mode = "each";
 
-  uploadCard.onclick = () => fileInput.click();
+  upload.onclick = () => fileInput.click();
 
   fileInput.onchange = () => {
     file = fileInput.files[0];
     if (!file) return;
 
-    fileItem.innerHTML = `
+    fileBox.innerHTML = `
       <div class="file-item">
-        <span class="file-name">${file.name}</span>
-        <button class="remove-btn">Remove</button>
+        <div class="file-name">${file.name}</div>
+        <button class="remove">Remove</button>
       </div>
     `;
 
-    fileItem.querySelector("button").onclick = () => {
+    fileBox.querySelector("button").onclick = () => {
       file = null;
-      fileItem.innerHTML = "";
+      fileBox.innerHTML = "";
       splitBtn.disabled = true;
     };
 
     splitBtn.disabled = false;
   };
 
-  optEach.onclick = () => {
-    optEach.classList.add("active");
-    optRange.classList.remove("active");
+  each.onclick = () => {
+    mode = "each";
+    each.classList.add("active");
+    rangeOpt.classList.remove("active");
     rangeBox.style.display = "none";
   };
 
-  optRange.onclick = () => {
-    optRange.classList.add("active");
-    optEach.classList.remove("active");
+  rangeOpt.onclick = () => {
+    mode = "range";
+    rangeOpt.classList.add("active");
+    each.classList.remove("active");
     rangeBox.style.display = "block";
   };
 
   splitBtn.onclick = () => {
-    uploadCard.classList.add("disabled");
+    upload.classList.add("disabled");
     splitBtn.disabled = true;
     progress.style.display = "block";
 
     setTimeout(() => {
       progress.style.display = "none";
-      uploadCard.style.display = "none";
-      splitBtn.style.display = "none";
       success.style.display = "block";
     }, 2000);
   };
 
-  resetBtn.onclick = () => location.reload();
+  document.getElementById("reset").onclick = () => location.reload();
 </script>
 
 </body>
