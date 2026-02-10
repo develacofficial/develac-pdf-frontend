@@ -268,16 +268,15 @@
       </div>
 
       <!-- OPTIONS -->
-      <div class="options">
-        <div id="optEach" class="option active">
-          <input type="radio" checked />
-          Split each page into separate PDF
-        </div>
+<div id="optEach" class="option active">
+  <input type="radio" name="splitType" value="each" checked />
+  <label>Split each page into separate PDF</label>
+</div>
 
-        <div id="optRange" class="option">
-          <input type="radio" />
-          Split by page range
-        </div>
+<div id="optRange" class="option">
+  <input type="radio" name="splitType" value="range" />
+  <label>Split by page range</label>
+</div>
 
         <div id="rangeInput" class="range-input">
           <input type="text" placeholder="Pages (example: 1-3, 5, 8-10)" />
@@ -319,67 +318,90 @@
   </div>
 
   <script>
-    const uploadCard = document.getElementById("uploadCard");
-    const fileInput = document.getElementById("fileInput");
-    const fileItem = document.getElementById("fileItem");
-    const splitBtn = document.getElementById("splitBtn");
-    const progressArea = document.getElementById("progressArea");
-    const successCard = document.getElementById("successCard");
-    const resetBtn = document.getElementById("resetBtn");
-    const mainArea = document.getElementById("mainArea");
+  const uploadCard = document.getElementById("uploadCard");
+  const fileInput = document.getElementById("fileInput");
+  const fileItem = document.getElementById("fileItem");
+  const splitBtn = document.getElementById("splitBtn");
+  const progressArea = document.getElementById("progressArea");
+  const successCard = document.getElementById("successCard");
+  const resetBtn = document.getElementById("resetBtn");
+  const mainArea = document.getElementById("mainArea");
 
-    const optEach = document.getElementById("optEach");
-    const optRange = document.getElementById("optRange");
-    const rangeInput = document.getElementById("rangeInput");
+  const optEach = document.getElementById("optEach");
+  const optRange = document.getElementById("optRange");
+  const rangeInput = document.getElementById("rangeInput");
 
-    let file = null;
+  const radioEach = optEach.querySelector('input[type="radio"]');
+  const radioRange = optRange.querySelector('input[type="radio"]');
 
-    uploadCard.onclick = () => fileInput.click();
+  let file = null;
 
-    fileInput.onchange = () => {
-      file = fileInput.files[0];
-      if (!file) return;
+  /* ---------- FILE UPLOAD ---------- */
+  uploadCard.onclick = () => fileInput.click();
 
-      fileItem.innerHTML = `
-        <div class="file-item">
-          <span>${file.name}</span>
-          <button class="remove-btn">Remove</button>
-        </div>
-      `;
-      fileItem.querySelector("button").onclick = () => {
-        file = null;
-        fileItem.innerHTML = "";
-        splitBtn.disabled = true;
-      };
-      splitBtn.disabled = false;
+  fileInput.onchange = () => {
+    file = fileInput.files[0];
+    if (!file) return;
+
+    fileItem.innerHTML = `
+      <div class="file-item">
+        <span>${file.name}</span>
+        <button class="remove-btn">Remove</button>
+      </div>
+    `;
+
+    fileItem.querySelector("button").onclick = () => {
+      file = null;
+      fileInput.value = "";
+      fileItem.innerHTML = "";
+      splitBtn.disabled = true;
     };
 
-    optEach.onclick = () => {
+    splitBtn.disabled = false;
+  };
+
+  /* ---------- OPTION SELECTION (FIXED) ---------- */
+  function updateOptions() {
+    if (radioEach.checked) {
       optEach.classList.add("active");
       optRange.classList.remove("active");
       rangeInput.style.display = "none";
-    };
-
-    optRange.onclick = () => {
+    } else {
       optRange.classList.add("active");
       optEach.classList.remove("active");
       rangeInput.style.display = "block";
-    };
+    }
+  }
 
-    splitBtn.onclick = () => {
-      uploadCard.classList.add("disabled");
-      splitBtn.disabled = true;
-      progressArea.style.display = "block";
+  optEach.onclick = () => {
+    radioEach.checked = true;
+    updateOptions();
+  };
 
-      setTimeout(() => {
-        mainArea.style.display = "none";
-        progressArea.style.display = "none";
-        successCard.style.display = "block";
-      }, 2000);
-    };
+  optRange.onclick = () => {
+    radioRange.checked = true;
+    updateOptions();
+  };
 
-    resetBtn.onclick = () => location.reload();
-  </script>
+  radioEach.onchange = updateOptions;
+  radioRange.onchange = updateOptions;
+
+  /* ---------- SPLIT ACTION ---------- */
+  splitBtn.onclick = () => {
+    uploadCard.classList.add("disabled");
+    splitBtn.disabled = true;
+    progressArea.style.display = "block";
+
+    setTimeout(() => {
+      mainArea.style.display = "none";
+      progressArea.style.display = "none";
+      successCard.style.display = "block";
+    }, 2000);
+  };
+
+  /* ---------- RESET ---------- */
+  resetBtn.onclick = () => location.reload();
+</script>
 
 </body>
 </html>
