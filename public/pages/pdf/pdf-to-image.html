@@ -1,216 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PDF to Image – Develac</title>
+  <meta charset="UTF-8" />
+  <title>PDF to Image – Develac</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- GLOBAL STYLES -->
-<link rel="stylesheet" href="/assets/css/theme.css">
-<link rel="stylesheet" href="/assets/css/layout.css">
-<link rel="stylesheet" href="/assets/css/components.css">
-<link rel="stylesheet" href="/assets/css/header.css">
+  <!-- GLOBAL HEADER -->
+  <link rel="stylesheet" href="/assets/css/header.css" />
+  <script src="/assets/js/header.js" defer></script>
 
-<style>
-/* TOOL-SPECIFIC STYLES */
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-.page{
-  max-width:760px;
-  margin:auto;
-  padding:32px 18px;
-}
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: #0f172a;
+    }
 
-h1{text-align:center;font-size:28px;margin-bottom:6px;}
-.sub{text-align:center;color:var(--text-muted);margin-bottom:30px;font-size:15px;}
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
+    }
 
-.card{
-  background:var(--bg-card);
-  border:2px dashed var(--border-light);
-  border-radius:20px;
-  padding:40px 20px;
-  text-align:center;
-}
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 8px;
+    }
 
-.card.locked{opacity:.4;pointer-events:none;}
+    .subtitle {
+      text-align: center;
+      font-size: 16px;
+      color: #64748b;
+      margin-bottom: 28px;
+    }
 
-.icon{
-  width:64px;height:64px;
-  margin:0 auto 18px;
-  background:var(--accent-soft);
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
+    /* UPLOAD CARD */
+    .upload-card {
+      border: 2px dashed #e5e7eb;
+      border-radius: 26px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 22px;
+    }
 
-.icon svg{width:32px;height:32px;stroke:var(--accent);}
+    .upload-card.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
 
-.btn{
-  background:var(--accent);
-  color:#fff;
-  padding:14px 30px;
-  border-radius:12px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  font-size:15px;
-}
+    .upload-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 16px;
+      background: #eef2ff;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.btn.secondary{
-  background:#e5e7eb;
-  color:#111827;
-}
+    .upload-icon svg {
+      width: 30px;
+      height: 30px;
+      stroke: #2563eb;
+    }
 
-.muted{font-size:13px;color:var(--text-muted);margin-top:12px;}
+    .upload-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
 
-/* OPTIONS */
-.options{
-  margin:22px 0;
-  display:flex;
-  justify-content:center;
-  gap:16px;
-  font-size:14px;
-}
+    .upload-desc {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
 
-/* PROGRESS */
-.progress-box{display:none;margin-top:22px;}
-.progress-text{font-size:14px;margin-bottom:10px;}
-.progress-bar{
-  width:100%;height:10px;
-  background:#e5e7eb;
-  border-radius:20px;
-  overflow:hidden;
-}
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:var(--accent);
-  transition:width .4s ease;
-}
+    .file-item {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-top: 12px;
+    }
 
-/* SUCCESS */
-.success{
-  display:none;
-  margin-top:40px;
-  background:#0b1220;
-  color:#e5e7eb;
-  border-radius:24px;
-  padding:40px 24px;
-  text-align:center;
-}
-.success h2{color:#22c55e;margin-bottom:8px;}
-.success p{color:#cbd5e1;margin-bottom:22px;}
-</style>
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* FORMAT OPTIONS */
+    .options {
+      border: 1px solid #e5e7eb;
+      border-radius: 26px;
+      padding: 18px;
+      margin-bottom: 22px;
+    }
+
+    .option {
+      border: 2px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 12px;
+    }
+
+    .option:last-child {
+      margin-bottom: 0;
+    }
+
+    .option.active {
+      border-color: #2563eb;
+      background: #eef2ff;
+    }
+
+    .option input {
+      accent-color: #2563eb;
+    }
+
+    /* BUTTON */
+    .btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+    }
+
+    .btn-primary:disabled {
+      background: #a5bdf6;
+      cursor: not-allowed;
+    }
+
+    /* PROGRESS */
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 40%;
+      background: #2563eb;
+    }
+
+    /* SUCCESS */
+    .success-card {
+      background: #020617;
+      border-radius: 26px;
+      padding: 28px 22px;
+      color: #ffffff;
+      text-align: center;
+      display: none;
+    }
+
+    .success-title {
+      color: #22c55e;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .success-sub {
+      color: #86efac;
+      font-size: 16px;
+      margin-bottom: 22px;
+    }
+
+    .btn-light {
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 28px;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- GLOBAL HEADER -->
-<div id="header-container"></div>
+  <!-- GLOBAL HEADER -->
+  <div id="header-container"></div>
 
-<div class="page">
+  <div class="container">
 
-<h1>PDF to Image</h1>
-<div class="sub">
-Convert PDF pages to JPG or PNG images. Fast, secure and privacy-first.
-</div>
-
-<!-- UPLOAD -->
-<div class="card" id="uploadCard">
-
-  <div class="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <rect x="3" y="3" width="18" height="18"/>
-      <circle cx="9" cy="9" r="2"/>
-      <path d="M21 15l-5-5-4 4-2-2-5 5"/>
-    </svg>
-  </div>
-
-  <h3>Select PDF file</h3>
-  <p class="muted">Each page will be converted into an image.</p>
-
-  <div class="options">
-    <label><input type="radio" name="format" checked> JPG</label>
-    <label><input type="radio" name="format"> PNG</label>
-  </div>
-
-  <button class="btn" onclick="startFakeConvert()">Choose PDF File</button>
-
-  <div class="muted">
-    Maximum file size: 100MB · Files deleted automatically
-  </div>
-
-  <div class="progress-box" id="progressBox">
-    <div class="progress-text" id="progressText">Uploading file…</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
+    <h1>PDF to Image</h1>
+    <div class="subtitle">
+      Convert PDF pages to JPG or PNG images. Fast, secure and privacy-first.
     </div>
+
+    <!-- MAIN AREA -->
+    <div id="mainArea">
+
+      <!-- UPLOAD CARD -->
+      <div id="uploadCard" class="upload-card">
+        <div class="upload-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M4 16l4-4m0 0l4 4m-4-4v12" />
+          </svg>
+        </div>
+        <div class="upload-title">Select PDF file</div>
+        <div class="upload-desc">Maximum file size: 100MB</div>
+
+        <input id="fileInput" type="file" accept="application/pdf" />
+        <div id="fileItem"></div>
+      </div>
+
+      <!-- FORMAT OPTIONS -->
+      <div class="options">
+        <div id="optJpg" class="option active">
+          <input type="radio" name="format" checked />
+          <label>JPG</label>
+        </div>
+
+        <div id="optPng" class="option">
+          <input type="radio" name="format" />
+          <label>PNG</label>
+        </div>
+      </div>
+
+      <button id="convertBtn" class="btn btn-primary" disabled>
+        Convert to Image
+      </button>
+
+      <!-- PROGRESS -->
+      <div id="progressArea" style="display:none;">
+        <div class="progress-text">Converting PDF...</div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="successCard" class="success-card">
+      <div class="success-title">Images are ready</div>
+      <div class="success-sub">All PDF pages were converted successfully.</div>
+
+      <button class="btn btn-primary">Download Images</button>
+      <button id="resetBtn" class="btn btn-light">Convert another PDF</button>
+
+      <div style="margin-top:16px; font-size:14px; color:#94a3b8;">
+        Encrypted processing · Automatic file deletion
+      </div>
+    </div>
+
+    <footer>
+      © 2026 Develac ·
+      <a href="#">Privacy</a> ·
+      <a href="#">Terms</a>
+    </footer>
+
   </div>
-</div>
 
-<!-- SUCCESS -->
-<div class="success" id="successBox">
-  <h2>Images are ready</h2>
-  <p>All PDF pages were converted successfully.</p>
+  <script>
+    const uploadCard = document.getElementById("uploadCard");
+    const fileInput = document.getElementById("fileInput");
+    const fileItem = document.getElementById("fileItem");
+    const convertBtn = document.getElementById("convertBtn");
+    const progressArea = document.getElementById("progressArea");
+    const successCard = document.getElementById("successCard");
+    const resetBtn = document.getElementById("resetBtn");
+    const mainArea = document.getElementById("mainArea");
 
-  <button class="btn" style="margin-bottom:14px;">
-    Download Images
-  </button><br>
+    const optJpg = document.getElementById("optJpg");
+    const optPng = document.getElementById("optPng");
+    const radioJpg = optJpg.querySelector("input");
+    const radioPng = optPng.querySelector("input");
 
-  <button class="btn secondary" onclick="resetTool()">
-    Convert another PDF
-  </button>
+    let file = null;
 
-  <p class="muted" style="margin-top:18px;">
-    Encrypted processing · Automatic file deletion
-  </p>
-</div>
+    /* UPLOAD */
+    uploadCard.onclick = () => fileInput.click();
 
-</div>
+    fileInput.onchange = () => {
+      file = fileInput.files[0];
+      if (!file) return;
 
-<footer class="footer">
-© 2026 Develac ·
-<a href="/pages/privacy.html">Privacy</a> ·
-<a href="/pages/terms.html">Terms</a>
-</footer>
+      fileItem.innerHTML = `
+        <div class="file-item">
+          <span>${file.name}</span>
+          <button class="remove-btn">Remove</button>
+        </div>
+      `;
 
-<!-- HEADER LOADER -->
-<script src="/assets/js/header.js"></script>
+      fileItem.querySelector("button").onclick = () => {
+        file = null;
+        fileInput.value = "";
+        fileItem.innerHTML = "";
+        convertBtn.disabled = true;
+      };
 
-<!-- TOOL LOGIC -->
-<script>
-function startFakeConvert(){
-  const card=document.getElementById("uploadCard");
-  const box=document.getElementById("progressBox");
-  const fill=document.getElementById("progressFill");
-  const text=document.getElementById("progressText");
-  const success=document.getElementById("successBox");
+      convertBtn.disabled = false;
+    };
 
-  card.classList.add("locked");
-  box.style.display="block";
-
-  const steps=["Uploading PDF…","Rendering pages…","Converting to images…","Finalizing…"];
-  let p=0,i=0;
-
-  const timer=setInterval(()=>{
-    p+=10;
-    fill.style.width=p+"%";
-    if(p%25===0 && i<steps.length) text.innerText=steps[i++];
-    if(p>=100){
-      clearInterval(timer);
-      setTimeout(()=>{
-        card.style.display="none";
-        success.style.display="block";
-        success.scrollIntoView({behavior:"smooth"});
-      },400);
+    /* FORMAT SELECTION */
+    function updateFormat() {
+      if (radioJpg.checked) {
+        optJpg.classList.add("active");
+        optPng.classList.remove("active");
+      } else {
+        optPng.classList.add("active");
+        optJpg.classList.remove("active");
+      }
     }
-  },400);
-}
 
-function resetTool(){
-  location.reload();
-}
-</script>
+    optJpg.onclick = () => {
+      radioJpg.checked = true;
+      updateFormat();
+    };
+
+    optPng.onclick = () => {
+      radioPng.checked = true;
+      updateFormat();
+    };
+
+    /* CONVERT */
+    convertBtn.onclick = () => {
+      uploadCard.classList.add("disabled");
+      convertBtn.disabled = true;
+      progressArea.style.display = "block";
+
+      setTimeout(() => {
+        mainArea.style.display = "none";
+        progressArea.style.display = "none";
+        successCard.style.display = "block";
+      }, 2000);
+    };
+
+    resetBtn.onclick = () => location.reload();
+  </script>
 
 </body>
 </html>
