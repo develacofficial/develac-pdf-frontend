@@ -5,6 +5,10 @@
   <title>Split PDF – Develac</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- GLOBAL HEADER -->
+  <link rel="stylesheet" href="/assets/css/header.css" />
+  <script src="/assets/js/header.js" defer></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -17,22 +21,6 @@
       color: #0f172a;
     }
 
-    /* ---------- HEADER ---------- */
-    .header {
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      border-bottom: 1px solid #e5e7eb;
-      font-weight: 600;
-    }
-
-    .header span {
-      font-size: 18px;
-    }
-
-    /* ---------- CONTAINER ---------- */
     .container {
       max-width: 420px;
       margin: 0 auto;
@@ -53,13 +41,19 @@
       margin-bottom: 28px;
     }
 
-    /* ---------- UPLOAD CARD ---------- */
+    /* UPLOAD CARD */
     .upload-card {
       border: 2px dashed #e5e7eb;
       border-radius: 26px;
       padding: 28px 20px;
       text-align: center;
       cursor: pointer;
+      margin-bottom: 22px;
+    }
+
+    .upload-card.disabled {
+      opacity: 0.5;
+      pointer-events: none;
     }
 
     .upload-icon {
@@ -88,17 +82,19 @@
     .upload-desc {
       font-size: 14px;
       color: #64748b;
+      margin-bottom: 12px;
     }
 
     .file-item {
-      margin-top: 14px;
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 12px 14px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-size: 14px;
+      margin-top: 12px;
     }
 
     .remove-btn {
@@ -109,22 +105,22 @@
       cursor: pointer;
     }
 
-    /* ---------- OPTIONS ---------- */
+    /* OPTIONS */
     .options {
-      margin-top: 18px;
       border: 1px solid #e5e7eb;
-      border-radius: 22px;
-      padding: 14px;
+      border-radius: 26px;
+      padding: 18px;
+      margin-bottom: 22px;
     }
 
     .option {
       border: 2px solid #e5e7eb;
       border-radius: 18px;
       padding: 14px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
       margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       cursor: pointer;
     }
 
@@ -133,20 +129,23 @@
       background: #eef2ff;
     }
 
+    .option input {
+      accent-color: #2563eb;
+    }
+
     .range-input {
       display: none;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .range-input input {
       width: 100%;
-      height: 44px;
-      border-radius: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
       border: 1px solid #e5e7eb;
-      padding: 0 12px;
+      font-size: 14px;
     }
 
-    /* ---------- BUTTON ---------- */
     .btn {
       width: 100%;
       height: 48px;
@@ -154,17 +153,69 @@
       border: none;
       font-size: 16px;
       font-weight: 600;
-      margin-top: 18px;
       cursor: pointer;
+      margin-bottom: 16px;
     }
 
     .btn-primary {
       background: #2563eb;
-      color: #fff;
+      color: #ffffff;
     }
 
     .btn-primary:disabled {
       background: #a5bdf6;
+      cursor: not-allowed;
+    }
+
+    /* PROGRESS */
+    .progress-text {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 40%;
+      background: #2563eb;
+    }
+
+    /* SUCCESS */
+    .success-card {
+      background: #020617;
+      border-radius: 26px;
+      padding: 28px 22px;
+      color: #ffffff;
+      text-align: center;
+      display: none;
+    }
+
+    .success-title {
+      color: #22c55e;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .success-sub {
+      color: #86efac;
+      font-size: 16px;
+      margin-bottom: 22px;
+    }
+
+    .btn-light {
+      background: #ffffff;
+      color: #0f172a;
     }
 
     footer {
@@ -180,8 +231,7 @@
       margin: 0 6px;
     }
 
-    input[type="file"],
-    input[type="radio"] {
+    input[type="file"] {
       display: none;
     }
   </style>
@@ -189,12 +239,8 @@
 
 <body>
 
-  <!-- HEADER -->
-  <div class="header">
-    ←
-    <span>Develac</span>
-    ☰
-  </div>
+  <!-- GLOBAL HEADER -->
+  <div id="header-container"></div>
 
   <div class="container">
 
@@ -203,42 +249,66 @@
       Split a PDF into multiple files. Fast, secure and privacy-first.
     </div>
 
-    <!-- UPLOAD -->
-    <div id="uploadCard" class="upload-card">
-      <div class="upload-icon">
-        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
-        </svg>
+    <!-- MAIN AREA -->
+    <div id="mainArea">
+
+      <!-- UPLOAD -->
+      <div id="uploadCard" class="upload-card">
+        <div class="upload-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
+          </svg>
+        </div>
+        <div class="upload-title">Select PDF file to split</div>
+        <div class="upload-desc">Maximum file size: 100MB</div>
+
+        <input id="fileInput" type="file" accept="application/pdf" />
+        <div id="fileItem"></div>
       </div>
 
-      <div class="upload-title">Select PDF file to split</div>
-      <div class="upload-desc">Maximum file size: 100MB</div>
+      <!-- OPTIONS -->
+      <div class="options">
+        <div id="optEach" class="option active">
+          <input type="radio" checked />
+          Split each page into separate PDF
+        </div>
 
-      <input id="fileInput" type="file" accept="application/pdf" />
-      <div id="fileItem"></div>
+        <div id="optRange" class="option">
+          <input type="radio" />
+          Split by page range
+        </div>
+
+        <div id="rangeInput" class="range-input">
+          <input type="text" placeholder="Pages (example: 1-3, 5, 8-10)" />
+        </div>
+      </div>
+
+      <button id="splitBtn" class="btn btn-primary" disabled>
+        Split PDF
+      </button>
+
+      <div id="progressArea" style="display:none;">
+        <div class="progress-text">Splitting PDF...</div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- OPTIONS -->
-    <div class="options">
-      <div id="optEach" class="option active">
-        <input type="radio" name="splitMode" checked />
-        Split each page into separate PDF
-      </div>
+    <!-- SUCCESS -->
+    <div id="successCard" class="success-card">
+      <div class="success-title">Your PDF is split</div>
+      <div class="success-sub">All pages were split successfully.</div>
 
-      <div id="optRange" class="option">
-        <input type="radio" name="splitMode" />
-        Split by page range
-      </div>
+      <button class="btn btn-primary">Download Split PDFs</button>
+      <button id="resetBtn" class="btn btn-light">Split another PDF</button>
 
-      <div id="rangeInput" class="range-input">
-        <input type="text" placeholder="Pages (example: 1-3, 5, 8-10)">
+      <div style="margin-top:16px; font-size:14px; color:#94a3b8;">
+        Encrypted processing · Automatic file deletion
       </div>
     </div>
-
-    <button id="splitBtn" class="btn btn-primary" disabled>
-      Split PDF
-    </button>
 
     <footer>
       © 2026 Develac ·
@@ -253,15 +323,21 @@
     const fileInput = document.getElementById("fileInput");
     const fileItem = document.getElementById("fileItem");
     const splitBtn = document.getElementById("splitBtn");
+    const progressArea = document.getElementById("progressArea");
+    const successCard = document.getElementById("successCard");
+    const resetBtn = document.getElementById("resetBtn");
+    const mainArea = document.getElementById("mainArea");
 
     const optEach = document.getElementById("optEach");
     const optRange = document.getElementById("optRange");
     const rangeInput = document.getElementById("rangeInput");
 
+    let file = null;
+
     uploadCard.onclick = () => fileInput.click();
 
     fileInput.onchange = () => {
-      const file = fileInput.files[0];
+      file = fileInput.files[0];
       if (!file) return;
 
       fileItem.innerHTML = `
@@ -270,12 +346,11 @@
           <button class="remove-btn">Remove</button>
         </div>
       `;
-
       fileItem.querySelector("button").onclick = () => {
+        file = null;
         fileItem.innerHTML = "";
         splitBtn.disabled = true;
       };
-
       splitBtn.disabled = false;
     };
 
@@ -290,6 +365,20 @@
       optEach.classList.remove("active");
       rangeInput.style.display = "block";
     };
+
+    splitBtn.onclick = () => {
+      uploadCard.classList.add("disabled");
+      splitBtn.disabled = true;
+      progressArea.style.display = "block";
+
+      setTimeout(() => {
+        mainArea.style.display = "none";
+        progressArea.style.display = "none";
+        successCard.style.display = "block";
+      }, 2000);
+    };
+
+    resetBtn.onclick = () => location.reload();
   </script>
 
 </body>
