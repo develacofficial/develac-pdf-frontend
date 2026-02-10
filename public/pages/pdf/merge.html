@@ -5,6 +5,10 @@
   <title>Merge PDF – Develac</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- GLOBAL HEADER -->
+  <link rel="stylesheet" href="/assets/css/header.css" />
+  <script src="/assets/js/header.js" defer></script>
+
   <style>
     * {
       box-sizing: border-box;
@@ -214,6 +218,10 @@
 </head>
 
 <body>
+
+  <!-- GLOBAL HEADER -->
+  <div id="header-container"></div>
+
   <div class="container">
 
     <h1>Merge PDF</h1>
@@ -237,12 +245,10 @@
       <div id="fileList" class="file-list"></div>
     </div>
 
-    <!-- MERGE BUTTON -->
     <button id="mergeBtn" class="btn btn-primary" disabled>
       Merge PDF
     </button>
 
-    <!-- PROGRESS -->
     <div id="progressArea" style="display:none;">
       <div class="progress-text">Merging PDFs...</div>
       <div class="progress-bar">
@@ -250,7 +256,6 @@
       </div>
     </div>
 
-    <!-- SUCCESS -->
     <div id="successCard" class="success-card">
       <div class="success-title">Your PDFs are merged</div>
       <div class="success-sub">All selected files combined successfully.</div>
@@ -296,7 +301,6 @@
 
     function renderFiles() {
       fileList.innerHTML = "";
-
       files.forEach((file, index) => {
         const div = document.createElement("div");
         div.className = "file-item";
@@ -310,7 +314,6 @@
         };
         fileList.appendChild(div);
       });
-
       mergeBtn.disabled = files.length < 2;
     }
 
