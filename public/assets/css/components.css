@@ -43,15 +43,23 @@
 }
 
 /* ===============================
-   TOOLS GRID (iLovePDF STYLE)
+   TOOLS GRID (RESPONSIVE FINAL)
 ================================ */
 
 .tools-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr); /* Mobile: 2 */
   gap:22px;
 }
 
+/* Tablet */
+@media(min-width:768px){
+  .tools-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Desktop */
 @media(min-width:1024px){
   .tools-grid{
     grid-template-columns:repeat(4,1fr);
