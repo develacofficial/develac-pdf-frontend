@@ -31,26 +31,25 @@
       font-size: 32px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
       font-size: 16px;
-      line-height: 1.6;
       color: #64748b;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
+      line-height: 1.5;
     }
 
-    /* ---------- UPLOAD CARD ---------- */
+    /* UPLOAD CARD */
     .upload-card {
       border: 2px dashed #e5e7eb;
       border-radius: 26px;
-      padding: 30px 20px;
+      padding: 28px 20px;
       text-align: center;
       cursor: pointer;
-      margin-bottom: 22px;
-      transition: background 0.2s, opacity 0.2s;
+      margin-bottom: 18px;
     }
 
     .upload-card.disabled {
@@ -59,19 +58,19 @@
     }
 
     .upload-icon {
-      width: 68px;
-      height: 68px;
+      width: 64px;
+      height: 64px;
       margin: 0 auto 16px;
       background: #eef2ff;
-      border-radius: 20px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .upload-icon svg {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       stroke: #2563eb;
     }
 
@@ -84,32 +83,26 @@
     .upload-desc {
       font-size: 14px;
       color: #64748b;
-      margin-bottom: 14px;
     }
 
-    .file-list {
-      margin-top: 14px;
-      text-align: left;
-    }
-
+    /* FILE ITEM */
     .file-item {
+      margin-top: 14px;
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 12px 14px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 10px;
       font-size: 14px;
-      margin-bottom: 10px;
     }
 
     .file-name {
       flex: 1;
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
       text-overflow: ellipsis;
-      margin-right: 10px;
     }
 
     .remove-btn {
@@ -120,48 +113,49 @@
       cursor: pointer;
     }
 
-    /* ---------- FORMAT OPTIONS ---------- */
-    .options {
-      border: 1px solid #e5e7eb;
-      border-radius: 26px;
-      padding: 18px;
-      margin-bottom: 22px;
+    /* FORMAT OPTIONS */
+    .format-box {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 10px;
+      margin-bottom: 18px;
     }
 
-    .option {
-      border: 2px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 14px;
+    .format-option {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 2px solid #e5e7eb;
+      font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .option:last-child {
+    .format-option:last-child {
       margin-bottom: 0;
     }
 
-    .option.active {
+    .format-option.active {
       border-color: #2563eb;
       background: #eef2ff;
     }
 
-    .option input {
-      accent-color: #2563eb;
+    .format-option input {
+      pointer-events: none;
     }
 
-    /* ---------- BUTTON ---------- */
+    /* BUTTONS */
     .btn {
       width: 100%;
-      height: 52px;
+      height: 50px;
       border-radius: 16px;
       border: none;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      margin-bottom: 16px;
     }
 
     .btn-primary {
@@ -174,12 +168,17 @@
       cursor: not-allowed;
     }
 
-    /* ---------- PROGRESS ---------- */
+    /* PROGRESS */
+    .progress-area {
+      margin-top: 16px;
+      display: none;
+    }
+
     .progress-text {
-      text-align: center;
       font-size: 14px;
       color: #64748b;
       margin-bottom: 8px;
+      text-align: center;
     }
 
     .progress-bar {
@@ -188,48 +187,48 @@
       background: #e5e7eb;
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 22px;
     }
 
     .progress-fill {
+      width: 35%;
       height: 100%;
-      width: 40%;
       background: #2563eb;
     }
 
-    /* ---------- SUCCESS ---------- */
+    /* SUCCESS */
     .success-card {
       background: #020617;
       border-radius: 28px;
-      padding: 30px 24px;
-      color: #ffffff;
+      padding: 30px 22px;
       text-align: center;
+      color: #ffffff;
       display: none;
     }
 
     .success-title {
-      color: #22c55e;
       font-size: 26px;
       font-weight: 700;
-      margin-bottom: 8px;
+      color: #22c55e;
+      margin-bottom: 6px;
     }
 
     .success-sub {
-      color: #c7f9cc;
       font-size: 16px;
+      color: #86efac;
       margin-bottom: 22px;
     }
 
     .btn-light {
       background: #ffffff;
       color: #0f172a;
+      margin-top: 12px;
     }
 
     footer {
       text-align: center;
       font-size: 14px;
       color: #64748b;
-      margin-top: 30px;
+      margin-top: 28px;
     }
 
     footer a {
@@ -249,65 +248,69 @@
   <!-- GLOBAL HEADER -->
   <div id="header-container"></div>
 
-  <div class="container">
+  <div class="container" id="mainArea">
 
     <h1>Image to PDF</h1>
     <div class="subtitle">
       Convert JPG or PNG images into a single PDF file. Fast and secure.
     </div>
 
-    <!-- MAIN AREA -->
-    <div id="mainArea">
-
-      <!-- UPLOAD -->
-      <div id="uploadCard" class="upload-card">
-        <div class="upload-icon">
-          <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M4 16l4-4 4 4m0-8v8m8-4v4H4" />
-          </svg>
-        </div>
-
-        <div class="upload-title">Select image files</div>
-        <div class="upload-desc">Multiple images will be combined into one PDF</div>
-
-        <input id="fileInput" type="file" accept="image/jpeg,image/png" multiple />
-        <div id="fileList" class="file-list"></div>
+    <!-- UPLOAD -->
+    <div id="uploadCard" class="upload-card">
+      <div class="upload-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
+        </svg>
       </div>
 
-      <!-- FORMAT OPTIONS -->
-      <div class="options">
-        <div id="optJpg" class="option active">
-          <input type="radio" name="format" checked />
-          <label>JPG</label>
-        </div>
-
-        <div id="optPng" class="option">
-          <input type="radio" name="format" />
-          <label>PNG</label>
-        </div>
+      <div class="upload-title">Select image files</div>
+      <div class="upload-desc">
+        Multiple images will be combined into one PDF.
       </div>
 
-      <button id="convertBtn" class="btn btn-primary" disabled>
-        Convert to PDF
-      </button>
-
-      <div id="progressArea" style="display:none;">
-        <div class="progress-text">Creating PDF…</div>
-        <div class="progress-bar">
-          <div class="progress-fill"></div>
-        </div>
-      </div>
-
+      <input id="fileInput" type="file" accept="image/*" multiple />
+      <div id="fileItem"></div>
     </div>
 
-    <!-- SUCCESS -->
+    <!-- FORMAT -->
+    <div class="format-box">
+      <div id="optJpg" class="format-option active">
+        <input type="radio" name="format" value="jpg" checked />
+        <span>JPG</span>
+      </div>
+
+      <div id="optPng" class="format-option">
+        <input type="radio" name="format" value="png" />
+        <span>PNG</span>
+      </div>
+    </div>
+
+    <button id="convertBtn" class="btn btn-primary" disabled>
+      Convert to PDF
+    </button>
+
+    <div id="progressArea" class="progress-area">
+      <div class="progress-text">Converting images…</div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="container">
     <div id="successCard" class="success-card">
       <div class="success-title">PDF is ready</div>
-      <div class="success-sub">Your images were converted successfully.</div>
+      <div class="success-sub">
+        Your images were converted successfully.
+      </div>
 
       <button class="btn btn-primary">Download PDF</button>
-      <button id="resetBtn" class="btn btn-light">Convert more images</button>
+      <button id="resetBtn" class="btn btn-light">
+        Convert more images
+      </button>
 
       <div style="margin-top:16px; font-size:14px; color:#94a3b8;">
         Encrypted processing · Automatic file deletion
@@ -316,16 +319,15 @@
 
     <footer>
       © 2026 Develac ·
-      <a href="#">Privacy</a> ·
-      <a href="#">Terms</a>
+      <a href="/pages/privacy.html">Privacy</a> ·
+      <a href="/pages/terms.html">Terms</a>
     </footer>
-
   </div>
 
   <script>
     const uploadCard = document.getElementById("uploadCard");
     const fileInput = document.getElementById("fileInput");
-    const fileList = document.getElementById("fileList");
+    const fileItem = document.getElementById("fileItem");
     const convertBtn = document.getElementById("convertBtn");
     const progressArea = document.getElementById("progressArea");
     const successCard = document.getElementById("successCard");
@@ -337,52 +339,38 @@
 
     let files = [];
 
-    /* UPLOAD */
     uploadCard.onclick = () => fileInput.click();
 
     fileInput.onchange = () => {
-      Array.from(fileInput.files).forEach(file => {
-        if (!files.find(f => f.name === file.name)) {
-          files.push(file);
-        }
-      });
-      renderFiles();
-      fileInput.value = "";
+      files = Array.from(fileInput.files);
+      if (!files.length) return;
+
+      fileItem.innerHTML = `
+        <div class="file-item">
+          <span class="file-name">${files.length} images selected</span>
+          <button class="remove-btn">Remove</button>
+        </div>
+      `;
+
+      fileItem.querySelector("button").onclick = () => {
+        files = [];
+        fileInput.value = "";
+        fileItem.innerHTML = "";
+        convertBtn.disabled = true;
+      };
+
+      convertBtn.disabled = false;
     };
 
-    function renderFiles() {
-      fileList.innerHTML = "";
-      files.forEach((file, index) => {
-        const div = document.createElement("div");
-        div.className = "file-item";
-        div.innerHTML = `
-          <span class="file-name">${file.name}</span>
-          <button class="remove-btn">Remove</button>
-        `;
-        div.querySelector("button").onclick = () => {
-          files.splice(index, 1);
-          renderFiles();
-        };
-        fileList.appendChild(div);
-      });
-      convertBtn.disabled = files.length === 0;
+    function selectFormat(active, inactive) {
+      active.classList.add("active");
+      inactive.classList.remove("active");
+      active.querySelector("input").checked = true;
     }
 
-    /* FORMAT SELECTION */
-    function setFormat(active) {
-      if (active === "jpg") {
-        optJpg.classList.add("active");
-        optPng.classList.remove("active");
-      } else {
-        optPng.classList.add("active");
-        optJpg.classList.remove("active");
-      }
-    }
+    optJpg.onclick = () => selectFormat(optJpg, optPng);
+    optPng.onclick = () => selectFormat(optPng, optJpg);
 
-    optJpg.onclick = () => setFormat("jpg");
-    optPng.onclick = () => setFormat("png");
-
-    /* CONVERT */
     convertBtn.onclick = () => {
       uploadCard.classList.add("disabled");
       convertBtn.disabled = true;
