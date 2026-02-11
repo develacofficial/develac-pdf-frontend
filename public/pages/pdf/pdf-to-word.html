@@ -1,347 +1,324 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PDF to Word – Develac</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+body{background:#f8fafc;color:#0f172a;}
+
+/* HEADER */
+.header{
+height:60px;
+background:#fff;
+border-bottom:1px solid #e2e8f0;
+display:flex;
+align-items:center;
+justify-content:center;
+position:sticky;
+top:0;
+}
+.header-inner{
+width:100%;
+max-width:1100px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 20px;
+}
+.header h2{font-size:20px;font-weight:700;}
+.icon-btn{font-size:20px;color:#334155;cursor:pointer;}
+
+/* LAYOUT */
+.container{
+max-width:600px;
+margin:42px auto;
+padding:0 20px;
+text-align:center;
 }
 
-body {
-  background: #f8fafc;
-  color: #0f172a;
+h1{
+font-size:34px;
+font-weight:700;
+margin-bottom:12px;
 }
 
-/* ===== Header ===== */
-
-.header {
-  height: 60px;
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: sticky;
-  top: 0;
+.subtitle{
+font-size:16px;
+color:#64748b;
+line-height:1.6;
+margin-bottom:36px;
 }
 
-.header-inner {
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
+/* UPLOAD CARD */
+.upload-card{
+border:2px dashed #cbd5e1;
+border-radius:28px;
+padding:48px 28px;
+background:#fff;
+transition:.2s ease;
 }
 
-.header h2 {
-  font-size: 20px;
-  font-weight: 700;
+.upload-icon{
+width:64px;
+height:64px;
+margin:0 auto 22px;
+background:#e2e8f0;
+border-radius:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.upload-icon svg{
+width:28px;
+height:28px;
+stroke:#3b82f6;
 }
 
-.icon-btn {
-  font-size: 20px;
-  cursor: pointer;
-  color: #334155;
+.upload-title{
+font-size:19px;
+font-weight:600;
+margin-bottom:8px;
 }
 
-/* ===== Layout ===== */
-
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 0 20px;
-  text-align: center;
+.upload-desc{
+font-size:14.5px;
+color:#64748b;
+margin-bottom:22px;
 }
 
-h1 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 10px;
+.primary-btn{
+width:100%;
+background:#3b82f6;
+color:#fff;
+padding:14px 20px;
+border-radius:16px;
+border:none;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+transition:.2s;
 }
 
-.subtitle {
-  font-size: 16px;
-  color: #64748b;
-  line-height: 1.55;
-  margin-bottom: 32px;
+.primary-btn:disabled{
+background:#93c5fd;
+cursor:not-allowed;
 }
 
-/* ===== Upload Card ===== */
-
-.upload-card {
-  border: 2px dashed #cbd5e1;
-  border-radius: 26px;
-  padding: 40px 24px;
-  background: #ffffff;
-  cursor: pointer;
-  transition: 0.2s ease;
+.convert-btn{
+margin-top:16px;
+background:#2563eb;
 }
 
-.upload-card:hover {
-  border-color: #3b82f6;
+.file-info{
+margin-top:18px;
+font-size:14px;
+color:#334155;
+display:flex;
+justify-content:space-between;
+align-items:center;
+word-break:break-all;
 }
 
-.upload-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 20px;
-  background: #e2e8f0;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.remove-btn{
+background:none;
+border:none;
+color:#ef4444;
+font-weight:600;
+cursor:pointer;
 }
 
-.upload-icon svg {
-  width: 28px;
-  height: 28px;
-  stroke: #3b82f6;
+.note{
+font-size:13px;
+color:#94a3b8;
+margin-top:20px;
 }
 
-.upload-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 6px;
+.progress-area{
+margin-top:20px;
+display:none;
+}
+.progress-text{
+font-size:14px;
+margin-bottom:8px;
+color:#475569;
+}
+.progress-bar{
+height:8px;
+background:#e2e8f0;
+border-radius:6px;
+overflow:hidden;
+}
+.progress-fill{
+height:100%;
+width:40%;
+background:#3b82f6;
 }
 
-.upload-desc {
-  font-size: 14px;
-  color: #64748b;
-  margin-bottom: 20px;
+/* SUCCESS CARD */
+.success-card{
+display:none;
+margin-top:36px;
+background:#020617;
+border-radius:30px;
+padding:36px 26px;
+color:#fff;
+}
+.success-title{
+font-size:24px;
+font-weight:700;
+color:#22c55e;
+margin-bottom:8px;
+}
+.success-subtitle{
+font-size:15px;
+color:#cbd5e1;
+margin-bottom:26px;
+}
+.secondary-btn{
+width:100%;
+background:#e2e8f0;
+color:#0f172a;
+padding:14px 20px;
+border-radius:16px;
+border:none;
+font-size:15px;
+font-weight:600;
+cursor:pointer;
+margin-top:14px;
 }
 
-.primary-btn {
-  background: #3b82f6;
-  color: white;
-  padding: 12px 22px;
-  border-radius: 14px;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
+/* FOOTER */
+.footer{
+text-align:center;
+font-size:13px;
+color:#94a3b8;
+margin:44px 0;
 }
-
-.primary-btn:disabled {
-  background: #93c5fd;
-  cursor: not-allowed;
+.footer a{
+color:#3b82f6;
+text-decoration:none;
+margin:0 6px;
 }
-
-.file-info {
-  margin-top: 16px;
-  font-size: 14px;
-  color: #334155;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.remove-btn {
-  background: none;
-  border: none;
-  color: #ef4444;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.note {
-  font-size: 13px;
-  color: #94a3b8;
-  margin-top: 18px;
-}
-
-/* ===== Progress ===== */
-
-.progress-area {
-  margin-top: 20px;
-  display: none;
-}
-
-.progress-text {
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: #475569;
-}
-
-.progress-bar {
-  height: 8px;
-  background: #e2e8f0;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  width: 40%;
-  height: 100%;
-  background: #3b82f6;
-}
-
-/* ===== Success Card ===== */
-
-.success-card {
-  display: none;
-  margin-top: 32px;
-  background: #020617;
-  border-radius: 28px;
-  padding: 32px 24px;
-  color: white;
-}
-
-.success-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #22c55e;
-  margin-bottom: 8px;
-}
-
-.success-subtitle {
-  font-size: 15px;
-  color: #cbd5e1;
-  margin-bottom: 24px;
-}
-
-.secondary-btn {
-  background: #e2e8f0;
-  color: #0f172a;
-  padding: 12px 22px;
-  border-radius: 14px;
-  border: none;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 14px;
-}
-
-/* ===== Footer ===== */
-
-.footer {
-  text-align: center;
-  font-size: 13px;
-  color: #94a3b8;
-  margin: 40px 0;
-}
-
-.footer a {
-  color: #3b82f6;
-  text-decoration: none;
-  margin: 0 6px;
-}
-
 </style>
 </head>
 
 <body>
 
 <div class="header">
-  <div class="header-inner">
-    <div class="icon-btn">←</div>
-    <h2>Develac</h2>
-    <div class="icon-btn">☰</div>
-  </div>
+<div class="header-inner">
+<div class="icon-btn">←</div>
+<h2>Develac</h2>
+<div class="icon-btn">☰</div>
+</div>
 </div>
 
 <div class="container">
 
-  <h1>PDF to Word</h1>
-  <p class="subtitle">
-    Convert PDF files into editable Word documents. Fast, accurate and secure.
-  </p>
+<h1>PDF to Word</h1>
+<p class="subtitle">
+Convert PDF files into editable Word documents. Fast, accurate and secure.
+</p>
 
-  <div class="upload-card" id="uploadCard">
-    <div class="upload-icon">
-      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          d="M12 16V4m0 0l-4 4m4-4l4 4M4 20h16" />
-      </svg>
-    </div>
+<div class="upload-card" id="uploadCard">
 
-    <div class="upload-title">Select PDF file</div>
-    <div class="upload-desc">
-      Text and layout will be converted into Word format.
-    </div>
+<div class="upload-icon">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+<path stroke-linecap="round" stroke-linejoin="round"
+d="M12 16V4m0 0l-4 4m4-4l4 4M4 20h16"/>
+</svg>
+</div>
 
-    <button class="primary-btn" id="chooseBtn">Choose PDF File</button>
+<div class="upload-title">Select PDF file</div>
+<div class="upload-desc">
+Text and layout will be converted into Word format.
+</div>
 
-    <div class="file-info" id="fileInfo" style="display:none;">
-      <span id="fileName"></span>
-      <button class="remove-btn" id="removeBtn">Remove</button>
-    </div>
+<button class="primary-btn" id="chooseBtn">Choose PDF File</button>
 
-    <div class="note">
-      Maximum file size: 100MB · Files deleted automatically
-    </div>
+<div class="file-info" id="fileInfo" style="display:none;">
+<span id="fileName"></span>
+<button class="remove-btn" id="removeBtn">Remove</button>
+</div>
 
-    <div class="progress-area" id="progressArea">
-      <div class="progress-text">Uploading PDF…</div>
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
-    </div>
+<button class="primary-btn convert-btn" id="convertBtn" disabled>
+Convert to Word
+</button>
 
-  </div>
+<div class="note">
+Maximum file size: 100MB · Files deleted automatically
+</div>
 
-  <div class="success-card" id="successCard">
-    <div class="success-title">Word file is ready</div>
-    <div class="success-subtitle">
-      Your PDF was converted successfully.
-    </div>
-    <button class="primary-btn">Download Word File</button>
-    <button class="secondary-btn" onclick="location.reload()">Convert another PDF</button>
-  </div>
+<div class="progress-area" id="progressArea">
+<div class="progress-text">Converting PDF…</div>
+<div class="progress-bar">
+<div class="progress-fill"></div>
+</div>
+</div>
+
+</div>
+
+<div class="success-card" id="successCard">
+<div class="success-title">Word file is ready</div>
+<div class="success-subtitle">
+Your PDF was converted successfully.
+</div>
+<button class="primary-btn">Download Word File</button>
+<button class="secondary-btn" onclick="location.reload()">
+Convert another PDF
+</button>
+</div>
 
 </div>
 
 <div class="footer">
-  © 2026 Develac ·
-  <a href="#">Privacy</a> ·
-  <a href="#">Terms</a>
+© 2026 Develac ·
+<a href="#">Privacy</a> ·
+<a href="#">Terms</a>
 </div>
 
 <input type="file" id="fileInput" accept="application/pdf" hidden>
 
 <script>
-const uploadCard = document.getElementById("uploadCard");
-const fileInput = document.getElementById("fileInput");
-const chooseBtn = document.getElementById("chooseBtn");
-const fileInfo = document.getElementById("fileInfo");
-const fileName = document.getElementById("fileName");
-const removeBtn = document.getElementById("removeBtn");
-const progressArea = document.getElementById("progressArea");
-const successCard = document.getElementById("successCard");
+const fileInput=document.getElementById("fileInput");
+const chooseBtn=document.getElementById("chooseBtn");
+const convertBtn=document.getElementById("convertBtn");
+const fileInfo=document.getElementById("fileInfo");
+const fileName=document.getElementById("fileName");
+const removeBtn=document.getElementById("removeBtn");
+const progressArea=document.getElementById("progressArea");
+const successCard=document.getElementById("successCard");
+const uploadCard=document.getElementById("uploadCard");
 
-uploadCard.onclick = () => fileInput.click();
-chooseBtn.onclick = (e) => {
-  e.stopPropagation();
-  fileInput.click();
+chooseBtn.onclick=()=>fileInput.click();
+
+fileInput.onchange=()=>{
+const file=fileInput.files[0];
+if(!file)return;
+
+fileName.textContent=file.name;
+fileInfo.style.display="flex";
+convertBtn.disabled=false;
 };
 
-fileInput.onchange = () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-
-  fileName.textContent = file.name;
-  fileInfo.style.display = "flex";
-  progressArea.style.display = "block";
-
-  setTimeout(() => {
-    uploadCard.style.display = "none";
-    successCard.style.display = "block";
-  }, 2000);
+removeBtn.onclick=()=>{
+fileInput.value="";
+fileInfo.style.display="none";
+convertBtn.disabled=true;
 };
 
-removeBtn.onclick = (e) => {
-  e.stopPropagation();
-  fileInput.value = "";
-  fileInfo.style.display = "none";
-  progressArea.style.display = "none";
+convertBtn.onclick=()=>{
+progressArea.style.display="block";
+convertBtn.disabled=true;
+
+setTimeout(()=>{
+uploadCard.style.display="none";
+successCard.style.display="block";
+},2000);
 };
 </script>
 
