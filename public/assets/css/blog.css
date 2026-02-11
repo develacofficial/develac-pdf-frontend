@@ -262,3 +262,119 @@
     width: 100%;
   }
 }
+/* =========================================
+   PREMIUM ARTICLE CONTAINER
+========================================= */
+
+.page-container {
+  padding: 40px 20px 60px;
+}
+
+.blog-article {
+  background: #ffffff;
+  padding: 40px 36px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
+}
+
+/* =========================================
+   STRONGER HEADER STYLE
+========================================= */
+
+.article-header {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 36px;
+}
+
+.article-meta {
+  margin-top: 8px;
+}
+
+/* =========================================
+   BETTER HEADING HIERARCHY
+========================================= */
+
+.article-content h2 {
+  position: relative;
+  padding-left: 14px;
+}
+
+.article-content h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 4px;
+  height: 24px;
+  background: #2563eb;
+  border-radius: 4px;
+}
+
+/* =========================================
+   IMPROVED LIST STYLING
+========================================= */
+
+.article-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.article-content ul li {
+  position: relative;
+  padding-left: 22px;
+}
+
+.article-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* Ordered list cleaner spacing */
+
+.article-content ol {
+  padding-left: 20px;
+}
+
+.article-content ol li {
+  padding-left: 4px;
+}
+
+/* =========================================
+   PARAGRAPH BREATHING SPACE
+========================================= */
+
+.article-content p {
+  max-width: 680px;
+}
+
+/* =========================================
+   CTA TRANSITION SPACE
+========================================= */
+
+.article-cta-box {
+  margin-top: 70px;
+}
+
+/* =========================================
+   MOBILE POLISH
+========================================= */
+
+@media (max-width: 640px) {
+
+  .blog-article {
+    padding: 26px 20px;
+    border-radius: 18px;
+  }
+
+  .article-content {
+    font-size: 16px;
+  }
+
+  .article-content h2::before {
+    height: 20px;
+  }
+}
