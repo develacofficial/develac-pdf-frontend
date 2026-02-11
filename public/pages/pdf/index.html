@@ -2,92 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Develac PDF – All PDF Tools</title>
-
-  <!-- GLOBAL STYLES -->
-  <link rel="stylesheet" href="/assets/css/theme.css">
-  <link rel="stylesheet" href="/assets/css/layout.css">
-  <link rel="stylesheet" href="/assets/css/tools.css">
-  <link rel="stylesheet" href="/assets/css/header.css">
-</head>
-<body>
+  <title>All PDF Tools – Develac</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- GLOBAL HEADER -->
-  <div id="header-container"></div>
+  <link rel="stylesheet" href="/assets/css/header.css" />
+  <script src="/assets/js/header.js" defer></script>
 
-  <!-- PAGE HERO -->
-  <section class="section section-light">
-    <div class="container hero stack-sm">
-      <h1>All PDF Tools</h1>
-      <p>
-        Develac PDF – fast, secure and privacy-first tools to work with your documents.
-      </p>
-    </div>
-  </section>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
 
-  <!-- TOOLS GRID -->
-  <section class="section section-muted">
-    <div class="container cards-wrapper">
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: #0f172a;
+    }
 
-      <div class="tools-grid">
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
 
-        <div class="tool-card">
-          <a href="/pages/pdf/compress.html">
-            <div class="tool-icon">📉</div>
-            <div class="tool-name">Compress PDF</div>
-          </a>
-        </div>
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 12px;
+    }
 
-        <div class="tool-card">
-          <a href="/pages/pdf/merge.html">
-            <div class="tool-icon">🧩</div>
-            <div class="tool-name">Merge PDF</div>
-          </a>
-        </div>
+    .subtitle {
+      text-align: center;
+      font-size: 17px;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
 
-        <div class="tool-card">
-          <a href="/pages/pdf/split.html">
-            <div class="tool-icon">✂️</div>
-            <div class="tool-name">Split PDF</div>
-          </a>
-        </div>
+    /* GRID */
 
-        <div class="tool-card">
-          <a href="/pages/pdf/pdf-to-image.html">
-            <div class="tool-icon">🖼️</div>
-            <div class="tool-name">PDF to Image</div>
-          </a>
-        </div>
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
 
-        <div class="tool-card">
-          <a href="/pages/pdf/image-to-pdf.html">
-            <div class="tool-icon">📄</div>
-            <div class="tool-name">Image to PDF</div>
-          </a>
-        </div>
+    @media (min-width: 768px) {
+      .tools-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 26px;
+      }
+    }
 
-        <div class="tool-card">
-          <a href="/pages/pdf/pdf-to-word.html">
-            <div class="tool-icon">📝</div>
-            <div class="tool-name">PDF to Word</div>
-          </a>
-        </div>
+    /* TOOL CARD */
 
+    .tool-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 24px;
+      padding: 26px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+      border-color: #dbeafe;
+    }
+
+    .tool-icon {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 16px;
+      background: #eef2ff;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tool-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: #2563eb;
+    }
+
+    .tool-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 60px;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="header-container"></div>
+
+<div class="container">
+
+  <h1>All PDF Tools</h1>
+
+  <div class="subtitle">
+    Develac PDF – fast, secure and privacy-first tools
+    to work with your documents.
+  </div>
+
+  <div class="tools-grid">
+
+    <!-- COMPRESS -->
+    <a href="/pages/pdf/compress.html" class="tool-card">
+      <div class="tool-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M4 16v4h4M20 8V4h-4M4 8V4h4M20 16v4h-4"/>
+        </svg>
       </div>
+      <div class="tool-title">Compress PDF</div>
+    </a>
 
-    </div>
-  </section>
+    <!-- MERGE -->
+    <a href="/pages/pdf/merge.html" class="tool-card">
+      <div class="tool-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8 7h8M8 12h8M8 17h8M4 7h.01M4 12h.01M4 17h.01"/>
+        </svg>
+      </div>
+      <div class="tool-title">Merge PDF</div>
+    </a>
 
-  <!-- FOOTER -->
-  <footer class="footer">
+    <!-- SPLIT -->
+    <a href="/pages/pdf/split.html" class="tool-card">
+      <div class="tool-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M16 3h5v5M8 21H3v-5M21 16l-5 5M3 8l5-5"/>
+        </svg>
+      </div>
+      <div class="tool-title">Split PDF</div>
+    </a>
+
+    <!-- PDF TO IMAGE -->
+    <a href="/pages/pdf/pdf-to-image.html" class="tool-card">
+      <div class="tool-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 16l5-5 4 4 5-6"/>
+        </svg>
+      </div>
+      <div class="tool-title">PDF to Image</div>
+    </a>
+
+    <!-- IMAGE TO PDF -->
+    <a href="/pages/pdf/image-to-pdf.html" class="tool-card">
+      <div class="tool-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4"/>
+        </svg>
+      </div>
+      <div class="tool-title">Image to PDF</div>
+    </a>
+
+    <!-- PDF TO WORD -->
+    <a href="/pages/pdf/pdf-to-word.html" class="tool-card">
+      <div class="tool-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M7 8h10M7 12h8M7 16h6"/>
+        </svg>
+      </div>
+      <div class="tool-title">PDF to Word</div>
+    </a>
+
+  </div>
+
+  <footer>
     © 2026 Develac ·
-    <a href="/pages/privacy.html">Privacy</a> ·
-    <a href="/pages/terms.html">Terms</a>
+    <a href="#">Privacy</a> ·
+    <a href="#">Terms</a>
   </footer>
 
-  <!-- GLOBAL HEADER LOADER -->
-  <script src="/assets/js/header.js"></script>
+</div>
 
 </body>
 </html>
