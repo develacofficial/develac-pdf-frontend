@@ -24,31 +24,39 @@
     .container {
       max-width: 420px;
       margin: 0 auto;
-      padding: 24px 16px 40px;
+      padding: 28px 16px 48px;
     }
 
     h1 {
       font-size: 32px;
       font-weight: 700;
+      line-height: 1.25;
       text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .subtitle {
       text-align: center;
       font-size: 16px;
+      line-height: 1.6;
       color: #64748b;
-      margin-bottom: 28px;
+      max-width: 340px;
+      margin: 0 auto 32px;
     }
 
     /* UPLOAD CARD */
     .upload-card {
       border: 2px dashed #e5e7eb;
       border-radius: 26px;
-      padding: 28px 20px;
+      padding: 32px 20px;
       text-align: center;
       cursor: pointer;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
+      transition: background 0.2s ease;
+    }
+
+    .upload-card:hover {
+      background: #f8fafc;
     }
 
     .upload-card.disabled {
@@ -57,9 +65,9 @@
     }
 
     .upload-icon {
-      width: 66px;
-      height: 66px;
-      margin: 0 auto 16px;
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 18px;
       background: #eef2ff;
       border-radius: 18px;
       display: flex;
@@ -76,25 +84,25 @@
     .upload-title {
       font-size: 18px;
       font-weight: 600;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .upload-desc {
       font-size: 14px;
+      line-height: 1.5;
       color: #64748b;
-      margin-bottom: 14px;
     }
 
     .file-item {
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 14px;
-      padding: 12px 14px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 14px;
-      margin-top: 12px;
+      margin-top: 16px;
     }
 
     .remove-btn {
@@ -105,21 +113,22 @@
       cursor: pointer;
     }
 
-    /* FORMAT OPTIONS */
+    /* OPTIONS */
     .options {
       border: 1px solid #e5e7eb;
       border-radius: 26px;
       padding: 18px;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
     }
 
     .option {
       border: 2px solid #e5e7eb;
       border-radius: 18px;
-      padding: 14px;
+      padding: 16px;
+      min-height: 56px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       cursor: pointer;
       margin-bottom: 12px;
     }
@@ -135,18 +144,19 @@
 
     .option input {
       accent-color: #2563eb;
+      margin-top: 2px;
     }
 
     /* BUTTON */
     .btn {
       width: 100%;
-      height: 48px;
+      height: 52px;
       border-radius: 14px;
       border: none;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
     .btn-primary {
@@ -155,8 +165,9 @@
     }
 
     .btn-primary:disabled {
-      background: #a5bdf6;
+      background: #b6ccfa;
       cursor: not-allowed;
+      opacity: 1;
     }
 
     /* PROGRESS */
@@ -164,7 +175,8 @@
       text-align: center;
       font-size: 14px;
       color: #64748b;
-      margin-bottom: 8px;
+      margin-top: 12px;
+      margin-bottom: 10px;
     }
 
     .progress-bar {
@@ -173,12 +185,11 @@
       background: #e5e7eb;
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 18px;
     }
 
     .progress-fill {
       height: 100%;
-      width: 40%;
+      width: 35%;
       background: #2563eb;
     }
 
@@ -186,22 +197,24 @@
     .success-card {
       background: #020617;
       border-radius: 26px;
-      padding: 28px 22px;
+      padding: 30px 22px;
       color: #ffffff;
       text-align: center;
       display: none;
+      margin-top: 24px;
     }
 
     .success-title {
       color: #22c55e;
       font-size: 26px;
       font-weight: 700;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .success-sub {
       color: #86efac;
       font-size: 16px;
+      line-height: 1.5;
       margin-bottom: 22px;
     }
 
@@ -214,7 +227,8 @@
       text-align: center;
       font-size: 14px;
       color: #64748b;
-      margin-top: 28px;
+      margin-top: 36px;
+      padding-bottom: 20px;
     }
 
     footer a {
@@ -241,17 +255,17 @@
       Convert PDF pages to JPG or PNG images. Fast, secure and privacy-first.
     </div>
 
-    <!-- MAIN AREA -->
     <div id="mainArea">
 
-      <!-- UPLOAD CARD -->
+      <!-- UPLOAD -->
       <div id="uploadCard" class="upload-card">
         <div class="upload-icon">
           <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round"
-              d="M4 16l4-4m0 0l4 4m-4-4v12" />
+              d="M12 16V4m0 0l-4 4m4-4l4 4M4 16v4h16v-4" />
           </svg>
         </div>
+
         <div class="upload-title">Select PDF file</div>
         <div class="upload-desc">Maximum file size: 100MB</div>
 
@@ -259,7 +273,7 @@
         <div id="fileItem"></div>
       </div>
 
-      <!-- FORMAT OPTIONS -->
+      <!-- OPTIONS -->
       <div class="options">
         <div id="optJpg" class="option active">
           <input type="radio" name="format" checked />
@@ -276,7 +290,6 @@
         Convert to Image
       </button>
 
-      <!-- PROGRESS -->
       <div id="progressArea" style="display:none;">
         <div class="progress-text">Converting PDF...</div>
         <div class="progress-bar">
@@ -289,7 +302,9 @@
     <!-- SUCCESS -->
     <div id="successCard" class="success-card">
       <div class="success-title">Images are ready</div>
-      <div class="success-sub">All PDF pages were converted successfully.</div>
+      <div class="success-sub">
+        All PDF pages were converted successfully.
+      </div>
 
       <button class="btn btn-primary">Download Images</button>
       <button id="resetBtn" class="btn btn-light">Convert another PDF</button>
@@ -319,12 +334,9 @@
 
     const optJpg = document.getElementById("optJpg");
     const optPng = document.getElementById("optPng");
-    const radioJpg = optJpg.querySelector("input");
-    const radioPng = optPng.querySelector("input");
 
     let file = null;
 
-    /* UPLOAD */
     uploadCard.onclick = () => fileInput.click();
 
     fileInput.onchange = () => {
@@ -348,28 +360,16 @@
       convertBtn.disabled = false;
     };
 
-    /* FORMAT SELECTION */
-    function updateFormat() {
-      if (radioJpg.checked) {
-        optJpg.classList.add("active");
-        optPng.classList.remove("active");
-      } else {
-        optPng.classList.add("active");
-        optJpg.classList.remove("active");
-      }
+    function setFormat(isJpg) {
+      optJpg.classList.toggle("active", isJpg);
+      optPng.classList.toggle("active", !isJpg);
+      optJpg.querySelector("input").checked = isJpg;
+      optPng.querySelector("input").checked = !isJpg;
     }
 
-    optJpg.onclick = () => {
-      radioJpg.checked = true;
-      updateFormat();
-    };
+    optJpg.onclick = () => setFormat(true);
+    optPng.onclick = () => setFormat(false);
 
-    optPng.onclick = () => {
-      radioPng.checked = true;
-      updateFormat();
-    };
-
-    /* CONVERT */
     convertBtn.onclick = () => {
       uploadCard.classList.add("disabled");
       convertBtn.disabled = true;
