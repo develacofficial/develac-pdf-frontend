@@ -2,206 +2,347 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PDF to Word – Develac</title>
 
-<!-- GLOBAL STYLES -->
-<link rel="stylesheet" href="/assets/css/theme.css">
-<link rel="stylesheet" href="/assets/css/layout.css">
-<link rel="stylesheet" href="/assets/css/components.css">
-<link rel="stylesheet" href="/assets/css/header.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* TOOL PAGE STYLES */
-
-.page{
-  max-width:760px;
-  margin:auto;
-  padding:32px 18px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
-h1{text-align:center;font-size:28px;margin-bottom:6px;}
-.sub{text-align:center;color:var(--text-muted);margin-bottom:30px;font-size:15px;}
-
-.card{
-  background:var(--bg-card);
-  border:2px dashed var(--border-light);
-  border-radius:20px;
-  padding:40px 20px;
-  text-align:center;
+body {
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-.card.locked{opacity:.4;pointer-events:none;}
+/* ===== Header ===== */
 
-.icon{
-  width:64px;height:64px;
-  margin:0 auto 18px;
-  background:var(--accent-soft);
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.header {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
 }
 
-.icon svg{width:32px;height:32px;stroke:var(--accent);}
-
-.btn{
-  background:var(--accent);
-  color:#fff;
-  padding:14px 30px;
-  border-radius:12px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  font-size:15px;
+.header-inner {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
-.btn.secondary{
-  background:#e5e7eb;
-  color:#111827;
+.header h2 {
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.muted{font-size:13px;color:var(--text-muted);margin-top:12px;}
-
-/* PROGRESS */
-.progress-box{display:none;margin-top:22px;}
-.progress-text{font-size:14px;margin-bottom:10px;}
-.progress-bar{
-  width:100%;height:10px;
-  background:#e5e7eb;
-  border-radius:20px;
-  overflow:hidden;
-}
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:var(--accent);
-  transition:width .4s ease;
+.icon-btn {
+  font-size: 20px;
+  cursor: pointer;
+  color: #334155;
 }
 
-/* SUCCESS */
-.success{
-  display:none;
-  margin-top:40px;
-  background:#0b1220;
-  color:#e5e7eb;
-  border-radius:24px;
-  padding:40px 24px;
-  text-align:center;
+/* ===== Layout ===== */
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
 }
-.success h2{color:#22c55e;margin-bottom:8px;}
-.success p{color:#cbd5e1;margin-bottom:22px;}
+
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #64748b;
+  line-height: 1.55;
+  margin-bottom: 32px;
+}
+
+/* ===== Upload Card ===== */
+
+.upload-card {
+  border: 2px dashed #cbd5e1;
+  border-radius: 26px;
+  padding: 40px 24px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.upload-card:hover {
+  border-color: #3b82f6;
+}
+
+.upload-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  background: #e2e8f0;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: #3b82f6;
+}
+
+.upload-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.upload-desc {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.primary-btn {
+  background: #3b82f6;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary-btn:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.file-info {
+  margin-top: 16px;
+  font-size: 14px;
+  color: #334155;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.note {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 18px;
+}
+
+/* ===== Progress ===== */
+
+.progress-area {
+  margin-top: 20px;
+  display: none;
+}
+
+.progress-text {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #475569;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 40%;
+  height: 100%;
+  background: #3b82f6;
+}
+
+/* ===== Success Card ===== */
+
+.success-card {
+  display: none;
+  margin-top: 32px;
+  background: #020617;
+  border-radius: 28px;
+  padding: 32px 24px;
+  color: white;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #22c55e;
+  margin-bottom: 8px;
+}
+
+.success-subtitle {
+  font-size: 15px;
+  color: #cbd5e1;
+  margin-bottom: 24px;
+}
+
+.secondary-btn {
+  background: #e2e8f0;
+  color: #0f172a;
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+/* ===== Footer ===== */
+
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 40px 0;
+}
+
+.footer a {
+  color: #3b82f6;
+  text-decoration: none;
+  margin: 0 6px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- GLOBAL HEADER -->
-<div id="header-container"></div>
-
-<div class="page">
-
-<h1>PDF to Word</h1>
-<div class="sub">
-Convert PDF files into editable Word documents. Fast, accurate and secure.
-</div>
-
-<!-- UPLOAD -->
-<div class="card" id="uploadCard">
-
-  <div class="icon">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M4 4h10l6 6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
-      <path d="M14 4v6h6"/>
-      <path d="M8 15h8"/>
-      <path d="M8 11h8"/>
-    </svg>
-  </div>
-
-  <h3>Select PDF file</h3>
-  <p class="muted">Text and layout will be converted into Word format.</p>
-
-  <button class="btn" onclick="startFakeConvert()">Choose PDF File</button>
-
-  <div class="muted">
-    Maximum file size: 100MB · Files deleted automatically
-  </div>
-
-  <div class="progress-box" id="progressBox">
-    <div class="progress-text" id="progressText">Uploading PDF…</div>
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
+<div class="header">
+  <div class="header-inner">
+    <div class="icon-btn">←</div>
+    <h2>Develac</h2>
+    <div class="icon-btn">☰</div>
   </div>
 </div>
 
-<!-- SUCCESS -->
-<div class="success" id="successBox">
-  <h2>Word file is ready</h2>
-  <p>Your PDF was converted successfully.</p>
+<div class="container">
 
-  <button class="btn" style="margin-bottom:14px;">
-    Download Word File
-  </button><br>
-
-  <button class="btn secondary" onclick="resetTool()">
-    Convert another PDF
-  </button>
-
-  <p class="muted" style="margin-top:18px;">
-    Encrypted processing · Automatic file deletion
+  <h1>PDF to Word</h1>
+  <p class="subtitle">
+    Convert PDF files into editable Word documents. Fast, accurate and secure.
   </p>
-</div>
+
+  <div class="upload-card" id="uploadCard">
+    <div class="upload-icon">
+      <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 16V4m0 0l-4 4m4-4l4 4M4 20h16" />
+      </svg>
+    </div>
+
+    <div class="upload-title">Select PDF file</div>
+    <div class="upload-desc">
+      Text and layout will be converted into Word format.
+    </div>
+
+    <button class="primary-btn" id="chooseBtn">Choose PDF File</button>
+
+    <div class="file-info" id="fileInfo" style="display:none;">
+      <span id="fileName"></span>
+      <button class="remove-btn" id="removeBtn">Remove</button>
+    </div>
+
+    <div class="note">
+      Maximum file size: 100MB · Files deleted automatically
+    </div>
+
+    <div class="progress-area" id="progressArea">
+      <div class="progress-text">Uploading PDF…</div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="success-card" id="successCard">
+    <div class="success-title">Word file is ready</div>
+    <div class="success-subtitle">
+      Your PDF was converted successfully.
+    </div>
+    <button class="primary-btn">Download Word File</button>
+    <button class="secondary-btn" onclick="location.reload()">Convert another PDF</button>
+  </div>
 
 </div>
 
-<footer class="footer">
-© 2026 Develac ·
-<a href="/pages/privacy.html">Privacy</a> ·
-<a href="/pages/terms.html">Terms</a>
-</footer>
+<div class="footer">
+  © 2026 Develac ·
+  <a href="#">Privacy</a> ·
+  <a href="#">Terms</a>
+</div>
 
-<!-- HEADER LOADER -->
-<script src="/assets/js/header.js"></script>
+<input type="file" id="fileInput" accept="application/pdf" hidden>
 
-<!-- TOOL LOGIC -->
 <script>
-function startFakeConvert(){
-  const card=document.getElementById("uploadCard");
-  const box=document.getElementById("progressBox");
-  const fill=document.getElementById("progressFill");
-  const text=document.getElementById("progressText");
-  const success=document.getElementById("successBox");
+const uploadCard = document.getElementById("uploadCard");
+const fileInput = document.getElementById("fileInput");
+const chooseBtn = document.getElementById("chooseBtn");
+const fileInfo = document.getElementById("fileInfo");
+const fileName = document.getElementById("fileName");
+const removeBtn = document.getElementById("removeBtn");
+const progressArea = document.getElementById("progressArea");
+const successCard = document.getElementById("successCard");
 
-  card.classList.add("locked");
-  box.style.display="block";
+uploadCard.onclick = () => fileInput.click();
+chooseBtn.onclick = (e) => {
+  e.stopPropagation();
+  fileInput.click();
+};
 
-  const steps=[
-    "Uploading PDF…",
-    "Analyzing text…",
-    "Converting to Word…",
-    "Finalizing document…"
-  ];
+fileInput.onchange = () => {
+  const file = fileInput.files[0];
+  if (!file) return;
 
-  let p=0,i=0;
-  const timer=setInterval(()=>{
-    p+=10;
-    fill.style.width=p+"%";
-    if(p%25===0 && i<steps.length) text.innerText=steps[i++];
-    if(p>=100){
-      clearInterval(timer);
-      setTimeout(()=>{
-        card.style.display="none";
-        success.style.display="block";
-        success.scrollIntoView({behavior:"smooth"});
-      },400);
-    }
-  },400);
-}
+  fileName.textContent = file.name;
+  fileInfo.style.display = "flex";
+  progressArea.style.display = "block";
 
-function resetTool(){
-  location.reload();
-}
+  setTimeout(() => {
+    uploadCard.style.display = "none";
+    successCard.style.display = "block";
+  }, 2000);
+};
+
+removeBtn.onclick = (e) => {
+  e.stopPropagation();
+  fileInput.value = "";
+  fileInfo.style.display = "none";
+  progressArea.style.display = "none";
+};
 </script>
 
 </body>
