@@ -31,25 +31,26 @@
       font-size: 32px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
     }
 
     .subtitle {
       text-align: center;
       font-size: 16px;
       color: #64748b;
-      margin-bottom: 26px;
-      line-height: 1.5;
+      line-height: 1.55;
+      margin-bottom: 32px;
     }
 
     /* UPLOAD CARD */
     .upload-card {
       border: 2px dashed #e5e7eb;
       border-radius: 26px;
-      padding: 28px 20px;
+      padding: 30px 20px;
       text-align: center;
       cursor: pointer;
-      margin-bottom: 18px;
+      margin-bottom: 26px;
     }
 
     .upload-card.disabled {
@@ -58,9 +59,9 @@
     }
 
     .upload-icon {
-      width: 64px;
-      height: 64px;
-      margin: 0 auto 16px;
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 18px;
       background: #eef2ff;
       border-radius: 18px;
       display: flex;
@@ -69,8 +70,8 @@
     }
 
     .upload-icon svg {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       stroke: #2563eb;
     }
 
@@ -85,23 +86,22 @@
       color: #64748b;
     }
 
-    /* FILE ITEM */
     .file-item {
-      margin-top: 14px;
+      margin-top: 16px;
       background: #f8fafc;
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       padding: 12px 14px;
       display: flex;
       align-items: center;
-      gap: 10px;
       font-size: 14px;
+      gap: 10px;
     }
 
     .file-name {
       flex: 1;
-      overflow: hidden;
       white-space: nowrap;
+      overflow: hidden;
       text-overflow: ellipsis;
     }
 
@@ -115,23 +115,20 @@
 
     /* FORMAT OPTIONS */
     .format-box {
-      background: #ffffff;
-      border-radius: 22px;
-      padding: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 26px;
     }
 
     .format-option {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 16px;
-      border-radius: 16px;
+      padding: 18px 16px;
+      border-radius: 18px;
       border: 2px solid #e5e7eb;
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      margin-bottom: 10px;
+      margin-bottom: 14px;
     }
 
     .format-option:last-child {
@@ -147,11 +144,11 @@
       pointer-events: none;
     }
 
-    /* BUTTONS */
+    /* BUTTON */
     .btn {
       width: 100%;
-      height: 50px;
-      border-radius: 16px;
+      height: 52px;
+      border-radius: 18px;
       border: none;
       font-size: 16px;
       font-weight: 600;
@@ -170,14 +167,14 @@
 
     /* PROGRESS */
     .progress-area {
-      margin-top: 16px;
+      margin-top: 18px;
       display: none;
     }
 
     .progress-text {
       font-size: 14px;
       color: #64748b;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       text-align: center;
     }
 
@@ -199,7 +196,7 @@
     .success-card {
       background: #020617;
       border-radius: 28px;
-      padding: 30px 22px;
+      padding: 32px 24px;
       text-align: center;
       color: #ffffff;
       display: none;
@@ -209,26 +206,27 @@
       font-size: 26px;
       font-weight: 700;
       color: #22c55e;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .success-sub {
       font-size: 16px;
       color: #86efac;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     .btn-light {
       background: #ffffff;
       color: #0f172a;
-      margin-top: 12px;
+      margin-top: 14px;
     }
 
     footer {
       text-align: center;
       font-size: 14px;
       color: #64748b;
-      margin-top: 28px;
+      margin-top: 32px;
     }
 
     footer a {
@@ -252,7 +250,8 @@
 
     <h1>Image to PDF</h1>
     <div class="subtitle">
-      Convert JPG or PNG images into a single PDF file. Fast and secure.
+      Convert JPG or PNG images into a single PDF file.<br>
+      Fast and secure.
     </div>
 
     <!-- UPLOAD -->
@@ -276,12 +275,12 @@
     <!-- FORMAT -->
     <div class="format-box">
       <div id="optJpg" class="format-option active">
-        <input type="radio" name="format" value="jpg" checked />
+        <input type="radio" name="format" checked />
         <span>JPG</span>
       </div>
 
       <div id="optPng" class="format-option">
-        <input type="radio" name="format" value="png" />
+        <input type="radio" name="format" />
         <span>PNG</span>
       </div>
     </div>
@@ -312,7 +311,7 @@
         Convert more images
       </button>
 
-      <div style="margin-top:16px; font-size:14px; color:#94a3b8;">
+      <div style="margin-top:18px; font-size:14px; color:#94a3b8;">
         Encrypted processing · Automatic file deletion
       </div>
     </div>
