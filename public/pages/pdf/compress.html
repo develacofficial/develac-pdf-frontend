@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>Compress PDF – Develac</title>
 
 <!-- GLOBAL STYLES -->
@@ -13,106 +14,116 @@
 <link rel="stylesheet" href="/assets/css/cookie.css">
 
 <style>
-/* =====================================================
-   COMPRESS TOOL – STABLE UI (DO NOT BREAK)
-===================================================== */
-
-/* ---------- PAGE ---------- */
+/* ======================================================
+   PAGE
+====================================================== */
 .page{
   max-width:760px;
   margin:auto;
-  padding:32px 16px 48px;
+  padding:32px 18px 48px;
 }
 
-/* ---------- HEADINGS ---------- */
 h1{
   text-align:center;
   font-size:30px;
   margin-bottom:8px;
 }
+
 .sub{
   text-align:center;
-  font-size:15px;
   color:var(--text-muted);
+  font-size:15px;
   margin-bottom:34px;
 }
 
-/* ---------- CARD BASE ---------- */
+/* ======================================================
+   CARD BASE
+====================================================== */
 .card{
   background:#fff;
   border-radius:26px;
-  padding:26px 20px;
+  padding:28px 22px;
   margin-bottom:26px;
   box-sizing:border-box;
 }
 
-/* =====================================================
+/* ======================================================
    UPLOAD CARD
-===================================================== */
+====================================================== */
 .upload-card{
+  position:relative;
   border:2px dashed #e5e7eb;
   border-radius:26px;
   text-align:center;
   cursor:pointer;
-  padding:26px 16px;
-  width:100%;
-  box-sizing:border-box;
+  padding:26px 18px;
+  overflow:hidden;               /* 🔑 UI stability */
 }
 
-/* ICON */
+.upload-card.disabled{
+  opacity:.55;
+  pointer-events:none;
+}
+
 .upload-icon{
   width:66px;
   height:66px;
-  margin:0 auto 18px;
+  margin:6px auto 18px;
   background:#eef2ff;
   border-radius:18px;
   display:flex;
   align-items:center;
   justify-content:center;
 }
+
 .upload-icon svg{
   width:30px;
   height:30px;
   stroke:#2563eb;
 }
 
-/* TEXT */
 .upload-title{
   font-size:18px;
   font-weight:600;
   margin-bottom:4px;
 }
+
 .upload-sub{
   font-size:14px;
   color:var(--text-muted);
 }
 
-/* FILE PREVIEW (ALWAYS PRESENT, HIDDEN BY DEFAULT) */
+/* ======================================================
+   FILE PREVIEW
+====================================================== */
 .file-preview{
   display:none;
   margin-top:18px;
   padding:14px 16px;
   border:1px solid #e5e7eb;
   border-radius:16px;
+  background:#fff;
+
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
 }
-.file-info{
-  overflow:hidden;
-}
+
 .file-name{
   font-size:14px;
   font-weight:500;
-  white-space:nowrap;
+  max-width:100%;
   overflow:hidden;
+  white-space:nowrap;
   text-overflow:ellipsis;
 }
+
 .file-size{
   font-size:13px;
   color:var(--text-muted);
 }
+
 .remove-btn{
   background:none;
   border:none;
@@ -122,42 +133,49 @@ h1{
   flex-shrink:0;
 }
 
-/* =====================================================
-   COMPRESSION LEVELS
-===================================================== */
+/* ======================================================
+   LEVEL CARD
+====================================================== */
 .level-card{
   border:1px solid #e5e7eb;
 }
+
+.level-card.disabled{
+  opacity:.6;
+  pointer-events:none;
+}
+
 .level-option{
   display:flex;
   gap:12px;
   padding:16px;
   border-radius:18px;
-  border:2px solid transparent;
   cursor:pointer;
+  border:2px solid transparent;
   margin-bottom:12px;
 }
+
 .level-option:last-child{
   margin-bottom:0;
 }
+
 .level-option.active{
   background:#eef2ff;
   border-color:#2563eb;
 }
-.level-option input{
-  display:none;
-}
+
 .level-option strong{
   font-size:15px;
 }
+
 .level-option div{
   font-size:14px;
   color:var(--text-muted);
 }
 
-/* =====================================================
-   BUTTON
-===================================================== */
+/* ======================================================
+   MAIN BUTTON
+====================================================== */
 .main-btn{
   width:100%;
   padding:16px;
@@ -169,22 +187,25 @@ h1{
   color:#fff;
   cursor:pointer;
 }
+
 .main-btn:disabled{
   background:#9db8f5;
   cursor:not-allowed;
 }
 
-/* =====================================================
+/* ======================================================
    PROGRESS
-===================================================== */
+====================================================== */
 .progress-box{
   display:none;
   margin-top:22px;
 }
+
 .progress-text{
   font-size:14px;
   margin-bottom:8px;
 }
+
 .progress-bar{
   width:100%;
   height:10px;
@@ -192,6 +213,7 @@ h1{
   border-radius:20px;
   overflow:hidden;
 }
+
 .progress-fill{
   width:0%;
   height:100%;
@@ -199,9 +221,9 @@ h1{
   transition:width .4s ease;
 }
 
-/* =====================================================
+/* ======================================================
    SUCCESS
-===================================================== */
+====================================================== */
 .success{
   display:none;
   background:#0b1220;
@@ -210,35 +232,36 @@ h1{
   padding:40px 24px;
   text-align:center;
 }
+
 .success h2{
   color:#22c55e;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
+
 .stats{
   display:flex;
   justify-content:space-between;
   margin:22px 0;
 }
+
 .stats strong{
   display:block;
   font-size:20px;
   color:#22c55e;
 }
+
 .reduction-percent{
+  margin-top:10px;
   font-size:15px;
   color:#9ca3af;
-  margin-bottom:18px;
 }
 
-/* =====================================================
-   MOBILE SAFETY
-===================================================== */
+/* ======================================================
+   MOBILE
+====================================================== */
 @media(max-width:640px){
   .page{
     padding:28px 14px 40px;
-  }
-  .level-option{
-    padding:14px;
   }
 }
 </style>
@@ -246,7 +269,6 @@ h1{
 
 <body>
 
-<!-- HEADER -->
 <div id="header-container"></div>
 
 <div class="page">
@@ -257,7 +279,7 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 </div>
 
 <!-- ================= UPLOAD ================= -->
-<label class="card upload-card" for="fileInput">
+<label class="card upload-card" id="uploadCard" for="fileInput">
   <input type="file" id="fileInput" accept="application/pdf" hidden>
 
   <div class="upload-icon">
@@ -272,46 +294,43 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
   <div class="upload-sub">Maximum file size: 100MB</div>
 
   <div class="file-preview" id="filePreview">
-    <div class="file-info">
+    <div>
       <div class="file-name" id="fileName"></div>
       <div class="file-size" id="fileSize"></div>
     </div>
-    <button type="button" class="remove-btn"
-      onclick="event.preventDefault(); event.stopPropagation(); removeFile();">
+    <button class="remove-btn" type="button"
+      onclick="event.stopPropagation(); removeFile();">
       Remove
     </button>
   </div>
 </label>
 
 <!-- ================= LEVEL ================= -->
-<div class="card level-card">
-  <label class="level-option active">
-    <input type="radio" name="level" value="medium" checked>
+<div class="card level-card" id="levelCard">
+  <div class="level-option active" data-level="medium">
     <div>
       <strong>Medium</strong>
       <div>Recommended</div>
     </div>
-  </label>
+  </div>
 
-  <label class="level-option">
-    <input type="radio" name="level" value="low">
+  <div class="level-option" data-level="low">
     <div>
       <strong>Low</strong>
       <div>Best quality</div>
     </div>
-  </label>
+  </div>
 
-  <label class="level-option">
-    <input type="radio" name="level" value="high">
+  <div class="level-option" data-level="high">
     <div>
       <strong>High</strong>
       <div>Smaller size</div>
     </div>
-  </label>
+  </div>
 </div>
 
 <button class="main-btn" id="compressBtn" disabled>
-  Compress PDF
+Compress PDF
 </button>
 
 <!-- ================= PROGRESS ================= -->
@@ -336,7 +355,7 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
   <button class="main-btn" id="downloadBtn">Download PDF</button>
   <button class="main-btn" style="background:#fff;color:#111"
     onclick="location.reload()">
-    Compress another
+    Compress another PDF
   </button>
 </div>
 
@@ -352,67 +371,128 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 <script src="/assets/js/cookie.js" defer></script>
 
 <script>
-/* =====================================================
-   COMPRESS TOOL – STATE SAFE JS
-===================================================== */
+/* ======================================================
+   STATE + ELEMENTS
+====================================================== */
+const fileInput   = document.getElementById("fileInput");
+const uploadCard  = document.getElementById("uploadCard");
+const levelCard   = document.getElementById("levelCard");
+const compressBtn = document.getElementById("compressBtn");
 
-const fileInput = document.getElementById("fileInput");
 const preview   = document.getElementById("filePreview");
 const nameEl    = document.getElementById("fileName");
 const sizeEl    = document.getElementById("fileSize");
-const btn       = document.getElementById("compressBtn");
 
 const progressBox  = document.getElementById("progressBox");
 const progressFill = document.getElementById("progressFill");
-const successBox   = document.getElementById("successBox");
+const progressText = document.getElementById("progressText");
+
+const successBox = document.getElementById("successBox");
 
 let selectedFile  = null;
 let selectedLevel = "medium";
 
-/* INITIAL */
-preview.style.display = "none";
-btn.disabled = true;
+/* ======================================================
+   UI STATE CONTROLLER
+====================================================== */
+function setState(state){
+  if(state === "idle"){
+    uploadCard.style.display = "";
+    levelCard.style.display  = "";
+    compressBtn.style.display = "";
 
-/* FILE SELECT */
-fileInput.addEventListener("change", () => {
+    uploadCard.classList.remove("disabled");
+    levelCard.classList.remove("disabled");
+
+    progressBox.style.display = "none";
+    successBox.style.display  = "none";
+
+    compressBtn.disabled = !selectedFile;
+  }
+
+  if(state === "processing"){
+    uploadCard.classList.add("disabled");
+    levelCard.classList.add("disabled");
+    compressBtn.disabled = true;
+
+    uploadCard.style.display = "none";
+    levelCard.style.display  = "none";
+    compressBtn.style.display = "none";
+
+    progressBox.style.display = "block";
+    successBox.style.display  = "none";
+  }
+
+  if(state === "success"){
+    uploadCard.style.display = "none";
+    levelCard.style.display  = "none";
+    compressBtn.style.display = "none";
+    progressBox.style.display = "none";
+
+    successBox.style.display = "block";
+  }
+}
+
+setState("idle");
+
+/* ======================================================
+   FILE HANDLING
+====================================================== */
+fileInput.addEventListener("change", ()=>{
   const file = fileInput.files[0];
-  if (!file) return resetFile();
+  if(!file){
+    resetFile();
+    return;
+  }
 
   selectedFile = file;
   nameEl.textContent = file.name;
-  sizeEl.textContent = (file.size/1024/1024).toFixed(2)+" MB";
+  sizeEl.textContent =
+    (file.size/1024/1024).toFixed(2)+" MB";
+
   preview.style.display = "flex";
-  btn.disabled = false;
+  compressBtn.disabled = false;
 });
 
-/* REMOVE FILE */
 function resetFile(){
   fileInput.value = "";
   preview.style.display = "none";
-  btn.disabled = true;
+  nameEl.textContent = "";
+  sizeEl.textContent = "";
   selectedFile = null;
+  compressBtn.disabled = true;
 }
-function removeFile(){ resetFile(); }
 
-/* LEVEL SELECTION */
+function removeFile(){
+  resetFile();
+}
+
+/* ======================================================
+   LEVEL SELECTION
+====================================================== */
 document.querySelectorAll(".level-option").forEach(opt=>{
   opt.addEventListener("click", ()=>{
-    document.querySelectorAll(".level-option")
+    document
+      .querySelectorAll(".level-option")
       .forEach(o=>o.classList.remove("active"));
+
     opt.classList.add("active");
-    selectedLevel = opt.querySelector("input").value;
+    selectedLevel = opt.dataset.level;
   });
 });
 
-/* START COMPRESSION */
-btn.addEventListener("click", startCompress);
+/* ======================================================
+   COMPRESSION FLOW
+====================================================== */
+compressBtn.addEventListener("click", startCompress);
 
 async function startCompress(){
   if(!selectedFile) return;
 
-  btn.disabled = true;
-  progressBox.style.display="block";
-  progressFill.style.width="20%";
+  setState("processing");
+
+  progressFill.style.width = "20%";
+  progressText.innerText = "Uploading…";
 
   const fd = new FormData();
   fd.append("pdf", selectedFile);
@@ -423,27 +503,31 @@ async function startCompress(){
       method:"POST",
       body:fd
     });
+
     if(!res.ok) throw new Error();
 
-    progressFill.style.width="80%";
+    progressFill.style.width = "80%";
+    progressText.innerText = "Optimizing…";
+
     const blob = await res.blob();
-    progressFill.style.width="100%";
+    progressFill.style.width = "100%";
 
     document.getElementById("origSize").innerText =
       (selectedFile.size/1024/1024).toFixed(2)+" MB";
+
     document.getElementById("compSize").innerText =
       (blob.size/1024/1024).toFixed(2)+" MB";
 
     const percent =
       ((selectedFile.size-blob.size)/selectedFile.size)*100;
+
     document.getElementById("reductionPercent").innerText =
       `Reduced by ${percent.toFixed(1)}%`;
 
-    successBox.style.display="block";
-    successBox.scrollIntoView({behavior:"smooth"});
+    setState("success");
 
-    document.getElementById("downloadBtn").onclick=()=>{
-      const url=URL.createObjectURL(blob);
+    document.getElementById("downloadBtn").onclick = ()=>{
+      const url = URL.createObjectURL(blob);
       const a=document.createElement("a");
       a.href=url;
       a.download="compressed.pdf";
@@ -451,7 +535,7 @@ async function startCompress(){
       URL.revokeObjectURL(url);
     };
 
-  }catch(e){
+  }catch(err){
     alert("Compression failed. Please try again.");
     location.reload();
   }
