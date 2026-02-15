@@ -240,6 +240,14 @@ h1{
   color:#9ca3af;
   margin-top:18px;
 }
+
+  .reduction-percent{
+  margin-top: 10px;
+  font-size: 15px;
+  color: #9ca3af;
+  text-align: center;
+}
+  
 </style>
 </head>
 
@@ -324,6 +332,10 @@ Compress PDF
   <div class="stats">
     <div>Original<strong>2.4 MB</strong></div>
     <div>Compressed<strong>1.1 MB</strong></div>
+  </div>
+
+  <div class="reduction-percent" id="reductionPercent">
+  Reduced by 0%
   </div>
 
   <button class="main-btn" style="margin-bottom:14px">
@@ -472,8 +484,13 @@ const reductionPercent =
   ((selectedFile.size - compressedBytes) / selectedFile.size) * 100;
 
 // Create / update percentage text
-let percentEl = successBox.querySelector(".reduction-percent");
 
+const reductionPercent =
+  ((selectedFile.size - compressedBytes) / selectedFile.size) * 100;
+
+document.getElementById("reductionPercent").innerText =
+  `Reduced by ${reductionPercent.toFixed(1)}%`;
+    
 if (!percentEl) {
   percentEl = document.createElement("div");
   percentEl.className = "reduction-percent";
