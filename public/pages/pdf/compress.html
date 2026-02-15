@@ -489,8 +489,6 @@ async function startCompress() {
 const reductionPercent =
   ((selectedFile.size - compressedBytes) / selectedFile.size) * 100;
 
-// Create / update percentage text
-
 // ==========================
 // Reduction percentage
 // ==========================
@@ -498,9 +496,6 @@ const reductionPercent =
   ((selectedFile.size - compressedBytes) / selectedFile.size) * 100;
 
 document.getElementById("reductionPercent").innerText =
-  `Reduced by ${reductionPercent.toFixed(1)}%`;
-
-percentEl.innerText =
   `Reduced by ${reductionPercent.toFixed(1)}%`;
     // ==========================
     // Download
