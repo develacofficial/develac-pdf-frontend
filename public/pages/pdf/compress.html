@@ -347,8 +347,10 @@ Compress PDF
 <a href="/pages/terms.html">Terms</a>
 </footer>
 
+
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/cookie.js" defer></script>
+
 <script>
 const uploadCard = document.getElementById("uploadCard");
 const fileInput = document.getElementById("fileInput");
@@ -357,117 +359,105 @@ const nameEl = document.getElementById("fileName");
 const sizeEl = document.getElementById("fileSize");
 const btn = document.getElementById("compressBtn");
 
+let selectedFile = null;
+
 uploadCard.onclick = () => fileInput.click();
 
 fileInput.onchange = () => {
   const file = fileInput.files[0];
-  if(!file) return;
+  if (!file) return;
+
+  selectedFile = file;
   nameEl.textContent = file.name;
   sizeEl.textContent = (file.size / 1024 / 1024).toFixed(2) + " MB";
   preview.style.display = "flex";
   btn.disabled = false;
 };
 
-function removeFile(){
+function removeFile() {
   fileInput.value = "";
   preview.style.display = "none";
   btn.disabled = true;
+  selectedFile = null;
 }
 
-document.querySelectorAll(".level-option").forEach(opt=>{
-  opt.onclick = ()=>{
-    document.querySelectorAll(".level-option").forEach(o=>o.classList.remove("active"));
+// Compression level
+let selectedLevel = "medium";
+document.querySelectorAll(".level-option").forEach(opt => {
+  opt.onclick = () => {
+    document.querySelectorAll(".level-option").forEach(o => o.classList.remove("active"));
     opt.classList.add("active");
     opt.querySelector("input").checked = true;
-  }
+    selectedLevel = opt.innerText.toLowerCase().includes("low")
+      ? "low"
+      : opt.innerText.toLowerCase().includes("high")
+      ? "high"
+      : "medium";
+  };
 });
 
-/* ===============================
-   REAL BACKEND COMPRESS LOGIC
-   (UI SAFE)
-================================ */
-async function startCompress(){
+async function startCompress() {
+  if (!selectedFile) return;
 
-  // Hide upload UI
-  uploadCard.style.display = "none";
+  document.getElementById("uploadCard").style.display = "none";
   document.querySelector(".level-card").style.display = "none";
   btn.style.display = "none";
 
   const box = document.getElementById("progressBox");
   const fill = document.getElementById("progressFill");
   const text = document.getElementById("progressText");
+
   box.style.display = "block";
+  text.innerText = "Uploading PDF…";
+  fill.style.width = "20%";
 
-  // Progress animation (fake but smooth)
-  let progress = 0;
-  const steps = ["Uploading…", "Analyzing…", "Compressing…", "Optimizing…"];
-  let stepIndex = 0;
-
-  const progressTimer = setInterval(() => {
-    progress += 8;
-    if (progress > 95) progress = 95;
-    fill.style.width = progress + "%";
-    if (steps[stepIndex]) text.innerText = steps[stepIndex++];
-  }, 400);
+  const formData = new FormData();
+  formData.append("pdf", selectedFile);
+  formData.append("level", selectedLevel);
 
   try {
-    const file = fileInput.files[0];
-    if (!file) throw new Error("No file selected");
-
-    // Get selected level
-    let level = "medium";
-    document.querySelectorAll(".level-option").forEach(opt => {
-      if (opt.classList.contains("active")) {
-        level = opt.querySelector(".level-name").innerText.toLowerCase();
-      }
-    });
-
-    // Build form data
-    const formData = new FormData();
-    formData.append("pdf", file);
-    formData.append("level", level);
-
-    // Call Railway backend
-    const response = await fetch("https://api.develac.com/compress", {
+    const res = await fetch("https://api.develac.com/compress", {
       method: "POST",
       body: formData
     });
 
-    if (!response.ok) throw new Error("Compression failed");
+    if (!res.ok) throw new Error("Compression failed");
 
-    const blob = await response.blob();
-    const downloadUrl = URL.createObjectURL(blob);
+    fill.style.width = "80%";
+    text.innerText = "Optimizing PDF…";
 
-    clearInterval(progressTimer);
+    const blob = await res.blob();
     fill.style.width = "100%";
-    text.innerText = "Completed";
 
-    setTimeout(() => {
-      box.style.display = "none";
-      const successBox = document.getElementById("successBox");
-      successBox.style.display = "block";
-      successBox.scrollIntoView({ behavior: "smooth" });
+    // Success UI
+    box.style.display = "none";
+    const successBox = document.getElementById("successBox");
+    successBox.style.display = "block";
+    successBox.scrollIntoView({ behavior: "smooth" });
 
-      // Download button
-      const downloadBtn = successBox.querySelector("button");
-      downloadBtn.onclick = () => {
-        const a = document.createElement("a");
-        a.href = downloadUrl;
-        a.download = "compressed.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(downloadUrl);
-      };
-    }, 500);
+    // Real sizes
+    successBox.querySelector(".stats div:nth-child(1) strong").innerText =
+      (selectedFile.size / 1024 / 1024).toFixed(2) + " MB";
+
+    successBox.querySelector(".stats div:nth-child(2) strong").innerText =
+      (blob.size / 1024 / 1024).toFixed(2) + " MB";
+
+    // Download
+    const downloadBtn = successBox.querySelector("button");
+    downloadBtn.onclick = () => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "compressed.pdf";
+      a.click();
+      URL.revokeObjectURL(url);
+    };
 
   } catch (err) {
-    clearInterval(progressTimer);
     alert("Compression failed. Please try again.");
     location.reload();
   }
 }
 </script>
-
 </body>
 </html>
