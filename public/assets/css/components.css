@@ -65,8 +65,8 @@
     grid-template-columns:repeat(4,1fr);
   }
 }
-
-.tool-card{
+.tools-grid .tool-card{
+   pointer-events: auto;
   background:#fff;
   border:1px solid var(--border-light);
   border-radius:26px;
@@ -76,7 +76,7 @@
   transition:.25s ease;
 }
 
-.tool-card:hover{
+.tools-grid .tool-card:hover{
   transform:translateY(-6px);
   box-shadow:var(--shadow-md);
 }
