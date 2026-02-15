@@ -347,7 +347,6 @@ Compress PDF
 <a href="/pages/terms.html">Terms</a>
 </footer>
 
-
 <script src="/assets/js/header.js"></script>
 <script src="/assets/js/cookie.js" defer></script>
 
@@ -361,6 +360,9 @@ const btn = document.getElementById("compressBtn");
 
 let selectedFile = null;
 
+// ==========================
+// Upload logic
+// ==========================
 uploadCard.onclick = () => fileInput.click();
 
 fileInput.onchange = () => {
@@ -381,21 +383,31 @@ function removeFile() {
   selectedFile = null;
 }
 
+// ==========================
 // Compression level
+// ==========================
 let selectedLevel = "medium";
+
 document.querySelectorAll(".level-option").forEach(opt => {
   opt.onclick = () => {
-    document.querySelectorAll(".level-option").forEach(o => o.classList.remove("active"));
+    document.querySelectorAll(".level-option").forEach(o =>
+      o.classList.remove("active")
+    );
     opt.classList.add("active");
     opt.querySelector("input").checked = true;
-    selectedLevel = opt.innerText.toLowerCase().includes("low")
+
+    const text = opt.innerText.toLowerCase();
+    selectedLevel = text.includes("low")
       ? "low"
-      : opt.innerText.toLowerCase().includes("high")
+      : text.includes("high")
       ? "high"
       : "medium";
   };
 });
 
+// ==========================
+// Start compression (REAL)
+// ==========================
 async function startCompress() {
   if (!selectedFile) return;
 
@@ -429,20 +441,33 @@ async function startCompress() {
     const blob = await res.blob();
     fill.style.width = "100%";
 
+    // ==========================
+    // REAL compressed size
+    // ==========================
+    const contentLength = res.headers.get("content-length");
+    const compressedBytes = contentLength
+      ? parseInt(contentLength)
+      : blob.size;
+
+    // ==========================
     // Success UI
+    // ==========================
     box.style.display = "none";
     const successBox = document.getElementById("successBox");
     successBox.style.display = "block";
     successBox.scrollIntoView({ behavior: "smooth" });
 
-    // Real sizes
+    // Original size
     successBox.querySelector(".stats div:nth-child(1) strong").innerText =
       (selectedFile.size / 1024 / 1024).toFixed(2) + " MB";
 
+    // Compressed size (REAL)
     successBox.querySelector(".stats div:nth-child(2) strong").innerText =
-      (blob.size / 1024 / 1024).toFixed(2) + " MB";
+      (compressedBytes / 1024 / 1024).toFixed(2) + " MB";
 
+    // ==========================
     // Download
+    // ==========================
     const downloadBtn = successBox.querySelector("button");
     downloadBtn.onclick = () => {
       const url = URL.createObjectURL(blob);
@@ -459,5 +484,6 @@ async function startCompress() {
   }
 }
 </script>
+
 </body>
 </html>
