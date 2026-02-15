@@ -84,9 +84,8 @@ h1{
 }
 
 /* ---------- FILE PREVIEW ---------- */
-
 .file-preview{
-  display: none;
+  display: none;              /* 🔑 DEFAULT HIDDEN */
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -96,7 +95,6 @@ h1{
   border: 1px solid #e5e7eb;
   border-radius: 16px;
 
-  display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
@@ -338,79 +336,140 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
 <script src="/assets/js/cookie.js" defer></script>
 
 <script>
-const fileInput = document.getElementById("fileInput");
-const preview = document.getElementById("filePreview");
-const nameEl = document.getElementById("fileName");
-const sizeEl = document.getElementById("fileSize");
-const btn = document.getElementById("compressBtn");
+const uploadCard = document.getElementById("uploadCard");
+const fileInput  = document.getElementById("fileInput");
+const preview    = document.getElementById("filePreview");
+const nameEl     = document.getElementById("fileName");
+const sizeEl     = document.getElementById("fileSize");
+const btn        = document.getElementById("compressBtn");
 
-let selectedFile = null;
+const progressBox  = document.getElementById("progressBox");
+const progressFill = document.getElementById("progressFill");
+const successBox   = document.getElementById("successBox");
+
+let selectedFile  = null;
 let selectedLevel = "medium";
+
+/* ===============================
+   INITIAL STATE (IMPORTANT)
+================================ */
+preview.style.display = "none";
+btn.disabled = true;
+
+/* ===============================
+   FILE PICKER
+================================ */
+uploadCard.addEventListener("click", () => {
+  fileInput.click();
+});
 
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0];
-  if (!file) return;
+  if (!file) {
+    resetFile();
+    return;
+  }
 
   selectedFile = file;
   nameEl.textContent = file.name;
-  sizeEl.textContent = (file.size/1024/1024).toFixed(2) + " MB";
+  sizeEl.textContent = (file.size / 1024 / 1024).toFixed(2) + " MB";
+
   preview.style.display = "flex";
   btn.disabled = false;
 });
 
-function removeFile(){
+/* ===============================
+   REMOVE FILE
+================================ */
+function resetFile(){
   fileInput.value = "";
   preview.style.display = "none";
+  nameEl.textContent = "";
+  sizeEl.textContent = "";
   btn.disabled = true;
   selectedFile = null;
 }
 
-document.querySelectorAll(".level-option").forEach(opt=>{
-  opt.onclick = ()=>{
-    document.querySelectorAll(".level-option").forEach(o=>o.classList.remove("active"));
+function removeFile(){
+  resetFile();
+}
+
+/* ===============================
+   COMPRESSION LEVEL
+================================ */
+document.querySelectorAll(".level-option").forEach(opt => {
+  opt.addEventListener("click", () => {
+    document.querySelectorAll(".level-option")
+      .forEach(o => o.classList.remove("active"));
+
     opt.classList.add("active");
-    selectedLevel = opt.innerText.toLowerCase().includes("low")
+    opt.querySelector("input").checked = true;
+
+    const text = opt.innerText.toLowerCase();
+    selectedLevel = text.includes("low")
       ? "low"
-      : opt.innerText.toLowerCase().includes("high")
+      : text.includes("high")
       ? "high"
       : "medium";
-  }
+  });
 });
 
+/* ===============================
+   START COMPRESSION
+================================ */
 async function startCompress(){
-  if(!selectedFile) return;
+  if (!selectedFile) return;
 
-  document.getElementById("progressBox").style.display="block";
-  document.getElementById("progressFill").style.width="20%";
+  progressBox.style.display = "block";
+  progressFill.style.width = "20%";
+  btn.disabled = true;
 
   const fd = new FormData();
   fd.append("pdf", selectedFile);
   fd.append("level", selectedLevel);
 
-  const res = await fetch("https://api.develac.com/compress",{method:"POST",body:fd});
-  const blob = await res.blob();
+  try {
+    const res = await fetch("https://api.develac.com/compress", {
+      method: "POST",
+      body: fd
+    });
 
-  document.getElementById("progressFill").style.width="100%";
+    if (!res.ok) throw new Error("Compression failed");
 
-  document.getElementById("origSize").innerText =
-    (selectedFile.size/1024/1024).toFixed(2)+" MB";
-  document.getElementById("compSize").innerText =
-    (blob.size/1024/1024).toFixed(2)+" MB";
+    progressFill.style.width = "80%";
+    const blob = await res.blob();
+    progressFill.style.width = "100%";
 
-  const percent = ((selectedFile.size-blob.size)/selectedFile.size)*100;
-  document.getElementById("reductionPercent").innerText =
-    `Reduced by ${percent.toFixed(1)}%`;
+    // Sizes
+    document.getElementById("origSize").innerText =
+      (selectedFile.size / 1024 / 1024).toFixed(2) + " MB";
 
-  document.getElementById("successBox").style.display="block";
+    document.getElementById("compSize").innerText =
+      (blob.size / 1024 / 1024).toFixed(2) + " MB";
 
-  document.getElementById("downloadBtn").onclick=()=>{
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href=url;
-    a.download="compressed.pdf";
-    a.click();
-    URL.revokeObjectURL(url);
-  };
+    const percent =
+      ((selectedFile.size - blob.size) / selectedFile.size) * 100;
+
+    document.getElementById("reductionPercent").innerText =
+      `Reduced by ${percent.toFixed(1)}%`;
+
+    successBox.style.display = "block";
+    successBox.scrollIntoView({ behavior: "smooth" });
+
+    // Download
+    document.getElementById("downloadBtn").onclick = () => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "compressed.pdf";
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+  } catch (err) {
+    alert("Compression failed. Please try again.");
+    location.reload();
+  }
 }
 </script>
 
