@@ -72,3 +72,9 @@
     font-size: 30px;
   }
 }
+/* FIX COOKIE BANNER ON TOOLS PAGE */
+.tools-page,
+.page-wrapper,
+main {
+  overflow: visible !important;
+}
