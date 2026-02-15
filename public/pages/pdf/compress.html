@@ -42,16 +42,18 @@ h1{
 }
 
 /* ---------- UPLOAD CARD ---------- */
-.upload-card{
-  display: block;              /* 🔑 MOST IMPORTANT */
+
+  .upload-card{
+  display: block;
   width: 100%;
+  max-width: 100%;          /* 🔑 prevent overflow */
+  box-sizing: border-box;  /* 🔑 */
   border: 2px dashed #e5e7eb;
   border-radius: 26px;
   text-align: center;
   cursor: pointer;
-  padding: 28px 22px;
-}
-  
+  padding: 24px 16px;      /* 🔑 mobile friendly */
+  }
 
 .upload-icon{
   width:66px;
@@ -82,24 +84,32 @@ h1{
 }
 
 /* ---------- FILE PREVIEW ---------- */
+
 .file-preview{
+  display: none;
   width: 100%;
-  display:none;
-  margin-top:18px;
-  padding:14px 16px;
-  border:1px solid #e5e7eb;
-  border-radius:16px;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  margin-top: 18px;
+  padding: 12px 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.file-name{
-  font-size:14px;
-  font-weight:500;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  .file-name{
+  font-size: 14px;
+  font-weight: 500;
+
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;   /* 🔑 no wrapping */
 }
 
 .file-size{
@@ -108,11 +118,12 @@ h1{
 }
 
 .remove-btn{
-  background:none;
-  border:none;
-  color:#ef4444;
-  font-weight:600;
-  cursor:pointer;
+  flex-shrink: 0;       /* 🔑 prevents pushing layout */
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 /* ---------- LEVEL ---------- */
@@ -201,6 +212,25 @@ h1{
   font-size:15px;
   color:#9ca3af;
 }
+
+  @media (max-width: 640px){
+
+  .level-option{
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 14px;
+  }
+
+  .level-card{
+    padding: 18px 14px;
+  }
+
+  .page{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  }
+  
 </style>
 </head>
 
