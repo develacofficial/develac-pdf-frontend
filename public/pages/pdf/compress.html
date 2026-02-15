@@ -363,7 +363,7 @@ fileInput.onchange = () => {
   const file = fileInput.files[0];
   if(!file) return;
   nameEl.textContent = file.name;
-  sizeEl.textContent = (file.size/1024/1024).toFixed(2) + " MB";
+  sizeEl.textContent = (file.size / 1024 / 1024).toFixed(2) + " MB";
   preview.style.display = "flex";
   btn.disabled = false;
 };
@@ -382,33 +382,90 @@ document.querySelectorAll(".level-option").forEach(opt=>{
   }
 });
 
-function startCompress(){
-  document.getElementById("uploadCard").style.display="none";
-  document.querySelector(".level-card").style.display="none";
-  btn.style.display="none";
+/* ===============================
+   REAL BACKEND COMPRESS LOGIC
+   (UI SAFE)
+================================ */
+async function startCompress(){
 
-  const box=document.getElementById("progressBox");
-  const fill=document.getElementById("progressFill");
-  const text=document.getElementById("progressText");
-  box.style.display="block";
+  // Hide upload UI
+  uploadCard.style.display = "none";
+  document.querySelector(".level-card").style.display = "none";
+  btn.style.display = "none";
 
-  let p=0;
-  const steps=["Uploading…","Analyzing…","Compressing…","Optimizing…"];
-  let i=0;
+  const box = document.getElementById("progressBox");
+  const fill = document.getElementById("progressFill");
+  const text = document.getElementById("progressText");
+  box.style.display = "block";
 
-  const t=setInterval(()=>{
-    p+=10;
-    fill.style.width=p+"%";
-    if(p%25===0 && steps[i]) text.innerText=steps[i++];
-    if(p>=100){
-      clearInterval(t);
-      setTimeout(()=>{
-        box.style.display="none";
-        document.getElementById("successBox").style.display="block";
-        document.getElementById("successBox").scrollIntoView({behavior:"smooth"});
-      },400);
-    }
-  },400);
+  // Progress animation (fake but smooth)
+  let progress = 0;
+  const steps = ["Uploading…", "Analyzing…", "Compressing…", "Optimizing…"];
+  let stepIndex = 0;
+
+  const progressTimer = setInterval(() => {
+    progress += 8;
+    if (progress > 95) progress = 95;
+    fill.style.width = progress + "%";
+    if (steps[stepIndex]) text.innerText = steps[stepIndex++];
+  }, 400);
+
+  try {
+    const file = fileInput.files[0];
+    if (!file) throw new Error("No file selected");
+
+    // Get selected level
+    let level = "medium";
+    document.querySelectorAll(".level-option").forEach(opt => {
+      if (opt.classList.contains("active")) {
+        level = opt.querySelector(".level-name").innerText.toLowerCase();
+      }
+    });
+
+    // Build form data
+    const formData = new FormData();
+    formData.append("pdf", file);
+    formData.append("level", level);
+
+    // Call Railway backend
+    const response = await fetch("https://api.develac.com/compress", {
+      method: "POST",
+      body: formData
+    });
+
+    if (!response.ok) throw new Error("Compression failed");
+
+    const blob = await response.blob();
+    const downloadUrl = URL.createObjectURL(blob);
+
+    clearInterval(progressTimer);
+    fill.style.width = "100%";
+    text.innerText = "Completed";
+
+    setTimeout(() => {
+      box.style.display = "none";
+      const successBox = document.getElementById("successBox");
+      successBox.style.display = "block";
+      successBox.scrollIntoView({ behavior: "smooth" });
+
+      // Download button
+      const downloadBtn = successBox.querySelector("button");
+      downloadBtn.onclick = () => {
+        const a = document.createElement("a");
+        a.href = downloadUrl;
+        a.download = "compressed.pdf";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(downloadUrl);
+      };
+    }, 500);
+
+  } catch (err) {
+    clearInterval(progressTimer);
+    alert("Compression failed. Please try again.");
+    location.reload();
+  }
 }
 </script>
 
