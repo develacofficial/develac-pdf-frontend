@@ -466,6 +466,27 @@ async function startCompress() {
       (compressedBytes / 1024 / 1024).toFixed(2) + " MB";
 
     // ==========================
+// Reduction percentage
+// ==========================
+const reductionPercent =
+  ((selectedFile.size - compressedBytes) / selectedFile.size) * 100;
+
+// Create / update percentage text
+let percentEl = successBox.querySelector(".reduction-percent");
+
+if (!percentEl) {
+  percentEl = document.createElement("div");
+  percentEl.className = "reduction-percent";
+  percentEl.style.marginTop = "12px";
+  percentEl.style.fontSize = "15px";
+  percentEl.style.color = "#9ca3af";
+  percentEl.style.textAlign = "center";
+  successBox.querySelector(".stats").after(percentEl);
+}
+
+percentEl.innerText =
+  `Reduced by ${reductionPercent.toFixed(1)}%`;
+    // ==========================
     // Download
     // ==========================
     const downloadBtn = successBox.querySelector("button");
