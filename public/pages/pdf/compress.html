@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Compress PDF – Develac</title>
 
-<!-- GLOBAL STYLES -->
 <link rel="stylesheet" href="/assets/css/theme.css">
 <link rel="stylesheet" href="/assets/css/layout.css">
 <link rel="stylesheet" href="/assets/css/components.css">
@@ -13,122 +12,41 @@
 <link rel="stylesheet" href="/assets/css/cookie.css">
 
 <style>
-/* ---------- PAGE ---------- */
-.page{
-  max-width:760px;
-  margin:auto;
-  padding:32px 18px 40px;
-}
+.page{max-width:760px;margin:auto;padding:32px 18px 40px}
+h1{text-align:center;font-size:30px;margin-bottom:8px}
+.sub{text-align:center;color:var(--text-muted);font-size:15px;margin-bottom:34px}
 
-h1{
-  text-align:center;
-  font-size:30px;
-  margin-bottom:8px;
-}
+.card{background:#fff;border-radius:26px;padding:28px 22px;margin-bottom:26px}
 
-.sub{
-  text-align:center;
-  color:var(--text-muted);
-  font-size:15px;
-  margin-bottom:34px;
-}
-
-/* ---------- CARD ---------- */
-.card{
-  background:#fff;
+/* UPLOAD */
+.upload-card{
+  width:100%;
+  border:2px dashed #e5e7eb;
   border-radius:26px;
-  padding:28px 22px;
-  margin-bottom:26px;
+  text-align:center;
+  cursor:pointer;
+  padding:24px 16px;
 }
+.upload-icon{width:66px;height:66px;margin:6px auto 18px;background:#eef2ff;border-radius:18px;display:flex;align-items:center;justify-content:center}
+.upload-icon svg{width:30px;height:30px;stroke:#2563eb}
 
-/* ---------- UPLOAD CARD ---------- */
-
-  .upload-card{
-  display: block;
-  width: 100%;
-  max-width: 100%;          /* 🔑 prevent overflow */
-  box-sizing: border-box;  /* 🔑 */
-  border: 2px dashed #e5e7eb;
-  border-radius: 26px;
-  text-align: center;
-  cursor: pointer;
-  padding: 24px 16px;      /* 🔑 mobile friendly */
-  }
-
-.upload-icon{
-  width:66px;
-  height:66px;
-  margin:6px auto 18px;
-  background:#eef2ff;
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.upload-icon svg{
-  width:30px;
-  height:30px;
-  stroke:#2563eb;
-}
-
-.upload-title{
-  font-size:18px;
-  font-weight:600;
-  margin-bottom:4px;
-}
-
-.upload-sub{
-  font-size:14px;
-  color:var(--text-muted);
-}
-
-/* ---------- FILE PREVIEW ---------- */
 .file-preview{
-  display: none;              /* 🔑 DEFAULT HIDDEN */
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-
-  margin-top: 18px;
-  padding: 12px 14px;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-  .file-name{
-  font-size: 14px;
-  font-weight: 500;
-
-  max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;   /* 🔑 no wrapping */
-}
-
-.file-size{
-  font-size:13px;
-  color:var(--text-muted);
-}
-
-.remove-btn{
-  flex-shrink: 0;       /* 🔑 prevents pushing layout */
-  background: none;
-  border: none;
-  color: #ef4444;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* ---------- LEVEL ---------- */
-.level-card{
+  display:none;
+  margin-top:18px;
+  padding:12px 14px;
   border:1px solid #e5e7eb;
+  border-radius:16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
+.file-name{font-size:14px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-size{font-size:13px;color:var(--text-muted)}
+.remove-btn{background:none;border:none;color:#ef4444;font-weight:600;cursor:pointer}
 
+/* LEVEL */
+.level-card{border:1px solid #e5e7eb}
 .level-option{
   display:flex;
   gap:12px;
@@ -138,97 +56,12 @@ h1{
   border:2px solid transparent;
   margin-bottom:12px;
 }
+.level-option input{accent-color:#2563eb}
+.level-option.active{background:#eef2ff;border-color:#2563eb}
 
-.level-option.active{
-  background:#eef2ff;
-  border-color:#2563eb;
-}
-
-/* ---------- BUTTON ---------- */
-.main-btn{
-  width:100%;
-  padding:16px;
-  border-radius:16px;
-  font-size:16px;
-  font-weight:600;
-  border:none;
-  background:#2563eb;
-  color:#fff;
-  cursor:pointer;
-}
-
-.main-btn:disabled{
-  background:#9db8f5;
-  cursor:not-allowed;
-}
-
-/* ---------- PROGRESS ---------- */
-.progress-box{
-  display:none;
-  margin-top:20px;
-}
-
-.progress-bar{
-  width:100%;
-  height:10px;
-  background:#e5e7eb;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.progress-fill{
-  width:0%;
-  height:100%;
-  background:#2563eb;
-  transition:width .4s ease;
-}
-
-/* ---------- SUCCESS ---------- */
-.success{
-  display:none;
-  background:#0b1220;
-  color:#e5e7eb;
-  border-radius:26px;
-  padding:40px 24px;
-  text-align:center;
-}
-
-.stats{
-  display:flex;
-  justify-content:space-between;
-  margin:22px 0;
-}
-
-.stats strong{
-  display:block;
-  font-size:20px;
-  color:#22c55e;
-}
-
-.reduction-percent{
-  margin-top:10px;
-  font-size:15px;
-  color:#9ca3af;
-}
-
-  @media (max-width: 640px){
-
-  .level-option{
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 14px;
-  }
-
-  .level-card{
-    padding: 18px 14px;
-  }
-
-  .page{
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-  }
-  
+/* BUTTON */
+.main-btn{width:100%;padding:16px;border-radius:16px;font-size:16px;font-weight:600;border:none;background:#2563eb;color:#fff;cursor:pointer}
+.main-btn:disabled{background:#9db8f5;cursor:not-allowed}
 </style>
 </head>
 
@@ -237,240 +70,86 @@ h1{
 <div id="header-container"></div>
 
 <div class="page">
-
 <h1>Compress PDF</h1>
-<div class="sub">
-Reduce PDF file size without losing quality. Fast, secure and privacy-first.
-</div>
+<div class="sub">Reduce PDF file size without losing quality.</div>
 
-<!-- ✅ UPLOAD (LABEL FIX) -->
-<label class="card upload-card" for="fileInput">
+<!-- UPLOAD -->
+<label class="card upload-card">
   <input type="file" id="fileInput" accept="application/pdf" hidden>
 
   <div class="upload-icon">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
-      <path d="M12 3v12"/>
-      <path d="M7 8l5-5 5 5"/>
-      <rect x="4" y="15" width="16" height="6"/>
+      <path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><rect x="4" y="15" width="16" height="6"/>
     </svg>
   </div>
 
-  <div class="upload-title">Click or tap to select PDF file</div>
-  <div class="upload-sub">Maximum file size: 100MB</div>
-
+  <div><strong>Click or tap to select PDF</strong></div>
   <div class="file-preview" id="filePreview">
     <div>
       <div class="file-name" id="fileName"></div>
       <div class="file-size" id="fileSize"></div>
     </div>
-    <button
-  class="remove-btn"
-  type="button"
-  onclick="event.stopPropagation(); removeFile();"
->
-  Remove
-</button>
+    <button type="button" class="remove-btn" onclick="removeFile()">Remove</button>
   </div>
 </label>
 
 <!-- LEVEL -->
 <div class="card level-card">
   <label class="level-option active">
-    <input type="radio" name="level" checked hidden>
-    <div>
-      <strong>Medium</strong>
-      <div>Recommended</div>
-    </div>
+    <input type="radio" name="level" value="medium" checked>
+    <div><strong>Medium</strong><div>Recommended</div></div>
   </label>
 
   <label class="level-option">
-    <input type="radio" name="level" hidden>
-    <div>
-      <strong>Low</strong>
-      <div>Best quality</div>
-    </div>
+    <input type="radio" name="level" value="low">
+    <div><strong>Low</strong><div>Best quality</div></div>
   </label>
 
   <label class="level-option">
-    <input type="radio" name="level" hidden>
-    <div>
-      <strong>High</strong>
-      <div>Smaller size</div>
-    </div>
+    <input type="radio" name="level" value="high">
+    <div><strong>High</strong><div>Smaller size</div></div>
   </label>
 </div>
 
-<button class="main-btn" id="compressBtn" disabled onclick="startCompress()">Compress PDF</button>
-
-<div class="progress-box" id="progressBox">
-  <div id="progressText">Uploading…</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
+<button class="main-btn" id="compressBtn" disabled>Compress PDF</button>
 </div>
-
-<!-- SUCCESS -->
-<div class="success" id="successBox">
-  <h2>Your PDF is ready</h2>
-
-  <div class="stats">
-    <div>Original<strong id="origSize">0 MB</strong></div>
-    <div>Compressed<strong id="compSize">0 MB</strong></div>
-  </div>
-
-  <div class="reduction-percent" id="reductionPercent"></div>
-
-  <button class="main-btn" id="downloadBtn">Download PDF</button>
-  <button class="main-btn" style="background:#fff;color:#111" onclick="location.reload()">Compress another</button>
-</div>
-
-</div>
-
-<footer class="footer">
-© 2026 Develac ·
-<a href="/pages/privacy.html">Privacy</a> ·
-<a href="/pages/terms.html">Terms</a>
-</footer>
-
-<script src="/assets/js/header.js"></script>
-<script src="/assets/js/cookie.js" defer></script>
 
 <script>
-const uploadCard = document.getElementById("uploadCard");
-const fileInput  = document.getElementById("fileInput");
-const preview    = document.getElementById("filePreview");
-const nameEl     = document.getElementById("fileName");
-const sizeEl     = document.getElementById("fileSize");
-const btn        = document.getElementById("compressBtn");
+const fileInput = document.getElementById("fileInput");
+const preview = document.getElementById("filePreview");
+const nameEl = document.getElementById("fileName");
+const sizeEl = document.getElementById("fileSize");
+const btn = document.getElementById("compressBtn");
 
-const progressBox  = document.getElementById("progressBox");
-const progressFill = document.getElementById("progressFill");
-const successBox   = document.getElementById("successBox");
-
-let selectedFile  = null;
+let selectedFile = null;
 let selectedLevel = "medium";
 
-/* ===============================
-   INITIAL STATE (IMPORTANT)
-================================ */
-preview.style.display = "none";
-btn.disabled = true;
-
-/* ===============================
-   FILE PICKER
-================================ */
-uploadCard.addEventListener("click", () => {
-  fileInput.click();
-});
-
-fileInput.addEventListener("change", () => {
+fileInput.addEventListener("change",()=>{
   const file = fileInput.files[0];
-  if (!file) {
-    resetFile();
-    return;
-  }
+  if(!file) return;
 
   selectedFile = file;
   nameEl.textContent = file.name;
-  sizeEl.textContent = (file.size / 1024 / 1024).toFixed(2) + " MB";
-
-  preview.style.display = "flex";
-  btn.disabled = false;
+  sizeEl.textContent = (file.size/1024/1024).toFixed(2)+" MB";
+  preview.style.display="flex";
+  btn.disabled=false;
 });
-
-/* ===============================
-   REMOVE FILE
-================================ */
-function resetFile(){
-  fileInput.value = "";
-  preview.style.display = "none";
-  nameEl.textContent = "";
-  sizeEl.textContent = "";
-  btn.disabled = true;
-  selectedFile = null;
-}
 
 function removeFile(){
-  resetFile();
+  fileInput.value="";
+  preview.style.display="none";
+  btn.disabled=true;
+  selectedFile=null;
 }
 
-/* ===============================
-   COMPRESSION LEVEL
-================================ */
-document.querySelectorAll(".level-option").forEach(opt => {
-  opt.addEventListener("click", () => {
-    document.querySelectorAll(".level-option")
-      .forEach(o => o.classList.remove("active"));
-
+document.querySelectorAll(".level-option").forEach(opt=>{
+  opt.onclick=()=>{
+    document.querySelectorAll(".level-option").forEach(o=>o.classList.remove("active"));
     opt.classList.add("active");
-    opt.querySelector("input").checked = true;
-
-    const text = opt.innerText.toLowerCase();
-    selectedLevel = text.includes("low")
-      ? "low"
-      : text.includes("high")
-      ? "high"
-      : "medium";
-  });
-});
-
-/* ===============================
-   START COMPRESSION
-================================ */
-async function startCompress(){
-  if (!selectedFile) return;
-
-  progressBox.style.display = "block";
-  progressFill.style.width = "20%";
-  btn.disabled = true;
-
-  const fd = new FormData();
-  fd.append("pdf", selectedFile);
-  fd.append("level", selectedLevel);
-
-  try {
-    const res = await fetch("https://api.develac.com/compress", {
-      method: "POST",
-      body: fd
-    });
-
-    if (!res.ok) throw new Error("Compression failed");
-
-    progressFill.style.width = "80%";
-    const blob = await res.blob();
-    progressFill.style.width = "100%";
-
-    // Sizes
-    document.getElementById("origSize").innerText =
-      (selectedFile.size / 1024 / 1024).toFixed(2) + " MB";
-
-    document.getElementById("compSize").innerText =
-      (blob.size / 1024 / 1024).toFixed(2) + " MB";
-
-    const percent =
-      ((selectedFile.size - blob.size) / selectedFile.size) * 100;
-
-    document.getElementById("reductionPercent").innerText =
-      `Reduced by ${percent.toFixed(1)}%`;
-
-    successBox.style.display = "block";
-    successBox.scrollIntoView({ behavior: "smooth" });
-
-    // Download
-    document.getElementById("downloadBtn").onclick = () => {
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "compressed.pdf";
-      a.click();
-      URL.revokeObjectURL(url);
-    };
-
-  } catch (err) {
-    alert("Compression failed. Please try again.");
-    location.reload();
+    opt.querySelector("input").checked=true;
+    selectedLevel = opt.querySelector("input").value;
   }
-}
+});
 </script>
 
 </body>
