@@ -1,17 +1,22 @@
 /* ================================
    SITE HEADER
 ================================ */
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
   background: #ffffff;
   border-bottom: 1px solid #e5e7eb;
-  overflow: visible;   /* 👈 ADD */
+
+  /* 🔑 IMPORTANT: allow dropdown nav to flow */
+  overflow: visible;
 }
 
+/* ================================
+   HEADER INNER
+================================ */
 
-/* Inner layout */
 .header-inner {
   max-width: 1200px;
   margin: 0 auto;
@@ -21,7 +26,10 @@
   justify-content: space-between;
 }
 
-/* Logo */
+/* ================================
+   LOGO
+================================ */
+
 .logo {
   font-size: 20px;
   font-weight: 700;
@@ -29,7 +37,10 @@
   text-decoration: none;
 }
 
-/* Menu button */
+/* ================================
+   MENU BUTTON (MOBILE)
+================================ */
+
 .menu-btn {
   font-size: 22px;
   background: none;
@@ -43,18 +54,33 @@
 ================================ */
 
 .mobile-nav {
-  display: none;
+  /* layout */
+  display: flex;
   flex-direction: column;
   background: #ffffff;
   border-top: 1px solid #e5e7eb;
+
+  /* positioning */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+
+  /* 🔑 CRITICAL FIX */
+  pointer-events: none;
+  opacity: 0;
+
+  /* smooth */
+  transition: opacity 0.2s ease;
 }
 
-/* Open state */
+/* OPEN STATE */
 .mobile-nav.open {
-  display: flex;
+  pointer-events: auto;
+  opacity: 1;
 }
 
-/* Links */
+/* NAV LINKS */
 .mobile-nav a {
   padding: 14px 18px;
   font-size: 16px;
@@ -77,9 +103,13 @@
   }
 
   .mobile-nav {
-    display: flex;
+    position: static;
     flex-direction: row;
     border-top: none;
+
+    /* desktop must always be clickable */
+    pointer-events: auto;
+    opacity: 1;
   }
 
   .mobile-nav a {
@@ -104,31 +134,8 @@
   margin-right: 8px;
 }
 
-/* Hide back button on desktop home spacing */
 @media (min-width: 768px) {
   .back-btn {
     margin-right: 12px;
   }
-     }
-/* Prevent hidden mobile nav from blocking clicks */
-.mobile-nav {
-  pointer-events: none;
-}
-
-.mobile-nav.open {
-  pointer-events: auto;
-}
-
-/* ================================
-   FIX: Invisible mobile nav blocking clicks
-================================ */
-
-/* When mobile nav is CLOSED */
-.mobile-nav {
-  pointer-events: none;
-}
-
-/* When mobile nav is OPEN */
-.mobile-nav.open {
-  pointer-events: auto;
 }
