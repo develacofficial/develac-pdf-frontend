@@ -43,10 +43,15 @@ h1{
 
 /* ---------- UPLOAD CARD ---------- */
 .upload-card{
-  border:2px dashed #e5e7eb;
-  text-align:center;
-  cursor:pointer;
+  display: block;              /* 🔑 MOST IMPORTANT */
+  width: 100%;
+  border: 2px dashed #e5e7eb;
+  border-radius: 26px;
+  text-align: center;
+  cursor: pointer;
+  padding: 28px 22px;
 }
+  
 
 .upload-icon{
   width:66px;
@@ -78,6 +83,7 @@ h1{
 
 /* ---------- FILE PREVIEW ---------- */
 .file-preview{
+  width: 100%;
   display:none;
   margin-top:18px;
   padding:14px 16px;
@@ -229,7 +235,13 @@ Reduce PDF file size without losing quality. Fast, secure and privacy-first.
       <div class="file-name" id="fileName"></div>
       <div class="file-size" id="fileSize"></div>
     </div>
-    <button class="remove-btn" type="button" onclick="removeFile()">Remove</button>
+    <button
+  class="remove-btn"
+  type="button"
+  onclick="event.stopPropagation(); removeFile();"
+>
+  Remove
+</button>
   </div>
 </label>
 
