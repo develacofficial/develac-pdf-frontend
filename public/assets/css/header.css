@@ -118,3 +118,17 @@
 .mobile-nav.open {
   pointer-events: auto;
 }
+
+/* ================================
+   FIX: Invisible mobile nav blocking clicks
+================================ */
+
+/* When mobile nav is CLOSED */
+.mobile-nav {
+  pointer-events: none;
+}
+
+/* When mobile nav is OPEN */
+.mobile-nav.open {
+  pointer-events: auto;
+}
