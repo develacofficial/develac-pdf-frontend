@@ -13,6 +13,9 @@
   <link rel="stylesheet" href="/assets/css/cookie.css">
 
   <style>
+    /* ===============================
+       PAGE
+    ================================ */
     .page{
       max-width:760px;
       margin:auto;
@@ -39,7 +42,9 @@
       margin-bottom:24px;
     }
 
-    /* UPLOAD */
+    /* ===============================
+       UPLOAD
+    ================================ */
     .upload-card{
       border:2px dashed #e5e7eb;
       text-align:center;
@@ -67,28 +72,18 @@
       color:var(--text-muted);
     }
 
-    /* FILE LIST */
+    /* ===============================
+       FILE LIST
+    ================================ */
     .file-list{
       display:none;
       margin-top:16px;
     }
 
-    .add-more-btn{
-      width:100%;
-      padding:14px;
-      margin-bottom:14px;
-      border-radius:14px;
-      border:1px dashed #2563eb;
-      background:#eef2ff;
-      color:#2563eb;
-      font-weight:600;
-      cursor:pointer;
-    }
-
     .file-item{
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       padding:12px 14px;
       border:1px solid #e5e7eb;
       border-radius:16px;
@@ -96,13 +91,17 @@
       gap:10px;
     }
 
+    .file-info{
+      overflow:hidden;
+    }
+
     .file-name{
       font-size:14px;
       font-weight:500;
-      max-width:220px;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      max-width:220px;
     }
 
     .file-size{
@@ -112,7 +111,8 @@
 
     .file-actions{
       display:flex;
-      gap:6px;
+      gap:8px;
+      flex-shrink:0;
     }
 
     .icon-btn{
@@ -121,9 +121,22 @@
       border-radius:10px;
       padding:6px 8px;
       cursor:pointer;
+      font-size:14px;
     }
 
-    /* BUTTON */
+    .add-more{
+      text-align:center;
+      margin:12px 0 20px;
+      font-size:14px;
+      font-weight:600;
+      color:#2563eb;
+      cursor:pointer;
+      display:none;
+    }
+
+    /* ===============================
+       BUTTON
+    ================================ */
     .main-btn{
       width:100%;
       padding:16px;
@@ -141,7 +154,9 @@
       cursor:not-allowed;
     }
 
-    /* PROGRESS */
+    /* ===============================
+       PROGRESS
+    ================================ */
     .progress-box{
       display:none;
       margin-top:20px;
@@ -162,7 +177,9 @@
       transition:width .4s ease;
     }
 
-    /* SUCCESS */
+    /* ===============================
+       SUCCESS
+    ================================ */
     .success{
       display:none;
       background:#0b1220;
@@ -192,10 +209,12 @@
 <div class="page">
 
   <h1>Merge PDF</h1>
-  <div class="sub">Combine multiple PDF files into one document securely.</div>
+  <div class="sub">
+    Combine multiple PDF files into one document securely.
+  </div>
 
   <!-- UPLOAD -->
-  <label class="card upload-card" id="uploadCard">
+  <label class="card upload-card" for="fileInput">
     <input type="file" id="fileInput" accept="application/pdf" multiple hidden>
 
     <div class="upload-icon">
@@ -211,9 +230,8 @@
   </label>
 
   <!-- FILE LIST -->
-  <div class="file-list" id="fileList">
-    <button class="add-more-btn" onclick="addMoreFiles()">+ Add more files</button>
-  </div>
+  <div class="file-list" id="fileList"></div>
+  <div class="add-more" id="addMoreBtn">+ Add more files</div>
 
   <button class="main-btn" id="mergeBtn" disabled>Merge PDF</button>
 
@@ -247,106 +265,133 @@
 <script src="/assets/js/cookie.js" defer></script>
 
 <script>
+/* ======================================================
+   DATA
+====================================================== */
 let files = [];
 
-const uploadCard = document.getElementById("uploadCard");
-const fileInput = document.getElementById("fileInput");
-const fileListEl = document.getElementById("fileList");
-const mergeBtn = document.getElementById("mergeBtn");
-const progressBox = document.getElementById("progressBox");
+/* ======================================================
+   ELEMENTS
+====================================================== */
+const fileInput    = document.getElementById("fileInput");
+const fileListEl   = document.getElementById("fileList");
+const addMoreBtn   = document.getElementById("addMoreBtn");
+const mergeBtn     = document.getElementById("mergeBtn");
+const progressBox  = document.getElementById("progressBox");
 const progressFill = document.getElementById("progressFill");
 const progressText = document.getElementById("progressText");
-const successBox = document.getElementById("successBox");
-const summaryText = document.getElementById("summaryText");
+const successBox   = document.getElementById("successBox");
+const summaryText  = document.getElementById("summaryText");
 
-uploadCard.onclick = () => fileInput.click();
+/* ======================================================
+   FILE HANDLING
+====================================================== */
+fileInput.addEventListener("change", () => {
+  const selected = Array.from(fileInput.files);
 
-fileInput.onchange = () => {
-  Array.from(fileInput.files).forEach(f=>{
-    if(files.length < 10) files.push(f);
+  selected.forEach(file => {
+    if(files.length < 10){
+      files.push(file);
+    }
   });
-  renderFiles();
-};
 
-function addMoreFiles(){
+  renderFiles();
+});
+
+addMoreBtn.addEventListener("click", () => {
   fileInput.click();
-}
+});
 
 function renderFiles(){
-  fileListEl.style.display = "block";
-  fileListEl.innerHTML = `<button class="add-more-btn" onclick="addMoreFiles()">+ Add more files</button>`;
+  fileListEl.innerHTML = "";
 
-  files.forEach((f,i)=>{
-    fileListEl.innerHTML += `
-      <div class="file-item">
-        <div>
-          <div class="file-name">${f.name}</div>
-          <div class="file-size">${(f.size/1024/1024).toFixed(2)} MB</div>
-        </div>
-        <div class="file-actions">
-          <button class="icon-btn" onclick="moveUp(${i})">↑</button>
-          <button class="icon-btn" onclick="moveDown(${i})">↓</button>
-          <button class="icon-btn" onclick="removeFile(${i})">✕</button>
-        </div>
+  files.forEach((file, index) => {
+    const div = document.createElement("div");
+    div.className = "file-item";
+
+    div.innerHTML = `
+      <div class="file-info">
+        <div class="file-name">${file.name}</div>
+        <div class="file-size">${(file.size/1024/1024).toFixed(2)} MB</div>
+      </div>
+      <div class="file-actions">
+        <button class="icon-btn" onclick="moveUp(${index})">↑</button>
+        <button class="icon-btn" onclick="moveDown(${index})">↓</button>
+        <button class="icon-btn" onclick="removeFile(${index})">✕</button>
       </div>
     `;
+
+    fileListEl.appendChild(div);
   });
 
+  fileListEl.style.display = files.length ? "block" : "none";
+  addMoreBtn.style.display = files.length ? "block" : "none";
   mergeBtn.disabled = files.length < 2;
 }
 
-function removeFile(i){
-  files.splice(i,1);
-  files.length ? renderFiles() : location.reload();
-}
-
-function moveUp(i){
-  if(i===0) return;
-  [files[i-1],files[i]]=[files[i],files[i-1]];
+function removeFile(index){
+  files.splice(index, 1);
   renderFiles();
 }
 
-function moveDown(i){
-  if(i===files.length-1) return;
-  [files[i+1],files[i]]=[files[i],files[i+1]];
+function moveUp(index){
+  if(index === 0) return;
+  [files[index - 1], files[index]] = [files[index], files[index - 1]];
   renderFiles();
 }
 
-mergeBtn.onclick = async ()=>{
-  progressBox.style.display="block";
-  let percent=0;
-  const interval=setInterval(()=>{
-    if(percent<90){
-      percent+=5;
-      progressFill.style.width=percent+"%";
-      progressText.innerText=`Processing… ${percent}%`;
-    }
-  },300);
+function moveDown(index){
+  if(index === files.length - 1) return;
+  [files[index + 1], files[index]] = [files[index], files[index + 1]];
+  renderFiles();
+}
 
-  const fd=new FormData();
-  files.forEach(f=>fd.append("pdfs[]",f));
+/* ======================================================
+   MERGE
+====================================================== */
+mergeBtn.onclick = async () => {
+  progressBox.style.display = "block";
+  let percent = 0;
+
+  const fakeProgress = setInterval(() => {
+    percent = Math.min(percent + 4, 95);
+    progressFill.style.width = percent + "%";
+    progressText.innerText = `Processing… ${percent}%`;
+  }, 300);
+
+  const fd = new FormData();
+  files.forEach(f => fd.append("pdfs", f));
 
   try{
-    const res=await fetch("https://api.develac.com/merge",{method:"POST",body:fd});
+    const res = await fetch("https://api.develac.com/merge", {
+      method: "POST",
+      body: fd
+    });
+
     if(!res.ok) throw new Error();
-    const blob=await res.blob();
 
-    clearInterval(interval);
-    progressFill.style.width="100%";
-    progressText.innerText="Processing… 100%";
+    const blob = await res.blob();
 
-    summaryText.innerText=`${files.length} files merged successfully`;
-    document.getElementById("downloadBtn").onclick=()=>{
-      const a=document.createElement("a");
-      a.href=URL.createObjectURL(blob);
-      a.download="merged.pdf";
+    clearInterval(fakeProgress);
+    progressFill.style.width = "100%";
+    progressText.innerText = "Completed 100%";
+
+    summaryText.innerText = `${files.length} files merged successfully`;
+
+    document.getElementById("downloadBtn").onclick = () => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "merged.pdf";
       a.click();
+      URL.revokeObjectURL(url);
     };
 
-    successBox.style.display="block";
+    successBox.style.display = "block";
+
   }catch{
-    alert("Merge failed. Please try again.");
-    location.reload();
+    clearInterval(fakeProgress);
+    alert("Merge failed. Please try fewer or smaller files.");
   }
 };
 </script>
