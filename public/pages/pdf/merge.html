@@ -124,17 +124,6 @@
       font-size:14px;
     }
 
-    /* ADD MORE (SAFE) */
-    .add-more{
-      margin:10px 0 20px;
-      font-size:14px;
-      font-weight:600;
-      color:#2563eb;
-      text-align:center;
-      cursor:pointer;
-      display:none;
-    }
-
     /* ===============================
        BUTTON
     ================================ */
@@ -215,7 +204,7 @@
   </div>
 
   <!-- UPLOAD -->
-  <label class="card upload-card" for="fileInput">
+  <label class="card upload-card" id="uploadCard" for="fileInput">
     <input type="file" id="fileInput" accept="application/pdf" multiple hidden>
 
     <div class="upload-icon">
@@ -232,13 +221,12 @@
 
   <!-- FILE LIST -->
   <div class="file-list" id="fileList"></div>
-  <div class="add-more" id="addMoreBtn">+ Add more files</div>
 
   <button class="main-btn" id="mergeBtn" disabled>Merge PDF</button>
 
   <!-- PROGRESS -->
   <div class="progress-box" id="progressBox">
-    <div id="progressText">Processing… 0%</div>
+    <div id="progressText">Uploading files…</div>
     <div class="progress-bar">
       <div class="progress-fill" id="progressFill"></div>
     </div>
@@ -266,11 +254,25 @@
 <script src="/assets/js/cookie.js" defer></script>
 
 <script>
+/* ======================================================
+   STATE
+====================================================== */
+const STATE = {
+  IDLE: "idle",
+  READY: "ready",
+  PROCESSING: "processing",
+  SUCCESS: "success"
+};
+
+let currentState = STATE.IDLE;
 let files = [];
 
+/* ======================================================
+   ELEMENTS
+====================================================== */
+const uploadCard   = document.getElementById("uploadCard");
 const fileInput    = document.getElementById("fileInput");
 const fileListEl   = document.getElementById("fileList");
-const addMoreBtn   = document.getElementById("addMoreBtn");
 const mergeBtn     = document.getElementById("mergeBtn");
 const progressBox  = document.getElementById("progressBox");
 const progressFill = document.getElementById("progressFill");
@@ -278,93 +280,128 @@ const progressText = document.getElementById("progressText");
 const successBox   = document.getElementById("successBox");
 const summaryText  = document.getElementById("summaryText");
 
+/* ======================================================
+   STATE RENDER
+====================================================== */
+function setState(state){
+  currentState = state;
+
+  uploadCard.style.display  = state === STATE.IDLE ? "block" : "none";
+  fileListEl.style.display  = state === STATE.READY ? "block" : "none";
+  mergeBtn.style.display    = state === STATE.READY ? "block" : "none";
+  progressBox.style.display = state === STATE.PROCESSING ? "block" : "none";
+  successBox.style.display  = state === STATE.SUCCESS ? "block" : "none";
+}
+
+/* ======================================================
+   FILE HANDLING
+====================================================== */
 fileInput.addEventListener("change", () => {
-  Array.from(fileInput.files).forEach(f => {
-    if(files.length < 10) files.push(f);
+  const selected = Array.from(fileInput.files);
+
+  selected.forEach(f => {
+    if(files.length < 10){
+      files.push(f);
+    }
   });
-  renderFiles();
+
+  renderFileList();
+  mergeBtn.disabled = files.length < 2;
+  setState(STATE.READY);
 });
 
-addMoreBtn.onclick = () => fileInput.click();
-
-function renderFiles(){
+function renderFileList(){
   fileListEl.innerHTML = "";
-  files.forEach((file, i) => {
+
+  files.forEach((file, index) => {
     const div = document.createElement("div");
     div.className = "file-item";
+
     div.innerHTML = `
       <div class="file-info">
         <div class="file-name">${file.name}</div>
         <div class="file-size">${(file.size/1024/1024).toFixed(2)} MB</div>
       </div>
       <div class="file-actions">
-        <button class="icon-btn" onclick="moveUp(${i})">↑</button>
-        <button class="icon-btn" onclick="moveDown(${i})">↓</button>
-        <button class="icon-btn" onclick="removeFile(${i})">✕</button>
+        <button class="icon-btn" onclick="moveUp(${index})">↑</button>
+        <button class="icon-btn" onclick="moveDown(${index})">↓</button>
+        <button class="icon-btn" onclick="removeFile(${index})">✕</button>
       </div>
     `;
+
     fileListEl.appendChild(div);
   });
-
-  fileListEl.style.display = files.length ? "block" : "none";
-  addMoreBtn.style.display = files.length ? "block" : "none";
-  mergeBtn.disabled = files.length < 2;
 }
 
-function removeFile(i){
-  files.splice(i,1);
-  renderFiles();
+function removeFile(index){
+  files.splice(index,1);
+  renderFileList();
+  mergeBtn.disabled = files.length < 2;
+  if(files.length === 0){
+    setState(STATE.IDLE);
+  }
 }
 
 function moveUp(i){
-  if(i===0) return;
+  if(i === 0) return;
   [files[i-1], files[i]] = [files[i], files[i-1]];
-  renderFiles();
+  renderFileList();
 }
 
 function moveDown(i){
-  if(i===files.length-1) return;
+  if(i === files.length-1) return;
   [files[i+1], files[i]] = [files[i], files[i+1]];
-  renderFiles();
+  renderFileList();
 }
 
+/* ======================================================
+   MERGE (SIMULATED PROGRESS)
+====================================================== */
 mergeBtn.onclick = async () => {
-  progressBox.style.display = "block";
-  let p = 0;
+  if(files.length < 2) return;
 
-  const fake = setInterval(()=>{
-    p = Math.min(p+5,95);
-    progressFill.style.width = p+"%";
-    progressText.innerText = `Processing… ${p}%`;
-  },300);
+  setState(STATE.PROCESSING);
+  progressFill.style.width = "30%";
+  progressText.innerText = "Uploading files…";
 
   const fd = new FormData();
-  files.forEach(f=>fd.append("pdfs",f));
+  files.forEach(f => fd.append("pdfs", f));
 
   try{
-    const res = await fetch("https://api.develac.com/merge",{method:"POST",body:fd});
+    progressFill.style.width = "70%";
+    progressText.innerText = "Merging PDFs…";
+
+    const res = await fetch("https://api.develac.com/merge", {
+      method: "POST",
+      body: fd
+    });
+
     if(!res.ok) throw new Error();
 
-    clearInterval(fake);
-    progressFill.style.width="100%";
-    progressText.innerText="Completed 100%";
-
     const blob = await res.blob();
-    summaryText.innerText = `${files.length} files merged successfully`;
+    progressFill.style.width = "100%";
 
-    document.getElementById("downloadBtn").onclick=()=>{
-      const url=URL.createObjectURL(blob);
-      const a=document.createElement("a");
-      a.href=url;a.download="merged.pdf";a.click();
+    summaryText.innerText =
+      `${files.length} files merged successfully`;
+
+    document.getElementById("downloadBtn").onclick = () => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "merged.pdf";
+      a.click();
       URL.revokeObjectURL(url);
     };
 
-    successBox.style.display="block";
+    setState(STATE.SUCCESS);
+
   }catch{
-    clearInterval(fake);
     alert("Merge failed. Please try again.");
+    location.reload();
   }
 };
+
+setState(STATE.IDLE);
 </script>
 
 </body>
