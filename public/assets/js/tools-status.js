@@ -4,7 +4,7 @@
 
 const TOOLS_STATUS = {
   compress: "live",
-  merge: "soon",
+  merge: "live",
   split: "soon",
   pdfToImage: "soon",
   imageToPdf: "soon",
